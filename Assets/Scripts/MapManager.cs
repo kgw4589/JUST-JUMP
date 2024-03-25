@@ -24,6 +24,7 @@ public class MapManager : MonoBehaviour
     void InstantiateRandomMap()
     {
         GameObject map = Instantiate(maps[Random.Range(0, maps.Length)]);
-        map.transform.position = _lastMap.transform.position += _interval;
+        map.transform.position = _lastMap.transform.position + _interval;
+        _lastMap = map;
     }
 }
