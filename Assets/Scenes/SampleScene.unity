@@ -731,6 +731,8 @@ MonoBehaviour:
   maps:
   - {fileID: 4569703801597622501, guid: 96f54b98c0e530342865c2f3d7c21e68, type: 3}
   startPos: {x: 0, y: 0}
+  player: {fileID: 0}
+  gameOverZone: {fileID: 0}
 --- !u!1 &1259906427
 GameObject:
   m_ObjectHideFlags: 0
