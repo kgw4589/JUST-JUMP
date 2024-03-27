@@ -1,49 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody2D rd;
+    private Rigidbody2D _rd;
     
-    private Vector2 strPos;
-    private Vector2 endPos;
-    private Vector2 direction;
+    private Vector2 _startPosition;
+    private Vector2 _endPosition;
+    private Vector2 _direction;
     
-    public float JumpPower = 5f;
+    public float jumpPower = 5f;
     [SerializeField] private float maxPower = 5f;
 
     
     // Start is called before the first frame update
     void Start()
     {
-        rd = GetComponent<Rigidbody2D>();
+        _rd = GetComponent<Rigidbody2D>();
     }
     
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            strPos = Input.mousePosition;
+            _startPosition = Input.mousePosition;
         }
     
         if (Input.GetMouseButtonUp(0))
         {
-            endPos = Input.mousePosition;
-            direction = strPos - endPos;
-            JumpPower = direction.magnitude/20; // 스와이프 길이 계산
-            if (JumpPower > maxPower)
+            _endPosition = Input.mousePosition;
+            _direction = _startPosition - _endPosition;
+            jumpPower = _direction.magnitude / 20; // 스와이프 길이 계산
+            if (jumpPower > maxPower)
             {
-                JumpPower = maxPower;
+                jumpPower = maxPower;
             }
-            direction.Normalize();
-            Debug.Log(JumpPower);
-            Jump(direction);
+            _direction.Normalize();
+            Debug.Log(jumpPower);
+            this.Jump(_direction);
         }
     }
 
     void Jump(Vector2 dir)
     {
-        rd.AddForce(new Vector2(dir.x,dir.y)* JumpPower,ForceMode2D.Impulse);
+        _rd.AddForce(new Vector2(dir.x,dir.y)* jumpPower,ForceMode2D.Impulse);
     }
 }
