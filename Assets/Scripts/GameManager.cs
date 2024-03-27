@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject _player;
+    [SerializeField] private int _score;
+    [SerializeField] private float _playerYPos;
+    
+    [SerializeField] private int _highScore;
+    
+    void Awake()
     {
-        
+        _highScore = PlayerPrefs.GetInt("highScore", 0);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         
     }
+    
+    
 }
