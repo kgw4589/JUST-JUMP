@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66c7bfd552f70140aeda9aa9e7ca84f, type: 3}
   m_Name: Normal
   m_EditorClassIdentifier: 
+  maps:
+  - {fileID: 4987497457295342307, guid: 96f54b98c0e530342865c2f3d7c21e68, type: 3}
