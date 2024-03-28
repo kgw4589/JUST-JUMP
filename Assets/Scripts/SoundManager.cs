@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private static float _soundSet;
+    public float soundSet;
     
     private void Awake()
     {
-        _soundSet = PlayerPrefs.GetFloat("soundSet", 0);
+        soundSet = PlayerPrefs.GetFloat("soundSet", 0);
     }
 
-    public static void SoundSet(float sound)
+    public void SoundChange(float sound)
     {
-        _soundSet = sound;
-        PlayerPrefs.SetFloat("soundSet", 0);
+        soundSet = sound;
+        PlayerPrefs.SetFloat("soundSet", soundSet);
     }
 }
