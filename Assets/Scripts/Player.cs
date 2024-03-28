@@ -7,7 +7,7 @@ public partial class Player : MonoBehaviour
 {
     public Image image;
     public Image routePrediction;
-    
+
     private Rigidbody2D _rd;
     
     private Vector2 _startPosition;
@@ -15,9 +15,10 @@ public partial class Player : MonoBehaviour
     private Vector2 _direction;
 
     [SerializeField]private bool _isJump = false;
-    
     public float jumpPower = 0;
     [SerializeField] private float maxPower = 5f;
+
+    private bool _isRight = false;
 
     
     // Start is called before the first frame update
@@ -39,10 +40,19 @@ public partial class Player : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector2 myPos = Input.mousePosition;
-            float desiredScaleX = Vector3.Distance(myPos, _startPosition);
-            if (desiredScaleX / 20 > maxPower)//애매함
+            Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
+            if (playerLook.x > transform.position.x && _isRight)
             {
-                desiredScaleX = maxPower * 25; // 스케일을 maxPower*40으로 제한
+                Right();
+            }
+            else if (playerLook.x < transform.position.x && !_isRight)
+            {
+                Right(); 
+            }
+            float desiredScaleX = Vector3.Distance(myPos, _startPosition);
+            if (desiredScaleX / 28 > maxPower)//아래에 곱하는 값과 동일 한 값으로 나눠야함
+            {
+                desiredScaleX = maxPower * 28; //점프 최대치 5기준
             }
             Debug.Log(desiredScaleX);
             image.transform.localScale = new Vector2(desiredScaleX, 1);
@@ -68,6 +78,13 @@ public partial class Player : MonoBehaviour
         }
     }
 
+    void Right()
+    {
+        Debug.Log("dksl");
+        _isRight = !_isRight;
+        transform.Rotate(Vector3.up, 180f, Space.World);
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log(other.gameObject.tag);
@@ -78,7 +95,7 @@ public partial class Player : MonoBehaviour
     }
     void Jump(Vector2 dir)
     {
-        _rd.AddForce(new Vector2(dir.x,dir.y+dir.y/4)* jumpPower,ForceMode2D.Impulse);//
+        _rd.AddForce(new Vector2(dir.x,dir.y+dir.y/4)*jumpPower,ForceMode2D.Impulse);
     }
     
     public static float AngleInRad(Vector3 vec1, Vector3 vec2)
