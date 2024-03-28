@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour
     private Vector3 _interval;
     private float _mapSizeY;
 
-    public Queue<GameObject> _mapPosQueue = new Queue<GameObject>();
+    private Queue<GameObject> _mapPosQueue = new Queue<GameObject>();
 
     void Start()
     {
@@ -33,9 +33,12 @@ public class MapManager : MonoBehaviour
     void Update()
     {
         float dis = Vector2.Distance(player.transform.position, _lastMap.transform.position);
+        
         if (dis < _mapSizeY * 3) InstantiateRandomMap();
-        Vector3 _mapQueFirst = _mapPosQueue.Peek().transform.position;
-        if (gameOverZone.transform.position.y - _mapQueFirst.y > _mapSizeY)
+        
+        Vector3 mapQueFirst = _mapPosQueue.Peek().transform.position;
+        
+        if (gameOverZone.transform.position.y - mapQueFirst.y > _mapSizeY)
             Destroy(_mapPosQueue.Dequeue());
     }
 
