@@ -1,18 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject _player;
+    
+    [SerializeField]
+    private int _highScore;
+    
+    [SerializeField]
+    private float _playerPosY;
+    public bool isPlay;
+    
+    private void Awake()
     {
-        
+        _highScore = PlayerPrefs.GetInt("highScore", 0);
+        StartGame();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (isPlay)
+        {
+            InGamePlay();
+            return;
+        }
     }
+    
+    private void StartGame()
+    {
+        isPlay = true;
+    }
+
+    private void InGamePlay()
+    {
+        _playerPosY = _player.gameObject.transform.position.y;
+
+        /*if (!_player.die)
+        {
+            return;
+        }
+        
+        if (_playerPosY > _highScore)
+        {
+            _highScore = (int)_playerPosY;
+            PlayerPrefs.SetInt("highScore", _highScore);
+        }
+            
+        isPlay = false;*/
+    }
+
+    public String PlayerPosY
+    {
+        get { return _playerPosY.ToString("F3") + " m";  }
+    }
+    
 }
