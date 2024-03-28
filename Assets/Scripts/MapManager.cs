@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] maps;
+    [SerializeField] private MapScriptable mapScriptable;
     
     [SerializeField] private Vector2 startPos;
 
@@ -16,13 +16,21 @@ public class MapManager : MonoBehaviour
     private float _mapSizeY;
 
     private Queue<GameObject> _mapPosQueue = new Queue<GameObject>();
+    
+    public enum MapMode
+    {
+        Normal
+    }
+    public MapMode mapMode;
 
     void Start()
     {
-        _mapSizeY = maps[0].transform.localScale.y;
+        mapScriptable = Resources.Load<MapScriptable>("MapScriptables/" + mapMode);
+        
+        _mapSizeY = mapScriptable.maps[0].transform.localScale.y;
         _interval = new Vector2(0, _mapSizeY);
         
-        _lastMap = Instantiate(maps[Random.Range(0, maps.Length)]);
+        _lastMap = Instantiate(mapScriptable.maps[Random.Range(0, mapScriptable.maps.Count)]);
         _lastMap.transform.position = startPos;
         _mapPosQueue.Enqueue(_lastMap);
         
@@ -44,7 +52,7 @@ public class MapManager : MonoBehaviour
 
     void InstantiateRandomMap()
     {
-        GameObject map = Instantiate(maps[Random.Range(0, maps.Length)]);
+        GameObject map = Instantiate(mapScriptable.maps[Random.Range(0, mapScriptable.maps.Count)]);
         map.transform.position = _lastMap.transform.position + _interval;
         _lastMap = map;
         _mapPosQueue.Enqueue(_lastMap);
