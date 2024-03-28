@@ -40,9 +40,9 @@ public partial class Player : MonoBehaviour
         {
             Vector2 myPos = Input.mousePosition;
             float desiredScaleX = Vector3.Distance(myPos, _startPosition);
-            if (desiredScaleX / 40 > maxPower)
+            if (desiredScaleX / 120 > maxPower)//600 : 5
             {
-                desiredScaleX = maxPower * 40; // 스케일을 maxPower*40으로 제한
+                desiredScaleX = maxPower * 120; // 스케일을 maxPower*40으로 제한
             }
             image.transform.localScale = new Vector2(desiredScaleX, 1);
             image.transform.localRotation = Quaternion.Euler(0, 0, AngleInDeg(_startPosition, myPos));
