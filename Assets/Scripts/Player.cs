@@ -33,17 +33,18 @@ public partial class Player : MonoBehaviour
         {
             image.gameObject.SetActive(true);
             _startPosition = Input.mousePosition;
-            image.transform.position = _startPosition;
+            image.transform.position = transform.position;
         }
 
         if (Input.GetMouseButton(0))
         {
             Vector2 myPos = Input.mousePosition;
             float desiredScaleX = Vector3.Distance(myPos, _startPosition);
-            if (desiredScaleX / 120 > maxPower)//600 : 5
+            if (desiredScaleX / 20 > maxPower)//애매함
             {
-                desiredScaleX = maxPower * 120; // 스케일을 maxPower*40으로 제한
+                desiredScaleX = maxPower * 25; // 스케일을 maxPower*40으로 제한
             }
+            Debug.Log(desiredScaleX);
             image.transform.localScale = new Vector2(desiredScaleX, 1);
             image.transform.localRotation = Quaternion.Euler(0, 0, AngleInDeg(_startPosition, myPos));
         }
