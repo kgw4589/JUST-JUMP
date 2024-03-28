@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -7,34 +8,30 @@ public class GameManager : MonoBehaviour
     private GameObject _player;
     
     [SerializeField]
-    private SoundManager _soundManager;
-    
-    [SerializeField]
-    private UIManager _uiManager;
-    
-    [SerializeField]
     private int _highScore;
     
+    [SerializeField]
     private float _playerPosY;
-    private bool _isPlay;
+    public bool isPlay;
     
     private void Awake()
     {
         _highScore = PlayerPrefs.GetInt("highScore", 0);
+        StartGame();
     }
 
     private void Update()
     {
-        if (_isPlay)
+        if (isPlay)
         {
             InGamePlay();
             return;
         }
     }
-
-    public void StartGame()
+    
+    private void StartGame()
     {
-        _isPlay = true;
+        isPlay = true;
     }
 
     private void InGamePlay()
@@ -52,7 +49,12 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("highScore", _highScore);
         }
             
-        _isPlay = false;*/
+        isPlay = false;*/
+    }
+
+    public String PlayerPosY
+    {
+        get { return _playerPosY.ToString("F3") + " m";  }
     }
     
 }
