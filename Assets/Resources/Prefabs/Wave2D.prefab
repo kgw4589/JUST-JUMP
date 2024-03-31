@@ -219,5 +219,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waitTime: 3
-  _moveDistance: 3
-  _moveDuration: 2
+  _moveDistance: 6
+  _moveDuration: 4

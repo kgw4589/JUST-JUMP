@@ -14,10 +14,22 @@ public class GameManager : MonoBehaviour
     private float _playerPosY;
     public bool isPlay;
     
+    public void StartGame()
+    {
+        Time.timeScale = 1; // game start
+        isPlay = true;
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0; // game pause (stop)
+    }
+    
     private void Awake()
     {
+        Time.timeScale = 0; // game stop
         _highScore = PlayerPrefs.GetInt("highScore", 0);
-        StartGame();
+        //StartGame();
     }
 
     private void Update()
@@ -27,11 +39,6 @@ public class GameManager : MonoBehaviour
             InGamePlay();
             return;
         }
-    }
-    
-    private void StartGame()
-    {
-        isPlay = true;
     }
 
     private void InGamePlay()
