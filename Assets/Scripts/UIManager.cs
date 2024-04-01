@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,21 +9,44 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private TextMeshProUGUI _playerPosY;
     [SerializeField] private GameObject startUICanvas;
+    [SerializeField] private GameObject inGameCanvas;
+
+    [SerializeField] private GameObject wave2DGameObject;
+    
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject pauseClose;
     
     public void OnClickStartButton()
     {
         Debug.Log("Game Start");
+        wave2DGameObject.SetActive(true);
         _gameManager.StartGame();
         startUICanvas.SetActive(false);
+        inGameCanvas.SetActive(true);
     }
 
     public void OnClickPauseButton()
     {
+        Time.timeScale = 0;
         Debug.Log("Game Pause");
         _gameManager.PauseGame();
+        pausePanel.SetActive(true);
     }
-    
-    void Update()
+
+    public void OnClickPauseClose()
+    {
+        pausePanel.SetActive(false);
+        Debug.Log("Panel Close");
+        Time.timeScale = 1;
+    }
+
+    private void Awake()
+    {
+        wave2DGameObject.SetActive(false);
+        inGameCanvas.SetActive(false);
+    }
+
+    private void Update()
     {
         if (_gameManager.isPlay)
         {
