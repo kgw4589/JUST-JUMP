@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        _playerScript.useJump = false;
         Time.timeScale = 0; // game pause (stop)
     }
     

@@ -27,7 +27,6 @@ public class UIManager : MonoBehaviour
 
     public void OnClickPauseButton()
     {
-        Time.timeScale = 0;
         Debug.Log("Game Pause");
         _gameManager.PauseGame();
         pausePanel.SetActive(true);
@@ -37,7 +36,7 @@ public class UIManager : MonoBehaviour
     {
         pausePanel.SetActive(false);
         Debug.Log("Panel Close");
-        Time.timeScale = 1;
+        _gameManager.StartGame();
     }
 
     private void Awake()

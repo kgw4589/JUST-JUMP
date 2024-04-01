@@ -15,7 +15,7 @@ public partial class Player : MonoBehaviour
     private Vector2 _endPosition;
     private Vector2 _direction;
 
-    [SerializeField]private bool _isJump = false;
+    [SerializeField] private bool _isJump = false;
     public float jumpPower = 0;
     [SerializeField] private float maxPower = 5f;
 
@@ -85,7 +85,6 @@ public partial class Player : MonoBehaviour
     }
     void Right()
     {
-        Debug.Log("dksl");
         _isRight = !_isRight;
         transform.Rotate(Vector3.up, 180f, Space.World);
     }
