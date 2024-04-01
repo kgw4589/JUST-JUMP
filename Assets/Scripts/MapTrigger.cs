@@ -37,6 +37,11 @@ public class MapTrigger : MonoBehaviour
 
     public void ChangeSpeed(float speed)
     {
-        // _player.GetComponent<Player>().ChangeJumpPower(speed);
+        _player.GetComponent<Player>().ChangeJumpPower(speed);
+    }
+    
+    public void SpringBoard(float power)
+    {
+        _player.GetComponent<Player>().SpringBoard(power);
     }
 }

@@ -4,5 +4,12 @@ using UnityEngine;
 
 public partial class Player
 {
-    
+    public void SpringBoard(float power)
+    {
+        _rd.AddForce(transform.up * power , ForceMode2D.Impulse);
+    }
+    public void ChangeJumpPower(float speed)
+    {
+        maxPower = speed;
+    }
 }
