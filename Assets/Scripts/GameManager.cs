@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _player;
+    public GameObject _player;
     
     [SerializeField]
     private int _highScore;
@@ -13,11 +13,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _playerPosY;
     public bool isPlay;
-    
+    private Player _playerScript;
+
+    private void Start()
+    {
+        _playerScript = _player.GetComponent<Player>();
+    }
+
     public void StartGame()
     {
         Time.timeScale = 1; // game start
         isPlay = true;
+        _playerScript.Invoke("WaitStart",0.1f);
     }
 
     public void PauseGame()

@@ -1439,10 +1439,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6387356582698238051, guid: af311e59a65a648008c9d4d06bc32d20, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6429097256749598456, guid: af311e59a65a648008c9d4d06bc32d20, type: 3}
       propertyPath: image
       value: 
