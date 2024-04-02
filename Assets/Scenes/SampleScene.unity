@@ -179,6 +179,7 @@ MonoBehaviour:
   wave2DGameObject: {fileID: 1183969965}
   pausePanel: {fileID: 846314673}
   pauseClose: {fileID: 29792641}
+  homeButton: {fileID: 0}
 --- !u!1 &332451756
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +397,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 502109137}
     m_Modifications:
+    - target: {fileID: 938796411567936904, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 89165387}
     - target: {fileID: 1901379524800019498, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -493,8 +498,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 4757332380343173201, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
