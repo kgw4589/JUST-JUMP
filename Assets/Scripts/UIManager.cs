@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class UIManager : MonoBehaviour
     
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject pauseClose;
+    [SerializeField] private GameObject homeButton;
     
     public void OnClickStartButton()
     {
@@ -37,6 +39,12 @@ public class UIManager : MonoBehaviour
         pausePanel.SetActive(false);
         Debug.Log("Panel Close");
         _gameManager.StartGame();
+    }
+
+    public void OnClickHomeButton()
+    {
+        Debug.Log("Go Home");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void Awake()
