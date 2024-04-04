@@ -20,6 +20,16 @@ public class GameManager : MonoBehaviour
     private float _playerPosY;
     public bool isPlay;
 
+    public enum GameState
+    {
+        Ready,
+        Pause,
+        Play,
+        End
+    }
+
+    public GameState gameState = GameState.Ready;
+
     private void Awake()
     {
         if (instance)
@@ -31,13 +41,14 @@ public class GameManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
         
-        player = FindObjectOfType<Player>();
+        
         Time.timeScale = 0; // game stop
         _highScore = PlayerPrefs.GetInt("highScore", 0);
     }
     
     public void StartGame()
     {
+        player = FindObjectOfType<Player>();
         Time.timeScale = 1; // game start
         isPlay = true;
     }

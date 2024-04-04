@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
         _gameManager.StartGame();
         startUICanvas.SetActive(false);
         inGameCanvas.SetActive(true);
+
+        GameManager.Instance.gameState = GameManager.GameState.Play;
     }
 
     public void OnClickPauseButton()
@@ -33,6 +35,8 @@ public class UIManager : MonoBehaviour
         Debug.Log("Game Pause");
         _gameManager.PauseGame();
         pausePanel.SetActive(true);
+
+        GameManager.Instance.gameState = GameManager.GameState.Pause;
     }
 
     public void OnClickPauseClose()
@@ -40,6 +44,8 @@ public class UIManager : MonoBehaviour
         pausePanel.SetActive(false);
         Debug.Log("Panel Close");
         _gameManager.StartGame();
+
+        GameManager.Instance.gameState = GameManager.GameState.Play;
     }
 
     public void OnClickHomeButton()
