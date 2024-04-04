@@ -413,6 +413,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 89165387}
+    - target: {fileID: 5589082910701075786, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
+      propertyPath: m_fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589082910701075786, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589082910701075786, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589082910701075786, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589082910701075786, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 6643584792241610276, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
       propertyPath: m_Name
       value: UI Canvas
@@ -496,6 +516,10 @@ PrefabInstance:
     - target: {fileID: 7362910963498496458, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915162024170951584, guid: 0fcefb7373ea9b8489799e191db3893c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
