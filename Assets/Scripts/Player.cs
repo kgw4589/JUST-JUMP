@@ -35,7 +35,7 @@ public partial class Player : MonoBehaviour
     void Update()
     {
         
-        useJump = GameManager.Instance.isPlay;
+        useJump = GameManager.Instance.isPlay;//qjrm
         if (useJump)
         {
             if (Input.GetMouseButtonDown(0))
