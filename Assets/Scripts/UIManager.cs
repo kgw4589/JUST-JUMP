@@ -7,16 +7,17 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject startUICanvas;
+    public GameObject inGameCanvas;
+
+    public GameObject wave2DGameObject;
+    
+    public GameObject pausePanel;
+    public GameObject pauseClose;
+    public GameObject homeButton;
+    
     [SerializeField] private GameManager _gameManager;
     [SerializeField] private TextMeshProUGUI _playerPosY;
-    [SerializeField] private GameObject startUICanvas;
-    [SerializeField] private GameObject inGameCanvas;
-
-    [SerializeField] private GameObject wave2DGameObject;
-    
-    [SerializeField] private GameObject pausePanel;
-    [SerializeField] private GameObject pauseClose;
-    [SerializeField] private GameObject homeButton;
     
     public void OnClickStartButton()
     {
