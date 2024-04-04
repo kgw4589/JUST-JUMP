@@ -7,14 +7,30 @@ public class CameraController : MonoBehaviour
     public GameObject player;
     public Vector3 offset;
     
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        // var camera = GetComponent<Camera>();
+        // var r = camera.rect;
+        // var scaleHeight = ((float)Screen.width / Screen.height) / (9f / 16f);
+        // var scaleWidth = 1f / scaleHeight;
+        //
+        // if (scaleHeight < 1f)
+        // {
+        //     r.height = scaleHeight;
+        //     r.y = (1f - scaleHeight) / 2f;
+        // }
+        // else
+        // {
+        //     r.width = scaleWidth;
+        //     r.x = (1f - scaleWidth) / 2f;
+        // }
+        //
+        // camera.rect = r;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    // void OnPreCull() => GL.Clear(true, true, Color.black);
+    
+    void Update()
     {
         var dirPos = new Vector3(0, player.transform.position.y, 0) + offset;
         
