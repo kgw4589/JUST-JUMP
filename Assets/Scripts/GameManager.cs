@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    public GameObject _player;
+    private static GameManager instance = null;
+
+    public static GameManager Instance
+    {
+        get { return instance; }
+    }
+    
+    public Player player;
     
     [SerializeField]
     private int _highScore;
@@ -13,59 +19,59 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _playerPosY;
     public bool isPlay;
-    private Player _playerScript;
 
-    private void Start()
+    private void Awake()
     {
-        _playerScript = _player.GetComponent<Player>();
-    }
+        if (instance)
+        {
+            Destroy(instance);
+            return;
+        }
 
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
+        
+        player = FindObjectOfType<Player>();
+        Time.timeScale = 0; // game stop
+        _highScore = PlayerPrefs.GetInt("highScore", 0);
+    }
+    
     public void StartGame()
     {
         Time.timeScale = 1; // game start
         isPlay = true;
-        _playerScript.Invoke("WaitStart",0.1f);
+        player.Invoke("WaitStart",0.1f);
     }
 
     public void PauseGame()
     {
-        _playerScript.useJump = false;
+        player.useJump = false;
         Time.timeScale = 0; // game pause (stop)
-    }
-    
-    private void Awake()
-    {
-        Time.timeScale = 0; // game stop
-        _highScore = PlayerPrefs.GetInt("highScore", 0);
-        //StartGame();
     }
 
     private void Update()
     {
-        if (isPlay)
+        if (!isPlay)
         {
-            InGamePlay();
             return;
         }
-    }
-
-    private void InGamePlay()
-    {
-        _playerPosY = _player.gameObject.transform.position.y;
+        
+        _playerPosY = player.gameObject.transform.position.y;
 
         /*if (!_player.die)
         {
             return;
         }
-        
+
         if (_playerPosY > _highScore)
         {
             _highScore = (int)_playerPosY;
             PlayerPrefs.SetInt("highScore", _highScore);
         }
-            
+
         isPlay = false;*/
     }
+    
 
     public String PlayerPosY
     {
