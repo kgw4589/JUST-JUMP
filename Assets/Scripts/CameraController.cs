@@ -9,26 +9,26 @@ public class CameraController : MonoBehaviour
     
     void Awake()
     {
-        var camera = GetComponent<Camera>();
-        var r = camera.rect;
-        var scaleHeight = ((float)Screen.width / Screen.height) / (9f / 16f);
-        var scaleWidth = 1f / scaleHeight;
-
-        if (scaleHeight < 1f)
-        {
-            r.height = scaleHeight;
-            r.y = (1f - scaleHeight) / 2f;
-        }
-        else
-        {
-            r.width = scaleWidth;
-            r.x = (1f - scaleWidth) / 2f;
-        }
-        
-        camera.rect = r;
+        // var camera = GetComponent<Camera>();
+        // var r = camera.rect;
+        // var scaleHeight = ((float)Screen.width / Screen.height) / (9f / 16f);
+        // var scaleWidth = 1f / scaleHeight;
+        //
+        // if (scaleHeight < 1f)
+        // {
+        //     r.height = scaleHeight;
+        //     r.y = (1f - scaleHeight) / 2f;
+        // }
+        // else
+        // {
+        //     r.width = scaleWidth;
+        //     r.x = (1f - scaleWidth) / 2f;
+        // }
+        //
+        // camera.rect = r;
     }
 
-    void OnPreCull() => GL.Clear(true, true, Color.black);
+    // void OnPreCull() => GL.Clear(true, true, Color.black);
     
     void Update()
     {
