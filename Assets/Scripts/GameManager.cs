@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1; // game start
         isPlay = true;
-        player.Invoke("WaitStart",0.1f);
     }
 
     public void PauseGame()

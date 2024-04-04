@@ -20,8 +20,9 @@ public partial class Player : MonoBehaviour
     [SerializeField] private float maxPower = 5f;
 
     private bool _isRight = false;
+    private bool isrmrj = false;
 
-    public bool useJump = false;
+    public bool useJump;
 
     
     // Start is called before the first frame update
@@ -30,9 +31,11 @@ public partial class Player : MonoBehaviour
         image.gameObject.SetActive(false);
         _rd = GetComponent<Rigidbody2D>();
     }
-    
+
     void Update()
     {
+        
+        useJump = GameManager.Instance.isPlay;//qjrm
         if (useJump)
         {
             if (Input.GetMouseButtonDown(0))
@@ -109,9 +112,5 @@ public partial class Player : MonoBehaviour
     public static float AngleInDeg(Vector3 vec1, Vector3 vec2)
     {
         return AngleInRad(vec1, vec2) * 180 / Mathf.PI;
-    }
-    public void WaitStart()
-    {
-        useJump = true;
     }
 }
