@@ -94,7 +94,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 287846257069560321}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f76c6ee6b0be0f14e9f50c8599cebe23, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -476,7 +476,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1480894614314912880}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f76c6ee6b0be0f14e9f50c8599cebe23, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -606,7 +606,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1764950054013755715}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f76c6ee6b0be0f14e9f50c8599cebe23, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -736,7 +736,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2102403140148556538}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c8f0de0849c2ee44dbe29726ac153dda, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1210,7 +1210,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 7088033029182022097}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f76c6ee6b0be0f14e9f50c8599cebe23, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1340,7 +1340,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 7153321792442731860}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f76c6ee6b0be0f14e9f50c8599cebe23, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1470,7 +1470,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 7366514448827635884}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f76c6ee6b0be0f14e9f50c8599cebe23, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1684,7 +1684,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 7863754803992453588}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c8f0de0849c2ee44dbe29726ac153dda, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
