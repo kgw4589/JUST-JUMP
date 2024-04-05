@@ -72,7 +72,7 @@ Material:
     - _SineSpeed: 2.02
     - _YValue: 1.69
     m_Colors:
-    - _Color: {r: 0.44165573, g: 0.6358964, b: 0.8616352, a: 1}
+    - _Color: {r: 0.4416556, g: 0.6358964, b: 0.8616352, a: 0.46666667}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
