@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        player.useJump = false;
         Time.timeScale = 0; // game pause (stop)
     }
 
