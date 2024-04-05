@@ -21,9 +21,6 @@ public partial class Player : MonoBehaviour
     [SerializeField] private float maxPower = 5f;
 
     private bool _isRight = false;
-    private bool isrmrj = false;
-
-    public bool useJump;
 
     private bool _isDragging = false;
 
