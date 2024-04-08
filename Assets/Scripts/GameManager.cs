@@ -1,5 +1,8 @@
 using System;
+using System.IO;
+using System.Text;
 using UnityEngine;
+using Newtonsoft.Json;
 
 
 public class GameManager : MonoBehaviour
@@ -18,7 +21,6 @@ public class GameManager : MonoBehaviour
     
     [SerializeField]
     private float _playerPosY;
-    public bool isPlay;
 
     public enum GameState
     {
@@ -50,7 +52,7 @@ public class GameManager : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         Time.timeScale = 1; // game start
-        isPlay = true;
+        gameState = GameState.Play;
     }
 
     public void PauseGame()
@@ -60,7 +62,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isPlay)
+        if (gameState != GameState.Play)
         {
             return;
         }
@@ -78,9 +80,28 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("highScore", _highScore);
         }
 
-        isPlay = false;*/
+        gameState = GameState.Ready;*/
     }
-    
+
+    private void CreateJson(string saveData)
+    {
+        FileStream fileStream =
+            new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"), FileMode.Create);
+        byte[] data = Encoding.UTF8.GetBytes(saveData);
+        fileStream.Write(data, 0, data.Length);
+        fileStream.Close();
+    }
+
+    private T LoadJson<T>()
+    {
+        FileStream fileStream =
+            new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"), FileMode.Open);
+        byte[] data = new byte[fileStream.Length];
+        fileStream.Read(data, 0, data.Length);
+        fileStream.Close();
+        string jsonData = Encoding.UTF8.GetString(data);
+        return JsonConvert.DeserializeObject<T>(jsonData);
+    }
 
     public String PlayerPosY
     {
