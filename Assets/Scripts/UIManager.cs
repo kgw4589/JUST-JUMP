@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (_gameManager.isPlay)
+        if (_gameManager.gameState == GameManager.GameState.Play)
         {
             _playerPosY.text = _gameManager.PlayerPosY;
         }

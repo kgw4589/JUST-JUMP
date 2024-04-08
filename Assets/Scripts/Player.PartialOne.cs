@@ -12,4 +12,9 @@ public partial class Player
     {
         maxPower = speed;
     }
+
+    public void Bounce(Vector2 dir, float power)
+    {
+        
+    }
 }
