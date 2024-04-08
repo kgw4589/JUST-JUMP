@@ -16,7 +16,7 @@ public partial class Player : MonoBehaviour
     private Vector2 _endPosition;
     private Vector2 _direction;
 
-    [SerializeField] private bool _isJump = false;
+    private bool _isJump = false;
     public float jumpPower = 0;
     [SerializeField] private float maxPower = 5f;
 
@@ -34,14 +34,11 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(GameManager.Instance.gameState);
-
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject() 
                 || GameManager.Instance.gameState != GameManager.GameState.Play)
             {
-                Debug.Log(321312321);
                 return;
             }
             
@@ -53,7 +50,6 @@ public partial class Player : MonoBehaviour
         }
         if (_isDragging && Input.GetMouseButton(0))
         {
-            Debug.Log(1111111);
             Vector2 myPos = Input.mousePosition;
             Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
             if (playerLook.x > transform.position.x && _isRight)
@@ -70,9 +66,8 @@ public partial class Player : MonoBehaviour
             {
                 desiredScaleX = maxPower * 28; //점프 최대치 5기준
             }
-
-            Debug.Log(desiredScaleX);
-            image.transform.localScale = new Vector2(desiredScaleX, 1);
+            
+            image.transform.localScale = new Vector2(-desiredScaleX, 1);
             image.transform.localRotation = Quaternion.Euler(0, 0, AngleInDeg(_startPosition, myPos));
         }
 
@@ -90,7 +85,6 @@ public partial class Player : MonoBehaviour
             }
 
             _direction.Normalize();
-            Debug.Log(jumpPower);
             this.Jump(_direction);
         }
     }
