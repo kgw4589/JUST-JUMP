@@ -8,9 +8,9 @@ using UnityEngine.EventSystems;
 public partial class Player : MonoBehaviour
 {
     public Image image;
-    public Image routePrediction;
 
     private Rigidbody2D _rd;
+    public LineRenderer _lineRenderer;
 
     private Vector2 _startPosition;
     private Vector2 _endPosition;
@@ -36,17 +36,14 @@ public partial class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            _lineRenderer.gameObject.SetActive(true);
             if (EventSystem.current.IsPointerOverGameObject() 
                 || GameManager.Instance.gameState != GameManager.GameState.Play)
             {
                 return;
             }
-            
             _isDragging = true;
-            
-            image.gameObject.SetActive(true);
             _startPosition = Input.mousePosition;
-            image.transform.position = transform.position;
         }
         if (_isDragging && Input.GetMouseButton(0))
         {
@@ -60,22 +57,6 @@ public partial class Player : MonoBehaviour
             {
                 Right();
             }
-
-            float desiredScaleX = Vector3.Distance(myPos, _startPosition);
-            if (desiredScaleX / 28 > maxPower) //아래에 곱하는 값과 동일 한 값으로 나눠야함
-            {
-                desiredScaleX = maxPower * 28; //점프 최대치 5기준
-            }
-            
-            image.transform.localScale = new Vector2(-desiredScaleX, 1);
-            image.transform.localRotation = Quaternion.Euler(0, 0, AngleInDeg(_startPosition, myPos));
-        }
-
-        if (_isDragging && Input.GetMouseButtonUp(0))
-        {
-            _isDragging = false;
-            
-            image.gameObject.SetActive(false);
             _endPosition = Input.mousePosition;
             _direction = _startPosition - _endPosition;
             jumpPower = _direction.magnitude / 20;
@@ -83,7 +64,24 @@ public partial class Player : MonoBehaviour
             {
                 jumpPower = maxPower;
             }
+            _direction.Normalize();
+            
+            Vector3 startPos = transform.position;
+            Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower;
+            PredictTrajectoryAndDrawLine(startPos, velocity);
+        }
 
+        if (_isDragging && Input.GetMouseButtonUp(0))
+        {
+            _isDragging = false;
+            _endPosition = Input.mousePosition;
+            _direction = _startPosition - _endPosition;
+            jumpPower = _direction.magnitude / 20;
+            if (jumpPower > maxPower)
+            {
+                jumpPower = maxPower;
+            }
+            _lineRenderer.gameObject.SetActive(false);
             _direction.Normalize();
             this.Jump(_direction);
         }
@@ -103,19 +101,29 @@ public partial class Player : MonoBehaviour
             _isJump = false;
         }
     }
+    void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
+    {
+        int steps = 60;
+        float deltaTime = Time.fixedDeltaTime;
+        Vector3 gravity = Physics.gravity;
+        Vector3 position = startPos;
+        Vector3 velocity = vel;
+
+        // 라인 렌더러 초기화
+        _lineRenderer.positionCount = steps;
+
+        for (int i = 0; i < steps; i++)
+        {
+            position += velocity * deltaTime + 0.5f * gravity * deltaTime * deltaTime;
+            velocity += gravity * deltaTime;
+
+            // 라인 렌더러에 대한 위치 설정
+            _lineRenderer.SetPosition(i, position);
+        }
+    }
 
     void Jump(Vector2 dir)
     {
         _rd.AddForce(new Vector2(dir.x, dir.y + dir.y / 4) * jumpPower, ForceMode2D.Impulse);
-    }
-
-    public static float AngleInRad(Vector3 vec1, Vector3 vec2)
-    {
-        return Mathf.Atan2(vec2.y - vec1.y, vec2.x - vec1.x);
-    }
-
-    public static float AngleInDeg(Vector3 vec1, Vector3 vec2)
-    {
-        return AngleInRad(vec1, vec2) * 180 / Mathf.PI;
     }
 }
