@@ -103,23 +103,35 @@ public partial class Player : MonoBehaviour
     }
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
-        int steps = 60;//오 진짜네
+        int steps = 60;
         float deltaTime = Time.fixedDeltaTime;
         Vector3 gravity = Physics.gravity;
         Vector3 position = startPos;
         Vector3 velocity = vel;
 
-        
-        _lineRenderer.positionCount = steps;// 라인 렌더러 초기화
+        _lineRenderer.positionCount = steps;
 
         for (int i = 0; i < steps; i++)
         {
-            position += velocity * deltaTime + 0.5f * gravity * deltaTime * deltaTime;
-            velocity += gravity * deltaTime;
-
-            _lineRenderer.SetPosition(i, position);//위치 
+            // 레이캐스트를 사용하여 벽 충돌 감지
+            RaycastHit2D hit = Physics2D.Raycast(position, velocity, velocity.magnitude * deltaTime);
+            if (hit.collider != null && hit.collider.CompareTag("Ground"))
+            {
+                // 충돌이 감지되면 라인 렌더러의 길이를 충돌 지점까지로 조정
+                _lineRenderer.positionCount = i + 1;
+                _lineRenderer.SetPosition(i, hit.point);
+                break; // 충돌이 감지되면 루프를 빠져나옴
+            }
+            else
+            {
+                // 충돌이 감지되지 않으면 정상적으로 라인 렌더러 그리기 계속
+                position += velocity * deltaTime + 0.5f * gravity * deltaTime * deltaTime;
+                velocity += gravity * deltaTime;
+                _lineRenderer.SetPosition(i, position);
+            }
         }
     }
+
 
     void Jump(Vector2 dir)
     {
