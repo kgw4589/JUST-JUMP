@@ -12,6 +12,13 @@ public abstract class TempMapTrigger : MonoBehaviour
             EnterEvent();
         }
     }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            StayEvent();
+        }
+    }
     
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -22,5 +29,6 @@ public abstract class TempMapTrigger : MonoBehaviour
     }
 
     public virtual void EnterEvent() { }
+    public virtual void StayEvent() { }
     public virtual void ExitEvent() { }
 }
