@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
     {
         string saveData = JsonConvert.SerializeObject(jsonData);
         FileStream fileStream =
-            new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"), FileMode.Create);
+            new FileStream(string.Format("{0}/{1}.json", Application.persistentDataPath, "SaveData"), FileMode.Create);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
         fileStream.Write(data, 0, data.Length);
         fileStream.Close();
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     private void ChangeJson(JsonData jsonData)
     {
         string saveData = JsonConvert.SerializeObject(jsonData);
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"),
+        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.persistentDataPath, "SaveData"),
             FileMode.Open, FileAccess.Write);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
         fileStream.Write(data, 0, data.Length);
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
     private T LoadJson<T>()
     {
         FileStream fileStream =
-            new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"), FileMode.Open);
+            new FileStream(string.Format("{0}/{1}.json", Application.persistentDataPath, "SaveData"), FileMode.Open);
         byte[] data = new byte[fileStream.Length];
         fileStream.Read(data, 0, data.Length);
         fileStream.Close();
