@@ -10,7 +10,7 @@ public partial class Player : MonoBehaviour
     public Image image;
 
     private Rigidbody2D _rd;
-    public LineRenderer _lineRenderer;
+    private LineRenderer _lineRenderer;
 
     private Vector2 _startPosition;
     private Vector2 _endPosition;
@@ -29,15 +29,22 @@ public partial class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _lineRenderer = GetComponent<LineRenderer>();
         image.gameObject.SetActive(false);
+        _lineRenderer.enabled = false;
         _rd = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject() 
+            || GameManager.Instance.gameState != GameManager.GameState.Play)
+        {
+            _lineRenderer.enabled = false;
+        }
         if (Input.GetMouseButtonDown(0))
         {
-            _lineRenderer.gameObject.SetActive(true);
+            _lineRenderer.enabled = true;
             if (EventSystem.current.IsPointerOverGameObject() 
                 || GameManager.Instance.gameState != GameManager.GameState.Play)
             {
@@ -67,7 +74,7 @@ public partial class Player : MonoBehaviour
             }
             _direction.Normalize();
             
-            Vector3 startPos = transform.position + new Vector3(0,0.2f,0);
+            Vector3 startPos = transform.position + new Vector3(0,0.56f,0);
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower;
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
@@ -75,7 +82,7 @@ public partial class Player : MonoBehaviour
         if (_isDragging && Input.GetMouseButtonUp(0))
         {
             _isDragging = false;
-            _lineRenderer.gameObject.SetActive(false);
+            _lineRenderer.enabled = false;
             this.Jump(_direction);
         }
     }
