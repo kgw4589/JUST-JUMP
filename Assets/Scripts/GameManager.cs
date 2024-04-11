@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         _saveData = LoadJson<JsonData>();
         _highScore = _saveData.highScore;
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 120;
+        Application.targetFrameRate = 30;
     }
     
     public void StartGame()
@@ -63,12 +63,14 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<Player>();
         Time.timeScale = 1; // game start
         gameState = GameState.Play;
+        Application.targetFrameRate = 120;
     }
 
     public void PauseGame()
     {
         Time.timeScale = 0; // game pause (stop)
         gameState = GameState.Pause;
+        Application.targetFrameRate = 30;
     }
 
     private void Update()
