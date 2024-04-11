@@ -74,15 +74,7 @@ public partial class Player : MonoBehaviour
         if (_isDragging && Input.GetMouseButtonUp(0))
         {
             _isDragging = false;
-            _endPosition = Input.mousePosition;
-            _direction = _startPosition - _endPosition;
-            jumpPower = _direction.magnitude / 20;
-            if (jumpPower > maxPower)
-            {
-                jumpPower = maxPower;
-            }
             _lineRenderer.gameObject.SetActive(false);
-            _direction.Normalize();
             this.Jump(_direction);
         }
     }
@@ -109,16 +101,15 @@ public partial class Player : MonoBehaviour
         Vector3 position = startPos;
         Vector3 velocity = vel;
 
-        // 라인 렌더러 초기화
-        _lineRenderer.positionCount = steps;
+        
+        _lineRenderer.positionCount = steps;// 라인 렌더러 초기화
 
         for (int i = 0; i < steps; i++)
         {
             position += velocity * deltaTime + 0.5f * gravity * deltaTime * deltaTime;
             velocity += gravity * deltaTime;
 
-            // 라인 렌더러에 대한 위치 설정
-            _lineRenderer.SetPosition(i, position);
+            _lineRenderer.SetPosition(i, position);//위치 
         }
     }
 
