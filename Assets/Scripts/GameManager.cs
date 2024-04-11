@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0; // game stop
         _saveData = LoadJson<JsonData>();
         _highScore = _saveData.highScore;
+        QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 120;
     }
     
