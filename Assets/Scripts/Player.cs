@@ -16,6 +16,7 @@ public partial class Player : MonoBehaviour
     private Vector2 _endPosition;
     private Vector2 _direction;
 
+    public bool isDie = false;
     private bool _isJump = false;
     public float jumpPower = 0;
     [SerializeField] private float maxPower = 5f;
@@ -51,11 +52,11 @@ public partial class Player : MonoBehaviour
             Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
             if (playerLook.x > transform.position.x && _isRight)
             {
-                Right();
+                TurnPlayer();
             }
             else if (playerLook.x < transform.position.x && !_isRight)
             {
-                Right();
+                TurnPlayer();
             }
             _endPosition = Input.mousePosition;
             _direction = _startPosition - _endPosition;
@@ -66,7 +67,7 @@ public partial class Player : MonoBehaviour
             }
             _direction.Normalize();
             
-            Vector3 startPos = transform.position;
+            Vector3 startPos = transform.position + new Vector3(0,0.5f,0);
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower;
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
@@ -79,7 +80,7 @@ public partial class Player : MonoBehaviour
         }
     }
 
-    void Right()
+    void TurnPlayer()
     {
         _isRight = !_isRight;
         transform.Rotate(Vector3.up, 180f, Space.World);
@@ -95,7 +96,7 @@ public partial class Player : MonoBehaviour
     }
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
-        int steps = 60;
+        int steps = 60;//오 진짜네
         float deltaTime = Time.fixedDeltaTime;
         Vector3 gravity = Physics.gravity;
         Vector3 position = startPos;
@@ -115,6 +116,6 @@ public partial class Player : MonoBehaviour
 
     void Jump(Vector2 dir)
     {
-        _rd.AddForce(new Vector2(dir.x, dir.y + dir.y / 4) * jumpPower, ForceMode2D.Impulse);
+        _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
     }
 }
