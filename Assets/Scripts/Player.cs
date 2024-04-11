@@ -67,7 +67,7 @@ public partial class Player : MonoBehaviour
             }
             _direction.Normalize();
             
-            Vector3 startPos = transform.position + new Vector3(0,0.5f,0);
+            Vector3 startPos = transform.position + new Vector3(0,0.2f,0);
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower;
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
