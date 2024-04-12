@@ -220,7 +220,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &332451758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 356829157}
   m_Layer: 0
-  m_Name: ---Manager---
+  m_Name: --->Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -537,7 +537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 502109137}
   m_Layer: 0
-  m_Name: ---Canvas---
+  m_Name: --->Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,6 +553,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &511269141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 511269142}
+  m_Layer: 0
+  m_Name: --->Other
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &511269142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511269141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.041944135, y: -0.25529248, z: -0.11356855}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -720,7 +751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 782572655}
   m_Layer: 0
-  m_Name: ---Camera---
+  m_Name: --->Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -878,7 +909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1259906428}
   m_Layer: 0
-  m_Name: ---Player---
+  m_Name: --->Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1046,7 +1077,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!114 &1507154181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1601,14 +1632,15 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 502109137}
   - {fileID: 332451760}
-  - {fileID: 1162373704}
   - {fileID: 1507154179}
   - {fileID: 478886813}
+  - {fileID: 1162373704}
   - {fileID: 356829157}
   - {fileID: 1889570816}
   - {fileID: 1252785620}
   - {fileID: 89165386}
   - {fileID: 1259906428}
   - {fileID: 7184284784045245672}
+  - {fileID: 511269142}
   - {fileID: 1747217460}
   - {fileID: 409400625}
