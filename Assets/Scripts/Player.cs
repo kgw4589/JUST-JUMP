@@ -42,7 +42,7 @@ public partial class Player : MonoBehaviour
         {
             _lineRenderer.enabled = false;
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !_isJump)
         {
             _lineRenderer.enabled = true;
             if (EventSystem.current.IsPointerOverGameObject() 
@@ -53,7 +53,7 @@ public partial class Player : MonoBehaviour
             _isDragging = true;
             _startPosition = Input.mousePosition;
         }
-        if (_isDragging && Input.GetMouseButton(0))
+        if (_isDragging && Input.GetMouseButton(0)&& !_isJump)
         {
             Vector2 myPos = Input.mousePosition;
             Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
@@ -79,7 +79,7 @@ public partial class Player : MonoBehaviour
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
 
-        if (_isDragging && Input.GetMouseButtonUp(0))
+        if (_isDragging && Input.GetMouseButtonUp(0)&& !_isJump)
         {
             _isDragging = false;
             _lineRenderer.enabled = false;
@@ -93,9 +93,8 @@ public partial class Player : MonoBehaviour
         transform.Rotate(Vector3.up, 180f, Space.World);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionStay2D(Collision2D other)
     {
-        Debug.Log(other.gameObject.tag);
         if (other.gameObject.CompareTag("Ground"))
         {
             _isJump = false;
@@ -135,6 +134,7 @@ public partial class Player : MonoBehaviour
 
     void Jump(Vector2 dir)
     {
+        _isJump = true;
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
     }
 }
