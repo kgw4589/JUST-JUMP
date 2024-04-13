@@ -5,16 +5,18 @@ using UnityEngine;
 
 public abstract class TempMapTrigger : MonoBehaviour
 {
+    [SerializeField] protected string triggerTagName = "Player"; 
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(triggerTagName))
         {
             EnterEvent();
         }
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(triggerTagName))
         {
             StayEvent();
         }
@@ -22,7 +24,7 @@ public abstract class TempMapTrigger : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(triggerTagName))
         {
             ExitEvent();
         }
