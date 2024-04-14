@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -28,13 +29,21 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private void Awake()
     {
+        
         if (transform.parent != null && transform.root != null)
         {
             DontDestroyOnLoad(this.transform.root.gameObject);
         }
         else
         {
-             DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
+
+        Init();
+    }
+
+    protected virtual void Init()
+    {
+        
     }
 }
