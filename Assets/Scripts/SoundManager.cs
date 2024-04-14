@@ -16,17 +16,17 @@ public class SoundManager : Singleton<SoundManager>
         yeosot,
     }
 
-    [Header("#BGM")]
+    [Header("#BGM SET")]
     public AudioClip bgmClip;
     public float bgmVolume;
     private AudioSource bgmPlayer;
     
-    [Header("#SFX")]
+    [Header("#SFX SET")]
     public AudioClip[] sfxClips;
     public float sfxVolume;
     public int channels;
-    AudioSource[] sfxPlayers;
-    int channelIndex;
+    private AudioSource[] sfxPlayers;
+    private int channelIndex;
     
     
     protected override void Init()
