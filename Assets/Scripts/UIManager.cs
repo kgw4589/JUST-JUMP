@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
         inGameCanvas.SetActive(true);
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.hana);
+        SoundManager.Instance.PlayBgm(true);
     }
 
     public void OnClickPauseButton()
@@ -37,6 +39,8 @@ public class UIManager : MonoBehaviour
         pausePanel.SetActive(true);
 
         GameManager.Instance.gameState = GameManager.GameState.Pause;
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.dull);
+        SoundManager.Instance.PlayBgm(false);
     }
 
     public void OnClickPauseClose()
@@ -46,12 +50,15 @@ public class UIManager : MonoBehaviour
         _gameManager.StartGame();
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.set);
+        SoundManager.Instance.PlayBgm(true);
     }
 
     public void OnClickHomeButton()
     {
         Debug.Log("Go Home");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.net);
     }
 
     private void Awake()
