@@ -81,9 +81,11 @@ public partial class Player : MonoBehaviour
 
         if (_isDragging && Input.GetMouseButtonUp(0)&& !_isJump)
         {
+            SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
             _lineRenderer.enabled = false;
             this.Jump(_direction);
+            
         }
     }
 
