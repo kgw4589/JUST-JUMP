@@ -10,11 +10,13 @@ public partial class GameOverZone : MonoBehaviour
     [SerializeField] private float _moveDuration = 2f;  // second
 
     private float _contactTime = 0f;
-    private float _timeSecond = 1f; // 1 Second +
+    private float _timeSecond = 2f; // 1 Second +
     private int _contactCnt = 0;
-    
+
+    private Player _player;
     void Start()
     {
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         StartCoroutine(MoveUpAfterWait());
     }
 
@@ -53,7 +55,9 @@ public partial class GameOverZone : MonoBehaviour
 
             if (_contactTime >= _timeSecond)
             {
+                _player.curruentTime = 0;
                 _contactCnt++;
+                _player.Recieve();
                 Debug.Log($"Player Cnt : {_contactCnt}(s)");
                 _contactTime = 0f;
             }
@@ -64,6 +68,7 @@ public partial class GameOverZone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            _player._isWave = false;
             _contactTime = 0f;
             _contactCnt = 0;
         }

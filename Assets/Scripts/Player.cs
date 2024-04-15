@@ -7,7 +7,12 @@ using UnityEngine.EventSystems;
 
 public partial class Player : MonoBehaviour
 {
+    [SerializeField] private float playerHp = 100;
+    [SerializeField] private float MaxplayerHp = 100;
+    public bool _isWave = false;
     public Image image;
+    public float curruentTime = 0f;
+    private float healTime = 3f;
 
     private Rigidbody2D _rd;
     private LineRenderer _lineRenderer;
@@ -29,6 +34,7 @@ public partial class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerHp = MaxplayerHp;
         _lineRenderer = GetComponent<LineRenderer>();
         image.gameObject.SetActive(false);
         _lineRenderer.enabled = false;
@@ -37,6 +43,16 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
+        if (!_isWave && playerHp != MaxplayerHp)
+        {
+            curruentTime += Time.deltaTime;
+            if (curruentTime >= healTime)
+            {
+                playerHp += 10;
+                curruentTime = 0;
+            }
+        }
+        
         if (EventSystem.current.IsPointerOverGameObject() 
             || GameManager.Instance.gameState != GameManager.GameState.Play)
         {
@@ -131,6 +147,13 @@ public partial class Player : MonoBehaviour
                 _lineRenderer.SetPosition(i, position);
             }
         }
+    }
+    public void Recieve()
+    {
+        //string[] recieve = e.Split("/");
+        //recieve[0]
+        _isWave = true;
+        playerHp -= 10;
     }
 
 
