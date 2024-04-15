@@ -31,8 +31,6 @@ public class SoundManager : Singleton<SoundManager>
     
     protected override void Init()
     {
-        base.Init(); // Singleton Init 호출
-
         #region bgmPlayer Initalize
         
         GameObject bgmObject = new GameObject("BgmPlayer");
