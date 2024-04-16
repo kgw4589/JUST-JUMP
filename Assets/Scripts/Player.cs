@@ -8,8 +8,10 @@ using UnityEngine.EventSystems;
 public partial class Player : MonoBehaviour
 {
     [SerializeField] private float playerHp = 100;
-    [SerializeField] private float MaxplayerHp = 100;
-    public bool _isWave = false;
+    [SerializeField] private float maxplayerHp = 100;
+
+    public Slider PlayerHpBar;
+    public bool _isHitWave = false;
     public Image image;
     public float curruentTime = 0f;
     private float healTime = 3f;
@@ -24,7 +26,8 @@ public partial class Player : MonoBehaviour
     public bool isDie = false;
     private bool _isJump = false;
     public float jumpPower = 0;
-    [SerializeField] private float maxPower = 5f;
+    [SerializeField] private float originMaxPower = 8f;
+    [SerializeField] private float maxPower;
 
     private bool _isRight = false;
 
@@ -34,7 +37,8 @@ public partial class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerHp = MaxplayerHp;
+        maxPower = originMaxPower;
+        playerHp = maxplayerHp;
         _lineRenderer = GetComponent<LineRenderer>();
         image.gameObject.SetActive(false);
         _lineRenderer.enabled = false;
@@ -43,7 +47,9 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
-        if (!_isWave && playerHp != MaxplayerHp)
+        PlayerHpBar.transform.position = transform.position + new Vector3(1, 0.2f, 0);
+        PlayerHpBar.value = playerHp/maxplayerHp;
+        if (!_isHitWave && playerHp != maxplayerHp)
         {
             curruentTime += Time.deltaTime;
             if (curruentTime >= healTime)
@@ -148,11 +154,11 @@ public partial class Player : MonoBehaviour
             }
         }
     }
-    public void Recieve()
+    public void Recive()
     {
         //string[] recieve = e.Split("/");
         //recieve[0]
-        _isWave = true;
+        _isHitWave = true;
         playerHp -= 10;
     }
 
@@ -161,5 +167,6 @@ public partial class Player : MonoBehaviour
     {
         //_isJump = true;
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
+        maxPower = originMaxPower;
     }
 }
