@@ -6,15 +6,8 @@ using Newtonsoft.Json;
 using Unity.VisualScripting;
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    private static GameManager instance = null;
-
-    public static GameManager Instance
-    {
-        get { return instance; }
-    }
-    
     public Player player;
     
     [SerializeField]
@@ -35,17 +28,8 @@ public class GameManager : MonoBehaviour
 
     public GameState gameState = GameState.Ready;
 
-    private void Awake()
+    protected override void Init()
     {
-        if (instance)
-        {
-            Destroy(instance);
-            return;
-        }
-
-        instance = this;
-        DontDestroyOnLoad(this.gameObject);
-
         if (!File.Exists(Path.Combine(Application.dataPath, "SaveData.json")))
         {
             CreateJson(new JsonData(0));
