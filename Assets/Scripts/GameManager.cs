@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
 
     protected override void Init()
     {
-        if (!File.Exists(Path.Combine(Application.dataPath, "SaveData.json")))
+        if (!File.Exists(Path.Combine(Application.persistentDataPath, "SaveData.json")))
         {
             CreateJson(new JsonData(0));
         }
