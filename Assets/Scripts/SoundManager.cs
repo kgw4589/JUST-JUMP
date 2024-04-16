@@ -8,12 +8,9 @@ public class SoundManager : Singleton<SoundManager>
 {
     public enum Sfx
     {
-        hana,
-        dull,
-        set,
-        net,
-        dasot,
-        yeosot,
+        jump,
+        menuTouch,
+        menuClose,
     }
 
     [Header("#BGM SET")]

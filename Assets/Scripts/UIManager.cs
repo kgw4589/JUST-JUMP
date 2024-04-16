@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
         inGameCanvas.SetActive(true);
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.hana);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
         SoundManager.Instance.PlayBgm(true);
     }
 
@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
         pausePanel.SetActive(true);
 
         GameManager.Instance.gameState = GameManager.GameState.Pause;
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.dull);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
         SoundManager.Instance.PlayBgm(false);
     }
 
@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
         _gameManager.StartGame();
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.set);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
         SoundManager.Instance.PlayBgm(true);
     }
 
@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Go Home");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.net);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     private void Awake()
