@@ -6,15 +6,8 @@ using Newtonsoft.Json;
 using Unity.VisualScripting;
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    private static GameManager instance = null;
-
-    public static GameManager Instance
-    {
-        get { return instance; }
-    }
-    
     public Player player;
     
     [SerializeField]
@@ -35,18 +28,9 @@ public class GameManager : MonoBehaviour
 
     public GameState gameState = GameState.Ready;
 
-    private void Awake()
+    protected override void Init()
     {
-        if (instance)
-        {
-            Destroy(instance);
-            return;
-        }
-
-        instance = this;
-        DontDestroyOnLoad(this.gameObject);
-
-        if (!File.Exists(Path.Combine(Application.dataPath, "SaveData.json")))
+        if (!File.Exists(Path.Combine(Application.persistentDataPath, "SaveData.json")))
         {
             CreateJson(new JsonData(0));
         }
@@ -54,6 +38,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0; // game stop
         _saveData = LoadJson<JsonData>();
         _highScore = _saveData.highScore;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 30;
     }
     
     public void StartGame()
@@ -61,12 +47,14 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<Player>();
         Time.timeScale = 1; // game start
         gameState = GameState.Play;
+        Application.targetFrameRate = 120;
     }
 
     public void PauseGame()
     {
         Time.timeScale = 0; // game pause (stop)
         gameState = GameState.Pause;
+        Application.targetFrameRate = 30;
     }
 
     private void Update()
@@ -97,7 +85,7 @@ public class GameManager : MonoBehaviour
     {
         string saveData = JsonConvert.SerializeObject(jsonData);
         FileStream fileStream =
-            new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"), FileMode.Create);
+            new FileStream(string.Format("{0}/{1}.json", Application.persistentDataPath, "SaveData"), FileMode.Create);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
         fileStream.Write(data, 0, data.Length);
         fileStream.Close();
@@ -106,7 +94,7 @@ public class GameManager : MonoBehaviour
     private void ChangeJson(JsonData jsonData)
     {
         string saveData = JsonConvert.SerializeObject(jsonData);
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"),
+        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.persistentDataPath, "SaveData"),
             FileMode.Open, FileAccess.Write);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
         fileStream.Write(data, 0, data.Length);
@@ -116,7 +104,7 @@ public class GameManager : MonoBehaviour
     private T LoadJson<T>()
     {
         FileStream fileStream =
-            new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"), FileMode.Open);
+            new FileStream(string.Format("{0}/{1}.json", Application.persistentDataPath, "SaveData"), FileMode.Open);
         byte[] data = new byte[fileStream.Length];
         fileStream.Read(data, 0, data.Length);
         fileStream.Close();

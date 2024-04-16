@@ -7,10 +7,15 @@ using UnityEngine.EventSystems;
 
 public partial class Player : MonoBehaviour
 {
+    [SerializeField] private float playerHp = 100;
+    [SerializeField] private float MaxplayerHp = 100;
+    public bool _isWave = false;
     public Image image;
+    public float curruentTime = 0f;
+    private float healTime = 3f;
 
     private Rigidbody2D _rd;
-    public LineRenderer _lineRenderer;
+    private LineRenderer _lineRenderer;
 
     private Vector2 _startPosition;
     private Vector2 _endPosition;
@@ -29,15 +34,33 @@ public partial class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerHp = MaxplayerHp;
+        _lineRenderer = GetComponent<LineRenderer>();
         image.gameObject.SetActive(false);
+        _lineRenderer.enabled = false;
         _rd = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!_isWave && playerHp != MaxplayerHp)
         {
-            _lineRenderer.gameObject.SetActive(true);
+            curruentTime += Time.deltaTime;
+            if (curruentTime >= healTime)
+            {
+                playerHp += 10;
+                curruentTime = 0;
+            }
+        }
+        
+        if (EventSystem.current.IsPointerOverGameObject() 
+            || GameManager.Instance.gameState != GameManager.GameState.Play)
+        {
+            _lineRenderer.enabled = false;
+        }
+        if (Input.GetMouseButtonDown(0) && !_isJump)
+        {
+            _lineRenderer.enabled = true;
             if (EventSystem.current.IsPointerOverGameObject() 
                 || GameManager.Instance.gameState != GameManager.GameState.Play)
             {
@@ -46,7 +69,7 @@ public partial class Player : MonoBehaviour
             _isDragging = true;
             _startPosition = Input.mousePosition;
         }
-        if (_isDragging && Input.GetMouseButton(0))
+        if (_isDragging && Input.GetMouseButton(0)&& !_isJump)
         {
             Vector2 myPos = Input.mousePosition;
             Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
@@ -67,16 +90,18 @@ public partial class Player : MonoBehaviour
             }
             _direction.Normalize();
             
-            Vector3 startPos = transform.position + new Vector3(0,0.5f,0);
+            Vector3 startPos = transform.position + new Vector3(0,0.56f,0);
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower;
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
 
-        if (_isDragging && Input.GetMouseButtonUp(0))
+        if (_isDragging && Input.GetMouseButtonUp(0)&& !_isJump)
         {
+            SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
-            _lineRenderer.gameObject.SetActive(false);
+            _lineRenderer.enabled = false;
             this.Jump(_direction);
+            
         }
     }
 
@@ -86,9 +111,8 @@ public partial class Player : MonoBehaviour
         transform.Rotate(Vector3.up, 180f, Space.World);
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionStay2D(Collision2D other)
     {
-        Debug.Log(other.gameObject.tag);
         if (other.gameObject.CompareTag("Ground"))
         {
             _isJump = false;
@@ -96,26 +120,46 @@ public partial class Player : MonoBehaviour
     }
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
-        int steps = 60;//오 진짜네
+        int steps = 60;
         float deltaTime = Time.fixedDeltaTime;
         Vector3 gravity = Physics.gravity;
         Vector3 position = startPos;
         Vector3 velocity = vel;
 
-        
-        _lineRenderer.positionCount = steps;// 라인 렌더러 초기화
+        _lineRenderer.positionCount = steps;
 
         for (int i = 0; i < steps; i++)
         {
-            position += velocity * deltaTime + 0.5f * gravity * deltaTime * deltaTime;
-            velocity += gravity * deltaTime;
-
-            _lineRenderer.SetPosition(i, position);//위치 
+            // 레이캐스트를 사용하여 벽 충돌 감지
+            RaycastHit2D hit = Physics2D.Raycast(position, velocity, velocity.magnitude * deltaTime);
+            if (hit.collider != null && hit.collider.CompareTag("Ground"))
+            {
+                // 충돌이 감지되면 라인 렌더러의 길이를 충돌 지점까지로 조정
+                _lineRenderer.positionCount = i + 1;
+                _lineRenderer.SetPosition(i, hit.point);
+                break; // 충돌이 감지되면 루프를 빠져나옴
+            }
+            else
+            {
+                // 충돌이 감지되지 않으면 정상적으로 라인 렌더러 그리기 계속
+                position += velocity * deltaTime + 0.5f * gravity * deltaTime * deltaTime;
+                velocity += gravity * deltaTime;
+                _lineRenderer.SetPosition(i, position);
+            }
         }
     }
+    public void Recieve()
+    {
+        //string[] recieve = e.Split("/");
+        //recieve[0]
+        _isWave = true;
+        playerHp -= 10;
+    }
+
 
     void Jump(Vector2 dir)
     {
+        //_isJump = true;
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
     }
 }
