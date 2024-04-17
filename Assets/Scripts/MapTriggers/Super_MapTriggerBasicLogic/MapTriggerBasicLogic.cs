@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TempMapTrigger : MonoBehaviour
+public abstract class MapTriggerBasicLogic : MonoBehaviour
 {
     [SerializeField] protected string triggerTagName = "Player"; 
+
+    protected abstract void EnterEvent();
+    protected abstract void StayEvent();
+    protected abstract void ExitEvent();
     
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -29,8 +33,4 @@ public abstract class TempMapTrigger : MonoBehaviour
             ExitEvent();
         }
     }
-
-    public virtual void EnterEvent() { }
-    public virtual void StayEvent() { }
-    public virtual void ExitEvent() { }
 }

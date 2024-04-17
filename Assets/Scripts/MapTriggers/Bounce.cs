@@ -3,15 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bounce : TempMapTrigger
+public class Bounce : MapTriggerBasicLogic
 {
     private Player _player;
 
     [SerializeField] private float bouncePower;
     [SerializeField] private Vector2 bounceDirection;
 
-    public override void EnterEvent()
+    protected override void EnterEvent()
     {
         _player.Bounce(bounceDirection, bouncePower);
+    }
+
+    protected override void StayEvent()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected override void ExitEvent()
+    {
+        throw new NotImplementedException();
     }
 }
