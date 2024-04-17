@@ -57,7 +57,7 @@ public partial class GameOverZone : MonoBehaviour
             {
                 _player.curruentTime = 0;
                 _contactCnt++;
-                _player.Recieve();
+                _player.Recive();
                 Debug.Log($"Player Cnt : {_contactCnt}(s)");
                 _contactTime = 0f;
             }
@@ -68,7 +68,7 @@ public partial class GameOverZone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _player._isWave = false;
+            _player._isHitWave = false;
             _contactTime = 0f;
             _contactCnt = 0;
         }

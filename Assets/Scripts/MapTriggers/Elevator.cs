@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Elevator : TempMapTrigger
+public class Elevator : MapTriggerBasicLogic
 {
     private bool _collision;
     private Vector2 _setPos;
@@ -24,7 +24,12 @@ public class Elevator : TempMapTrigger
         }
     }
 
-    public override void StayEvent()
+    protected override void EnterEvent()
+    {
+        
+    }
+
+    protected override void StayEvent()
     {
         _collision = true;
         float distance = Vector2.Distance(
@@ -33,7 +38,7 @@ public class Elevator : TempMapTrigger
             transform.position += transform.up * speed * Time.deltaTime;
     }
 
-    public override void ExitEvent()
+    protected override void ExitEvent()
     {
         _collision = false;
     }
