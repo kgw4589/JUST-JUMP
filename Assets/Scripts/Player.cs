@@ -47,7 +47,7 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
-        PlayerHpBar.transform.position = transform.position + new Vector3(1, 0.2f, 0);
+        //PlayerHpBar.transform.position = transform.position + new Vector3(1, 0.2f, 0);
         PlayerHpBar.value = playerHp/maxplayerHp;
         if (!_isHitWave && playerHp != maxplayerHp)
         {
