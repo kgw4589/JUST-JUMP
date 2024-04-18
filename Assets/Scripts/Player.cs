@@ -96,7 +96,7 @@ public partial class Player : MonoBehaviour
             }
             _direction.Normalize();
             
-            Vector3 startPos = transform.position + new Vector3(0,0.56f,0);
+            Vector3 startPos = transform.position;
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower;
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
@@ -154,7 +154,7 @@ public partial class Player : MonoBehaviour
             }
         }
     }
-    public void Recive()
+    public void Damage()
     {
         //string[] recieve = e.Split("/");
         //recieve[0]
