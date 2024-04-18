@@ -57,7 +57,7 @@ public partial class GameOverZone : MonoBehaviour
             {
                 _player.curruentTime = 0;
                 _contactCnt++;
-                _player.Recive();
+                _player.Damage();
                 Debug.Log($"Player Cnt : {_contactCnt}(s)");
                 _contactTime = 0f;
             }
