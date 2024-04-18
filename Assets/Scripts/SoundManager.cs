@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -12,6 +14,10 @@ public class SoundManager : Singleton<SoundManager>
         menuTouch,
         menuClose,
     }
+
+    [Header("#Sliders")]
+    public Slider bgmSlider;
+    public Slider sfxSlider;
 
     [Header("#BGM SET")]
     public AudioClip bgmClip;
@@ -24,6 +30,28 @@ public class SoundManager : Singleton<SoundManager>
     public int channels;
     private AudioSource[] sfxPlayers;
     private int channelIndex;
+
+    void Start()
+    {
+        bgmSlider = bgmSlider.GetComponent<Slider>();
+        sfxSlider = bgmSlider.GetComponent<Slider>();
+        
+        bgmSlider.onValueChanged.AddListener(ChangeBgmSound);
+        sfxSlider.onValueChanged.AddListener(ChangeSfxSound);
+    }
+
+    void ChangeBgmSound(float volume)
+    {
+        bgmPlayer.volume = volume;
+    }
+    
+    void ChangeSfxSound(float volume)
+    {
+        foreach (AudioSource sfxs in sfxPlayers)
+        {
+            sfxs.volume = volume;
+        }
+    }
     
     
     protected override void Init()
