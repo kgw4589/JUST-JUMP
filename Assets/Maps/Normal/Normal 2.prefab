@@ -1345,7 +1345,7 @@ GameObject:
   - component: {fileID: 7850686823415417212}
   - component: {fileID: 6676717920836627899}
   m_Layer: 0
-  m_Name: TempMap2
+  m_Name: Normal 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
