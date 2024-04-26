@@ -7,14 +7,14 @@ using UnityEngine.EventSystems;
 
 public partial class Player : MonoBehaviour
 {
-    [SerializeField] private float playerHp = 100;
-    [SerializeField] private float maxplayerHp = 100;
+    private float playerHp = 5;
+    private float maxplayerHp = 5;
 
     public Slider PlayerHpBar;
     public bool _isHitWave = false;
     public Image image;
     public float curruentTime = 0f;
-    private float healTime = 3f;
+    private float healTime = 1f;
 
     private Rigidbody2D _rd;
     private LineRenderer _lineRenderer;
@@ -47,35 +47,55 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
-        //PlayerHpBar.transform.position = transform.position + new Vector3(1, 0.2f, 0);
-        PlayerHpBar.value = playerHp/maxplayerHp;
+        PlayerHpBar.value = playerHp / maxplayerHp;
+        // color = Color.Lerp(Color.red, Color.cyan, playerHp / maxplayerHp);
+        if (PlayerHpBar.value >= 0.8f)
+        {
+            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.cyan;
+        }
+        else if (PlayerHpBar.value >= 0.6f)
+        {
+            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.yellow;
+        }
+        else if (PlayerHpBar.value >= 0.4f)
+        {
+            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.yellow;
+        }
+        else if (PlayerHpBar.value >= 0.2f)
+        {
+            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.red;
+        }
+      
         if (!_isHitWave && playerHp != maxplayerHp)
         {
             curruentTime += Time.deltaTime;
             if (curruentTime >= healTime)
             {
-                playerHp += 10;
-                curruentTime = 0;
+                playerHp += 1;
+                curruentTime = 0; 
             }
         }
-        
-        if (EventSystem.current.IsPointerOverGameObject() 
+
+        if (EventSystem.current.IsPointerOverGameObject()
             || GameManager.Instance.gameState != GameManager.GameState.Play)
         {
             _lineRenderer.enabled = false;
         }
+
         if (Input.GetMouseButtonDown(0) && !_isJump)
         {
             _lineRenderer.enabled = true;
-            if (EventSystem.current.IsPointerOverGameObject() 
+            if (EventSystem.current.IsPointerOverGameObject()
                 || GameManager.Instance.gameState != GameManager.GameState.Play)
             {
                 return;
             }
+
             _isDragging = true;
             _startPosition = Input.mousePosition;
         }
-        if (_isDragging && Input.GetMouseButton(0)&& !_isJump)
+
+        if (_isDragging && Input.GetMouseButton(0) && !_isJump)
         {
             Vector2 myPos = Input.mousePosition;
             Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
@@ -87,6 +107,7 @@ public partial class Player : MonoBehaviour
             {
                 TurnPlayer();
             }
+
             _endPosition = Input.mousePosition;
             _direction = _startPosition - _endPosition;
             jumpPower = _direction.magnitude / 20;
@@ -94,20 +115,20 @@ public partial class Player : MonoBehaviour
             {
                 jumpPower = maxPower;
             }
+
             _direction.Normalize();
-            
+
             Vector3 startPos = transform.position;
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower;
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
 
-        if (_isDragging && Input.GetMouseButtonUp(0)&& !_isJump)
+        if (_isDragging && Input.GetMouseButtonUp(0) && !_isJump)
         {
             SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
             _lineRenderer.enabled = false;
             this.Jump(_direction);
-            
         }
     }
 
@@ -124,6 +145,7 @@ public partial class Player : MonoBehaviour
             _isJump = false;
         }
     }
+
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
         int steps = 60;
@@ -154,12 +176,11 @@ public partial class Player : MonoBehaviour
             }
         }
     }
+
     public void Damage()
     {
-        //string[] recieve = e.Split("/");
-        //recieve[0]
+        playerHp -= Time.deltaTime;
         _isHitWave = true;
-        playerHp -= 10;
     }
 
 
