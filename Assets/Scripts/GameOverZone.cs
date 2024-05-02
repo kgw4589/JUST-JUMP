@@ -61,7 +61,7 @@ public partial class GameOverZone : MonoBehaviour
             //     Debug.Log($"Player Cnt : {_contactCnt}(s)");
             //     _contactTime = 0f;
             // }
-            
+            Debug.Log(_player._isHitWave);
             _player.Damage();
         }
     }
@@ -71,6 +71,7 @@ public partial class GameOverZone : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             _player._isHitWave = false;
+            
             _contactTime = 0f;
             _contactCnt = 0;
         }
