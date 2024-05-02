@@ -70,7 +70,7 @@ public partial class Player : MonoBehaviour
             PlayerHpBar.fillRect.GetComponent<Image>().color = Color.red;
         }
       
-        if (!_isHitWave && playerHp != maxplayerHp)
+        if (!_isHitWave && playerHp <= maxplayerHp) //힐량 오버남
         {
             curruentTime += Time.deltaTime;
             if (curruentTime >= healTime)
