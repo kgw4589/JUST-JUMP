@@ -27,9 +27,6 @@ public class MapManager : MonoBehaviour
     {
         mapScriptable = Resources.Load<MapScriptable>("MapScriptables/" + mapMode);
         
-        _mapSizeY = mapScriptable.maps[0].transform.localScale.y;
-        _interval = new Vector2(0, _mapSizeY);
-        
         _lastMap = Instantiate(mapScriptable.maps[Random.Range(0, mapScriptable.maps.Count)]);
         _lastMap.transform.position = startPos;
         _mapPosQueue.Enqueue(_lastMap);
@@ -41,20 +38,32 @@ public class MapManager : MonoBehaviour
     void Update()
     {
         float dis = Vector2.Distance(player.transform.position, _lastMap.transform.position);
-        
-        if (dis < _mapSizeY * 3) InstantiateRandomMap();
+
+        if (dis < _mapSizeY * 3)
+        {
+            InstantiateRandomMap();
+        }
         
         Vector3 mapQueFirst = _mapPosQueue.Peek().transform.position;
-        
+
         if (gameOverZone.transform.position.y - mapQueFirst.y > _mapSizeY)
+        {
             Destroy(_mapPosQueue.Dequeue());
+        }
     }
 
     void InstantiateRandomMap()
     {
         GameObject map = Instantiate(mapScriptable.maps[Random.Range(0, mapScriptable.maps.Count)]);
+        
+        float lastMapSizeY = _lastMap.transform.localScale.y / 2;
+        _mapSizeY = map.transform.localScale.y / 2;
+        
+        _interval = new Vector2(0, lastMapSizeY + _mapSizeY);
+
         map.transform.position = _lastMap.transform.position + _interval;
         _lastMap = map;
+        
         _mapPosQueue.Enqueue(_lastMap);
     }
 }
