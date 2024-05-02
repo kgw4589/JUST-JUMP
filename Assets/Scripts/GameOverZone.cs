@@ -51,16 +51,18 @@ public partial class GameOverZone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _contactTime += Time.deltaTime;
-
-            if (_contactTime >= _timeSecond)
-            {
-                _player.curruentTime = 0;
-                _contactCnt++;
-                _player.Damage();
-                Debug.Log($"Player Cnt : {_contactCnt}(s)");
-                _contactTime = 0f;
-            }
+            // _contactTime += Time.deltaTime;
+            //
+            // if (_contactTime >= _timeSecond)
+            // {
+            //     _player.curruentTime = 0;
+            //     _contactCnt++;
+            //     _player.Damage();
+            //     Debug.Log($"Player Cnt : {_contactCnt}(s)");
+            //     _contactTime = 0f;
+            // }
+            
+            _player.Damage();
         }
     }
 
