@@ -4,10 +4,6 @@ using UnityEngine;
 
 public partial class Player
 {
-    public void SpringBoard(float power)
-    {
-        _rd.AddForce(transform.up * power , ForceMode2D.Impulse);
-    }
     public void ChangeJumpPower(float speed)
     {
         maxPower = speed;
@@ -15,6 +11,10 @@ public partial class Player
 
     public void Bounce(Vector2 dir, float power)
     {
-        
+        _rd.AddForce(dir * power , ForceMode2D.Impulse);
+    }
+    public void StopMove(Vector2 dir, float power)
+    {
+        _rd.AddForce(dir * power , ForceMode2D.Impulse);
     }
 }

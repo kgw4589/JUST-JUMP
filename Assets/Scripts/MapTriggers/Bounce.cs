@@ -10,6 +10,11 @@ public class Bounce : MapTriggerBasicLogic
     [SerializeField] private float bouncePower;
     [SerializeField] private Vector2 bounceDirection;
 
+    private void Awake()
+    {
+        _player = GameObject.FindWithTag(triggerTagName).GetComponent<Player>();
+    }
+
     protected override void EnterEvent()
     {
         _player.Bounce(bounceDirection, bouncePower);
@@ -17,11 +22,9 @@ public class Bounce : MapTriggerBasicLogic
 
     protected override void StayEvent()
     {
-        throw new NotImplementedException();
     }
 
     protected override void ExitEvent()
     {
-        throw new NotImplementedException();
     }
 }
