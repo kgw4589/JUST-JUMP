@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapManager : MonoBehaviour
+public class MapManager : Singleton<MapManager>
 {
     [SerializeField] private MapScriptable mapScriptable;
     
@@ -21,9 +21,14 @@ public class MapManager : MonoBehaviour
     {
         Normal
     }
-    public MapMode mapMode;
+    public MapMode mapMode = MapMode.Normal;
 
     void Start()
+    {
+        InitMap();
+    }
+
+    public void InitMap()
     {
         mapScriptable = Resources.Load<MapScriptable>("MapScriptables/" + mapMode);
         
@@ -33,6 +38,11 @@ public class MapManager : MonoBehaviour
         
         InstantiateRandomMap();
         InstantiateRandomMap();
+    }
+
+    public void EndMap()
+    {
+        _mapPosQueue.Clear();
     }
 
     void Update()
