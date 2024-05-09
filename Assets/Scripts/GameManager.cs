@@ -57,6 +57,20 @@ public class GameManager : Singleton<GameManager>
         Application.targetFrameRate = 30;
     }
 
+    private void GameOver()
+    {
+        if (_playerPosY > _highScore)
+        {
+            _highScore = (int)_playerPosY;
+            _saveData.highScore = _highScore;
+            ChangeJson(_saveData);
+        }
+        
+        Time.timeScale = 0;
+        gameState = GameState.End;
+        Application.targetFrameRate = 30;
+    }
+
     private void Update()
     {
         if (gameState != GameState.Play)
@@ -66,19 +80,11 @@ public class GameManager : Singleton<GameManager>
         
         _playerPosY = player.gameObject.transform.position.y;
 
-        /*if (!_player.die)
+        if (player.isDie)
         {
-            return;
+            GameOver();
         }
 
-        if (_playerPosY > _highScore)
-        {
-            _highScore = (int)_playerPosY;
-            JsonData.highScore = _highScore;
-            ChangeJson(JsonData);
-        }
-
-        gameState = GameState.Ready;*/
     }
 
     private void CreateJson(JsonData jsonData)
@@ -112,9 +118,9 @@ public class GameManager : Singleton<GameManager>
         return JsonConvert.DeserializeObject<T>(jsonData);
     }
 
-    public String PlayerPosY
+    public float PlayerPosY
     {
-        get { return _playerPosY.ToString("F3") + " m";  }
+        get { return _playerPosY; }
     }
 
     public int HighScore
