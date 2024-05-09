@@ -53,10 +53,12 @@ public class Cannon : MonoBehaviour
         if (_currentTime > shootingTime && _reload)
         {
             Shooting();
-            _currentTime = 0;    
+            _currentTime = 0;
         }
         else if (_currentTime > shootingTime - 0.75f && !_reload)
         {
+            cannonBullet.rb.gravityScale = 0f;
+
             bulletObj.SetActive(true);
         
             Debug.DrawLine(_startPoint,endPoint);
@@ -64,6 +66,8 @@ public class Cannon : MonoBehaviour
             trajectory.UpdateDots(cannonBullet.Pos,_force);
             
             trajectory.Show();
+
+            _reload = true;
         }
         
     }
