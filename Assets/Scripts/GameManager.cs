@@ -112,9 +112,9 @@ public class GameManager : Singleton<GameManager>
         return JsonConvert.DeserializeObject<T>(jsonData);
     }
 
-    public String PlayerPosY
+    public float PlayerPosY
     {
-        get { return _playerPosY.ToString("F3") + " m";  }
+        get { return _playerPosY; }
     }
 
     public int HighScore
