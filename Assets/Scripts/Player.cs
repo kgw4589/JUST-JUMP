@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 
 public partial class Player : MonoBehaviour
 {
-    public GameObject PausePanel;
     [SerializeField]
     private float playerHp = 5;
     [SerializeField]
@@ -103,7 +102,7 @@ public partial class Player : MonoBehaviour
             _startPosition = Input.mousePosition;
         }
 
-        if (_isDragging && Input.GetMouseButton(0) && !_isJump && !isDie && PausePanel.activeSelf == false)
+        if (_isDragging && Input.GetMouseButton(0) && !_isJump && !isDie)
         {
             Vector2 myPos = Input.mousePosition;
             Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
