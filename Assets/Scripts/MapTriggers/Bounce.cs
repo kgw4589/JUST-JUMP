@@ -17,7 +17,7 @@ public class Bounce : MapTriggerBasicLogic
 
     protected override void EnterEvent()
     {
-        _player.Bounce(bounceDirection, bouncePower);
+        _player.Bounce(bounceDirection.normalized, bouncePower);
     }
 
     protected override void StayEvent()
