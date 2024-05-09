@@ -40,6 +40,7 @@ public partial class Player : MonoBehaviour
 
     private bool _isDragging = false;
 
+    private Color _playerHpBarColor;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +51,8 @@ public partial class Player : MonoBehaviour
         image.gameObject.SetActive(false);
         _lineRenderer.enabled = false;
         _rd = GetComponent<Rigidbody2D>();
+
+        _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>().color;
     }
 
     void Update()
@@ -59,22 +62,18 @@ public partial class Player : MonoBehaviour
             isDie = true;
         }
         PlayerHpBar.value = playerHp / maxplayerHp;
-        // color = Color.Lerp(Color.red, Color.cyan, playerHp / maxplayerHp);
+        
         if (PlayerHpBar.value >= 0.8f)
         {
-            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.cyan;
+            _playerHpBarColor = Color.cyan;
         }
-        else if (PlayerHpBar.value >= 0.6f)
+        else if (PlayerHpBar.value >= 0.5f)
         {
-            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.yellow;
-        }
-        else if (PlayerHpBar.value >= 0.4f)
-        {
-            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.yellow;
+            _playerHpBarColor = Color.yellow;
         }
         else if (PlayerHpBar.value >= 0.2f)
         {
-            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.red;
+            _playerHpBarColor = Color.red;
         }
       
         if (!isHitWave && playerHp <= maxplayerHp && !isDie) //힐량 오버남
