@@ -28,6 +28,7 @@ public partial class Player : MonoBehaviour
     private Vector2 _direction;
 
     public bool isDie = false;
+    [SerializeField]
     private bool _isJump = false;
     public float jumpPower = 0;
     [SerializeField] 
@@ -202,7 +203,7 @@ public partial class Player : MonoBehaviour
 
     void Jump(Vector2 dir)
     {
-        //_isJump = true;
+        _isJump = true;
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
         maxPower = originMaxPower;
     }
