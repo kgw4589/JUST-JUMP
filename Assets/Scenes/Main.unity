@@ -386,6 +386,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3244785698334012014, guid: adad9c49f51e9df4aa4f729061034691, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3244785698334012014, guid: adad9c49f51e9df4aa4f729061034691, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1889,6 +1893,10 @@ PrefabInstance:
       propertyPath: image
       value: 
       objectReference: {fileID: 2106273265}
+    - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: PausePanel
+      value: 
+      objectReference: {fileID: 846314673}
     - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: PlayerHpBar
       value: 
