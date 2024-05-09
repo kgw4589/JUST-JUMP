@@ -83,9 +83,9 @@ public class GameManager : Singleton<GameManager>
 
     private void CreateJson(JsonData jsonData)
     {
-        string saveData = JsonConvert.SerializeObject(jsonData);
+        string saveData = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
         FileStream fileStream =
-            new FileStream(string.Format("{0}/{1}.json", Application.persistentDataPath, "SaveData"), FileMode.Create);
+            new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"), FileMode.Create);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
         fileStream.Write(data, 0, data.Length);
         fileStream.Close();
@@ -93,8 +93,8 @@ public class GameManager : Singleton<GameManager>
 
     private void ChangeJson(JsonData jsonData)
     {
-        string saveData = JsonConvert.SerializeObject(jsonData);
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.persistentDataPath, "SaveData"),
+        string saveData = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
+        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"),
             FileMode.Open, FileAccess.Write);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
         fileStream.Write(data, 0, data.Length);
@@ -104,7 +104,7 @@ public class GameManager : Singleton<GameManager>
     private T LoadJson<T>()
     {
         FileStream fileStream =
-            new FileStream(string.Format("{0}/{1}.json", Application.persistentDataPath, "SaveData"), FileMode.Open);
+            new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"), FileMode.Open);
         byte[] data = new byte[fileStream.Length];
         fileStream.Read(data, 0, data.Length);
         fileStream.Close();
