@@ -16,7 +16,6 @@ public class UIManager : MonoBehaviour
     public GameObject pauseClose;
     public GameObject homeButton;
     public GameObject diePanel;
-    public GameObject diePanelClose;
     
     private int _currentFloor;
     
@@ -78,7 +77,6 @@ public class UIManager : MonoBehaviour
         diePanel.SetActive(false);
         inGameCanvas.SetActive(false);
         startUICanvas.SetActive(true);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.Instance.gameState = GameManager.GameState.Ready;
     }
 

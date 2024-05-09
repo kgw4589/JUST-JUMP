@@ -66,8 +66,8 @@ public class GameManager : Singleton<GameManager>
             ChangeJson(_saveData);
         }
         
-        gameState = GameState.End;
         Time.timeScale = 0;
+        gameState = GameState.End;
         Application.targetFrameRate = 30;
     }
 
@@ -84,6 +84,7 @@ public class GameManager : Singleton<GameManager>
         {
             GameOver();
         }
+
     }
 
     private void CreateJson(JsonData jsonData)
