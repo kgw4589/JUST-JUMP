@@ -116,5 +116,9 @@ public class GameManager : Singleton<GameManager>
     {
         get { return _playerPosY.ToString("F3") + " m";  }
     }
-    
+
+    public int HighScore
+    {
+        get { return _highScore; }
+    }
 }
