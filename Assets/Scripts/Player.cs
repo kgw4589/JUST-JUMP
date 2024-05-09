@@ -13,10 +13,10 @@ public partial class Player : MonoBehaviour
     private float maxplayerHp = 5;
 
     public Slider PlayerHpBar;
-    public bool _isHitWave = false;
+    public bool isHitWave = false;
     public Image image;
     public float curruentTime = 0f;
-    private float healTime = 1f;
+    private float _healTime = 1f;
 
     private Rigidbody2D _rd;
     private LineRenderer _lineRenderer;
@@ -51,6 +51,10 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
+        if (playerHp <= 0)
+        {
+            isDie = true;
+        }
         PlayerHpBar.value = playerHp / maxplayerHp;
         // color = Color.Lerp(Color.red, Color.cyan, playerHp / maxplayerHp);
         if (PlayerHpBar.value >= 0.8f)
@@ -70,10 +74,10 @@ public partial class Player : MonoBehaviour
             PlayerHpBar.fillRect.GetComponent<Image>().color = Color.red;
         }
       
-        if (!_isHitWave && playerHp <= maxplayerHp) //힐량 오버남
+        if (!isHitWave && playerHp <= maxplayerHp && !isDie) //힐량 오버남
         {
             curruentTime += Time.deltaTime;
-            if (curruentTime >= healTime)
+            if (curruentTime >= _healTime)
             {
                 playerHp += Time.deltaTime;
             }
@@ -85,7 +89,7 @@ public partial class Player : MonoBehaviour
             _lineRenderer.enabled = false;
         }
 
-        if (Input.GetMouseButtonDown(0) && !_isJump)
+        if (Input.GetMouseButtonDown(0) && !_isJump && !isDie)
         {
             _lineRenderer.enabled = true;
             if (EventSystem.current.IsPointerOverGameObject()
@@ -98,7 +102,7 @@ public partial class Player : MonoBehaviour
             _startPosition = Input.mousePosition;
         }
 
-        if (_isDragging && Input.GetMouseButton(0) && !_isJump)
+        if (_isDragging && Input.GetMouseButton(0) && !_isJump && !isDie)
         {
             Vector2 myPos = Input.mousePosition;
             Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
@@ -118,7 +122,7 @@ public partial class Player : MonoBehaviour
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
 
-        if (_isDragging && Input.GetMouseButtonUp(0) && !_isJump)
+        if (_isDragging && Input.GetMouseButtonUp(0) && !_isJump && !isDie)
         {
             SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
@@ -156,7 +160,7 @@ public partial class Player : MonoBehaviour
         {
             // 레이캐스트를 사용하여 벽 충돌 감지
             RaycastHit2D hit = Physics2D.Raycast(position, velocity, velocity.magnitude * deltaTime);
-            //Debug.DrawRay(position,velocity);
+            // Debug.DrawRay(position,velocity);
             if (hit.collider != null && hit.collider.CompareTag("Ground"))
             {
                 if (hit.transform.position.x < transform.position.x && _isRight)
@@ -185,10 +189,12 @@ public partial class Player : MonoBehaviour
 
     public void Damage()
     {
-        curruentTime = 0;
-        playerHp -= Time.deltaTime;
-        _isHitWave = true;
-        
+        if (!isDie)
+        {
+            curruentTime = 0;
+            playerHp -= Time.deltaTime;
+            isHitWave = true;
+        }
     }
 
 

@@ -69,7 +69,7 @@ public partial class GameOverZone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _player._isHitWave = false;
+            _player.isHitWave = false;
             
             _contactTime = 0f;
             _contactCnt = 0;
