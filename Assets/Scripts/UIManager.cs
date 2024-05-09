@@ -15,9 +15,18 @@ public class UIManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject pauseClose;
     public GameObject homeButton;
+    public GameObject diePanel;
     
-    [SerializeField] private GameManager _gameManager;
-    [SerializeField] private TextMeshProUGUI _playerPosY;
+    private int _currentFloor;
+    
+    [SerializeField]
+    private GameManager _gameManager;
+    [SerializeField]
+    private TextMeshProUGUI _playerPosY;
+    [SerializeField]
+    private TextMeshProUGUI _highScore;
+    [SerializeField]
+    private TextMeshProUGUI _currentScore;
     
     public void OnClickStartButton()
     {
@@ -26,6 +35,7 @@ public class UIManager : MonoBehaviour
         _gameManager.StartGame();
         startUICanvas.SetActive(false);
         inGameCanvas.SetActive(true);
+        diePanel.SetActive(false);
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
@@ -61,6 +71,15 @@ public class UIManager : MonoBehaviour
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
+    public void OnClickDieClose()
+    {
+        Debug.Log("Die Close");
+        diePanel.SetActive(false);
+        inGameCanvas.SetActive(false);
+        startUICanvas.SetActive(true);
+        GameManager.Instance.gameState = GameManager.GameState.Ready;
+    }
+
     private void Awake()
     {
         wave2DGameObject.SetActive(false);
@@ -71,7 +90,15 @@ public class UIManager : MonoBehaviour
     {
         if (_gameManager.gameState == GameManager.GameState.Play)
         {
-            _playerPosY.text = _gameManager.PlayerPosY;
+            _playerPosY.text = _gameManager.PlayerPosY.ToString("F3") + "m";
+            _currentFloor = Mathf.FloorToInt(_gameManager.PlayerPosY);
+        }
+
+        if (_gameManager.gameState == GameManager.GameState.End)
+        {
+            _highScore.text = _gameManager.HighScore.ToString("F3") + "m";
+            _currentScore.text = _currentFloor.ToString("F3") + "m";
+            diePanel.SetActive(true);
         }
     }
 }
