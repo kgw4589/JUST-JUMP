@@ -91,14 +91,14 @@ public class UIManager : MonoBehaviour
     {
         if (_gameManager.gameState == GameManager.GameState.Play)
         {
-            _playerPosY.text = _gameManager.PlayerPosY.ToString("F3") + "m";
+            _playerPosY.text = _gameManager.PlayerPosY.ToString("F2") + "m";
             _currentFloor = Mathf.FloorToInt(_gameManager.PlayerPosY);
         }
 
         if (_gameManager.gameState == GameManager.GameState.End)
         {
-            _highScore.text = _gameManager.HighScore.ToString("F3") + "m";
-            _currentScore.text = _currentFloor.ToString("F3") + "m";
+            _highScore.text = _gameManager.HighScore.ToString("F2") + "m";
+            _currentScore.text = _currentFloor.ToString("F2") + "m";
             diePanel.SetActive(true);
         }
     }
