@@ -46,6 +46,7 @@ public class GameManager : Singleton<GameManager>
     
     public void StartGame()
     {
+        mapManager = FindObjectOfType<MapManager>();
         player = FindObjectOfType<Player>();
         Time.timeScale = 1; // game start
         gameState = GameState.Play;
