@@ -11,7 +11,7 @@ public class Cannon : MonoBehaviour
     private float _currentTime;
     private bool _reload;
 
-    [SerializeField] private float shootingTime = 5f;
+    [SerializeField][Range(0.1f, 15f)] private float shootingTime = 5f;
     [SerializeField] private float pushForce = 3f;
     
     [SerializeField] private CannonBullet cannonBullet;
