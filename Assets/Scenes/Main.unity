@@ -179,7 +179,6 @@ MonoBehaviour:
   pauseClose: {fileID: 29792641}
   homeButton: {fileID: 231768221}
   diePanel: {fileID: 119525321}
-  _gameManager: {fileID: 0}
   _playerPosY: {fileID: 1505347242}
   _highScore: {fileID: 631991474}
   _currentScore: {fileID: 1294533647}
@@ -1641,6 +1640,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6387356582698238051, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_GravityScale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: image
       value: 
@@ -1656,6 +1659,10 @@ PrefabInstance:
     - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: maxplayerHp
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: originMaxPower
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7556445533956157632, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: m_LocalScale.x
