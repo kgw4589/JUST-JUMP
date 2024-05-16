@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_android_client_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">719605771433</string>
+  <string name="google_storage_bucket" translatable="false">justjump-f2f09.appspot.com</string>
+  <string name="project_id" translatable="false">justjump-f2f09</string>
+  <string name="google_api_key" translatable="false">AIzaSyD_30090_2xvkzS9a4aNfxMuyLd4t0hj68</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD_30090_2xvkzS9a4aNfxMuyLd4t0hj68</string>
+  <string name="google_app_id" translatable="false">1:719605771433:android:c0f36d7d85cc236e5bcdb8</string>
+  <string name="default_android_client_id" translatable="false">719605771433-69jamvbblk3iq881bts9fo5jrcbp52vr.apps.googleusercontent.com</string>
+  <string name="default_web_client_id" translatable="false">719605771433-aqa61rqj5kok08b7i8srrousf2n3uumn.apps.googleusercontent.com</string>
+</resources>
