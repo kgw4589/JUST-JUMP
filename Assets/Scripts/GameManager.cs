@@ -8,8 +8,6 @@ using Unity.VisualScripting;
 
 public class GameManager : Singleton<GameManager>
 {
-    public MapManager mapManager;
-    
     public Player player;
     
     [SerializeField]
@@ -46,7 +44,6 @@ public class GameManager : Singleton<GameManager>
     
     public void StartGame()
     {
-        mapManager = FindObjectOfType<MapManager>();
         while (player == null)
         {
             player = FindObjectOfType<Player>();
@@ -54,7 +51,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1; // game start
         gameState = GameState.Play;
         Application.targetFrameRate = 120;
-        mapManager.InitMap();
+        MapManager.Instance.InitMap();
     }
 
     public void PauseGame()
