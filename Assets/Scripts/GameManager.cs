@@ -47,7 +47,10 @@ public class GameManager : Singleton<GameManager>
     public void StartGame()
     {
         mapManager = FindObjectOfType<MapManager>();
-        player = FindObjectOfType<Player>();
+        while (player == null)
+        {
+            player = FindObjectOfType<Player>();
+        }
         Time.timeScale = 1; // game start
         gameState = GameState.Play;
         Application.targetFrameRate = 120;
@@ -77,7 +80,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Update()
     {
-        if (gameState != GameState.Play)
+        if (gameState != GameState.Play || Time.timeScale == 0 || !player)
         {
             return;
         }
