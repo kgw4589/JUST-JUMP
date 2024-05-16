@@ -129,7 +129,7 @@ public partial class Player : MonoBehaviour
             SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
             _lineRenderer.enabled = false;
-            this.Jump(_direction);
+            StartCoroutine(Jump(_direction));
         }
     }
 
@@ -199,11 +199,11 @@ public partial class Player : MonoBehaviour
         }
     }
 
-
-    void Jump(Vector2 dir)
+    IEnumerator Jump(Vector2 dir)
     {
-        _isJump = true;
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
         maxPower = originMaxPower;
+        yield return new WaitForSeconds(0.05f);
+        _isJump = true;
     }
 }
