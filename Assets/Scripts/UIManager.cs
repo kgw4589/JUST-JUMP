@@ -20,8 +20,6 @@ public class UIManager : MonoBehaviour
     private int _currentFloor;
     
     [SerializeField]
-    private GameManager _gameManager;
-    [SerializeField]
     private TextMeshProUGUI _playerPosY;
     [SerializeField]
     private TextMeshProUGUI _highScore;
@@ -32,7 +30,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Game Start");
         wave2DGameObject.SetActive(true);
-        _gameManager.StartGame();
+        GameManager.Instance.StartGame();
         startUICanvas.SetActive(false);
         inGameCanvas.SetActive(true);
         diePanel.SetActive(false);
@@ -45,7 +43,7 @@ public class UIManager : MonoBehaviour
     public void OnClickPauseButton()
     {
         Debug.Log("Game Pause");
-        _gameManager.PauseGame();
+        GameManager.Instance.PauseGame();
         pausePanel.SetActive(true);
 
         GameManager.Instance.gameState = GameManager.GameState.Pause;
@@ -57,7 +55,7 @@ public class UIManager : MonoBehaviour
     {
         pausePanel.SetActive(false);
         Debug.Log("Panel Close");
-        _gameManager.StartGame();
+        GameManager.Instance.StartGame();
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
@@ -89,15 +87,19 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (_gameManager.gameState == GameManager.GameState.Play)
+        if (!GameManager.Instance)
         {
-            _playerPosY.text = _gameManager.PlayerPosY.ToString("F2") + "m";
-            _currentFloor = Mathf.FloorToInt(_gameManager.PlayerPosY);
+            return;
+        }
+        if (GameManager.Instance.gameState == GameManager.GameState.Play)
+        {
+            _playerPosY.text = GameManager.Instance.PlayerPosY.ToString("F2") + "m";
+            _currentFloor = Mathf.FloorToInt(GameManager.Instance.PlayerPosY);
         }
 
-        if (_gameManager.gameState == GameManager.GameState.End)
+        if (GameManager.Instance.gameState == GameManager.GameState.End)
         {
-            _highScore.text = _gameManager.HighScore.ToString("F2") + "m";
+            _highScore.text = GameManager.Instance.HighScore.ToString("F2") + "m";
             _currentScore.text = _currentFloor.ToString("F2") + "m";
             diePanel.SetActive(true);
         }
