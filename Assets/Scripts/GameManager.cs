@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
 
     protected override void Init()
     {
-        if (!File.Exists(Path.Combine(Application.persistentDataPath, "SaveData.json")))
+        if (!File.Exists(Application.persistentDataPath+"/SaveData.json"))
         {
             CreateJson(new JsonData(0));
         }
@@ -40,6 +40,7 @@ public class GameManager : Singleton<GameManager>
         _highScore = _saveData.highScore;
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
+        Debug.Log(_saveData.highScore);
     }
     
     public void StartGame()
@@ -94,8 +95,8 @@ public class GameManager : Singleton<GameManager>
     private void CreateJson(JsonData jsonData)
     {
         string saveData = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
-        FileStream fileStream =
-            new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"), FileMode.Create);
+        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", 
+            Application.persistentDataPath, "SaveData"), FileMode.Create);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
         fileStream.Write(data, 0, data.Length);
         fileStream.Close();
@@ -104,8 +105,8 @@ public class GameManager : Singleton<GameManager>
     private void ChangeJson(JsonData jsonData)
     {
         string saveData = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"),
-            FileMode.Open, FileAccess.Write);
+        FileStream fileStream = new FileStream(
+            Application.persistentDataPath+"/SaveData.json", FileMode.Open, FileAccess.Write);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
         fileStream.Write(data, 0, data.Length);
         fileStream.Close();
@@ -113,8 +114,8 @@ public class GameManager : Singleton<GameManager>
     
     private T LoadJson<T>()
     {
-        FileStream fileStream =
-            new FileStream(string.Format("{0}/{1}.json", Application.dataPath, "SaveData"), FileMode.Open);
+        FileStream fileStream = new FileStream(
+            Application.persistentDataPath+"/SaveData.json", FileMode.Open);
         byte[] data = new byte[fileStream.Length];
         fileStream.Read(data, 0, data.Length);
         fileStream.Close();
