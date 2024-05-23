@@ -669,6 +669,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapTool
       objectReference: {fileID: 0}
+    - target: {fileID: 7267478032716466847, guid: e3a9d5dde9543fe4ca31604d6c6c4f5d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7271150246378881930, guid: e3a9d5dde9543fe4ca31604d6c6c4f5d, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.382
@@ -2537,6 +2541,14 @@ PrefabInstance:
     - target: {fileID: 2179049527291968340, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133481461826463968, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Size.y
+      value: 2.6453354
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133481461826463968, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.48733222
       objectReference: {fileID: 0}
     - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: image
