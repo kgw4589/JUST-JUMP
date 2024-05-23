@@ -6,7 +6,6 @@ using System.IO;
 using System.Text;
 using Unity.VisualScripting;
 using UnityEngine.PlayerLoop;
-using 
 
 public class DataManager : Singleton<DataManager>
 {
