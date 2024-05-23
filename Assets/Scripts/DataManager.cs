@@ -9,14 +9,6 @@ using UnityEngine.PlayerLoop;
 
 public class DataManager : Singleton<DataManager>
 {
-    
-    protected override void Init()
-    {
-        if (!File.Exists(Application.persistentDataPath+"/SaveData.json"))
-        {
-            CreateJson(new JsonData(0));
-        }
-    }
 
     private void CreateJson(JsonData jsonData)
     {
