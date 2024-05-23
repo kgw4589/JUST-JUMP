@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 using Unity.VisualScripting;
+using UnityEditor.Playables;
 using UnityEngine.PlayerLoop;
 
 public class DataManager : Singleton<DataManager>
@@ -12,7 +13,7 @@ public class DataManager : Singleton<DataManager>
 
     private void CreateJson(JsonData jsonData)
     {
-        string saveData = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
+        string saveData = JsonUtility.ToJson(jsonData);
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", 
             Application.persistentDataPath, "SaveData"), FileMode.Create);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
@@ -22,7 +23,7 @@ public class DataManager : Singleton<DataManager>
 
     private void ChangeJson(JsonData jsonData)
     {
-        string saveData = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
+        string saveData = JsonUtility.ToJson(jsonData);
         FileStream fileStream = new FileStream(
             Application.persistentDataPath+"/SaveData.json", FileMode.Open, FileAccess.Write);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
@@ -38,7 +39,7 @@ public class DataManager : Singleton<DataManager>
         fileStream.Read(data, 0, data.Length);
         fileStream.Close();
         string jsonData = Encoding.UTF8.GetString(data);
-        return JsonConvert.DeserializeObject<T>(jsonData);
+        return JsonUtility.FromJson<T>(jsonData);
     }
 
 
