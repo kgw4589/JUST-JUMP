@@ -72,6 +72,7 @@ public partial class Player : MonoBehaviour
         }
         else if (PlayerHpBar.value >= 0.5f)
         {
+            //if 문은 작동함
             _playerHpBarColor = Color.yellow;
         }
         else if (PlayerHpBar.value >= 0.2f)
