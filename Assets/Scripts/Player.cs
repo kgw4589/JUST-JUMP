@@ -26,7 +26,8 @@ public partial class Player : MonoBehaviour
     private Vector2 _startPosition;
     private Vector2 _endPosition;
     private Vector2 _direction;
-
+    [SerializeField]
+    private float gravityScale;
     public bool isDie = false;
     [SerializeField]
     private bool _isJump = false;
@@ -39,7 +40,9 @@ public partial class Player : MonoBehaviour
     private bool _isRight = false;
 
     private bool _isDragging = false;
-
+    
+    
+    
     private Color _playerHpBarColor;
 
     // Start is called before the first frame update
@@ -51,7 +54,7 @@ public partial class Player : MonoBehaviour
         image.gameObject.SetActive(false);
         _lineRenderer.enabled = false;
         _rd = GetComponent<Rigidbody2D>();
-
+        gravityScale = _rd.gravityScale;
         _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>().color;
     }
 
@@ -120,7 +123,7 @@ public partial class Player : MonoBehaviour
             _direction.Normalize();
 
             Vector3 startPos = transform.position;
-            Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower;
+            Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower / (gravityScale - (jumpPower/20));//0.6
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
 
@@ -129,7 +132,7 @@ public partial class Player : MonoBehaviour
             SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
             _lineRenderer.enabled = false;
-            this.Jump(_direction);
+            StartCoroutine(Jump(_direction));
         }
     }
 
@@ -181,7 +184,7 @@ public partial class Player : MonoBehaviour
             else
             {
                 // 충돌이 감지되지 않으면 정상적으로 라인 렌더러 그리기 계속
-                position += velocity * deltaTime + 0.5f * gravity * deltaTime * deltaTime;
+                position += velocity * deltaTime + gravity * (0.5f * deltaTime * deltaTime);
                 velocity += gravity * deltaTime;
                 _lineRenderer.SetPosition(i, position);
                 
@@ -199,11 +202,11 @@ public partial class Player : MonoBehaviour
         }
     }
 
-
-    void Jump(Vector2 dir)
+    IEnumerator Jump(Vector2 dir)
     {
-        _isJump = true;
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
         maxPower = originMaxPower;
+        yield return new WaitForSeconds(0.05f);
+        _isJump = true;
     }
 }

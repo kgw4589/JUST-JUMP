@@ -18,6 +18,8 @@ public class FireBaseManager : Singleton<FireBaseManager>
 
         _auth = FirebaseAuth.DefaultInstance;
         Debug.Log("FireBase Starts");
+        
+        GoogleLogin();
     }
 
     private void GoogleLogin()
