@@ -32,11 +32,11 @@ public class GameManager : Singleton<GameManager>
     {
         if (!File.Exists(Application.persistentDataPath+"/SaveData.json"))
         {
-            CreateJson(new JsonData(0));
+            DataManager.Instance.GetCreateJson(new JsonData(0));
         }
         
         Time.timeScale = 0; // game stop
-        _saveData = LoadJson<JsonData>();
+        _saveData = DataManager.Instance.LoadJson<JsonData>();
         _highScore = _saveData.highScore;
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
@@ -68,7 +68,7 @@ public class GameManager : Singleton<GameManager>
         {
             _highScore = (int)_playerPosY;
             _saveData.highScore = _highScore;
-            ChangeJson(_saveData);
+            DataManager.Instance.GetChangeJson(_saveData);
         }
         
         Time.timeScale = 0;
@@ -91,38 +91,7 @@ public class GameManager : Singleton<GameManager>
         }
 
     }
-
-    private void CreateJson(JsonData jsonData)
-    {
-        string saveData = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", 
-            Application.persistentDataPath, "SaveData"), FileMode.Create);
-        byte[] data = Encoding.UTF8.GetBytes(saveData);
-        fileStream.Write(data, 0, data.Length);
-        fileStream.Close();
-    }
-
-    private void ChangeJson(JsonData jsonData)
-    {
-        string saveData = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
-        FileStream fileStream = new FileStream(
-            Application.persistentDataPath+"/SaveData.json", FileMode.Open, FileAccess.Write);
-        byte[] data = Encoding.UTF8.GetBytes(saveData);
-        fileStream.Write(data, 0, data.Length);
-        fileStream.Close();
-    }
     
-    private T LoadJson<T>()
-    {
-        FileStream fileStream = new FileStream(
-            Application.persistentDataPath+"/SaveData.json", FileMode.Open);
-        byte[] data = new byte[fileStream.Length];
-        fileStream.Read(data, 0, data.Length);
-        fileStream.Close();
-        string jsonData = Encoding.UTF8.GetString(data);
-        return JsonConvert.DeserializeObject<T>(jsonData);
-    }
-
     public float PlayerPosY
     {
         get { return _playerPosY; }
