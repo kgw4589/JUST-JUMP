@@ -43,7 +43,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log(_saveData.highScore);
     }
     
-    public void StartGame()
+    public void StartGame(bool restart)
     {
         while (player == null)
         {
@@ -52,16 +52,19 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1; // game start
         gameState = GameState.Play;
         Application.targetFrameRate = 120;
-        MapManager.Instance.InitMap();
+        if (!restart)
+        {
+            MapManager.Instance.InitMap();
+        }
     }
-
+    
     public void PauseGame()
     {
         Time.timeScale = 0; // game pause (stop)
         gameState = GameState.Pause;
         Application.targetFrameRate = 30;
     }
-
+    
     private void GameOver()
     {
         if (_playerPosY > _highScore)

@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Game Start");
         wave2DGameObject.SetActive(true);
-        GameManager.Instance.StartGame();
+        GameManager.Instance.StartGame(false);
         startUICanvas.SetActive(false);
         inGameCanvas.SetActive(true);
         diePanel.SetActive(false);
@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
     {
         pausePanel.SetActive(false);
         Debug.Log("Panel Close");
-        GameManager.Instance.StartGame();
+        GameManager.Instance.StartGame(true);
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);

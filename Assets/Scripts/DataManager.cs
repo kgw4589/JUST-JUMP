@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 using Unity.VisualScripting;
@@ -13,7 +12,7 @@ public class DataManager : Singleton<DataManager>
 
     private void CreateJson(JsonData jsonData)
     {
-        string saveData = JsonUtility.ToJson(jsonData);
+        string saveData = JsonUtility.ToJson(jsonData, true);
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", 
             Application.persistentDataPath, "SaveData"), FileMode.Create);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
@@ -23,7 +22,7 @@ public class DataManager : Singleton<DataManager>
 
     private void ChangeJson(JsonData jsonData)
     {
-        string saveData = JsonUtility.ToJson(jsonData);
+        string saveData = JsonUtility.ToJson(jsonData, true);
         FileStream fileStream = new FileStream(
             Application.persistentDataPath+"/SaveData.json", FileMode.Open, FileAccess.Write);
         byte[] data = Encoding.UTF8.GetBytes(saveData);
