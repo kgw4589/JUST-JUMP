@@ -43,21 +43,21 @@ public partial class Player : MonoBehaviour
     
     
     
-    private Color _playerHpBarColor;
+   private Color _playerHpBarColor;
+   
 
     // Start is called before the first frame update
     void Start()
     {
-        maxPower = originMaxPower;
+        maxPower = originMaxPower; 
         playerHp = maxplayerHp;
-        _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer = GetComponent<LineRenderer>(); 
         image.gameObject.SetActive(false);
         _lineRenderer.enabled = false;
         _rd = GetComponent<Rigidbody2D>();
         gravityScale = _rd.gravityScale;
-        _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>().color;
+        _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>().color; //색 변경 컴포넌트
     }
-
     void Update()
     {
         if (playerHp <= 0)
@@ -68,17 +68,19 @@ public partial class Player : MonoBehaviour
         
         if (PlayerHpBar.value >= 0.8f)
         {
-            _playerHpBarColor = Color.cyan;
+            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.cyan;
         }
         else if (PlayerHpBar.value >= 0.5f)
         {
-            _playerHpBarColor = Color.yellow;
+            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.yellow;
         }
         else if (PlayerHpBar.value >= 0.2f)
         {
-            _playerHpBarColor = Color.red;
+            Debug.Log("빨강");
+            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.red;
+            //_playerHpBarColor = Color.red;
         }
-      
+        
         if (!isHitWave && playerHp <= maxplayerHp && !isDie) //힐량 오버남
         {
             curruentTime += Time.deltaTime;

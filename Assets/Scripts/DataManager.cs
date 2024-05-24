@@ -4,7 +4,6 @@ using UnityEngine;
 using System.IO;
 using System.Text;
 using Unity.VisualScripting;
-using UnityEditor.Playables;
 using UnityEngine.PlayerLoop;
 
 public class DataManager : Singleton<DataManager>
