@@ -4,51 +4,24 @@ using UnityEngine;
 using System.IO;
 using System.Text;
 using Unity.VisualScripting;
-using UnityEngine.PlayerLoop;
-
 public class DataManager : Singleton<DataManager>
 {
 
-    private void CreateJson(JsonData jsonData)
+    private void EditJson(JsonData jsonData)
     {
         string saveData = JsonUtility.ToJson(jsonData, true);
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", 
-            Application.persistentDataPath, "SaveData"), FileMode.Create);
-        byte[] data = Encoding.UTF8.GetBytes(saveData);
-        fileStream.Write(data, 0, data.Length);
-        fileStream.Close();
-    }
-
-    private void ChangeJson(JsonData jsonData)
-    {
-        string saveData = JsonUtility.ToJson(jsonData, true);
-        FileStream fileStream = new FileStream(
-            Application.persistentDataPath+"/SaveData.json", FileMode.Open, FileAccess.Write);
-        byte[] data = Encoding.UTF8.GetBytes(saveData);
-        fileStream.Write(data, 0, data.Length);
-        fileStream.Close();
+        File.WriteAllText(Application.persistentDataPath+"/SaveData.json", jsonData, Encoding.UTF8);
     }
     
     public T LoadJson<T>()
     {
-        FileStream fileStream = new FileStream(
-            Application.persistentDataPath+"/SaveData.json", FileMode.Open);
-        byte[] data = new byte[fileStream.Length];
-        fileStream.Read(data, 0, data.Length);
-        fileStream.Close();
-        string jsonData = Encoding.UTF8.GetString(data);
+        string jsonData = File.ReadAllText(Application.persistentDataPath + "/SaveData.json", Encoding.UTF8);
         return JsonUtility.FromJson<T>(jsonData);
     }
 
 
-    public void GetCreateJson(JsonData jsonData)
+    public void GetEditJson(JsonData jsonData)
     {
-        CreateJson(jsonData);
+        EditJson(jsonData);
     }
-
-    public void GetChangeJson(JsonData jsonData)
-    {
-        ChangeJson(jsonData);
-    }
-
 }

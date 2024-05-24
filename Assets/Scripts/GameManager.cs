@@ -32,7 +32,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (!File.Exists(Application.persistentDataPath+"/SaveData.json"))
         {
-            DataManager.Instance.GetCreateJson(new JsonData(0));
+            DataManager.Instance.GetEditJson(new JsonData(0));
         }
         
         Time.timeScale = 0; // game stop
@@ -71,7 +71,7 @@ public class GameManager : Singleton<GameManager>
         {
             _highScore = (int)_playerPosY;
             _saveData.highScore = _highScore;
-            DataManager.Instance.GetChangeJson(_saveData);
+            DataManager.Instance.GetEditJson(_saveData);
         }
         
         Time.timeScale = 0;
