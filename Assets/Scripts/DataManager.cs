@@ -10,7 +10,7 @@ public class DataManager : Singleton<DataManager>
     private void EditJson(JsonData jsonData)
     {
         string saveData = JsonUtility.ToJson(jsonData, true);
-        File.WriteAllText(Application.persistentDataPath+"/SaveData.json", jsonData, Encoding.UTF8);
+        File.WriteAllText(Application.persistentDataPath+"/SaveData.json", saveData, Encoding.UTF8);
     }
     
     public T LoadJson<T>()
