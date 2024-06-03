@@ -1,19 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Firebase;
 using UnityEngine;
 using Firebase.Auth;
+using Firebase.Extensions;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
     
 public class FireBaseManager : Singleton<FireBaseManager>
 {
     private string _authCode;
+    private FirebaseAuth _auth;
     
     protected override void Init()
     {
         
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
+
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        {
+            FirebaseApp app = FirebaseApp.DefaultInstance;
+            _auth = FirebaseAuth.DefaultInstance;
+        });
         
         GoogleLogin();
     }
