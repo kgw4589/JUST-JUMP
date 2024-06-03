@@ -49,9 +49,8 @@ public class FireBaseManager : Singleton<FireBaseManager>
 
     private void FireBaseLogin()
     {
-        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         Firebase.Auth.Credential credential = Firebase.Auth.PlayGamesAuthProvider.GetCredential(_authCode);
-        auth.SignInAndRetrieveDataWithCredentialAsync(credential).ContinueWith(task =>
+        _auth.SignInAndRetrieveDataWithCredentialAsync(credential).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {

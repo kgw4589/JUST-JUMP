@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "719605771433-nj2g0oivpk9tepppvg8kl4ji9obto7ds.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.DGSWTeamSSR.JUSTJUMP",
+            "certificate_hash": "cfa29603a2b8676827cfeebbd9cb96232eb7f145"
+          }
+        },
+        {
           "client_id": "719605771433-aqa61rqj5kok08b7i8srrousf2n3uumn.apps.googleusercontent.com",
           "client_type": 3
         }
