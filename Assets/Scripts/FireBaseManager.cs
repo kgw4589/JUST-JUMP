@@ -7,7 +7,6 @@ using GooglePlayGames.BasicApi;
     
 public class FireBaseManager : Singleton<FireBaseManager>
 {
-    private FirebaseAuth _auth;
     private string _authCode;
     
     protected override void Init()
@@ -15,18 +14,15 @@ public class FireBaseManager : Singleton<FireBaseManager>
         
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
-
-        _auth = FirebaseAuth.DefaultInstance;
-        Debug.Log("FireBase Starts");
         
         GoogleLogin();
     }
 
     private void GoogleLogin()
     {
-        Social.localUser.Authenticate(success =>
+        PlayGamesPlatform.Instance.Authenticate(success =>
         {
-            if (success)
+            if (success == SignInStatus.Success)
             {
                 Debug.Log("LogIn success");
                 PlayGamesPlatform.Instance.RequestServerSideAccess(false, code =>
@@ -44,8 +40,9 @@ public class FireBaseManager : Singleton<FireBaseManager>
 
     private void FireBaseLogin()
     {
-        Firebase.Auth.Credential credential = Firebase.Auth.GoogleAuthProvider.GetCredential(_authCode, null);
-        _auth.SignInAndRetrieveDataWithCredentialAsync(credential).ContinueWith(task =>
+        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        Firebase.Auth.Credential credential = Firebase.Auth.PlayGamesAuthProvider.GetCredential(_authCode);
+        auth.SignInAndRetrieveDataWithCredentialAsync(credential).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
