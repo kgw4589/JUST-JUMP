@@ -29,7 +29,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
 
     private void GoogleLogin()
     {
-        PlayGamesPlatform.Instance.Authenticate(success =>
+        PlayGamesPlatform.Instance.ManuallyAuthenticate(success =>
         {
             if (success == SignInStatus.Success)
             {
