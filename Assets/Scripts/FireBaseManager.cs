@@ -12,7 +12,6 @@ public class FireBaseManager : Singleton<FireBaseManager>
 {
     private string _authCode;
     private FirebaseAuth _auth;
-    private FirebaseApp app;
     
     protected override void Init()
     {
@@ -28,9 +27,9 @@ public class FireBaseManager : Singleton<FireBaseManager>
         {
             if (task.Result == DependencyStatus.Available)
             {
-                app = FirebaseApp.DefaultInstance;
+                FirebaseApp app = FirebaseApp.DefaultInstance;
                 _auth = FirebaseAuth.DefaultInstance;
-                GoogleLogin();
+                PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
             }
             else
             {
@@ -39,24 +38,17 @@ public class FireBaseManager : Singleton<FireBaseManager>
         });
     }
 
-    private void GoogleLogin()
+    private void ProcessAuthentication(SignInStatus status)
     {
-        PlayGamesPlatform.Instance.Authenticate(result =>
+        if (status == SignInStatus.Success)
         {
-            if (result == SignInStatus.Success)
-            {
-                Debug.Log("LogIn success");
-                PlayGamesPlatform.Instance.RequestServerSideAccess(false, code =>
-                {
-                    _authCode = code;
-                    FireBaseLogin();
-                });
-            }
-            else
-            {
-                Debug.LogError("LogIn failed: " + result);
-            }
-        });
+            Debug.Log("Login Success");
+            FireBaseLogin();
+        }
+        else
+        {
+            Debug.LogError("Login failed: " + status);
+        }
     }
 
     private void FireBaseLogin()
