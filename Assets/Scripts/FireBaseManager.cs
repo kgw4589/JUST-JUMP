@@ -6,32 +6,44 @@ using Firebase.Auth;
 using Firebase.Extensions;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-    
+using UnityEditor.VersionControl;
+
 public class FireBaseManager : Singleton<FireBaseManager>
 {
     private string _authCode;
     private FirebaseAuth _auth;
+    private FirebaseApp app;
     
     protected override void Init()
     {
-        
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        ChectFirebaseDepencies();
+    }
+
+    private void ChectFirebaseDepencies()
+    {
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
-            FirebaseApp app = FirebaseApp.DefaultInstance;
-            _auth = FirebaseAuth.DefaultInstance;
-        });
-        
-        GoogleLogin();
+            if (task.Result == DependencyStatus.Available)
+            {
+                app = FirebaseApp.DefaultInstance;
+                _auth = FirebaseAuth.DefaultInstance;
+                GoogleLogin();
+            }
+            else
+            {
+                Debug.Log("Could not resolve all Firebase dependecies: " + task.Result);
+            }
+        })
     }
 
     private void GoogleLogin()
     {
-        PlayGamesPlatform.Instance.ManuallyAuthenticate(success =>
+        PlayGamesPlatform.Instance.ManuallyAuthenticate(SignInInteractivity.CanPromptOnce, result =>
         {
-            if (success == SignInStatus.Success)
+            if (result == SignInStatus.Success)
             {
                 Debug.Log("LogIn success");
                 PlayGamesPlatform.Instance.RequestServerSideAccess(false, code =>
@@ -42,7 +54,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
             }
             else
             {
-                Debug.LogError("LogIn failed");
+                Debug.LogError("LogIn failed: " + result);
             }
         });
     }
