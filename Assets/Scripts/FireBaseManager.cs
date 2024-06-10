@@ -36,12 +36,12 @@ public class FireBaseManager : Singleton<FireBaseManager>
             {
                 Debug.Log("Could not resolve all Firebase dependecies: " + task.Result);
             }
-        })
+        });
     }
 
     private void GoogleLogin()
     {
-        PlayGamesPlatform.Instance.ManuallyAuthenticate(SignInInteractivity.CanPromptOnce, result =>
+        PlayGamesPlatform.Instance.Authenticate(result =>
         {
             if (result == SignInStatus.Success)
             {
