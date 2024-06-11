@@ -746,6 +746,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave2D
       objectReference: {fileID: 0}
+    - target: {fileID: 8214253071486603494, guid: adad9c49f51e9df4aa4f729061034691, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236910652489405022, guid: adad9c49f51e9df4aa4f729061034691, type: 3}
+      propertyPath: _waitTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236910652489405022, guid: adad9c49f51e9df4aa4f729061034691, type: 3}
+      propertyPath: _moveDistance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236910652489405022, guid: adad9c49f51e9df4aa4f729061034691, type: 3}
+      propertyPath: _moveDuration
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8533778578019666144, guid: adad9c49f51e9df4aa4f729061034691, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
