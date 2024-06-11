@@ -2759,6 +2759,51 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8317949656392250675, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
   m_PrefabInstance: {fileID: 7184284784045245672}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &747696468079487246
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747696468079487238}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.38447797}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.768956}
+  m_EdgeRadius: 0
 --- !u!1001 &7184284784045245672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2807,6 +2852,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3133481461826463968, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Size.x
+      value: 1.2820909
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133481461826463968, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Size.y
+      value: 0.4806149
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133481461826463968, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.023507595
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133481461826463968, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.6145984
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133481461826463968, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: image
       value: 
@@ -2826,7 +2891,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8317949656392250675, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 747696468079487246}
   m_SourcePrefab: {fileID: 100100000, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

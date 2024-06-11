@@ -144,13 +144,21 @@ public partial class Player : MonoBehaviour
         transform.Rotate(Vector3.up, 180f, Space.World);
     }
 
-    private void OnCollisionStay2D(Collision2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
             _isJump = false;
         }
     }
+
+    // private void OnCollisionStay2D(Collision2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Ground"))
+    //     {
+    //         _isJump = false;
+    //     }
+    // }
 
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
@@ -208,7 +216,7 @@ public partial class Player : MonoBehaviour
     {
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
         maxPower = originMaxPower;
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.09f);
         _isJump = true;
     }
 }
