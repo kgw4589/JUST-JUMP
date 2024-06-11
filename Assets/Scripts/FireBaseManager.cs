@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using Firebase;
 using UnityEngine;
 using Firebase.Auth;
 using Firebase.Extensions;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-using UnityEditor.VersionControl;
 
 public class FireBaseManager : Singleton<FireBaseManager>
 {
@@ -43,7 +40,6 @@ public class FireBaseManager : Singleton<FireBaseManager>
         if (status == SignInStatus.Success)
         {
             Debug.Log("Login Success");
-            FireBaseLogin();
         }
         else
         {
@@ -53,7 +49,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
 
     private void FireBaseLogin()
     {
-        Firebase.Auth.Credential credential = Firebase.Auth.PlayGamesAuthProvider.GetCredential(_authCode);
+        Credential credential = PlayGamesAuthProvider.GetCredential(_authCode);
         _auth.SignInAndRetrieveDataWithCredentialAsync(credential).ContinueWith(task =>
         {
             if (task.IsCanceled)
@@ -68,7 +64,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
                 return;
             }
 
-            Firebase.Auth.AuthResult result = task.Result;
+            AuthResult result = task.Result;
             Debug.LogFormat("User signed in successfully: {0} ({1})", result.User.DisplayName, result.User.UserId);
         });
 
