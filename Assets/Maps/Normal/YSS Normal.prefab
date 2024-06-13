@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 2780150709031862010}
   m_Layer: 0
   m_Name: Left (1)
-  m_TagString: Ground
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 155856610657856985}
   m_Layer: 0
   m_Name: Right (1)
-  m_TagString: Ground
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
