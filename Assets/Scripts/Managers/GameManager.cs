@@ -13,8 +13,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private int _highScore;
     
-    [SerializeField]
-    private float _playerPosY;
+    public float _playerPosY;
 
     private JsonData _saveData;
 
@@ -75,6 +74,7 @@ public class GameManager : Singleton<GameManager>
         }
         
         Time.timeScale = 0;
+        MapManager.Instance.EndMap();
         gameState = GameState.End;
         Application.targetFrameRate = 30;
     }

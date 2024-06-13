@@ -15,11 +15,6 @@ public class FireBaseManager : Singleton<FireBaseManager>
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 
-        ChectFirebaseDepencies();
-    }
-
-    private void ChectFirebaseDepencies()
-    {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             if (task.Result == DependencyStatus.Available)
@@ -40,6 +35,11 @@ public class FireBaseManager : Singleton<FireBaseManager>
         if (status == SignInStatus.Success)
         {
             Debug.Log("Login Success");
+            PlayGamesPlatform.Instance.RequestServerSideAccess(false, code =>
+            {
+                _authCode = code;
+                FireBaseLogin();
+            });
         }
         else
         {
