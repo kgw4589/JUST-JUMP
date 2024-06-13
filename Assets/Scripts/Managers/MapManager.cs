@@ -16,8 +16,12 @@ public class MapManager : Singleton<MapManager>
     private float _mapSizeY;
 
     private Queue<GameObject> _mapPosQueue = new Queue<GameObject>();
-
+    
     private bool _isInitComplete = false;
+
+    private int _mapSectionIndex = 0;
+
+    private float _mapDestroyDistance = 50.0f;
     
     public enum MapMode
     {
@@ -25,27 +29,20 @@ public class MapManager : Singleton<MapManager>
     }
     public MapMode mapMode = MapMode.Normal;
 
-    void Awake()
-    {
-
-    }
-
-    void Start()
-    {
-        // _gameOverZone = GameObject.Find("Wave2D");
-        // Debug.Log(_gameOverZone);
-    }
-
     public void InitMap()
     {
         _player = FindObjectOfType<Player>().gameObject;
         _gameOverZone = FindObjectOfType<GameOverZone>().gameObject;
         
         _mapScriptable = Resources.Load<MapScriptable>("MapScriptables/" + mapMode);
+
+        _mapSectionIndex = 0;
         
         _startPos = new Vector2(0, 0);
         
-        _lastMap = Instantiate(_mapScriptable.maps[Random.Range(0, _mapScriptable.maps.Count)]);
+        _lastMap = Instantiate(_mapScriptable.maps[_mapSectionIndex]
+            .sectionMaps[Random.Range(0, _mapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
+        
         _lastMap.transform.position = _startPos;
         _mapPosQueue.Enqueue(_lastMap);
 
@@ -67,17 +64,22 @@ public class MapManager : Singleton<MapManager>
         {
             return;
         }
-        
+
         float dis = Vector2.Distance(_player.transform.position, _lastMap.transform.position);
 
         if (dis < _mapSizeY * 3)
         {
+            if (_mapSectionIndex < _mapScriptable.section.Length
+                && GameManager.Instance._playerPosY >= _mapScriptable.section[_mapSectionIndex])
+            {
+                ++_mapSectionIndex;
+            }
             InstantiateRandomMap();
         }
         
         Vector3 mapQueFirst = _mapPosQueue.Peek().transform.position;
 
-        if (_gameOverZone.transform.position.y - mapQueFirst.y > _mapSizeY)
+        if (_gameOverZone.transform.position.y - mapQueFirst.y > _mapDestroyDistance)
         {
             Destroy(_mapPosQueue.Dequeue());
         }
@@ -85,7 +87,8 @@ public class MapManager : Singleton<MapManager>
 
     void InstantiateRandomMap()
     {
-        GameObject map = Instantiate(_mapScriptable.maps[Random.Range(0, _mapScriptable.maps.Count)]);
+        GameObject map = Instantiate(_mapScriptable.maps[_mapSectionIndex]
+            .sectionMaps[Random.Range(0, _mapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
         
         float lastMapSizeY = _lastMap.transform.localScale.y / 2;
         _mapSizeY = map.transform.localScale.y / 2;
