@@ -23,11 +23,11 @@ public class Cannon : MonoBehaviour
     private Vector2 _direction;
     private Vector2 _force;
 
-    private void Awake()
+    private void OnEnable()
     {
         _startPoint = transform.position;
         endPoint = new Vector2(endPoint.x + _startPoint.x, endPoint.y + _startPoint.y);
-
+        
         StartCoroutine(Reload());
     }
 

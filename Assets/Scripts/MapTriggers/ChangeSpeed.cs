@@ -9,6 +9,11 @@ public class ChangeSpeed : MapTriggerBasicLogic
 
     [SerializeField] private float speed;
 
+    private void OnEnable()
+    {
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+    }
+
     protected override void EnterEvent()
     {
         
