@@ -11,7 +11,7 @@ public class Elevator : MapTriggerBasicLogic
     [SerializeField] private float maxDis;
     [SerializeField] private float speed;
 
-    private void Awake()
+    private void OnEnable()
     {
         _setPos = gameObject.transform.position;
     }
