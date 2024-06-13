@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
     public GameObject player;
     public Vector3 offset;
     
-    private float _targetWidth = 6f; // 가로 방향으로 보여주고 싶은 유닛의 수
+    [SerializeField] private float _targetWidth = 7.5f; // 가로 방향으로 보여주고 싶은 유닛의 수
 
     private Camera _camera;
 
