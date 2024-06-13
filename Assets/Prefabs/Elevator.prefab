@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2243295930514789539}
   m_Layer: 0
   m_Name: Elevator
-  m_TagString: Elevator
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff22c04ab6ccf3e4cbfc6c97517331e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerTagName: Player
   maxDis: 5
   speed: 2
 --- !u!61 &2243295930514789539
