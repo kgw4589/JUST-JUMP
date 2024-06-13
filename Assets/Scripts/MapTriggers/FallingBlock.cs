@@ -41,26 +41,30 @@ public class FallingBlock : MapTriggerBasicLogic
         switch (triggerMode)
         {
             case TriggerMode.Falling:
-               float distance = Vector2.Distance(transform.position, _startPos);
+               float distance = Vector2.Distance(transform.position, _endPos);
                if (_up)
                {
-                   transform.position = Vector2.MoveTowards(transform.position, _startPos, speed * 2);
-                   if (distance == 0 && _col)
+                   transform.position = Vector2.MoveTowards(transform.position, _startPos, speed * 5);
+
+                   Debug.Log("시발" + distance);
+                   if (distance >= moveDis && _col)
                    {
-                       _up = !_up;
+                       _up = false;
                    }
                }
-               else if (!_up)
+               else
                {
                    if (_col)
                    {
                        _up = false;
                    }
+
                    transform.position = Vector2.MoveTowards(transform.position, _endPos, speed);
-                   float distance1 = Vector2.Distance(gameObject.transform.position, _endPos);
-                   if (distance1 == 0)
+                   float distance1 = Vector2.Distance(gameObject.transform.position, _startPos);
+                   Debug.Log("족발" + distance1);
+                   if (distance1 >= moveDis)
                    {
-                       _up = !_up;
+                       _up = true;
                    }
                }
                break;

@@ -11,16 +11,19 @@ public class Elevator : MapTriggerBasicLogic
     [SerializeField] private float maxDis;
     [SerializeField] private float speed;
 
-    private void OnEnable()
+    private void Start()
     {
-        _setPos = gameObject.transform.position;
+        _setPos = new Vector2(transform.position.x, transform.position.y);
+        Debug.Log(_setPos);
     }
 
     private void Update()
     {
+        
         if (!_collision)
         {
             transform.position = Vector2.Lerp(gameObject.transform.position, _setPos, 0.05f);
+
         }
     }
 
