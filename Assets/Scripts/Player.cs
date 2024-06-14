@@ -176,8 +176,9 @@ public partial class Player : MonoBehaviour
             // 레이캐스트를 사용하여 벽 충돌 감지
             RaycastHit2D hit = Physics2D.Raycast(position, velocity, velocity.magnitude * deltaTime);
             // Debug.DrawRay(position,velocity);
-            if (hit.collider != null && hit.collider.CompareTag("Ground"))
+            if (hit.collider != null && (hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Wall")))
             {
+                Debug.Log(hit.collider.tag);
                 if (hit.transform.position.x < transform.position.x && _isRight)
                 {
                     TurnPlayer();
