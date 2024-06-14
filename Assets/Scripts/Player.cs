@@ -111,8 +111,8 @@ public partial class Player : MonoBehaviour
 
         if (_isDragging && Input.GetMouseButton(0) && !_isJump && !isDie && PausePanel.activeSelf == false)
         {
-            Vector2 myPos = Input.mousePosition;
-            Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
+            //Vector2 myPos = Input.mousePosition;
+            //Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
 
             _endPosition = Input.mousePosition;
             _direction = _startPosition - _endPosition;
@@ -133,7 +133,6 @@ public partial class Player : MonoBehaviour
         {
             SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
-            _lineRenderer.enabled = false;
             StartCoroutine(Jump(_direction));
         }
     }
@@ -148,6 +147,7 @@ public partial class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
+            Debug.Log("Tlqkf");
             _isJump = false;
         }
     }
@@ -175,8 +175,7 @@ public partial class Player : MonoBehaviour
         {
             // 레이캐스트를 사용하여 벽 충돌 감지
             RaycastHit2D hit = Physics2D.Raycast(position, velocity, velocity.magnitude * deltaTime);
-            // Debug.DrawRay(position,velocity);
-            if (hit.collider != null && hit.collider.CompareTag("Ground"))
+            if (hit.collider != null && (hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Wall")))
             {
                 if (hit.transform.position.x < transform.position.x && _isRight)
                 {
@@ -218,5 +217,6 @@ public partial class Player : MonoBehaviour
         maxPower = originMaxPower;
         yield return new WaitForSeconds(0.09f);
         _isJump = true;
+        _lineRenderer.enabled = false;
     }
 }
