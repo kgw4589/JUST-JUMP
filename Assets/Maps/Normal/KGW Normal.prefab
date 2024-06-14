@@ -554,6 +554,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1675098331772257836}
     m_Modifications:
+    - target: {fileID: 2243295930514789539, guid: 10c5d1df2198107429611c0e4e034cd7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3703775694879455743, guid: 10c5d1df2198107429611c0e4e034cd7, type: 3}
       propertyPath: m_Name
       value: Elevator
@@ -604,6 +608,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4007314689287166602, guid: 10c5d1df2198107429611c0e4e034cd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752626833095788965, guid: 10c5d1df2198107429611c0e4e034cd7, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9167139307596152151, guid: 10c5d1df2198107429611c0e4e034cd7, type: 3}
