@@ -67,6 +67,13 @@ public class SoundManager : Singleton<SoundManager>
         
     }
 
+    public void Awake()
+    {
+        // prevent the DontDestroyOnLoad duplicates
+        
+        Init();
+    }
+
     public void PlayBgm(bool isPlay)
     {
         if (isPlay)
