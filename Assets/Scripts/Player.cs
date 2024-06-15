@@ -60,7 +60,6 @@ public partial class Player : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(playerHp);
         if (playerHp <= 0)
         {
             isDie = true;
