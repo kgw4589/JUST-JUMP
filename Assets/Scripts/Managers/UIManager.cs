@@ -48,7 +48,6 @@ public class UIManager : MonoBehaviour
 
         GameManager.Instance.gameState = GameManager.GameState.Pause;
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
-        SoundManager.Instance.PlayBgm(false);
     }
 
     public void OnClickPauseClose()
@@ -59,7 +58,7 @@ public class UIManager : MonoBehaviour
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
-        SoundManager.Instance.PlayBgm(true);
+        SoundManager.Instance.UnPauseBGM();
     }
 
     public void OnClickHomeButton()
