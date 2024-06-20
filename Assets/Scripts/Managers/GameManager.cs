@@ -77,6 +77,7 @@ public class GameManager : Singleton<GameManager>
         MapManager.Instance.EndMap();
         gameState = GameState.End;
         Application.targetFrameRate = 30;
+        SoundManager.Instance.PlayBgm(false);
     }
 
     private void Update()
