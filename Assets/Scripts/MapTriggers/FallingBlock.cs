@@ -60,7 +60,6 @@ public class FallingBlock : MapTriggerBasicLogic
 
                    transform.position = Vector2.MoveTowards(transform.position, _endPos, speed);
                    float distance1 = Vector2.Distance(gameObject.transform.position, _startPos);
-                   Debug.Log("족발" + distance1);
                    if (distance1 >= moveDis)
                    {
                        _up = true;
