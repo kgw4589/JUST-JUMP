@@ -97,7 +97,7 @@ public partial class Player : MonoBehaviour
             _lineRenderer.enabled = false;
         }
 
-        if (Input.GetMouseButtonDown(0) && !_isJump && !isDie)
+        if (Input.GetMouseButtonDown(0) && IsJumpAble())
         {
             _lineRenderer.enabled = true;
             if (EventSystem.current.IsPointerOverGameObject()
@@ -110,7 +110,7 @@ public partial class Player : MonoBehaviour
             _startPosition = Input.mousePosition;
         }
 
-        if (_isDragging && Input.GetMouseButton(0) && !_isJump && !isDie && PausePanel.activeSelf == false)
+        if (Input.GetMouseButton(0) && IsJumpAble() && _isDragging )
         {
             //Vector2 myPos = Input.mousePosition;
             //Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
@@ -130,11 +130,23 @@ public partial class Player : MonoBehaviour
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
 
-        if (_isDragging && Input.GetMouseButtonUp(0) && !_isJump && !isDie)
+        if (_isDragging && Input.GetMouseButtonUp(0) && IsJumpAble())
         {
             SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
             StartCoroutine(Jump(_direction));
+        }
+    }
+
+    bool IsJumpAble()
+    {
+        if ( GameManager.Instance.gameState is not GameManager.GameState.Pause && !_isJump && !isDie && !PausePanel.activeSelf)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -148,7 +160,6 @@ public partial class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("Tlqkf");
             _isJump = false;
         }
     }
