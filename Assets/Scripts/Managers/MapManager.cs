@@ -7,20 +7,20 @@ public class MapManager : Singleton<MapManager>
     private MapScriptable _mapScriptable;
     
     private Vector2 _startPos;
-
+    
     private GameObject _player;
     private GameObject _gameOverZone;
-
+    
     private GameObject _lastMap;
     private Vector3 _interval;
     private float _mapSizeY;
-
+    
     private Queue<GameObject> _mapPosQueue = new Queue<GameObject>();
     
     private bool _isInitComplete = false;
-
+    
     private int _mapSectionIndex = 0;
-
+    
     private float _mapDestroyDistance = 50.0f;
     
     public enum MapMode

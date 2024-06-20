@@ -14,6 +14,9 @@ public partial class Player : MonoBehaviour
     [SerializeField]
     private float maxplayerHp = 5;
 
+    [SerializeField] 
+    private float moveSpeed = 3f;
+
     public Slider PlayerHpBar;
     public bool isHitWave = false;
     public Image image;
@@ -60,6 +63,7 @@ public partial class Player : MonoBehaviour
     }
     void Update()
     {
+        
         Debug.Log(playerHp);
         if (playerHp <= 0)
         {
@@ -95,6 +99,12 @@ public partial class Player : MonoBehaviour
             || GameManager.Instance.gameState != GameManager.GameState.Play)
         {
             _lineRenderer.enabled = false;
+        }
+        if (!_isDragging && IsJumpAble())
+        {
+            float f = Input.GetAxis("Horizontal");
+            Vector3 dir = new Vector3(f, 0,0);
+            transform.position += dir * moveSpeed * Time.deltaTime;
         }
 
         if (Input.GetMouseButtonDown(0) && IsJumpAble())
@@ -154,6 +164,11 @@ public partial class Player : MonoBehaviour
     {
         _isRight = !_isRight;
         transform.Rotate(Vector3.up, 180f, Space.World);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        maxPower = originMaxPower;
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -226,7 +241,7 @@ public partial class Player : MonoBehaviour
     IEnumerator Jump(Vector2 dir)
     {
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
-        maxPower = originMaxPower;
+        
         yield return new WaitForSeconds(0.09f);
         _isJump = true;
         _lineRenderer.enabled = false;

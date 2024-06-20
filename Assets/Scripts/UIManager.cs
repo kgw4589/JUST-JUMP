@@ -65,6 +65,8 @@ public class UIManager : MonoBehaviour
     public void OnClickHomeButton()
     {
         Debug.Log("Go Home");
+        MapManager.Instance.EndMap();
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
