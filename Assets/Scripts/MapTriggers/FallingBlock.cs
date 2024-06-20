@@ -45,8 +45,7 @@ public class FallingBlock : MapTriggerBasicLogic
                if (_up)
                {
                    transform.position = Vector2.MoveTowards(transform.position, _startPos, speed * 5);
-
-                   Debug.Log("시발" + distance);
+                   
                    if (distance >= moveDis && _col)
                    {
                        _up = false;
