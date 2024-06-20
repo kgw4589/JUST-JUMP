@@ -62,6 +62,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0; // game pause (stop)
         gameState = GameState.Pause;
         Application.targetFrameRate = 30;
+        SoundManager.Instance.PauseBGM();
     }
     
     private void GameOver()
@@ -77,6 +78,7 @@ public class GameManager : Singleton<GameManager>
         MapManager.Instance.EndMap();
         gameState = GameState.End;
         Application.targetFrameRate = 30;
+        SoundManager.Instance.PlayBgm(false);
     }
 
     private void Update()
