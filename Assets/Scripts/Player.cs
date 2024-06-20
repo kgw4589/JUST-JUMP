@@ -156,6 +156,12 @@ public partial class Player : MonoBehaviour
         transform.Rotate(Vector3.up, 180f, Space.World);
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        maxPower = originMaxPower;
+        Debug.Log(maxPower);
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
@@ -226,7 +232,7 @@ public partial class Player : MonoBehaviour
     IEnumerator Jump(Vector2 dir)
     {
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
-        maxPower = originMaxPower;
+        
         yield return new WaitForSeconds(0.09f);
         _isJump = true;
         _lineRenderer.enabled = false;
