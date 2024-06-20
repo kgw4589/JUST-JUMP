@@ -148,6 +148,7 @@ public partial class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             Debug.Log("Tlqkf");
+            maxPower = originMaxPower;
             _isJump = false;
         }
     }
@@ -214,7 +215,7 @@ public partial class Player : MonoBehaviour
     IEnumerator Jump(Vector2 dir)
     {
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
-        maxPower = originMaxPower;
+        
         yield return new WaitForSeconds(0.09f);
         _isJump = true;
         _lineRenderer.enabled = false;
