@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.Utilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -86,6 +87,22 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
 
+    public void PauseBGM()
+    {
+        if (bgmPlayer.isPlaying)
+        {
+            bgmPlayer.Pause();
+        }
+    }
+
+    public void UnPauseBGM()
+    {
+        if (!bgmPlayer.isPlaying)
+        {
+            bgmPlayer.UnPause();
+        }
+    }
+
     public void PlaySfx(Sfx sfx)
     {
         for (int i = 0; i < sfxPlayers.Length; i++)
@@ -102,7 +119,6 @@ public class SoundManager : Singleton<SoundManager>
             sfxPlayers[loopIndex].Play();
             break; 
         }
-        
         
     }
     
