@@ -71,6 +71,10 @@ public partial class Player : MonoBehaviour
         if (!_isDragging && IsJumpAble())
         {
             transform.position += new Vector3(-0.2f, 0, 0);   
+            if (_isRight)
+            {
+                TurnPlayer();   
+            }
         }
        
     }
@@ -79,6 +83,10 @@ public partial class Player : MonoBehaviour
         if (!_isDragging && IsJumpAble())
         {
             transform.position += new Vector3(0.2f, 0, 0);
+            if (!_isRight)
+            {
+                TurnPlayer();   
+            }
         }
     }
     
@@ -159,6 +167,7 @@ public partial class Player : MonoBehaviour
 
             Vector3 startPos = transform.position;
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower / (gravityScale - (jumpPower/20));//0.6
+            _lineRenderer.transform.position = transform.position;
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
 
@@ -192,9 +201,6 @@ public partial class Player : MonoBehaviour
     {
         maxPower = originMaxPower;
         _lineRenderer.transform.position = transform.position;
-        Debug.Log("라인렌더러 위치: "+_lineRenderer.transform.position);
-        Debug.Log(Vector3.Distance(transform.position,_lineRenderer.transform.position));
-       
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -209,7 +215,6 @@ public partial class Player : MonoBehaviour
 
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
-        
         int steps = 60;
         float deltaTime = Time.fixedDeltaTime;
         Vector3 gravity = Physics.gravity;
@@ -265,6 +270,7 @@ public partial class Player : MonoBehaviour
         yield return new WaitForSeconds(0.09f);
         
         _isJump = true;
+        _lineRenderer.transform.position = transform.position;
         _lineRenderer.enabled = false;
     }
 }
