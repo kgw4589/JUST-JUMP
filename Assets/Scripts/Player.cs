@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 public partial class Player : MonoBehaviour
 {
     public GameObject PausePanel;
+    public Button RigthButton;
+    public Button LeftButton;
     
     [SerializeField]
     private float playerHp = 5;
@@ -60,11 +62,28 @@ public partial class Player : MonoBehaviour
         _rd = GetComponent<Rigidbody2D>();
         gravityScale = _rd.gravityScale;
         _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>().color; //색 변경 컴포넌트
+        RigthButton.onClick.AddListener(RButton);
+        LeftButton.onClick.AddListener(LButton);
     }
+
+    void RButton()
+    {
+        if (!_isDragging && IsJumpAble())
+        {
+            transform.position += new Vector3(-0.2f, 0, 0);   
+        }
+       
+    }
+    void LButton()
+    {
+        if (!_isDragging && IsJumpAble())
+        {
+            transform.position += new Vector3(0.2f, 0, 0);
+        }
+    }
+    
     void Update()
     {
-        
-        Debug.Log(playerHp);
         if (playerHp <= 0)
         {
             isDie = true;
@@ -81,7 +100,7 @@ public partial class Player : MonoBehaviour
         }
         else if (PlayerHpBar.value >= 0.2f)
         {
-            Debug.Log("빨강");
+            
             PlayerHpBar.fillRect.GetComponent<Image>().color = Color.red;
             //_playerHpBarColor = Color.red;
         }
@@ -94,19 +113,22 @@ public partial class Player : MonoBehaviour
                 playerHp += Time.deltaTime;
             }
         }
+    
+        if (Input.GetMouseButtonDown(0) && (EventSystem.current.currentSelectedGameObject))
+        {
+            if (EventSystem.current.currentSelectedGameObject.name == LeftButton.name
+                || EventSystem.current.currentSelectedGameObject.name == RigthButton.name)
+            {
+                Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+                return;
+            }
+        }
 
         if (EventSystem.current.IsPointerOverGameObject()
             || GameManager.Instance.gameState != GameManager.GameState.Play)
         {
             _lineRenderer.enabled = false;
         }
-        if (!_isDragging && IsJumpAble())
-        {
-            float f = Input.GetAxis("Horizontal");
-            Vector3 dir = new Vector3(f, 0,0);
-            transform.position += dir * moveSpeed * Time.deltaTime;
-        }
-
         if (Input.GetMouseButtonDown(0) && IsJumpAble())
         {
             _lineRenderer.enabled = true;
@@ -169,23 +191,21 @@ public partial class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         maxPower = originMaxPower;
+        _lineRenderer.transform.position = transform.position;
+        Debug.Log("라인렌더러 위치: "+_lineRenderer.transform.position);
+        Debug.Log(Vector3.Distance(transform.position,_lineRenderer.transform.position));
+       
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
+            _lineRenderer.transform.position = transform.position;
             _isJump = false;
+           
         }
     }
-
-    // private void OnCollisionStay2D(Collision2D other)
-    // {
-    //     if (other.gameObject.CompareTag("Ground"))
-    //     {
-    //         _isJump = false;
-    //     }
-    // }
 
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
@@ -243,6 +263,7 @@ public partial class Player : MonoBehaviour
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
         
         yield return new WaitForSeconds(0.09f);
+        
         _isJump = true;
         _lineRenderer.enabled = false;
     }
