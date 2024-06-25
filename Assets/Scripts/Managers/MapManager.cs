@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MapManager : Singleton<MapManager>
 {
+    private MapListScriptable _mapScriptables;
     private MapScriptable _mapScriptable;
     
     private Vector2 _startPos;
@@ -18,31 +22,31 @@ public class MapManager : Singleton<MapManager>
     private Queue<GameObject> _mapPosQueue = new Queue<GameObject>();
     
     private bool _isInitComplete = false;
-    
+
+    private int _mapScriptableIndex = 0;
     private int _mapSectionIndex = 0;
-    
+
     private float _mapDestroyDistance = 50.0f;
-    
-    public enum MapMode
+
+    protected override void Init()
     {
-        Normal
+        _mapSectionIndex = 0;
+        _mapScriptableIndex = 0;
+
+        _mapScriptables = Resources.Load<MapListScriptable>("MapScriptables");
+        _mapScriptable = _mapScriptables.mapScriptableList[_mapScriptableIndex];
     }
-    public MapMode mapMode = MapMode.Normal;
 
     public void InitMap()
     {
         _player = FindObjectOfType<Player>().gameObject;
         _gameOverZone = FindObjectOfType<GameOverZone>().gameObject;
-        
-        _mapScriptable = Resources.Load<MapScriptable>("MapScriptables/" + mapMode);
 
-        _mapSectionIndex = 0;
-        
         _startPos = new Vector2(0, 0);
-        
+
         _lastMap = Instantiate(_mapScriptable.maps[_mapSectionIndex]
             .sectionMaps[Random.Range(0, _mapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
-        
+
         _lastMap.transform.position = _startPos;
         _mapPosQueue.Enqueue(_lastMap);
 
@@ -50,6 +54,22 @@ public class MapManager : Singleton<MapManager>
         
         InstantiateRandomMap();
         InstantiateRandomMap();
+    }
+
+    public void ChangeMode(bool isMinus)
+    {
+        if (isMinus)
+        {
+            _mapScriptableIndex = (_mapScriptableIndex == 0) ?
+                    _mapScriptables.mapScriptableList.Count - 1 : --_mapScriptableIndex;
+        }
+        else
+        {
+            _mapScriptableIndex = (_mapScriptableIndex + 1) % _mapScriptables.mapScriptableList.Count;
+        }
+
+        _mapScriptable = _mapScriptables.mapScriptableList[_mapScriptableIndex];
+        Debug.Log(_mapScriptable);
     }
 
     public void EndMap()
