@@ -70,6 +70,7 @@ public partial class Player : MonoBehaviour
     {
         if (!_isDragging && IsJumpAble())
         {
+            _lineRenderer.transform.position = transform.position;
             transform.position += new Vector3(-0.2f, 0, 0);   
             if (_isRight)
             {
@@ -82,6 +83,7 @@ public partial class Player : MonoBehaviour
     {
         if (!_isDragging && IsJumpAble())
         {
+            _lineRenderer.transform.position = transform.position;
             transform.position += new Vector3(0.2f, 0, 0);
             if (!_isRight)
             {
@@ -140,6 +142,7 @@ public partial class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && IsJumpAble())
         {
             _lineRenderer.enabled = true;
+            _lineRenderer.transform.position = transform.position;
             if (EventSystem.current.IsPointerOverGameObject()
                 || GameManager.Instance.gameState != GameManager.GameState.Play)
             {
@@ -148,6 +151,7 @@ public partial class Player : MonoBehaviour
 
             _isDragging = true;
             _startPosition = Input.mousePosition;
+            
         }
 
         if (Input.GetMouseButton(0) && IsJumpAble() && _isDragging )
