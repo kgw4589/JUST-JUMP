@@ -47,7 +47,7 @@ public class MapManager : Singleton<MapManager>
         _lastMap = Instantiate(_mapScriptable.maps[_mapSectionIndex]
             .sectionMaps[Random.Range(0, _mapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
 
-        _lastMap.transform.position = _startPos;
+        _lastMap.transform.position = _startPos + new Vector2(0, _lastMap.transform.localScale.y / 2);
         _mapPosQueue.Enqueue(_lastMap);
 
         _isInitComplete = true;
