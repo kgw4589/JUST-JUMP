@@ -49,6 +49,9 @@ public partial class Player : MonoBehaviour
     
     
    private Color _playerHpBarColor;
+   public bool _isRigthClick = false;
+   public bool _isClick = false;
+   public bool _isLeftClick = false;
    
 
     // Start is called before the first frame update
@@ -70,22 +73,16 @@ public partial class Player : MonoBehaviour
     {
         if (!_isDragging && IsJumpAble())
         {
-            Debug.Log(_lineRenderer.transform.position);
-            transform.position += new Vector3(-0.2f, 0, 0);   
-            _lineRenderer.transform.position = transform.position;
             if (_isRight)
             {
                 TurnPlayer();   
             }
         }
-       
     }
     void LButton()
     {
         if (!_isDragging && IsJumpAble())
         {
-            transform.position += new Vector3(0.2f, 0, 0);
-            _lineRenderer.transform.position = transform.position;
             if (!_isRight)
             {
                 TurnPlayer();   
@@ -95,6 +92,27 @@ public partial class Player : MonoBehaviour
     
     void Update()
     {
+        if (_isRigthClick && !_isDragging && IsJumpAble())
+        {
+            transform.position += new Vector3(0.09f, 0, 0);
+            _lineRenderer.transform.position = transform.position;
+        }
+
+        if (_isLeftClick && !_isDragging && IsJumpAble())
+        {
+            transform.position += new Vector3(-0.09f, 0, 0);
+            _lineRenderer.transform.position = transform.position;
+        }
+      
+        if (Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("겟마우스버튼따운");
+                _isRigthClick = false;
+                _isLeftClick = false;
+        }
+
+
+
         if (playerHp <= 0)
         {
             isDie = true;
@@ -127,10 +145,16 @@ public partial class Player : MonoBehaviour
     
         if (Input.GetMouseButtonDown(0) && (EventSystem.current.currentSelectedGameObject))
         {
-            if (EventSystem.current.currentSelectedGameObject.name == LeftButton.name
-                || EventSystem.current.currentSelectedGameObject.name == RigthButton.name)
+            if (EventSystem.current.currentSelectedGameObject.name == LeftButton.name)
             {
+                _isRigthClick = true;
                 Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+                return;
+            }
+
+            if (EventSystem.current.currentSelectedGameObject.name == RigthButton.name)
+            {
+                _isLeftClick = true;
                 return;
             }
         }

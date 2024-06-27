@@ -41,6 +41,14 @@ public class GameManager : Singleton<GameManager>
         Application.targetFrameRate = 30;
         Debug.Log(_saveData.highScore);
     }
+
+    public void InitObjects(UIManager uiManager)
+    {
+        gameState = GameState.Ready;
+        
+        MapManager.Instance.InitMap();
+        uiManager.InitUI();
+    }
     
     public void StartGame(bool restart)
     {
@@ -53,7 +61,7 @@ public class GameManager : Singleton<GameManager>
         Application.targetFrameRate = 120;
         if (!restart)
         {
-            MapManager.Instance.InitMap();
+            MapManager.Instance.StartMap();
         }
     }
     
@@ -75,7 +83,6 @@ public class GameManager : Singleton<GameManager>
         }
         
         Time.timeScale = 0;
-        MapManager.Instance.EndMap();
         gameState = GameState.End;
         Application.targetFrameRate = 30;
         SoundManager.Instance.PlayBgm(false);
