@@ -15,6 +15,8 @@ public partial class Player : MonoBehaviour,IObjectInit
     private float playerHp = 5;
     [SerializeField]
     private float maxplayerHp = 5;
+    private Vector3 PlayerstartPosition;
+    
 
     [SerializeField] 
     private float moveSpeed = 3f;
@@ -60,6 +62,8 @@ public partial class Player : MonoBehaviour,IObjectInit
    // Start is called before the first frame update
     void Start()
     {
+       // GameManager.Instance.
+        PlayerstartPosition = transform.position;
         maxPower = originMaxPower; 
         playerHp = maxplayerHp;
         _lineRenderer = GetComponent<LineRenderer>(); 
@@ -147,6 +151,7 @@ public partial class Player : MonoBehaviour,IObjectInit
 
             _isDragging = true;
             _startPosition = Input.mousePosition;
+            Debug.Log("시작 클릭");
             
         }
 
@@ -168,6 +173,7 @@ public partial class Player : MonoBehaviour,IObjectInit
             Vector3 startPos = transform.position;
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower / (gravityScale - (jumpPower/20));//0.6
             _lineRenderer.transform.position = transform.position;
+            Debug.Log("지금 클릭 중");
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
 
@@ -182,12 +188,10 @@ public partial class Player : MonoBehaviour,IObjectInit
     public void RigthButtonPush(bool isPush)
     {
         _isRigthButtonPush = isPush;
-        Debug.Log("ddddd");
     }
     public void LeftButtonPush(bool isPush)
     {
         _isLeftButtonPush = isPush;
-        Debug.Log(_isLeftButtonPush);
     }
 
 
@@ -290,7 +294,10 @@ public partial class Player : MonoBehaviour,IObjectInit
 
     public void InitObject()
     {
-        //체력,점프,위치 초기화
-        Debug.Log("");
+        playerHp = maxplayerHp;
+        jumpPower = originMaxPower;
+        transform.position = PlayerstartPosition;
+        curruentTime = 0;
+        Debug.Log("리셋");
     }
 }
