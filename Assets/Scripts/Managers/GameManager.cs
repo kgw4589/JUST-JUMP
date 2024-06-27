@@ -42,6 +42,7 @@ public class GameManager : Singleton<GameManager>
         if (_saveData == null)
         {
             _saveData = DataManager.Instance.LoadJson<JsonData>();
+            Debug.Log("Using Local Save");
         }
         _highScore = _saveData.highScore;
         QualitySettings.vSyncCount = 0;
