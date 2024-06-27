@@ -25,6 +25,15 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI _highScore;
     [SerializeField]
     private TextMeshProUGUI _currentScore;
+
+    public void InitUI()
+    {
+        startUICanvas.SetActive(true);
+        inGameCanvas.SetActive(false);
+        wave2DGameObject.SetActive(false);
+        pausePanel.SetActive(false);
+        diePanel.SetActive(false);
+    }
     
     public void OnClickStartButton()
     {
@@ -64,9 +73,9 @@ public class UIManager : MonoBehaviour
     public void OnClickHomeButton()
     {
         Debug.Log("Go Home");
-        MapManager.Instance.EndMap();
         
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.Instance.InitObjects(this);
+        
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
