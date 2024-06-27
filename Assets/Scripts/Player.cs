@@ -70,8 +70,9 @@ public partial class Player : MonoBehaviour
     {
         if (!_isDragging && IsJumpAble())
         {
-            _lineRenderer.transform.position = transform.position;
+            Debug.Log(_lineRenderer.transform.position);
             transform.position += new Vector3(-0.2f, 0, 0);   
+            _lineRenderer.transform.position = transform.position;
             if (_isRight)
             {
                 TurnPlayer();   
@@ -83,8 +84,8 @@ public partial class Player : MonoBehaviour
     {
         if (!_isDragging && IsJumpAble())
         {
-            _lineRenderer.transform.position = transform.position;
             transform.position += new Vector3(0.2f, 0, 0);
+            _lineRenderer.transform.position = transform.position;
             if (!_isRight)
             {
                 TurnPlayer();   
