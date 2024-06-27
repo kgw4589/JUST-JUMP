@@ -85,7 +85,8 @@ public class UIManager : MonoBehaviour, IObjectInit
         diePanel.SetActive(false);
         inGameCanvas.SetActive(false);
         startUICanvas.SetActive(true);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
+        GameManager.Instance.InitObjects();
         GameManager.Instance.gameState = GameManager.GameState.Ready;
     }
 
