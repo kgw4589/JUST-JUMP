@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MapManager : Singleton<MapManager>, IObjectInit
+public class MapManager : Singleton<MapManager>
 {
     private MapListScriptable _mapScriptables;
     private MapScriptable _mapScriptable;
@@ -38,7 +38,7 @@ public class MapManager : Singleton<MapManager>, IObjectInit
         
         _startPos = new Vector2(0, 0);
         
-        GameManager.Instance.SetInitDelegate(this);
+        GameManager.Instance.initAction += InitObject;
         
         InitObject();
     }
@@ -88,21 +88,13 @@ public class MapManager : Singleton<MapManager>, IObjectInit
         Debug.Log(_mapScriptable);
     }
 
-    public void EndMap()
-    {
-        
-    }
-
     void Update()
     {
         if (!_isInitComplete)
         {
             return;
         }
-        
-        Debug.Log(_player);
-        Debug.Log(_lastMap);
-        
+
         float dis = Vector2.Distance(_player.transform.position, _lastMap.transform.position);
 
         if (dis < _mapSizeY * 3)
@@ -137,5 +129,10 @@ public class MapManager : Singleton<MapManager>, IObjectInit
         _lastMap = map;
         
         _mapQueue.Enqueue(_lastMap);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.initAction -= InitObject;
     }
 }

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour, IObjectInit
+public class UIManager : MonoBehaviour
 {
     public GameObject startUICanvas;
     public GameObject inGameCanvas;
@@ -94,8 +94,8 @@ public class UIManager : MonoBehaviour, IObjectInit
     {
         wave2DGameObject.SetActive(false);
         inGameCanvas.SetActive(false);
-        
-        GameManager.Instance.SetInitDelegate(this);
+
+        GameManager.Instance.initAction += InitObject;
     }
 
     private void Update()

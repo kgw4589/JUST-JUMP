@@ -18,9 +18,7 @@ public class GameManager : Singleton<GameManager>
 
     private JsonData _saveData;
 
-    private delegate void ObjectInit();
-
-    private ObjectInit _objectInit;
+    public Action initAction;
 
     public enum GameState
     {
@@ -46,17 +44,12 @@ public class GameManager : Singleton<GameManager>
         Application.targetFrameRate = 30;
         Debug.Log(_saveData.highScore);
     }
-
-    public void SetInitDelegate(IObjectInit objectInit)
-    {
-        _objectInit += objectInit.InitObject;
-    }
-
+    
     public void InitObjects()
     {
         gameState = GameState.Ready;
 
-        _objectInit();
+        initAction();
     }
     
     public void StartGame(bool restart)
