@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MapManager : Singleton<MapManager>
+public class MapManager : Singleton<MapManager>, IObjectInit
 {
     private MapListScriptable _mapScriptables;
     private MapScriptable _mapScriptable;
@@ -38,10 +38,12 @@ public class MapManager : Singleton<MapManager>
         
         _startPos = new Vector2(0, 0);
         
-        InitMap();
+        GameManager.Instance.SetInitDelegate(this);
+        
+        InitObject();
     }
 
-    public void InitMap()
+    public void InitObject()
     {
         _isInitComplete = false;
 
