@@ -18,7 +18,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] private GameObject bulletObj;
     [SerializeField] private Trajectory trajectory;
     [SerializeField] private Vector2 endPoint;
-    
+    [SerializeField] private GameObject cannonHead;
     private Vector2 _startPoint;
     private Vector2 _direction;
     private Vector2 _force;
@@ -43,6 +43,9 @@ public class Cannon : MonoBehaviour
             bulletObj.transform.position = transform.position;
             _currentTime = 0;
         }
+        var newPos = endPoint - new Vector2(cannonHead.transform.position.x, cannonHead.transform.position.y);
+        var rotZ = Mathf.Atan2(newPos.x, newPos.y) * Mathf.Rad2Deg;
+        cannonHead.transform.rotation = Quaternion.Euler(0, 0, rotZ);
     }
 
     private IEnumerator Reload()

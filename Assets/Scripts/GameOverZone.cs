@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOverZone : MonoBehaviour
+public partial class GameOverZone : MonoBehaviour
 {
     [SerializeField] private float _waitTime = 3f; // second
     [SerializeField] private float _moveDistance = 3f; // Y Axis

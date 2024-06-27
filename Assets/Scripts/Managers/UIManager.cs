@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour, IObjectInit
+public class UIManager : MonoBehaviour
 {
     public GameObject startUICanvas;
     public GameObject inGameCanvas;
@@ -25,16 +25,7 @@ public class UIManager : MonoBehaviour, IObjectInit
     private TextMeshProUGUI _highScore;
     [SerializeField]
     private TextMeshProUGUI _currentScore;
-
-    public void InitObject()
-    {
-        startUICanvas.SetActive(true);
-        inGameCanvas.SetActive(false);
-        wave2DGameObject.SetActive(false);
-        pausePanel.SetActive(false);
-        diePanel.SetActive(false);
-    }
-
+    
     public void OnClickStartButton()
     {
         Debug.Log("Game Start");
@@ -73,9 +64,9 @@ public class UIManager : MonoBehaviour, IObjectInit
     public void OnClickHomeButton()
     {
         Debug.Log("Go Home");
+        MapManager.Instance.EndMap();
         
-        GameManager.Instance.InitObjects();
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
@@ -94,8 +85,6 @@ public class UIManager : MonoBehaviour, IObjectInit
     {
         wave2DGameObject.SetActive(false);
         inGameCanvas.SetActive(false);
-        
-        GameManager.Instance.SetInitDelegate(this);
     }
 
     private void Update()
