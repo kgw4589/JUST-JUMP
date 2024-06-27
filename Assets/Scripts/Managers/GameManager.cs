@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -17,10 +16,6 @@ public class GameManager : Singleton<GameManager>
     public float _playerPosY;
 
     private JsonData _saveData;
-
-    private delegate void ObjectInit();
-
-    private ObjectInit _objectInit;
 
     public enum GameState
     {
@@ -46,18 +41,6 @@ public class GameManager : Singleton<GameManager>
         Application.targetFrameRate = 30;
         Debug.Log(_saveData.highScore);
     }
-
-    public void SetInitDelegate(IObjectInit objectInit)
-    {
-        _objectInit += objectInit.InitObject;
-    }
-
-    public void InitObjects()
-    {
-        gameState = GameState.Ready;
-
-        _objectInit();
-    }
     
     public void StartGame(bool restart)
     {
@@ -70,7 +53,7 @@ public class GameManager : Singleton<GameManager>
         Application.targetFrameRate = 120;
         if (!restart)
         {
-            MapManager.Instance.StartMap();
+            MapManager.Instance.InitMap();
         }
     }
     
@@ -92,6 +75,7 @@ public class GameManager : Singleton<GameManager>
         }
         
         Time.timeScale = 0;
+        MapManager.Instance.EndMap();
         gameState = GameState.End;
         Application.targetFrameRate = 30;
         SoundManager.Instance.PlayBgm(false);
