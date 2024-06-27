@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MapManager : Singleton<MapManager>
+public class MapManager : Singleton<MapManager>, IObjectInit
 {
     private MapListScriptable _mapScriptables;
     private MapScriptable _mapScriptable;
@@ -19,7 +19,7 @@ public class MapManager : Singleton<MapManager>
     private Vector3 _interval;
     private float _mapSizeY;
     
-    private Queue<GameObject> _mapPosQueue = new Queue<GameObject>();
+    private Queue<GameObject> _mapQueue = new Queue<GameObject>();
     
     private bool _isInitComplete = false;
 
@@ -35,20 +35,36 @@ public class MapManager : Singleton<MapManager>
 
         _mapScriptables = Resources.Load<MapListScriptable>("MapScriptables");
         _mapScriptable = _mapScriptables.mapScriptableList[_mapScriptableIndex];
+        
+        _startPos = new Vector2(0, 0);
+        
+        GameManager.Instance.SetInitDelegate(this);
+        
+        InitObject();
     }
 
-    public void InitMap()
+    public void InitObject()
     {
-        _player = FindObjectOfType<Player>().gameObject;
-        _gameOverZone = FindObjectOfType<GameOverZone>().gameObject;
+        _isInitComplete = false;
 
-        _startPos = new Vector2(0, 0);
+        foreach (var map in _mapQueue)
+        {
+            Destroy(map);
+        }
+        
+        _mapQueue.Clear();
+    }
 
+    public void StartMap()
+    {
+        _player ??= FindObjectOfType<Player>().gameObject;
+        _gameOverZone ??= FindObjectOfType<GameOverZone>().gameObject;
+        
         _lastMap = Instantiate(_mapScriptable.maps[_mapSectionIndex]
             .sectionMaps[Random.Range(0, _mapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
 
         _lastMap.transform.position = _startPos + new Vector2(0, _lastMap.transform.localScale.y / 2);
-        _mapPosQueue.Enqueue(_lastMap);
+        _mapQueue.Enqueue(_lastMap);
 
         _isInitComplete = true;
         
@@ -74,8 +90,7 @@ public class MapManager : Singleton<MapManager>
 
     public void EndMap()
     {
-        _mapPosQueue.Clear();
-        _isInitComplete = false;
+        
     }
 
     void Update()
@@ -84,7 +99,10 @@ public class MapManager : Singleton<MapManager>
         {
             return;
         }
-
+        
+        Debug.Log(_player);
+        Debug.Log(_lastMap);
+        
         float dis = Vector2.Distance(_player.transform.position, _lastMap.transform.position);
 
         if (dis < _mapSizeY * 3)
@@ -97,11 +115,11 @@ public class MapManager : Singleton<MapManager>
             InstantiateRandomMap();
         }
         
-        Vector3 mapQueFirst = _mapPosQueue.Peek().transform.position;
+        Vector3 mapQueFirst = _mapQueue.Peek().transform.position;
 
         if (_gameOverZone.transform.position.y - mapQueFirst.y > _mapDestroyDistance)
         {
-            Destroy(_mapPosQueue.Dequeue());
+            Destroy(_mapQueue.Dequeue());
         }
     }
 
@@ -118,6 +136,6 @@ public class MapManager : Singleton<MapManager>
         map.transform.position = _lastMap.transform.position + _interval;
         _lastMap = map;
         
-        _mapPosQueue.Enqueue(_lastMap);
+        _mapQueue.Enqueue(_lastMap);
     }
 }
