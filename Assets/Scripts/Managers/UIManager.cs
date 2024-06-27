@@ -25,20 +25,12 @@ public class UIManager : MonoBehaviour, IObjectInit
     private TextMeshProUGUI _highScore;
     [SerializeField]
     private TextMeshProUGUI _currentScore;
-    
-    private void Awake()
-    {
-        wave2DGameObject.SetActive(false);
-        inGameCanvas.SetActive(false);
-        
-        GameManager.Instance.SetInitDelegate(this);
-    }
 
     public void InitObject()
     {
-        // UI objects Only
         startUICanvas.SetActive(true);
         inGameCanvas.SetActive(false);
+        wave2DGameObject.SetActive(false);
         pausePanel.SetActive(false);
         diePanel.SetActive(false);
     }
@@ -96,6 +88,14 @@ public class UIManager : MonoBehaviour, IObjectInit
         
         GameManager.Instance.InitObjects();
         GameManager.Instance.gameState = GameManager.GameState.Ready;
+    }
+
+    private void Awake()
+    {
+        wave2DGameObject.SetActive(false);
+        inGameCanvas.SetActive(false);
+        
+        GameManager.Instance.SetInitDelegate(this);
     }
 
     private void Update()

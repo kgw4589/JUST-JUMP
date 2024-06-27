@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOverZone : MonoBehaviour, IObjectInit
+public class GameOverZone : MonoBehaviour
 {
     [SerializeField] private float _waitTime = 3f; // second
     [SerializeField] private float _moveDistance = 3f; // Y Axis
@@ -14,17 +14,6 @@ public class GameOverZone : MonoBehaviour, IObjectInit
     private int _contactCnt = 0;
 
     private Player _player;
-
-    private void Awake()
-    {
-        GameManager.Instance.SetInitDelegate(this);
-    }
-
-    public void InitObject()
-    {
-        gameObject.SetActive(false);
-    }
-    
     void Start()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -86,5 +75,4 @@ public class GameOverZone : MonoBehaviour, IObjectInit
             _contactCnt = 0;
         }
     }
-    
 }
