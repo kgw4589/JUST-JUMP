@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public partial class Player : MonoBehaviour,IObjectInit
+public partial class Player : MonoBehaviour
 {
     public GameObject PausePanel;
     public Button RButton;
@@ -53,15 +53,21 @@ public partial class Player : MonoBehaviour,IObjectInit
     private bool _isLeftButtonPush = false;
     
    private Color _playerHpBarColor;
-
-   private IObjectInit _objectInitImplementation;
    
-   
-
+   public void InitObject()
+   {
+       playerHp = maxplayerHp;
+       jumpPower = originMaxPower;
+       transform.position = PlayerstartPosition;
+       curruentTime = 0;
+       Debug.Log("리셋");
+   }
 
    // Start is called before the first frame update
     void Start()
     {
+        GameManager.Instance.initAction += InitObject;
+        
        // GameManager.Instance.
         PlayerstartPosition = transform.position;
         maxPower = originMaxPower; 
@@ -290,14 +296,5 @@ public partial class Player : MonoBehaviour,IObjectInit
         _isJump = true;
         _lineRenderer.transform.position = transform.position;
         _lineRenderer.enabled = false;
-    }
-
-    public void InitObject()
-    {
-        playerHp = maxplayerHp;
-        jumpPower = originMaxPower;
-        transform.position = PlayerstartPosition;
-        curruentTime = 0;
-        Debug.Log("리셋");
     }
 }
