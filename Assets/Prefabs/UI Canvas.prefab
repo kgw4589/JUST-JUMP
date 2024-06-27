@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 7834330571566191458}
   - component: {fileID: 907500752620778285}
   m_Layer: 0
-  m_Name: RigthButton
+  m_Name: LeftMoveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -484,7 +484,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4827201375843143100, guid: 3783a7230bdb3ab4aa20c11243c9c8cd, type: 3}
+  m_Sprite: {fileID: 6342293345636278915, guid: 3783a7230bdb3ab4aa20c11243c9c8cd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1112,7 +1112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4974269653805358834
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2297,7 +2297,7 @@ GameObject:
   - component: {fileID: 5218774711383345541}
   - component: {fileID: 2432154217447021571}
   m_Layer: 0
-  m_Name: LeftButton
+  m_Name: RightMoveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2351,7 +2351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4827201375843143100, guid: 3783a7230bdb3ab4aa20c11243c9c8cd, type: 3}
+  m_Sprite: {fileID: -8667803144176668281, guid: 3783a7230bdb3ab4aa20c11243c9c8cd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4563,11 +4563,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345591233572540019, guid: ffc58ea8e1d3444b38d1ad5d8d86fc7d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 345591233572540019, guid: ffc58ea8e1d3444b38d1ad5d8d86fc7d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 345591234199285074, guid: ffc58ea8e1d3444b38d1ad5d8d86fc7d, type: 3}
       propertyPath: m_Name
