@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using Firebase;
 using UnityEngine;
 using Firebase.Auth;
+using Firebase.Database;
 using Firebase.Extensions;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
@@ -9,6 +11,10 @@ public class FireBaseManager : Singleton<FireBaseManager>
 {
     private string _authCode;
     private FirebaseAuth _auth;
+    private FirebaseApp _app;
+    private DatabaseReference _dbReference;
+    private DatabaseReference _userReference;
+    private FirebaseUser _user;
     
     protected override void Init()
     {
@@ -19,15 +25,19 @@ public class FireBaseManager : Singleton<FireBaseManager>
         {
             if (task.Result == DependencyStatus.Available)
             {
-                FirebaseApp app = FirebaseApp.DefaultInstance;
-                _auth = FirebaseAuth.DefaultInstance;
                 PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
             }
             else
             {
-                Debug.Log("Could not resolve all Firebase dependecies: " + task.Result);
+                Debug.Log("Could not resolve all Firebase dependencies: " + task.Result);
             }
         });
+
+        _app = FirebaseApp.DefaultInstance;
+        _auth = FirebaseAuth.DefaultInstance;
+        _dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+        
+        FireBaseLogin();
     }
 
     private void ProcessAuthentication(SignInStatus status)
@@ -38,7 +48,6 @@ public class FireBaseManager : Singleton<FireBaseManager>
             PlayGamesPlatform.Instance.RequestServerSideAccess(false, code =>
             {
                 _authCode = code;
-                FireBaseLogin();
             });
         }
         else
@@ -49,6 +58,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
 
     private void FireBaseLogin()
     {
+        Debug.Log("FireBase Login try ...");
         Credential credential = PlayGamesAuthProvider.GetCredential(_authCode);
         _auth.SignInAndRetrieveDataWithCredentialAsync(credential).ContinueWith(task =>
         {
@@ -63,10 +73,29 @@ public class FireBaseManager : Singleton<FireBaseManager>
                 Debug.LogError("SignIn encountered an error: " + task.Exception);
                 return;
             }
-
+            
             AuthResult result = task.Result;
+            _user = result.User;
+            _userReference = _dbReference.Child("users").Child(_user.UserId);
             Debug.LogFormat("User signed in successfully: {0} ({1})", result.User.DisplayName, result.User.UserId);
         });
 
+    }
+
+    public async Task<T> LoadSaveData<T>()
+    {
+        DataSnapshot snapshot = await _userReference.GetValueAsync();
+
+        if (!snapshot.Exists)
+        {
+            SaveInDB(JsonUtility.ToJson(new JsonData(0)));
+        }
+
+        return JsonUtility.FromJson<T>(snapshot.GetRawJsonValue());
+    }
+
+    private async Task SaveInDB(string saveData)
+    {
+        await _userReference.SetValueAsync(saveData);
     }
 }
