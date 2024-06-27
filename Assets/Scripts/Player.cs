@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public partial class Player : MonoBehaviour
+public partial class Player : MonoBehaviour,IObjectInit
 {
     public GameObject PausePanel;
     public Button RigthButton;
@@ -49,12 +49,14 @@ public partial class Player : MonoBehaviour
     
     
    private Color _playerHpBarColor;
-   public bool _isRigthClick = false;
-   public bool _isClick = false;
-   public bool _isLeftClick = false;
+   private bool _isRigthClick = false;
+   private bool _isLeftClick = false;
+   private IObjectInit _objectInitImplementation;
+   
    
 
-    // Start is called before the first frame update
+
+   // Start is called before the first frame update
     void Start()
     {
         maxPower = originMaxPower; 
@@ -65,41 +67,29 @@ public partial class Player : MonoBehaviour
         _rd = GetComponent<Rigidbody2D>();
         gravityScale = _rd.gravityScale;
         _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>().color; //색 변경 컴포넌트
-        RigthButton.onClick.AddListener(RButton);
-        LeftButton.onClick.AddListener(LButton);
+        // RigthButton.onClick.AddListener(RButton);
+        // LeftButton.onClick.AddListener(LButton);
+        //RigthButton = GameObject.FindGameObjectsWithTag("RigthButton");
     }
 
-    void RButton()
+    void Update()
     {
-        if (!_isDragging && IsJumpAble())
-        {
-            if (_isRight)
-            {
-                TurnPlayer();   
-            }
-        }
-    }
-    void LButton()
-    {
-        if (!_isDragging && IsJumpAble())
+        if (_isRigthClick && !_isDragging && IsJumpAble())
         {
             if (!_isRight)
             {
                 TurnPlayer();   
             }
-        }
-    }
-    
-    void Update()
-    {
-        if (_isRigthClick && !_isDragging && IsJumpAble())
-        {
             transform.position += new Vector3(0.09f, 0, 0);
             _lineRenderer.transform.position = transform.position;
         }
 
         if (_isLeftClick && !_isDragging && IsJumpAble())
         {
+            if (_isRight)
+            {
+                TurnPlayer();   
+            }
             transform.position += new Vector3(-0.09f, 0, 0);
             _lineRenderer.transform.position = transform.position;
         }
@@ -208,6 +198,8 @@ public partial class Player : MonoBehaviour
         }
     }
 
+    
+
     bool IsJumpAble()
     {
         if ( GameManager.Instance.gameState is not GameManager.GameState.Pause && !_isJump && !isDie && !PausePanel.activeSelf)
@@ -301,5 +293,11 @@ public partial class Player : MonoBehaviour
         _isJump = true;
         _lineRenderer.transform.position = transform.position;
         _lineRenderer.enabled = false;
+    }
+
+    public void InitObject()
+    {
+        
+        Debug.Log("");
     }
 }
