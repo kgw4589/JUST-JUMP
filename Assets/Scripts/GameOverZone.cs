@@ -5,15 +5,27 @@ using UnityEngine;
 
 public class GameOverZone : MonoBehaviour
 {
-    [SerializeField] private float _waitTime = 3f; // second
-    [SerializeField] private float _moveDistance = 3f; // Y Axis
-    [SerializeField] private float _moveDuration = 2f;  // second
+    [SerializeField] private float _waitTime = 5f; // second
+    [SerializeField] private float _moveDistance = 100f; // Y Axis
+    [SerializeField] private float _moveDuration = 100f;  // second
 
+    private float _startYaxis = -30f;
     private float _contactTime = 0f;
     private float _timeSecond = 2f; // 1 Second +
     private int _contactCnt = 0;
 
     private Player _player;
+
+    private void Awake()
+    {
+        GameManager.Instance.initAction += InitObject;
+    }
+
+    void InitObject()
+    {
+        transform.position = new Vector3(0, _startYaxis, -1);
+    }
+
     void Start()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
