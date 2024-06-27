@@ -32,15 +32,17 @@ public class GameManager : Singleton<GameManager>
 
     public GameState gameState = GameState.Ready;
 
-    protected override void Init()
+    protected override async void Init()
     {
         if (!File.Exists(Application.persistentDataPath+"/SaveData.json"))
         {
             DataManager.Instance.GetEditJson(new JsonData(0));
         }
-        
-        Time.timeScale = 0; // game stop
-        _saveData = DataManager.Instance.LoadJson<JsonData>();
+        _saveData = await FireBaseManager.Instance.LoadSaveData<JsonData>();
+        if (_saveData == null)
+        {
+            _saveData = DataManager.Instance.LoadJson<JsonData>();
+        }
         _highScore = _saveData.highScore;
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
@@ -89,6 +91,7 @@ public class GameManager : Singleton<GameManager>
             _highScore = (int)_playerPosY;
             _saveData.highScore = _highScore;
             DataManager.Instance.GetEditJson(_saveData);
+            FireBaseManager.Instance.GetSaveInDB(_saveData);
         }
         
         Time.timeScale = 0;

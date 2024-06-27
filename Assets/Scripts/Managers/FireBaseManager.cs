@@ -82,20 +82,25 @@ public class FireBaseManager : Singleton<FireBaseManager>
 
     }
 
-    public async Task<T> LoadSaveData<T>()
+    public async Task<JsonData> LoadSaveData<T>()
     {
         DataSnapshot snapshot = await _userReference.GetValueAsync();
 
         if (!snapshot.Exists)
         {
-            SaveInDB(JsonUtility.ToJson(new JsonData(0)));
+            SaveInDB(new JsonData(0));
         }
 
-        return JsonUtility.FromJson<T>(snapshot.GetRawJsonValue());
+        return JsonUtility.FromJson<JsonData>(snapshot.GetRawJsonValue());
     }
 
-    private async Task SaveInDB(string saveData)
+    private async Task SaveInDB(JsonData saveData)
     {
         await _userReference.SetValueAsync(saveData);
+    }
+
+    public void GetSaveInDB(JsonData saveData)
+    {
+        SaveInDB(saveData);
     }
 }
