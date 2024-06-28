@@ -54,21 +54,10 @@ public partial class Player : MonoBehaviour
     
    private Color _playerHpBarColor;
    
-   public void InitObject()
-   {
-       playerHp = maxplayerHp;
-       jumpPower = originMaxPower;
-       transform.position = PlayerstartPosition;
-       curruentTime = 0;
-       Debug.Log("리셋");
-   }
-
    // Start is called before the first frame update
     void Start()
     {
-        GameManager.Instance.initAction += InitObject;
-        
-       // GameManager.Instance.
+	    GameManager.Instance.initAction += InitObject;
         PlayerstartPosition = transform.position;
         maxPower = originMaxPower; 
         playerHp = maxplayerHp;
@@ -83,6 +72,8 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
+        
+
         if (_isRigthButtonPush && !_isDragging && IsJumpAble())
         {
             transform.position += new Vector3(0.09f, 0, 0);
@@ -130,35 +121,21 @@ public partial class Player : MonoBehaviour
         }
     
         if (Input.GetMouseButtonDown(0) && (EventSystem.current.currentSelectedGameObject))
-        {
+        {//클릭한게 Ui인지 확인해서 리턴함
             if (EventSystem.current.currentSelectedGameObject.name == LButton.name || 
                 EventSystem.current.currentSelectedGameObject.name == RButton.name)
             {
-                _lineRenderer.transform.position = transform.position;
                 Debug.Log(EventSystem.current.currentSelectedGameObject.name);
                 return;
             }
         }
-
-        if (EventSystem.current.IsPointerOverGameObject()
-            || GameManager.Instance.gameState != GameManager.GameState.Play)
-        {
-            _lineRenderer.enabled = false;
-        }
+        
         if (Input.GetMouseButtonDown(0) && IsJumpAble())
         {
             _lineRenderer.enabled = true;
-            _lineRenderer.transform.position = transform.position;
-            if (EventSystem.current.IsPointerOverGameObject()
-                || GameManager.Instance.gameState != GameManager.GameState.Play)
-            {
-                return;
-            }
-
             _isDragging = true;
             _startPosition = Input.mousePosition;
-            Debug.Log("시작 클릭");
-            
+            // Debug.Log("시작 클릭");
         }
 
         if (Input.GetMouseButton(0) && IsJumpAble() && _isDragging )
@@ -178,8 +155,8 @@ public partial class Player : MonoBehaviour
 
             Vector3 startPos = transform.position;
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower / (gravityScale - (jumpPower/20));//0.6
-            _lineRenderer.transform.position = transform.position;
-            Debug.Log("지금 클릭 중");
+           
+            // Debug.Log("지금 클릭 중");
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
 
@@ -224,14 +201,14 @@ public partial class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         maxPower = originMaxPower;
-        _lineRenderer.transform.position = transform.position;
+        
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            _lineRenderer.transform.position = transform.position;
+            
             _isJump = false;
            
         }
@@ -239,6 +216,7 @@ public partial class Player : MonoBehaviour
 
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
+        // Debug.Log(_lineRenderer.enabled);
         int steps = 60;
         float deltaTime = Time.fixedDeltaTime;
         Vector3 gravity = Physics.gravity;
@@ -296,5 +274,14 @@ public partial class Player : MonoBehaviour
         _isJump = true;
         _lineRenderer.transform.position = transform.position;
         _lineRenderer.enabled = false;
+    }
+
+    public void InitObject()
+    {
+        playerHp = maxplayerHp;
+        jumpPower = originMaxPower;
+        transform.position = PlayerstartPosition;
+        curruentTime = 0;
+        Debug.Log("리셋");
     }
 }
