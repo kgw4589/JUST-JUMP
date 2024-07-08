@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class GameOverZone : MonoBehaviour
@@ -19,6 +20,7 @@ public class GameOverZone : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.initAction += InitObject;
+        GameManager.Instance.startAction += StartMove;
     }
 
     void InitObject()
@@ -26,10 +28,14 @@ public class GameOverZone : MonoBehaviour
         transform.position = new Vector3(0, _startYaxis, -1);
     }
 
+    void StartMove()
+    {
+        StartCoroutine(MoveUpAfterWait());
+    }
+
     void Start()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        StartCoroutine(MoveUpAfterWait());
     }
 
     IEnumerator MoveUpAfterWait()
