@@ -19,6 +19,7 @@ public class GameManager : Singleton<GameManager>
     private JsonData _saveData;
 
     public Action initAction;
+    public Action startAction;
 
     public enum GameState
     {
@@ -63,7 +64,7 @@ public class GameManager : Singleton<GameManager>
         Application.targetFrameRate = 120;
         if (!restart)
         {
-            MapManager.Instance.StartMap();
+            startAction();
         }
     }
     
