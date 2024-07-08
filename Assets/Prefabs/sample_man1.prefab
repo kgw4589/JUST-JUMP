@@ -221,8 +221,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PausePanel: {fileID: 0}
+  RButton: {fileID: 0}
+  LButton: {fileID: 0}
+  MoveSpeed: 0.025
   playerHp: 100
   maxplayerHp: 10
+  moveSpeed: 3
   PlayerHpBar: {fileID: 0}
   isHitWave: 0
   image: {fileID: 0}

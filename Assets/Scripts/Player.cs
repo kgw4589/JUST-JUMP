@@ -10,6 +10,8 @@ public partial class Player : MonoBehaviour
     public GameObject PausePanel;
     public Button RButton;
     public Button LButton;
+    [Range(0, 0.09f)] [SerializeField] private float MoveSpeed = 0.05f;
+        
     
     [SerializeField]
     private float playerHp = 5;
@@ -43,6 +45,7 @@ public partial class Player : MonoBehaviour
     private float originMaxPower = 8f;
     [SerializeField] 
     private float maxPower;
+    
 
     private bool _isRight = false;
 
@@ -72,11 +75,13 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
-        
-
+        if(isDie)
+        {
+            _lineRenderer.enabled = false;
+        }
         if (_isRigthButtonPush && !_isDragging && IsJumpAble())
         {
-            transform.position += new Vector3(0.09f, 0, 0);
+            transform.position += new Vector3(MoveSpeed, 0, 0);
             if (!_isRight)
             {
                 TurnPlayer();   
@@ -84,7 +89,7 @@ public partial class Player : MonoBehaviour
         }
         if (_isLeftButtonPush && !_isDragging && IsJumpAble())
         {
-            transform.position += new Vector3(-0.09f, 0, 0);
+            transform.position += new Vector3(-MoveSpeed, 0, 0);
             if (_isRight)
             {
                 TurnPlayer();   
@@ -106,7 +111,6 @@ public partial class Player : MonoBehaviour
         }
         else if (PlayerHpBar.value >= 0.2f)
         {
-            
             PlayerHpBar.fillRect.GetComponent<Image>().color = Color.red;
             //_playerHpBarColor = Color.red;
         }
@@ -183,7 +187,7 @@ public partial class Player : MonoBehaviour
     bool IsJumpAble()
     {
         if ( GameManager.Instance.gameState is not GameManager.GameState.Pause && !_isJump && !isDie && !PausePanel.activeSelf)
-        {
+        {//현재 게임상태가 펄스거나 점프안하고 있거나 안죽었거나 펄스판넬이 없을때
             return true;
         }
         else
@@ -227,7 +231,7 @@ public partial class Player : MonoBehaviour
 
         for (int i = 0; i < steps; i++)
         {
-            // 레이캐스트를 사용하여 벽 충돌 감지
+            // 레이캐스트를 사용하여 벽 충돌 감지함
             RaycastHit2D hit = Physics2D.Raycast(position, velocity, velocity.magnitude * deltaTime);
             if (hit.collider != null && (hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Wall")))
             {
@@ -239,7 +243,7 @@ public partial class Player : MonoBehaviour
                 {
                     TurnPlayer();
                 }
-                // 충돌이 감지되면 라인 렌더러의 길이를 충돌 지점까지로 조정
+                // 충돌이 감지되면 라인 렌더러의 길이를 충돌 지점까지로 조정함
                 _lineRenderer.positionCount = i + 1;
                 _lineRenderer.SetPosition(i, hit.point);
                 break; // 충돌이 감지되면 루프를 빠져나옴
