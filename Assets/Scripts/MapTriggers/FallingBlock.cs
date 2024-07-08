@@ -15,6 +15,8 @@ public class FallingBlock : MapTriggerBasicLogic
     
     private Vector2 _startPos;
     private Vector2 _endPos;
+
+    private Animator _anim;
     
     private bool _up = true;
     private bool _turn = true;
@@ -29,11 +31,14 @@ public class FallingBlock : MapTriggerBasicLogic
     }
 
     public TriggerMode triggerMode;
+    private static readonly int BreakSpeed = Animator.StringToHash("breakSpeed");
+
     private void Start()
     {
         var position = transform.position;
         _endPos = new Vector2(position.x, position.y - moveDis);
         _startPos = position;
+        _anim.SetFloat(BreakSpeed, 0);
     }
 
     private void Update()
@@ -69,6 +74,7 @@ public class FallingBlock : MapTriggerBasicLogic
             case TriggerMode.FadeOut:
                 if (_col && _turn)
                 {
+                    _anim.SetFloat("breakSpeed", speed); 
                     _currentTime += Time.deltaTime;
                     if (_currentTime > offDelay)
                     {
@@ -85,9 +91,11 @@ public class FallingBlock : MapTriggerBasicLogic
                     _currentTime += Time.deltaTime;
                     if (_currentTime > onDelay)
                     {
+                        _anim.Play("breakSpeed", -1, 0);
                         var position = transform.position;
                         position = new Vector2(position.x - 20, position.y);
                         transform.position = position;
+                        _anim.SetFloat("breakSpeed", 0);
                         _currentTime = 0;
                         _turn = true;
                     }
