@@ -282,6 +282,7 @@ public partial class Player : MonoBehaviour
 
     public void InitObject()
     {
+        isDie = false;
         playerHp = maxplayerHp;
         jumpPower = originMaxPower;
         transform.position = PlayerstartPosition;
