@@ -39,6 +39,7 @@ public class MapManager : Singleton<MapManager>
         _startPos = new Vector2(0, 0);
         
         GameManager.Instance.initAction += InitObject;
+        GameManager.Instance.startAction += StartMap;
         
         InitObject();
     }
