@@ -55,7 +55,7 @@ public partial class Player : MonoBehaviour
     private bool _isRigthButtonPush = false;
     private bool _isLeftButtonPush = false;
     
-   private Color _playerHpBarColor;
+   private Image _playerHpBarColor;
    
    // Start is called before the first frame update
     void Start()
@@ -69,7 +69,7 @@ public partial class Player : MonoBehaviour
         _lineRenderer.enabled = false;
         _rd = GetComponent<Rigidbody2D>();
         gravityScale = _rd.gravityScale;
-        _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>().color; //색 변경 컴포넌트
+        _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>(); //색 변경 컴포넌트
 
     }
 
@@ -103,16 +103,15 @@ public partial class Player : MonoBehaviour
         
         if (PlayerHpBar.value >= 0.8f)
         {
-            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.cyan;
+            _playerHpBarColor.color = Color.cyan;
         }
         else if (PlayerHpBar.value >= 0.5f)
         {
-            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.yellow;
+            _playerHpBarColor.color = Color.yellow;
         }
         else if (PlayerHpBar.value >= 0.2f)
         {
-            PlayerHpBar.fillRect.GetComponent<Image>().color = Color.red;
-            //_playerHpBarColor = Color.red;
+            _playerHpBarColor.color = Color.red;
         }
         
         if (!isHitWave && playerHp <= maxplayerHp && !isDie) //힐량 오버남
@@ -186,7 +185,7 @@ public partial class Player : MonoBehaviour
 
     bool IsJumpAble()
     {
-        if ( GameManager.Instance.gameState is not GameManager.GameState.Pause && !_isJump && !isDie && !PausePanel.activeSelf)
+        if ( !_isJump && !isDie && !PausePanel.activeSelf && GameManager.Instance.gameState is GameManager.GameState.Play)
         {//현재 게임상태가 펄스거나 점프안하고 있거나 안죽었거나 펄스판넬이 없을때
             return true;
         }

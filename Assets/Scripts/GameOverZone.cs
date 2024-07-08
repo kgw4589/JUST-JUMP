@@ -24,6 +24,7 @@ public class GameOverZone : MonoBehaviour
     void InitObject()
     {
         transform.position = new Vector3(0, _startYaxis, -1);
+        StartCoroutine(MoveUpAfterWait());
     }
 
     void Start()
