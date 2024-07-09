@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    private Vector3 _originPosition;
+    
     public GameObject player;
     public Vector3 offset;
     
@@ -11,12 +13,16 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        _originPosition = transform.position;
         _camera = GetComponent<Camera>();
-        InitCameraSize();
+        GameManager.Instance.startAction += InitCamera;
+        InitCamera();
     }
 
-    public void InitCameraSize()
+    public void InitCamera()
     {
+        transform.position = _originPosition;
+        Debug.Log(_originPosition);
         // 가로세로 비율에 따라 orthographicSize 조정
         float windowAspect = (float)Screen.width / (float)Screen.height;
         _camera.orthographicSize = (_targetWidth / windowAspect) / 2f;
