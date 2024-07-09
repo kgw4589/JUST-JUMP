@@ -38,7 +38,6 @@ public class FallingBlock : MapTriggerBasicLogic
         var position = transform.position;
         _endPos = new Vector2(position.x, position.y - moveDis);
         _startPos = position;
-        _anim.SetFloat(BreakSpeed, 0);
     }
 
     private void Update()
@@ -91,11 +90,11 @@ public class FallingBlock : MapTriggerBasicLogic
                     _currentTime += Time.deltaTime;
                     if (_currentTime > onDelay)
                     {
-                        _anim.Play("breakSpeed", -1, 0);
+                        _anim.Play(BreakSpeed, -1, 0);
                         var position = transform.position;
                         position = new Vector2(position.x - 20, position.y);
                         transform.position = position;
-                        _anim.SetFloat("breakSpeed", 0);
+                        _anim.SetFloat(BreakSpeed, 0);
                         _currentTime = 0;
                         _turn = true;
                     }
