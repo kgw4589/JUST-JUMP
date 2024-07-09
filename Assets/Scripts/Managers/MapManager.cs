@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class MapManager : Singleton<MapManager>
@@ -27,6 +29,8 @@ public class MapManager : Singleton<MapManager>
     private int _mapSectionIndex = 0;
 
     private float _mapDestroyDistance = 50.0f;
+
+    [SerializeField] private Text modeText;
 
     protected override void Init()
     {
@@ -86,6 +90,7 @@ public class MapManager : Singleton<MapManager>
         }
 
         _mapScriptable = _mapScriptables.mapScriptableList[_mapScriptableIndex];
+        modeText.text = "MODE : " + _mapScriptable.name;
         Debug.Log(_mapScriptable);
     }
 
