@@ -56,7 +56,8 @@ public class MapManager : Singleton<MapManager>
         {
             Destroy(map);
         }
-        
+
+        _mapSectionIndex = 0;
         _mapQueue.Clear();
     }
 
