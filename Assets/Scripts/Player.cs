@@ -281,9 +281,11 @@ public partial class Player : MonoBehaviour
 
     public void InitObject()
     {
+        
         isDie = false;
         playerHp = maxplayerHp;
-        jumpPower = originMaxPower;
+        jumpPower = 0;
+        maxPower = originMaxPower;
         transform.position = PlayerstartPosition;
         curruentTime = 0;
         Debug.Log("리셋");
