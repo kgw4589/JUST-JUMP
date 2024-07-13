@@ -281,7 +281,7 @@ public partial class Player : MonoBehaviour
 
     public void InitObject()
     {
-        
+        _rd.velocity = Vector2.zero;
         isDie = false;
         playerHp = maxplayerHp;
         jumpPower = 0;
