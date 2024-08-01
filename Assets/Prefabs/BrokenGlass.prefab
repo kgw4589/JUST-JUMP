@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerTagName: Player
   moveDis: 10
-  speed: 0.02
+  speed: 0.024
   onDelay: 5
   offDelay: 5
   triggerMode: 1
