@@ -12,6 +12,7 @@ public class FallingBlock : MapTriggerBasicLogic
     
     [SerializeField] private float onDelay;
     [SerializeField] private float offDelay;
+    private float _animSpeed;
     
     private Vector2 _startPos;
     private Vector2 _endPos;
@@ -31,13 +32,14 @@ public class FallingBlock : MapTriggerBasicLogic
     }
 
     public TriggerMode triggerMode;
-    private static readonly int BreakSpeed = Animator.StringToHash("breakSpeed");
 
     private void Start()
     {
+        _anim = GetComponent<Animator>();
         var position = transform.position;
         _endPos = new Vector2(position.x, position.y - moveDis);
         _startPos = position;
+        _animSpeed = 1 / offDelay;
     }
 
     private void Update()
@@ -73,7 +75,7 @@ public class FallingBlock : MapTriggerBasicLogic
             case TriggerMode.FadeOut:
                 if (_col && _turn)
                 {
-                    _anim.SetFloat("breakSpeed", speed); 
+                    _anim.speed = _animSpeed;
                     _currentTime += Time.deltaTime;
                     if (_currentTime > offDelay)
                     {
@@ -85,18 +87,20 @@ public class FallingBlock : MapTriggerBasicLogic
                     }
                 }
 
-                if (!_col && !_turn)
+                if (!_col)
                 {
-                    _currentTime += Time.deltaTime;
-                    if (_currentTime > onDelay)
+                    _anim.speed = 0;
+                    if (!_turn)
                     {
-                        _anim.Play(BreakSpeed, -1, 0);
-                        var position = transform.position;
-                        position = new Vector2(position.x - 20, position.y);
-                        transform.position = position;
-                        _anim.SetFloat(BreakSpeed, 0);
-                        _currentTime = 0;
-                        _turn = true;
+                        _currentTime += Time.deltaTime;
+                        if (_currentTime > onDelay)
+                        {
+                            var position = transform.position;
+                            position = new Vector2(position.x - 20, position.y);
+                            transform.position = position;
+                            _currentTime = 0;
+                            _turn = true;
+                        }
                     }
                 }
                 break;
