@@ -156,7 +156,7 @@ public partial class Player : MonoBehaviour
 
             _direction.Normalize();
 
-            Vector3 startPos = transform.position;
+            Vector3 startPos = transform.position - new Vector3(0,0.7f,0);
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower / (gravityScale - (jumpPower/20));//0.6
            
             // Debug.Log("지금 클릭 중");
