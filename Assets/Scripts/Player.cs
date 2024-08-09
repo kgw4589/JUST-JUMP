@@ -156,7 +156,7 @@ public partial class Player : MonoBehaviour
 
             _direction.Normalize();
 
-            Vector3 startPos = transform.position - new Vector3(0,0.7f,0);
+            Vector3 startPos = transform.position - new Vector3(0,0.4f,0);
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower / (gravityScale - (jumpPower/20));//0.6
            
             // Debug.Log("지금 클릭 중");
@@ -219,7 +219,12 @@ public partial class Player : MonoBehaviour
 
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
-        // Debug.Log(_lineRenderer.enabled);
+        if (_lineRenderer == null)
+        {
+            Debug.LogError(_lineRenderer.enabled);
+            return;
+        }
+
         int steps = 60;
         float deltaTime = Time.fixedDeltaTime;
         Vector3 gravity = Physics.gravity;
@@ -231,21 +236,28 @@ public partial class Player : MonoBehaviour
         for (int i = 0; i < steps; i++)
         {
             // 레이캐스트를 사용하여 벽 충돌 감지함
-            RaycastHit2D hit = Physics2D.Raycast(position, velocity, velocity.magnitude * deltaTime);
-            if (hit.collider != null && (hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Wall")))
+            RaycastHit2D hit1 = Physics2D.Raycast(position, velocity, velocity.magnitude * deltaTime);
+            RaycastHit2D hit2 = Physics2D.Raycast(position + new Vector3(0, -0.32f, 0), velocity, velocity.magnitude * deltaTime);
+            Debug.DrawRay(position,velocity * velocity.magnitude * deltaTime,Color.red);
+            Debug.DrawRay(position+ new Vector3(0, -0.32f, 0),velocity * velocity.magnitude * deltaTime,Color.red);
+
+            if ((hit1.collider != null && (hit1.collider.CompareTag("Ground") || hit1.collider.CompareTag("Wall"))) ||
+                (hit2.collider != null && (hit2.collider.CompareTag("Ground") || hit2.collider.CompareTag("Wall"))))
             {
-                if (hit.transform.position.x < transform.position.x && _isRight)
-                {
-                    TurnPlayer();
-                }
-                if (hit.transform.position.x > transform.position.x && !_isRight)
-                {
-                    TurnPlayer();
-                }
-                // 충돌이 감지되면 라인 렌더러의 길이를 충돌 지점까지로 조정함
+                RaycastHit2D hit = hit1.collider != null ? hit1 : hit2;
+                
                 _lineRenderer.positionCount = i + 1;
+                // 충돌이 감지되면 라인 렌더러의 길이를 충돌 지점까지로 조정함
                 _lineRenderer.SetPosition(i, hit.point);
-                break; // 충돌이 감지되면 루프를 빠져나옴
+                if (hit.point.x > transform.position.x && !_isRight)
+                {
+                    TurnPlayer();
+                }
+                if (hit.point.x < transform.position.x && _isRight)
+                {
+                    TurnPlayer();
+                }
+                break;// 충돌이 감지되면 루프를 빠져나옴
             }
             else
             {
@@ -253,10 +265,10 @@ public partial class Player : MonoBehaviour
                 position += velocity * deltaTime + gravity * (0.5f * deltaTime * deltaTime);
                 velocity += gravity * deltaTime;
                 _lineRenderer.SetPosition(i, position);
-                
             }
         }
     }
+
 
     public void Damage()
     {
