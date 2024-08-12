@@ -15,7 +15,9 @@ public class UIManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject pauseClose;
     public GameObject homeButton;
+    public GameObject tutorialButton;
     public GameObject diePanel;
+    public GameObject tutorialPanel;
     
     private int _currentFloor;
     
@@ -43,6 +45,7 @@ public class UIManager : MonoBehaviour
         startUICanvas.SetActive(false);
         inGameCanvas.SetActive(true);
         diePanel.SetActive(false);
+        tutorialPanel.SetActive(false);
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
@@ -76,6 +79,18 @@ public class UIManager : MonoBehaviour
         
         GameManager.Instance.InitObjects();
         
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+    }
+
+    public void OnClickTutorialButton()
+    {
+        tutorialPanel.SetActive(true);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+    }
+
+    public void CloseTutorialPanel()
+    {
+        tutorialPanel.SetActive(false);
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
