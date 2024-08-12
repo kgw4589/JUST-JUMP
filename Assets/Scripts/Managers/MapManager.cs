@@ -39,6 +39,7 @@ public class MapManager : Singleton<MapManager>
 
         _mapScriptables = Resources.Load<MapListScriptable>("MapScriptables");
         _mapScriptable = _mapScriptables.mapScriptableList[_mapScriptableIndex];
+        modeText.text = "MODE : " + _mapScriptable.name;
         
         _startPos = new Vector2(0, 0);
         
