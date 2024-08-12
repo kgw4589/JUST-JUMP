@@ -4042,7 +4042,7 @@ GameObject:
   - component: {fileID: 2572189059658295797}
   - component: {fileID: 3599744971152817994}
   m_Layer: 0
-  m_Name: ModeSelectButton
+  m_Name: ModeSelectPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
