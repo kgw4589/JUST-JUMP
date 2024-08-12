@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     {
         _originPosition = transform.position;
         _camera = GetComponent<Camera>();
-        GameManager.Instance.startAction += InitCamera;
+        GameManager.Instance.initAction += InitCamera;
         InitCamera();
     }
 
