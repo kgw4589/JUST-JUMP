@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 2676666635907745071}
   - component: {fileID: 1272347582685313082}
   m_Layer: 0
-  m_Name: YSS Normal
+  m_Name: YSS Normal 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

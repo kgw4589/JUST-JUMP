@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: MapScriptables
   m_EditorClassIdentifier: 
   mapScriptableList:
+  - {fileID: 11400000, guid: 46cb93426faa0bb4d88c2c50e168e58c, type: 2}
   - {fileID: 11400000, guid: bbbd977a1afbf964ab3a54f1b358fd79, type: 2}
   - {fileID: 11400000, guid: f603cc9d0de974a46923c1d467f0f8b9, type: 2}
