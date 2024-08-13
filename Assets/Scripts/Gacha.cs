@@ -21,7 +21,6 @@ public class Gacha : MonoBehaviour
     private int _currentPivot;
 
     private Dictionary<string, int> _ratingDictionary = new Dictionary<string, int>();
-    private Dictionary<string, int> _testDic = new Dictionary<string, int>();
 
     private IEnumerator Start()
     {
@@ -61,38 +60,18 @@ public class Gacha : MonoBehaviour
 
     public void PlayGacha()
     {
-        int cnt = 0;
-        
-        for (int i = 0; i < 1000; i++)
-        {
-            ++cnt;
-            int a = Random.Range(1, _totalProbability + 1);
-            Debug.Log(a);
+        int randomValue = Random.Range(1, _totalProbability + 1);
 
-            foreach (int probability in Enum.GetValues(typeof(Probability)))
+        foreach (int probability in Enum.GetValues(typeof(Probability)))
+        {
+            Debug.Log("확률 : " + probability);
+            _currentPivot += probability;
+
+            if (randomValue <= _currentPivot)
             {
-                Debug.Log("확률" + probability);
-                _currentPivot += probability;
-            
-                if (a <= _currentPivot)
-                {
-                    Debug.Log((Probability)probability);
-                    if (!_testDic.TryAdd(probability.ToString(), 1))
-                    {
-                        ++_testDic[probability.ToString()];
-                        break;
-                    }
-                }
+                Debug.Log((Probability)probability);
+                break;
             }
-
-            _currentPivot = 0;
         }
-
-        foreach (var data in _testDic)
-        {
-            Debug.Log("g" + data.Key);
-            Debug.Log("fad" + data.Value);
-        }
-        Debug.Log(cnt);
     }
 }
