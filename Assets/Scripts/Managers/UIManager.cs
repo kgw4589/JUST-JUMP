@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     public GameObject tutorialButton;
     public GameObject diePanel;
     public GameObject tutorialPanel;
+    public GameObject gachaButton;
+    public GameObject gachaPanel;
     
     private int _currentFloor;
     
@@ -35,6 +37,7 @@ public class UIManager : MonoBehaviour
         wave2DGameObject.SetActive(false);
         pausePanel.SetActive(false);
         diePanel.SetActive(false);
+        gachaPanel.SetActive(false);
     }
 
     public void OnClickStartButton()
@@ -88,7 +91,7 @@ public class UIManager : MonoBehaviour
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
-    public void CloseTutorialPanel()
+    public void OnClickTutorialClose()
     {
         tutorialPanel.SetActive(false);
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
@@ -103,6 +106,18 @@ public class UIManager : MonoBehaviour
         
         GameManager.Instance.InitObjects();
         GameManager.Instance.gameState = GameManager.GameState.Ready;
+    }
+
+    public void OnClickGachaButton()
+    {
+        gachaPanel.SetActive(true);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+    }
+
+    public void OnClickGachaClose()
+    {
+        gachaPanel.SetActive(false);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     private void Awake()
