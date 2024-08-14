@@ -18,10 +18,6 @@ public partial class Player : MonoBehaviour
     [SerializeField]
     private float maxplayerHp = 5;
     private Vector3 PlayerstartPosition;
-    
-
-    [SerializeField] 
-    private float moveSpeed = 3f;
 
     public Slider PlayerHpBar;
     public bool isHitWave = false;
@@ -56,21 +52,27 @@ public partial class Player : MonoBehaviour
     private bool _isLeftButtonPush = false;
     
    private Image _playerHpBarColor;
-   
+
+   private Collider2D _collider;
    // Start is called before the first frame update
     void Start()
     {
-	    GameManager.Instance.initAction += InitObject;
+        //초기화
+        _collider = GetComponent<Collider2D>();
+        _lineRenderer = GetComponent<LineRenderer>(); 
+        _rd = GetComponent<Rigidbody2D>();
+        _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>(); //색 변경 컴포넌트
+        //------------------------------------------------
+        //게임 스탯 초기화 
         PlayerstartPosition = transform.position;
         maxPower = originMaxPower; 
         playerHp = maxplayerHp;
-        _lineRenderer = GetComponent<LineRenderer>(); 
+        gravityScale = _rd.gravityScale;
+        
         image.gameObject.SetActive(false);
         _lineRenderer.enabled = false;
-        _rd = GetComponent<Rigidbody2D>();
-        gravityScale = _rd.gravityScale;
-        _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>(); //색 변경 컴포넌트
-
+        
+        GameManager.Instance.initAction += InitObject;
     }
 
     void Update()
