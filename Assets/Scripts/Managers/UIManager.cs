@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,23 +13,23 @@ public class UIManager : Singleton<UIManager>
 
     public GameObject wave2DGameObject;
     
-    public GameObject pausePanel;
-    public GameObject pauseClose;
-    public GameObject homeButton;
-    public GameObject tutorialButton;
-    public GameObject diePanel;
-    public GameObject tutorialPanel;
-    public GameObject gachaButton;
-    public GameObject gachaPanel;
+    [Header("#UI Objects")]
+    [SerializeField] private GameObject homeButton; // HomeButton
+    [SerializeField] private GameObject pausePanel; // PauseButton
+    [SerializeField] private GameObject diePanel; // DiePanel
+    [SerializeField] private GameObject tutorialPanel; // TutorialPanel
+    [SerializeField] private GameObject tutorialButton; // TutorialButton
+    [SerializeField] private GameObject gachaPanel; // GachaPanel
+    [SerializeField] private GameObject gachaButton; // GachaGoButton
+    [SerializeField] private GameObject charaPanel; // CharaChangePanel
+    [SerializeField] private GameObject charaButton; // CharaChangeButton
     
     private int _currentFloor;
     
-    [SerializeField]
-    private TextMeshProUGUI _playerPosY;
-    [SerializeField]
-    private TextMeshProUGUI _highScore;
-    [SerializeField]
-    private TextMeshProUGUI _currentScore;
+    [SerializeField] private TextMeshProUGUI _playerPosY; // PlayerPosY
+    [SerializeField] private TextMeshProUGUI _highScore; // Best Score
+    [SerializeField] private TextMeshProUGUI _currentScore; // Score
+    [SerializeField] private TextMeshProUGUI _coin; // Coin
 
     public void InitObject()
     {
@@ -37,6 +38,7 @@ public class UIManager : Singleton<UIManager>
         wave2DGameObject.SetActive(false);
         pausePanel.SetActive(false);
         diePanel.SetActive(false);
+        tutorialPanel.SetActive(false);
         gachaPanel.SetActive(false);
     }
 
@@ -106,6 +108,18 @@ public class UIManager : Singleton<UIManager>
         
         GameManager.Instance.InitObjects();
         GameManager.Instance.gameState = GameManager.GameState.Ready;
+    }
+
+    public void OnClickCharaChangeButton()
+    {
+        charaPanel.SetActive(true);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+    }
+
+    public void OnClickCharaChangeClose()
+    {
+        charaPanel.SetActive(false);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickGachaButton()
