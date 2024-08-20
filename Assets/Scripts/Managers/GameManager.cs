@@ -35,13 +35,13 @@ public class GameManager : Singleton<GameManager>
     {
         if (_saveData == null)
         {
-            FireBaseManager.Instance.LoadSaveData();
+            // FireBaseManager.Instance.LoadSaveData();
         }
         Time.timeScale = 0; // game stop
-        _highScore = _saveData.highScore;
+        // _highScore = _saveData.highScore;
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
-        Debug.Log(_saveData.highScore);
+        // Debug.Log(_saveData.highScore);
     }
     
     public void InitObjects()
@@ -79,7 +79,7 @@ public class GameManager : Singleton<GameManager>
         if (_playerPosY > _highScore)
         {
             _highScore = (int)_playerPosY;
-            _saveData.highScore = _highScore;
+            // _saveData.highScore = _highScore;
             FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(_saveData));
         }
         
