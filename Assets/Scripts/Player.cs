@@ -54,6 +54,11 @@ public partial class Player : MonoBehaviour
    private Image _playerHpBarColor;
 
    private Collider2D _collider;
+   [SerializeField]
+   Vector2 boxSize = new Vector2(0.8f, 0.8f); // 너비와 높이를 적절하게 설정
+   [SerializeField]
+   float boxAngle = 0f; // 박스의 회전 각도, 필요시 변경 가능
+   
    // Start is called before the first frame update
     void Start()
     {
@@ -158,7 +163,7 @@ public partial class Player : MonoBehaviour
 
             _direction.Normalize();
 
-            Vector3 startPos = transform.position - new Vector3(0,0.4f,0);
+            Vector3 startPos = _collider.bounds.center;
             Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower / (gravityScale - (jumpPower/20));//0.6
            
             // Debug.Log("지금 클릭 중");
@@ -235,22 +240,21 @@ public partial class Player : MonoBehaviour
 
         _lineRenderer.positionCount = steps;
 
+        // 박스 캐스트에 사용할 박스의 크기와 각도를 정의
+        
+
         for (int i = 0; i < steps; i++)
         {
-            // 레이캐스트를 사용하여 벽 충돌 감지함
-            RaycastHit2D hit1 = Physics2D.Raycast(position, velocity, velocity.magnitude * deltaTime);
-            RaycastHit2D hit2 = Physics2D.Raycast(position + new Vector3(0, -0.32f, 0), velocity, velocity.magnitude * deltaTime);
-            Debug.DrawRay(position,velocity * velocity.magnitude * deltaTime,Color.red);
-            Debug.DrawRay(position+ new Vector3(0, -0.32f, 0),velocity * velocity.magnitude * deltaTime,Color.red);
+            // 박스 캐스트를 사용하여 벽 충돌 감지함
+            RaycastHit2D hit = Physics2D.BoxCast(position, boxSize, boxAngle, velocity, velocity.magnitude * deltaTime);
+            Debug.DrawRay(position, velocity * velocity.magnitude * deltaTime, Color.red);
 
-            if ((hit1.collider != null && (hit1.collider.CompareTag("Ground") || hit1.collider.CompareTag("Wall"))) ||
-                (hit2.collider != null && (hit2.collider.CompareTag("Ground") || hit2.collider.CompareTag("Wall"))))
+            if (hit.collider != null && (hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Wall")))
             {
-                RaycastHit2D hit = hit1.collider != null ? hit1 : hit2;
-                
                 _lineRenderer.positionCount = i + 1;
                 // 충돌이 감지되면 라인 렌더러의 길이를 충돌 지점까지로 조정함
                 _lineRenderer.SetPosition(i, hit.point);
+
                 if (hit.point.x > transform.position.x && !_isRight)
                 {
                     TurnPlayer();
@@ -259,7 +263,7 @@ public partial class Player : MonoBehaviour
                 {
                     TurnPlayer();
                 }
-                break;// 충돌이 감지되면 루프를 빠져나옴
+                break; // 충돌이 감지되면 루프를 빠져나옴
             }
             else
             {
@@ -270,6 +274,7 @@ public partial class Player : MonoBehaviour
             }
         }
     }
+
 
 
     public void Damage()
