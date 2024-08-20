@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Firebase;
 using UnityEngine;
@@ -81,21 +82,42 @@ public class FireBaseManager : Singleton<FireBaseManager>
         });
 
     }
-
-    public async Task<T> LoadSaveData<T>()
+    public void LoadSaveData()
     {
-        DataSnapshot snapshot = await _userReference.GetValueAsync();
-
-        if (!snapshot.Exists)
+        DataSnapshot snapshot = null;
+        _userReference.GetValueAsync().ContinueWithOnMainThread(task =>
         {
-            SaveInDB(JsonUtility.ToJson(new JsonData(0)));
-        }
+            if (task.IsCompleted)
+            {
+                snapshot = task.Result;
+                Debug.Log("Load Success");
+            }
+            else
+            {
+                Debug.Log("Load failed : " + task.Exception);
+            }
 
-        return JsonUtility.FromJson<T>(snapshot.GetRawJsonValue());
+            GameManager.Instance.SaveData = JsonUtility.FromJson<JsonData>(snapshot.GetRawJsonValue());
+        });
     }
 
-    private async Task SaveInDB(string saveData)
+    private void SaveInDB(string value)
     {
-        await _userReference.SetValueAsync(saveData);
+        _userReference.SetRawJsonValueAsync(value).ContinueWithOnMainThread(task =>
+        {
+            if (task.IsCompleted)
+            {
+                Debug.Log("Save Completed");
+            }
+            else
+            {
+                Debug.Log("Save failed: " + task);
+            }
+        });
+    }
+
+    public void GetSaveInDB(string value)
+    {
+        SaveInDB(value);
     }
 }

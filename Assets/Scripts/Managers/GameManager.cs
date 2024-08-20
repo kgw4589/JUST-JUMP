@@ -33,13 +33,11 @@ public class GameManager : Singleton<GameManager>
 
     protected override void Init()
     {
-        if (!File.Exists(Application.persistentDataPath+"/SaveData.json"))
+        if (_saveData == null)
         {
-            DataManager.Instance.GetEditJson(new JsonData(0));
+            FireBaseManager.Instance.LoadSaveData();
         }
-        
         Time.timeScale = 0; // game stop
-        _saveData = DataManager.Instance.LoadJson<JsonData>();
         _highScore = _saveData.highScore;
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
@@ -82,7 +80,7 @@ public class GameManager : Singleton<GameManager>
         {
             _highScore = (int)_playerPosY;
             _saveData.highScore = _highScore;
-            DataManager.Instance.GetEditJson(_saveData);
+            FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(_saveData));
         }
         
         Time.timeScale = 0;
@@ -115,5 +113,11 @@ public class GameManager : Singleton<GameManager>
     public int HighScore
     {
         get { return _highScore; }
+    }
+
+    public JsonData SaveData
+    {
+        get { return _saveData; }
+        set { _saveData = value; }
     }
 }
