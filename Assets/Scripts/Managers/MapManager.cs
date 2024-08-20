@@ -9,8 +9,8 @@ using Random = UnityEngine.Random;
 
 public class MapManager : Singleton<MapManager>
 {
-    private MapListScriptable _mapScriptables;
-    private MapScriptable _mapScriptable;
+    private MapListScriptable _mapListScriptable;
+    private MapScriptable _selectedMapScriptable;
     
     private Vector2 _startPos;
     
@@ -37,9 +37,9 @@ public class MapManager : Singleton<MapManager>
         _mapSectionIndex = 0;
         _mapScriptableIndex = 0;
 
-        _mapScriptables = Resources.Load<MapListScriptable>("MapScriptables");
-        _mapScriptable = _mapScriptables.mapScriptableList[_mapScriptableIndex];
-        modeText.text = "MODE : " + _mapScriptable.name;
+        _mapListScriptable = Resources.Load<MapListScriptable>("MapScriptables");
+        _selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
+        modeText.text = "MODE : " + _selectedMapScriptable.name;
         
         _startPos = new Vector2(0, 0);
         
@@ -67,8 +67,8 @@ public class MapManager : Singleton<MapManager>
         _player ??= FindObjectOfType<Player>().gameObject;
         _gameOverZone ??= FindObjectOfType<GameOverZone>().gameObject;
         
-        _lastMap = Instantiate(_mapScriptable.maps[_mapSectionIndex]
-            .sectionMaps[Random.Range(0, _mapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
+        _lastMap = Instantiate(_selectedMapScriptable.maps[_mapSectionIndex]
+            .sectionMaps[Random.Range(0, _selectedMapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
 
         _lastMap.transform.position = _startPos + new Vector2(0, _lastMap.transform.localScale.y / 2);
         _mapQueue.Enqueue(_lastMap);
@@ -81,19 +81,11 @@ public class MapManager : Singleton<MapManager>
 
     public void ChangeMode(bool isMinus)
     {
-        if (isMinus)
-        {
-            _mapScriptableIndex = (_mapScriptableIndex == 0) ?
-                    _mapScriptables.mapScriptableList.Count - 1 : --_mapScriptableIndex;
-        }
-        else
-        {
-            _mapScriptableIndex = (_mapScriptableIndex + 1) % _mapScriptables.mapScriptableList.Count;
-        }
-
-        _mapScriptable = _mapScriptables.mapScriptableList[_mapScriptableIndex];
-        modeText.text = "MODE : " + _mapScriptable.name;
-        Debug.Log(_mapScriptable);
+        _mapScriptableIndex = Mathf.Abs(_mapScriptableIndex + (isMinus ? -1 : 1)) % _mapListScriptable.mapScriptableList.Count;
+        
+        _selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
+        
+        modeText.text = "MODE : " + _selectedMapScriptable.name;
     }
 
     void Update()
@@ -107,8 +99,8 @@ public class MapManager : Singleton<MapManager>
 
         if (dis < _mapSizeY * 3)
         {
-            if (_mapSectionIndex < _mapScriptable.section.Length
-                && GameManager.Instance._playerPosY >= _mapScriptable.section[_mapSectionIndex])
+            if (_mapSectionIndex < _selectedMapScriptable.section.Length
+                && GameManager.Instance._playerPosY >= _selectedMapScriptable.section[_mapSectionIndex])
             {
                 ++_mapSectionIndex;
             }
@@ -125,8 +117,8 @@ public class MapManager : Singleton<MapManager>
 
     void InstantiateRandomMap()
     {
-        GameObject map = Instantiate(_mapScriptable.maps[_mapSectionIndex]
-            .sectionMaps[Random.Range(0, _mapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
+        GameObject map = Instantiate(_selectedMapScriptable.maps[_mapSectionIndex]
+            .sectionMaps[Random.Range(0, _selectedMapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
         
         float lastMapSizeY = _lastMap.transform.localScale.y / 2;
         _mapSizeY = map.transform.localScale.y / 2;
