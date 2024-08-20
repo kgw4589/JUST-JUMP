@@ -80,7 +80,7 @@ public class GameManager : Singleton<GameManager>
         {
             _highScore = (int)_playerPosY;
             _saveData.highScore = _highScore;
-            DataManager.Instance.GetEditJson(_saveData);
+            FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(_saveData));
         }
         
         Time.timeScale = 0;
