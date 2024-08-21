@@ -24,6 +24,11 @@ MonoBehaviour:
     characterImage: {fileID: 0}
     characterObject: {fileID: 866148982198049316, guid: 88e9ec1d42f7944489ec9fccd8b19491, type: 3}
     ratingText: 
+  - characterNumber: 3
+    characterName: "\uC606\uC9D1\uB204\uB098"
+    characterImage: {fileID: 0}
+    characterObject: {fileID: 7421779896858430636, guid: 4ffc51874f2ab22448d9dc3b9612160c, type: 3}
+    ratingText: 
   legendCharacters:
   - characterNumber: 2
     characterName: "\uC720\uB2DB 002"
