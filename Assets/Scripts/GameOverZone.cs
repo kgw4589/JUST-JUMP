@@ -50,15 +50,26 @@ public class GameOverZone : MonoBehaviour
             _timeConsol -= 1f;
         }
         
-        // yield return new WaitForSeconds(_waitTime); Not Consol log
+        // yield return new WaitForSeconds(_waitTime); <<<Not Consol log>>>
 
         Vector3 startPosition = transform.position;
         Vector3 endPosition = new Vector3(startPosition.x, startPosition.y + _moveDistance, startPosition.z);
 
-        float _elapsedTime = 0f;
+        float _elapsedTime = 0f; // Elapsed Time
+        float _currentSpeed = 0f; // speed
+        float _maxSpeed = 2f; // Max Speed
+        float _accel = _moveDistance / _moveDuration; // accelerlation
+        
         while (_elapsedTime < _moveDuration)
         {
-            transform.position = Vector3.Lerp(startPosition, endPosition, (_elapsedTime / _moveDuration));
+            // Max Speed Lock
+            if (_currentSpeed > _maxSpeed)
+            {
+                _currentSpeed = _maxSpeed;
+            }
+            Debug.Log(_currentSpeed);
+            _currentSpeed += _accel * Time.deltaTime; // speed Up
+            transform.position = Vector3.MoveTowards(transform.position, endPosition, _currentSpeed * Time.deltaTime);
             _elapsedTime += Time.deltaTime;
             yield return null;
         }

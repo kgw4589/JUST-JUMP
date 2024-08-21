@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 472116740267579151}
   - component: {fileID: 1830318956303291649}
   m_Layer: 0
-  m_Name: Button (Legacy) (1)
+  m_Name: ' Normal Button'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 472116740267579151}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MapManager, Assembly-CSharp
+        m_MethodName: ChangeMode
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &242841716342067185
 GameObject:
   m_ObjectHideFlags: 0
@@ -4482,7 +4494,7 @@ GameObject:
   - component: {fileID: 8083810267523741402}
   - component: {fileID: 3274361391733108767}
   m_Layer: 0
-  m_Name: Button (Legacy)
+  m_Name: Easy Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4589,7 +4601,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8083810267523741402}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MapManager, Assembly-CSharp
+        m_MethodName: ChangeMode
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5925716274121445913
 GameObject:
   m_ObjectHideFlags: 0
@@ -5977,7 +6001,7 @@ GameObject:
   - component: {fileID: 4592640374526175506}
   - component: {fileID: 5949185038083980123}
   m_Layer: 0
-  m_Name: Button (Legacy) (2)
+  m_Name: Hell Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6084,7 +6108,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4592640374526175506}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: MapManager, Assembly-CSharp
+        m_MethodName: ChangeMode
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7076726410268867647
 GameObject:
   m_ObjectHideFlags: 0
@@ -6364,7 +6400,7 @@ GameObject:
   - component: {fileID: 3599744971152817994}
   - component: {fileID: 2127951149269341934}
   m_Layer: 0
-  m_Name: ModeSelectPanel
+  m_Name: ModeSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
