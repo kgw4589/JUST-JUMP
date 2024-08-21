@@ -12,6 +12,8 @@ public class FallingBlock : MapTriggerBasicLogic
     
     [SerializeField] private float onDelay;
     [SerializeField] private float offDelay;
+
+    [SerializeField] private GameObject effect;
     private float _animSpeed;
     
     private Vector2 _startPos;
@@ -48,6 +50,8 @@ public class FallingBlock : MapTriggerBasicLogic
         {
             case TriggerMode.Falling:
                float distance = Vector2.Distance(transform.position, _endPos);
+               PlayEffect();
+               
                if (_up)
                {
                    transform.position = Vector2.MoveTowards(transform.position, _startPos, speed * 5);
@@ -62,6 +66,11 @@ public class FallingBlock : MapTriggerBasicLogic
                    if (_col)
                    {
                        _up = false;
+                       effect.SetActive(true);
+                   }
+                   else
+                   {
+                       effect.SetActive(false);
                    }
 
                    transform.position = Vector2.MoveTowards(transform.position, _endPos, speed);
