@@ -5,11 +5,12 @@ using UnityEngine;
 
 public abstract class MapTriggerBasicLogic : MonoBehaviour
 {
-    [SerializeField] protected string triggerTagName = "Player"; 
-
+    [SerializeField] protected string triggerTagName = "Player";
+    
     protected abstract void EnterEvent();
     protected abstract void StayEvent();
     protected abstract void ExitEvent();
+    protected abstract void PlayEffect();
     
     private void OnTriggerEnter2D(Collider2D other)
     {
