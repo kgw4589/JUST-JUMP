@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class GameOverZone : MonoBehaviour
 {
-    [SerializeField] private float _waitTime = 5f; // second
-    [SerializeField] private float _moveDistance = 100f; // Y Axis
+    [SerializeField] private float _waitTime = 5f; // wait second
+    [SerializeField] private float _moveDistance = 100f; // Max Y Axis
     [SerializeField] private float _moveDuration = 100f;  // second
 
     private float _startYaxis = -30f;

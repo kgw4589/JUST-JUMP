@@ -23,6 +23,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject gachaButton; // GachaGoButton
     [SerializeField] private GameObject charaPanel; // CharaChangePanel
     [SerializeField] private GameObject charaButton; // CharaChangeButton
+    [SerializeField] private GameObject modeChangeButton;
+    [SerializeField] private GameObject modeChangePanel;
     
     private int _currentFloor;
     
@@ -50,6 +52,7 @@ public class UIManager : Singleton<UIManager>
         startUICanvas.SetActive(false);
         inGameCanvas.SetActive(true);
         diePanel.SetActive(false);
+        modeChangePanel.SetActive(false);
         tutorialPanel.SetActive(false);
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
@@ -108,6 +111,18 @@ public class UIManager : Singleton<UIManager>
         
         GameManager.Instance.InitObjects();
         GameManager.Instance.gameState = GameManager.GameState.Ready;
+    }
+
+    public void OnClickModeChangeButton()
+    {
+        modeChangePanel.SetActive(true);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+    }
+
+    public void OnClickModeClose()
+    {
+        modeChangePanel.SetActive(false);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickCharaChangeButton()
