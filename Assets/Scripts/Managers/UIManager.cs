@@ -8,26 +8,31 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
-    public GameObject startUICanvas;
-    public GameObject inGameCanvas;
-
-    public GameObject wave2DGameObject;
     
-    [Header("#UI Objects")]
-    [SerializeField] private GameObject homeButton; // HomeButton
-    [SerializeField] private GameObject pausePanel; // PauseButton
-    [SerializeField] private GameObject diePanel; // DiePanel
-    [SerializeField] private GameObject tutorialPanel; // TutorialPanel
-    [SerializeField] private GameObject tutorialButton; // TutorialButton
-    [SerializeField] private GameObject gachaPanel; // GachaPanel
-    [SerializeField] private GameObject gachaButton; // GachaGoButton
-    [SerializeField] private GameObject charaPanel; // CharaChangePanel
-    [SerializeField] private GameObject charaButton; // CharaChangeButton
-    [SerializeField] private GameObject modeChangeButton;
-    [SerializeField] private GameObject modeChangePanel;
+    public GameObject wave2DGameObject; // PixelWave
     
     private int _currentFloor;
     
+    [Header("#UI Canvases")]
+    public GameObject startUICanvas; // Start Set UI Panel
+    public GameObject inGameCanvas; // In Game UI Panel
+    
+    [Header("#UI Buttons")]
+    [SerializeField] private GameObject homeButton; // HomeButton
+    [SerializeField] private GameObject tutorialButton; // TutorialButton
+    [SerializeField] private GameObject gachaButton; // GachaGoButton
+    [SerializeField] private GameObject charaButton; // CharaChangeButton
+    [SerializeField] private GameObject modeChangeButton; // ModeSelectButton
+    
+    [Header("#UI Panels")]
+    [SerializeField] private GameObject pausePanel; // PausePanel
+    [SerializeField] private GameObject diePanel; // DiePanel
+    [SerializeField] private GameObject tutorialPanel; // TutorialPanel
+    [SerializeField] private GameObject gachaPanel; // GachaPanel
+    [SerializeField] private GameObject charaPanel; // CharaChangePanel
+    [SerializeField] private GameObject modeChangePanel; // ModePanel
+    
+    [Header("#UI Texts")]
     [SerializeField] private TextMeshProUGUI _playerPosY; // PlayerPosY
     [SerializeField] private TextMeshProUGUI _highScore; // Best Score
     [SerializeField] private TextMeshProUGUI _currentScore; // Score
