@@ -62,7 +62,7 @@ public class MapManager : Singleton<MapManager>
         _mapQueue.Clear();
     }
 
-    public void StartMap()
+    private void StartMap()
     {
         _player ??= FindObjectOfType<Player>().gameObject;
         _gameOverZone ??= FindObjectOfType<GameOverZone>().gameObject;
@@ -77,6 +77,13 @@ public class MapManager : Singleton<MapManager>
         
         InstantiateRandomMap();
         InstantiateRandomMap();
+    }
+
+    public void ChangeMode(int index)
+    {
+        _selectedMapScriptable = _mapListScriptable.mapScriptableList[index];
+        
+        modeText.text = "MODE : " + _selectedMapScriptable.name;
     }
 
     public void ChangeMode(bool isMinus)
