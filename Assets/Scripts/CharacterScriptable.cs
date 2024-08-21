@@ -17,7 +17,6 @@ public class CharacterScriptable : ScriptableObject
     [System.Serializable]
     public struct CharacterInfo
     {
-        public int characterNumber;
         public string characterName;
         public Sprite characterImage;
         public GameObject characterObject;
