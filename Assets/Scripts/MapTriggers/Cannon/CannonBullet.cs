@@ -53,5 +53,10 @@ namespace MapTriggers.Cannon
         protected override void ExitEvent()
         {
         }
+
+        protected override void PlayEffect()
+        {
+            
+        }
     }
 }

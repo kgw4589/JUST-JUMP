@@ -120,4 +120,9 @@ public class FallingBlock : MapTriggerBasicLogic
     {
         _col = false;
     }
+
+    protected override void PlayEffect()
+    {
+        
+    }
 }
