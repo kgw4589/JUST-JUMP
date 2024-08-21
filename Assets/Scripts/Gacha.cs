@@ -18,59 +18,37 @@ public class Gacha : MonoBehaviour
     }
     private int _totalProbability;
     private int _currentPivot;
-    
-    private Dictionary<Probability, string> _sheetURL = new Dictionary<Probability, string>()
-    {
-        { Probability.Normal , "https://docs.google.com/spreadsheets/d/1fXMD0-E3BzRYGxw1NP9vNgQME82UK3_nQsQUexYfYzo/export?format=tsv&range=A2:C4"},
-        { Probability.Epic , "https://docs.google.com/spreadsheets/d/1RzikpWotuwisLCb3Tk2-IKyTTldfbQMozatybseHVzI/export?format=tsv&range=A2:C3"},
-        { Probability.Legend , "https://docs.google.com/spreadsheets/d/1z_Ep63oibFqS7L808ab9Bu1lOCxEMSxXrEagNNGU2Oo/export?format=tsv&range=A2:C2"}
-    };
-
-    private Dictionary<Probability, string> _sheetData = new Dictionary<Probability, string>();
-
-    private string[] _sheetDataRow;
 
     [SerializeField] private TextMeshProUGUI tempRatingText;
     [SerializeField] private TextMeshProUGUI tempGachaName;
     [SerializeField] private Image tempGachaImage;
 
-    private void Start()
+    private CharacterScriptable _characterScriptable;
+    private List<CharacterScriptable.CharacterInfo> _haveNotCharacters = new List<CharacterScriptable.CharacterInfo>();
+
+    private void Awake()
     {
         _totalProbability = 0;
         _currentPivot = 0;
-
-        StartCoroutine(SetSheetData());
-    }
-
-    IEnumerator SetSheetData()
-    {
         foreach (Probability probability in Enum.GetValues(typeof(Probability)))
         {
             _totalProbability += (int)probability;
-            
-            // UnityWebRequest 인스턴스 리소스 해제를 위해 Using 사용함.
-            using (UnityWebRequest www = UnityWebRequest.Get(_sheetURL[probability]))
-            {
-                yield return www.SendWebRequest();
-
-                if (www.isDone)
-                {
-                    _sheetData.Add(probability, www.downloadHandler.text);
-                }
-            }
         }
-    }
-
-    private void SetData(string sheetData)
-    {
-        _sheetDataRow = sheetData.Split("\n");
-
-        int value = Random.Range(0, _sheetDataRow.Length);
-
-        var a = _sheetDataRow[value].Split("\t");
-
-        tempRatingText.text = a[0];
-        tempGachaName.text = a[1];
+        
+        _characterScriptable = Resources.Load<CharacterScriptable>("AllCharacterList");
+        
+        foreach (var characterInfo in _characterScriptable.normalCharacters)
+        {
+            _haveNotCharacters.Add(characterInfo);
+        }
+        foreach (var characterInfo in _characterScriptable.epicCharacters)
+        {
+            _haveNotCharacters.Add(characterInfo);
+        }
+        foreach (var characterInfo in _characterScriptable.legendCharacters)
+        {
+            _haveNotCharacters.Add(characterInfo);
+        }
     }
 
     public void PlayGacha()
@@ -84,11 +62,46 @@ public class Gacha : MonoBehaviour
             if (randomValue <= _currentPivot)
             {
                 Debug.Log(probability);
-                SetData(_sheetData[probability]);
+                SelectedCharacter(probability);
                 break;
             }
         }
 
         _currentPivot = 0;
+    }
+
+    private void SelectedCharacter(Probability probability)
+    {
+        CharacterScriptable.CharacterInfo selectedCharacter = default;
+        List<CharacterScriptable.CharacterInfo> selectedInfos;
+        
+        switch (probability)
+        {
+            case Probability.Normal :
+                selectedInfos = _characterScriptable.normalCharacters;
+                selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
+                selectedCharacter.ratingText = _characterScriptable.normalText;
+                break;
+            case Probability.Epic :
+                selectedInfos = _characterScriptable.epicCharacters;
+                selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
+                selectedCharacter.ratingText = _characterScriptable.epicText;
+                break;
+            case Probability.Legend :
+                selectedInfos = _characterScriptable.legendCharacters;
+                selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
+                selectedCharacter.ratingText = _characterScriptable.legendText;
+                break;
+        }
+
+        _haveNotCharacters.Remove(selectedCharacter);
+        SetData(selectedCharacter);
+    }
+
+    private void SetData(CharacterScriptable.CharacterInfo character)
+    {
+        tempRatingText.text = character.ratingText;
+        tempGachaImage.sprite = character.characterImage;
+        tempGachaName.text = character.characterName;
     }
 }

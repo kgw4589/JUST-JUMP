@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33e1d54c0d87bf4ca23fea34ba066b3, type: 3}
+  m_Name: AllCharacterList
+  m_EditorClassIdentifier: 
+  normalCharacters:
+  - characterNumber: 0
+    characterName: "\uC720\uB2DB 000"
+    characterImage: {fileID: 0}
+    characterObject: {fileID: 7038514439267334622, guid: 062ae60089e4c954e84a94ef81204be7, type: 3}
+    ratingText: 
+  epicCharacters:
+  - characterNumber: 1
+    characterName: "\uC720\uB2DB 001"
+    characterImage: {fileID: 0}
+    characterObject: {fileID: 866148982198049316, guid: 88e9ec1d42f7944489ec9fccd8b19491, type: 3}
+    ratingText: 
+  legendCharacters:
+  - characterNumber: 2
+    characterName: "\uC720\uB2DB 002"
+    characterImage: {fileID: 0}
+    characterObject: {fileID: 8143271742072760529, guid: 3766f223679806f4999636a3024e35b3, type: 3}
+    ratingText: 
+  normalText: "\u2605\u2605\u2605"
+  epicText: "\u2605\u2605\u2605\u2605"
+  legendText: "\u2605\u2605\u2605\u2605\u2605"
