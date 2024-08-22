@@ -98,7 +98,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
                 Debug.Log("Load failed : " + task.Exception);
             }
 
-            GameManager.Instance.SaveData = JsonUtility.FromJson<JsonData>(snapshot.GetRawJsonValue());
+            GameManager.Instance.SaveData = JsonUtility.FromJson<UserData>(snapshot.GetRawJsonValue());
         });
     }
 

@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
     
     public float _playerPosY;
 
-    private JsonData _saveData;
+    private UserData _saveData;
 
     public Action initAction;
     public Action startAction;
@@ -116,7 +116,7 @@ public class GameManager : Singleton<GameManager>
         get { return _highScore; }
     }
 
-    public JsonData SaveData
+    public UserData SaveData
     {
         get { return _saveData; }
         set { _saveData = value; }
