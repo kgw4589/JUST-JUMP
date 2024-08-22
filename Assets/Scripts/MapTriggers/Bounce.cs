@@ -27,9 +27,4 @@ public class Bounce : MapTriggerBasicLogic
     protected override void ExitEvent()
     {
     }
-
-    protected override void PlayEffect()
-    {
-        
-    }
 }

@@ -10,7 +10,6 @@ public abstract class MapTriggerBasicLogic : MonoBehaviour
     protected abstract void EnterEvent();
     protected abstract void StayEvent();
     protected abstract void ExitEvent();
-    protected abstract void PlayEffect();
     
     private void OnTriggerEnter2D(Collider2D other)
     {

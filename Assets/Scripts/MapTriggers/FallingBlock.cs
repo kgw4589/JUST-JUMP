@@ -50,7 +50,6 @@ public class FallingBlock : MapTriggerBasicLogic
         {
             case TriggerMode.Falling:
                float distance = Vector2.Distance(transform.position, _endPos);
-               PlayEffect();
                
                if (_up)
                {
@@ -128,10 +127,5 @@ public class FallingBlock : MapTriggerBasicLogic
     protected override void ExitEvent()
     {
         _col = false;
-    }
-
-    protected override void PlayEffect()
-    {
-        
     }
 }
