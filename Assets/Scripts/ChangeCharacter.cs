@@ -9,18 +9,20 @@ using Image = UnityEngine.UI.Image;
 
 public class ChangeCharacter : MonoBehaviour
 {
-    public List<GameObject> CharacterList; // 캐릭터들 담길 리스트
-    public List<Sprite> ImagesList;
-    public Image ViewCharacterImage;   // 화면에 보일 이미지
+    [SerializeField]
+    private List<GameObject> CharacterList; // 캐릭터들 담길 리스트
+    [SerializeField]
+    private List<Sprite> ImagesList;
     
-    public TextMeshProUGUI nowCharacterText;
+    public Image ViewCharacterImage;   // 화면에 보일 이미지
+    public TextMeshProUGUI NowCharacterText;
 
-    private GameObject SelectCharacter; //  고른 캐릭터
-    public int CharacterIndex = 0;      //현재 화면에 보일 캐릭터
+    private GameObject _selectCharacter; //  고른 캐릭터
+    private int _characterIndex = 0;      //현재 화면에 보일 캐릭터 인덱스임
     
     private GameObject _player;           // 적용될 플레이어
     
-    private GameObject _skin;
+    private GameObject _skin; // 
 
     public GameObject RigthButton;
     public GameObject LeftButton;
@@ -28,13 +30,13 @@ public class ChangeCharacter : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindWithTag("Player");
-        CharacterIndex = 0;
+        _characterIndex = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (CharacterIndex == 0)
+        if (_characterIndex == 0)
         {
             RigthButton.SetActive(false);
         }
@@ -42,7 +44,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             RigthButton.SetActive(true);
         }
-        if (CharacterIndex == CharacterList.Count -1)
+        if (_characterIndex == CharacterList.Count -1)
         {
             LeftButton.SetActive(false);
         }
@@ -50,9 +52,9 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
-        nowCharacterText.text ="Now Character: "+ CharacterList[CharacterIndex].gameObject.name;
-        ViewCharacterImage.sprite = ImagesList[CharacterIndex]; 
-        Debug.Log(CharacterList[CharacterIndex].gameObject.name);
+        NowCharacterText.text ="Now Character: "+ CharacterList[_characterIndex].gameObject.name;
+        ViewCharacterImage.sprite = ImagesList[_characterIndex]; 
+        Debug.Log(CharacterList[_characterIndex].gameObject.name);
         
     }
     
@@ -64,8 +66,8 @@ public class ChangeCharacter : MonoBehaviour
         {
             Destroy(DeletObject);
         }
-        SelectCharacter = CharacterList[CharacterIndex];
-        _skin = Instantiate(SelectCharacter);
+        _selectCharacter = CharacterList[_characterIndex];
+        _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);
         
         
@@ -76,17 +78,17 @@ public class ChangeCharacter : MonoBehaviour
     public void RigthButtonPush()
     {
         
-        if (CharacterIndex != 0)
+        if (_characterIndex != 0)
         {
-            CharacterIndex--;
+            _characterIndex--;
         }
     }
     public void LeftButtonPush()
     {
         
-        if (CharacterIndex != CharacterList.Count -1)
+        if (_characterIndex != CharacterList.Count -1)
         {
-            CharacterIndex ++;
+            _characterIndex ++;
         }
         else
         {

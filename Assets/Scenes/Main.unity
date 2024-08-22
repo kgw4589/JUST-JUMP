@@ -1073,6 +1073,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7431136903834593774, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: NowCharacterText
+      value: 
+      objectReference: {fileID: 1575162949}
+    - target: {fileID: 7431136903834593774, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: ImagesList.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -2240,6 +2244,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1575162949 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6263227269934442338, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+  m_PrefabInstance: {fileID: 478886813}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1603979862
 GameObject:
   m_ObjectHideFlags: 0

@@ -226,7 +226,6 @@ MonoBehaviour:
   MoveSpeed: 0.025
   playerHp: 100
   maxplayerHp: 10
-  moveSpeed: 3
   PlayerHpBar: {fileID: 0}
   isHitWave: 0
   image: {fileID: 0}
@@ -237,6 +236,8 @@ MonoBehaviour:
   jumpPower: 0
   originMaxPower: 12
   maxPower: 8
+  boxSize: {x: 0.8, y: 0.8}
+  boxAngle: 0
 --- !u!120 &1764550627159122354
 LineRenderer:
   serializedVersion: 2
