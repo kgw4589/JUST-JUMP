@@ -11,6 +11,8 @@ public class ChangeCharacter : MonoBehaviour
 {
     public List<GameObject> CharacterList; // 캐릭터들 담길 리스트
     public Image ViewCharacterImage;   // 화면에 보일 이미지
+    public GameObject ViewObject = null; 
+    
     public TextMeshProUGUI nowCharacterText;
     [SerializeField]
     private GameObject SelectCharacter; //  고른 캐릭터
@@ -49,10 +51,30 @@ public class ChangeCharacter : MonoBehaviour
             LeftButton.SetActive(true);
         }
         nowCharacterText.text ="Now Character: "+ CharacterList[CharacterIndex].gameObject.name;
-        SpriteRenderer spriteRenderer = CharacterList[CharacterIndex].GetComponent<SpriteRenderer>();
-        ViewCharacterImage.sprite = spriteRenderer.sprite;
+        // SpriteRenderer spriteRenderer = CharacterList[CharacterIndex].GetComponent<SpriteRenderer>();
+        // ViewCharacterImage.sprite = spriteRenderer.sprite;
+        if (ViewObject == null)
+        {
+            CharacterView();
+        }
         Debug.Log(CharacterList[CharacterIndex].gameObject.name);
         
+    }
+
+    void CharacterView()
+    {
+        ViewObject = Instantiate(CharacterList[CharacterIndex],ViewCharacterImage.transform);
+        ViewObject.transform.localScale = new Vector3(100, 100, 100);
+        ViewObject.transform.localPosition = new Vector3(0, -30, 0);
+    }
+
+    void DeleteCharacter()
+    {
+        if (ViewObject != null)
+        {
+            Destroy(ViewObject);
+            ViewObject = null;
+        }
     }
 
     public void Apply()
@@ -73,6 +95,7 @@ public class ChangeCharacter : MonoBehaviour
 
     public void RigthButtonPush()
     {
+        DeleteCharacter();
         if (CharacterIndex != 0)
         {
             Debug.Log("오른쪽");
@@ -81,6 +104,7 @@ public class ChangeCharacter : MonoBehaviour
     }
     public void LeftButtonPush()
     {
+        DeleteCharacter();
         if (CharacterIndex != CharacterList.Count -1)
         {
             Debug.Log("왼쪽");

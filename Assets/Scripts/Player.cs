@@ -300,7 +300,7 @@ public partial class Player : MonoBehaviour
 
     public void InitObject()
     {
-        _isRight = false;
+        transform.Rotate(0,0,0);
         _rd.velocity = Vector2.zero;
         isDie = false;
         playerHp = maxplayerHp;

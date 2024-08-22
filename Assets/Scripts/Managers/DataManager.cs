@@ -12,7 +12,7 @@ public class DataManager : Singleton<DataManager>
         return Path.Combine(Application.persistentDataPath, "SaveData.json");
     }
     
-    private void EditJson(JsonData jsonData)
+    private void EditJson(UserData jsonData)
     {
         string saveData = JsonUtility.ToJson(jsonData, true);
         File.WriteAllText(SavePath(), saveData, Encoding.UTF8);
@@ -25,7 +25,7 @@ public class DataManager : Singleton<DataManager>
     }
 
 
-    public void GetEditJson(JsonData jsonData)
+    public void GetEditJson(UserData jsonData)
     {
         EditJson(jsonData);
     }
