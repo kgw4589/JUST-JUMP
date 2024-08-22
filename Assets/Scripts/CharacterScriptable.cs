@@ -6,9 +6,7 @@ using UnityEngine.UI;
 [CreateAssetMenu]
 public class CharacterScriptable : ScriptableObject
 {
-    public List<CharacterInfo> normalCharacters;
-    public List<CharacterInfo> epicCharacters;
-    public List<CharacterInfo> legendCharacters;
+    public List<CharacterInfo> characterInfos;
 
     public string normalText;
     public string epicText;
@@ -17,6 +15,7 @@ public class CharacterScriptable : ScriptableObject
     [System.Serializable]
     public struct CharacterInfo
     {
+        public int characterNumber;
         public string characterName;
         public Sprite characterImage;
         public GameObject characterObject;

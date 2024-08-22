@@ -37,18 +37,18 @@ public class Gacha : MonoBehaviour
         
         _characterScriptable = Resources.Load<CharacterScriptable>("AllCharacterList");
         
-        foreach (var characterInfo in _characterScriptable.normalCharacters)
-        {
-            _haveNotCharacters.Add(characterInfo);
-        }
-        foreach (var characterInfo in _characterScriptable.epicCharacters)
-        {
-            _haveNotCharacters.Add(characterInfo);
-        }
-        foreach (var characterInfo in _characterScriptable.legendCharacters)
-        {
-            _haveNotCharacters.Add(characterInfo);
-        }
+        // foreach (var characterInfo in _characterScriptable.normalCharacters)
+        // {
+        //     _haveNotCharacters.Add(characterInfo);
+        // }
+        // foreach (var characterInfo in _characterScriptable.epicCharacters)
+        // {
+        //     _haveNotCharacters.Add(characterInfo);
+        // }
+        // foreach (var characterInfo in _characterScriptable.legendCharacters)
+        // {
+        //     _haveNotCharacters.Add(characterInfo);
+        // }
     }
 
     public void PlayGacha()
@@ -77,21 +77,21 @@ public class Gacha : MonoBehaviour
         
         switch (probability)
         {
-            case Probability.Normal :
-                selectedInfos = _characterScriptable.normalCharacters;
-                selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
-                selectedCharacter.ratingText = _characterScriptable.normalText;
-                break;
-            case Probability.Epic :
-                selectedInfos = _characterScriptable.epicCharacters;
-                selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
-                selectedCharacter.ratingText = _characterScriptable.epicText;
-                break;
-            case Probability.Legend :
-                selectedInfos = _characterScriptable.legendCharacters;
-                selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
-                selectedCharacter.ratingText = _characterScriptable.legendText;
-                break;
+            // case Probability.Normal :
+            //     selectedInfos = _characterScriptable.normalCharacters;
+            //     selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
+            //     selectedCharacter.ratingText = _characterScriptable.normalText;
+            //     break;
+            // case Probability.Epic :
+            //     selectedInfos = _characterScriptable.epicCharacters;
+            //     selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
+            //     selectedCharacter.ratingText = _characterScriptable.epicText;
+            //     break;
+            // case Probability.Legend :
+            //     selectedInfos = _characterScriptable.legendCharacters;
+            //     selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
+            //     selectedCharacter.ratingText = _characterScriptable.legendText;
+            //     break;
         }
 
         _haveNotCharacters.Remove(selectedCharacter);
