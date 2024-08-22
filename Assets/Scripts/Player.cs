@@ -82,6 +82,10 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.gameState == GameManager.GameState.Ready)
+        {
+            _lineRenderer.enabled = false;
+        }
         if(isDie)
         {
             _lineRenderer.enabled = false;

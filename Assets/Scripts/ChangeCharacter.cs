@@ -78,7 +78,6 @@ public class ChangeCharacter : MonoBehaviour
         
         if (CharacterIndex != 0)
         {
-            Debug.Log("오른쪽");
             CharacterIndex--;
         }
     }
@@ -87,7 +86,6 @@ public class ChangeCharacter : MonoBehaviour
         
         if (CharacterIndex != CharacterList.Count -1)
         {
-            Debug.Log("왼쪽");
             CharacterIndex ++;
         }
         else
