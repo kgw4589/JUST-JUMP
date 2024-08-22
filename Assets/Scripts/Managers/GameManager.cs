@@ -33,10 +33,6 @@ public class GameManager : Singleton<GameManager>
 
     protected override void Init()
     {
-        if (_saveData == null)
-        {
-            // FireBaseManager.Instance.LoadSaveData();
-        }
         Time.timeScale = 0; // game stop
         // _highScore = _saveData.highScore;
         QualitySettings.vSyncCount = 0;
@@ -80,7 +76,12 @@ public class GameManager : Singleton<GameManager>
         {
             _highScore = (int)_playerPosY;
             // _saveData.highScore = _highScore;
-            FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(_saveData));
+            try {
+                FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(_saveData));
+            } catch (Exception e) {
+                Debug.Log(e);
+                gameState = GameState.End;
+            }
         }
         
         Time.timeScale = 0;

@@ -21,7 +21,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
     {
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
-
+        
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
         {
             if (task.Result == DependencyStatus.Available)
@@ -79,6 +79,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
             _user = result.User;
             _userReference = _dbReference.Child("users").Child(_user.UserId);
             Debug.LogFormat("User signed in successfully: {0} ({1})", result.User.DisplayName, result.User.UserId);
+            LoadSaveData();
         });
 
     }
