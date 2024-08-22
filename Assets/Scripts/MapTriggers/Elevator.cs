@@ -45,9 +45,4 @@ public class Elevator : MapTriggerBasicLogic
     {
         _collision = false;
     }
-
-    protected override void PlayEffect()
-    {
-        
-    }
 }
