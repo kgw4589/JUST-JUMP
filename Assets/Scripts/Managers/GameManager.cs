@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -9,14 +10,15 @@ using Unity.VisualScripting;
 
 public class GameManager : Singleton<GameManager>
 {
+    // GameObjects
     public Player player;
+    public MapManager mapManager;
+    public UIManager uiManager;
+    public DataManager dataManager;
+    public SoundManager soundManager;
+    public FireBaseManager firebaseManager;
     
-    [SerializeField]
-    private int _highScore;
-    
-    public float _playerPosY;
-
-    private UserData _saveData;
+    public float playerPosY;
 
     public Action initAction;
     public Action startAction;
@@ -67,17 +69,17 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0; // game pause (stop)
         gameState = GameState.Pause;
         Application.targetFrameRate = 30;
-        SoundManager.Instance.PauseBGM();
+        soundManager.PauseBGM();
     }
     
     private void GameOver()
     {
-        if (_playerPosY > _highScore)
+        if (playerPosY > dataManager.HighScore)
         {
-            _highScore = (int)_playerPosY;
+            dataManager.HighScore = (int)playerPosY;
             // _saveData.highScore = _highScore;
             try {
-                FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(_saveData));
+                firebaseManager.GetSaveInDB(JsonUtility.ToJson(dataManager.SaveData));
             } catch (Exception e) {
                 Debug.Log(e);
                 gameState = GameState.End;
@@ -87,7 +89,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0;
         gameState = GameState.End;
         Application.targetFrameRate = 30;
-        SoundManager.Instance.PlayBgm(false);
+        soundManager.PlayBgm(false);
     }
 
     private void Update()
@@ -97,7 +99,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         
-        _playerPosY = player.gameObject.transform.position.y;
+        playerPosY = player.gameObject.transform.position.y;
 
         if (player.isDie)
         {
@@ -106,19 +108,6 @@ public class GameManager : Singleton<GameManager>
 
     }
     
-    public float PlayerPosY
-    {
-        get { return _playerPosY; }
-    }
 
-    public int HighScore
-    {
-        get { return _highScore; }
-    }
-
-    public UserData SaveData
-    {
-        get { return _saveData; }
-        set { _saveData = value; }
-    }
+    
 }

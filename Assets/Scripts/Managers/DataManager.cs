@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,28 +6,39 @@ using System.IO;
 using System.Text;
 using Unity.VisualScripting;
 
-public class DataManager : Singleton<DataManager>
+public class DataManager : MonoBehaviour
 {
-    private string SavePath()
+    [SerializeField]
+    private int _highScore;
+    
+    private UserData _saveData;
+    
+    [System.Serializable]
+    public class CharacterInfo
     {
-        return Path.Combine(Application.persistentDataPath, "SaveData.json");
+        public int characterNumber;
+        public string characterName;
+        public Sprite characterImage;
+        public GameObject characterObject;
     }
     
-    private void EditJson(UserData jsonData)
+    public List<CharacterInfo> characterInfos;
+    
+
+    private void Awake()
     {
-        string saveData = JsonUtility.ToJson(jsonData, true);
-        File.WriteAllText(SavePath(), saveData, Encoding.UTF8);
+        GameManager.Instance.dataManager = this;
     }
     
-    public T LoadJson<T>()
+    public int HighScore
     {
-        string jsonData = File.ReadAllText(SavePath(), Encoding.UTF8);
-        return JsonUtility.FromJson<T>(jsonData);
+        get { return _highScore; }
+        set { _highScore = value; }
     }
 
-
-    public void GetEditJson(UserData jsonData)
+    public UserData SaveData
     {
-        EditJson(jsonData);
+        get { return _saveData; }
+        set { _saveData = value; }
     }
 }
