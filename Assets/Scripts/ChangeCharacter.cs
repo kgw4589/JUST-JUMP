@@ -90,13 +90,9 @@ public class ChangeCharacter : MonoBehaviour
         {
             _characterIndex ++;
         }
-        else
-        {
-            Debug.Log(CharacterList.Count - 1);
-        }
     }
 
-    void AddList(GameObject gameObject,Sprite sprite)
+    public void AddList(GameObject gameObject,Sprite sprite)
     {//가챠로 뽑았을때
         CharacterList.Add(gameObject);
         ImagesList.Add(sprite);
