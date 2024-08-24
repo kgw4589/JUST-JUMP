@@ -22,23 +22,35 @@ public class DataManager : MonoBehaviour
         public int prefabIndex;
     }
 
-    public class CharacterInfo
+    public class CharacterDictionary
     {
-        public Character character0;
-        public Character character1;
-        public Character character2;
-        public Character character3;
-        public Character character4;
+        public Dictionary<string, Character> characters = new Dictionary<string, Character>();
     }
-
+    
     public Sprite[] characterSprites;
     public GameObject[] characterPrefabs;
 
+    public Dictionary<string, Character> characterInfo = new Dictionary<string, Character>();
+    
     private void Awake()
     {
         GameManager.Instance.dataManager = this;
-        CharacterInfo characterInfo =
-            JsonUtility.FromJson<CharacterInfo>(Resources.Load<TextAsset>("CharacterInfo").text);
+        TextAsset characterInfoJson = Resources.Load<TextAsset>("CharacterInfo");
+        
+        if (characterInfoJson != null)
+        {
+            var temporaryInfo =
+                JsonUtility.FromJson<CharacterDictionary>(characterInfoJson.text);
+            foreach (var i in temporaryInfo.characters)
+            {
+                characterInfo[i.Key] = i.Value;
+            }
+        }
+        else
+        {
+            Debug.LogError("Find CharacterInfo failed");
+        }
+        
         if (_highScore == null)
         {
             _highScore = 0;
