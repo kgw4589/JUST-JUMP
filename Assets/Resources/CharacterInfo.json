@@ -1,0 +1,27 @@
+﻿{
+    "character0": {
+      "name": "백수",
+      "spriteIndex": 0,
+      "prefabIndex": 0
+    },
+    "character1": {
+      "name": "스웨터녀",
+      "spriteIndex": 1,
+      "prefabIndex": 1
+    },
+    "character2": {
+      "name": "대머리",
+      "spriteIndex": 2,
+      "prefabIndex": 2
+    },
+    "character3": {
+      "name": "쌍칼",
+      "spriteIndex": 3,
+      "prefabIndex": 3
+    },
+    "character4": {
+      "name": "기사",
+      "spriteIndex": 4,
+      "prefabIndex": 4
+    }
+}

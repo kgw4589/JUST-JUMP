@@ -19,6 +19,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
     
     protected override void Init()
     {
+        GameManager.Instance.firebaseManager = this;
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
         
@@ -98,7 +99,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
                 Debug.Log("Load failed : " + task.Exception);
             }
 
-            GameManager.Instance.SaveData = JsonUtility.FromJson<UserData>(snapshot.GetRawJsonValue());
+            GameManager.Instance.dataManager.SaveData = JsonUtility.FromJson<UserData>(snapshot.GetRawJsonValue());
         });
     }
 
