@@ -35,19 +35,6 @@ public class Gacha : MonoBehaviour
         {
             _totalProbability += (int)probability;
         }
-
-        // foreach (var characterInfo in _characterScriptable.normalCharacters)
-        // {
-        //     _haveNotCharacters.Add(characterInfo);
-        // }
-        // foreach (var characterInfo in _characterScriptable.epicCharacters)
-        // {
-        //     _haveNotCharacters.Add(characterInfo);
-        // }
-        // foreach (var characterInfo in _characterScriptable.legendCharacters)
-        // {
-        //     _haveNotCharacters.Add(characterInfo);
-        // }
     }
 
     public void PlayGacha()
@@ -71,6 +58,8 @@ public class Gacha : MonoBehaviour
 
     private void SelectedCharacter(Probability probability)
     {
+        Debug.Log(GameManager.Instance.dataManager.characterInfos[0].characterName);
+        
         switch (probability)
         {
             // case Probability.Normal :
@@ -89,8 +78,6 @@ public class Gacha : MonoBehaviour
             //     selectedCharacter.ratingText = _characterScriptable.legendText;
             //     break;
         }
-        
-        // SetData(selectedCharacter);
     }
 
     private void SetData()
