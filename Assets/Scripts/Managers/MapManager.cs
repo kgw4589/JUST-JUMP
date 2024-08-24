@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MapManager : Singleton<MapManager>
+public class MapManager : MonoBehaviour
 {
     private MapListScriptable _mapListScriptable;
     private MapScriptable _selectedMapScriptable;
@@ -32,8 +32,10 @@ public class MapManager : Singleton<MapManager>
 
     [SerializeField] private Text modeText;
 
-    protected override void Init()
+    private void Awake()
     {
+        GameManager.Instance.mapManager = this;
+        
         _mapSectionIndex = 0;
         _mapScriptableIndex = 0;
 
@@ -107,7 +109,7 @@ public class MapManager : Singleton<MapManager>
         if (dis < _mapSizeY * 3)
         {
             if (_mapSectionIndex < _selectedMapScriptable.section.Length
-                && GameManager.Instance._playerPosY >= _selectedMapScriptable.section[_mapSectionIndex])
+                && GameManager.Instance.playerPosY >= _selectedMapScriptable.section[_mapSectionIndex])
             {
                 ++_mapSectionIndex;
             }

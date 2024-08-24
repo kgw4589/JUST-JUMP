@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class SoundManager : Singleton<SoundManager>
+public class SoundManager : MonoBehaviour
 {
     public enum Sfx
     {
@@ -31,8 +31,10 @@ public class SoundManager : Singleton<SoundManager>
     private AudioSource[] sfxPlayers;
     private int channelIndex;
     
-    protected override void Init()
+    private void Awake()
     {
+        GameManager.Instance.soundManager = this;
+        
         bgmSlider = bgmSlider.GetComponent<Slider>();
         sfxSlider = sfxSlider.GetComponent<Slider>();
         
@@ -66,13 +68,6 @@ public class SoundManager : Singleton<SoundManager>
 
         #endregion
         
-    }
-
-    public void Awake()
-    {
-        // prevent the DontDestroyOnLoad duplicates
-        
-        Init();
     }
 
     public void PlayBgm(bool isPlay)

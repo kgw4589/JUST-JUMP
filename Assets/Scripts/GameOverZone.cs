@@ -12,7 +12,7 @@ public class GameOverZone : MonoBehaviour
 
     private float _startYaxis = -30f;
     private float _contactTime = 0f;
-    private float _timeSecond = 2f; // 1 Second +
+    private float _timeSecond = 1f; // 1 Second +
     private int _contactCnt = 0;
 
     private Player _player;

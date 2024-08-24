@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : MonoBehaviour
 {
     
     public GameObject wave2DGameObject; // PixelWave
@@ -61,8 +61,8 @@ public class UIManager : Singleton<UIManager>
         tutorialPanel.SetActive(false);
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
-        SoundManager.Instance.PlayBgm(true);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlayBgm(true);
     }
 
     public void OnClickPauseButton()
@@ -72,7 +72,7 @@ public class UIManager : Singleton<UIManager>
         pausePanel.SetActive(true);
 
         GameManager.Instance.gameState = GameManager.GameState.Pause;
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickPauseClose()
@@ -82,8 +82,8 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.StartGame(true);
 
         GameManager.Instance.gameState = GameManager.GameState.Play;
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
-        SoundManager.Instance.UnPauseBGM();
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.UnPauseBGM();
     }
 
     public void OnClickHomeButton()
@@ -92,19 +92,19 @@ public class UIManager : Singleton<UIManager>
         
         GameManager.Instance.InitObjects();
         
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickTutorialButton()
     {
         tutorialPanel.SetActive(true);
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickTutorialClose()
     {
         tutorialPanel.SetActive(false);
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickDieClose()
@@ -121,41 +121,43 @@ public class UIManager : Singleton<UIManager>
     public void OnClickModeChangeButton()
     {
         modeChangePanel.SetActive(true);
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickModeClose()
     {
         modeChangePanel.SetActive(false);
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickCharaChangeButton()
     {
         charaPanel.SetActive(true);
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickCharaChangeClose()
     {
         charaPanel.SetActive(false);
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickGachaButton()
     {
         gachaPanel.SetActive(true);
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     public void OnClickGachaClose()
     {
         gachaPanel.SetActive(false);
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
+        GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
     private void Awake()
     {
+        GameManager.Instance.uiManager = this;
+        
         wave2DGameObject.SetActive(false);
         inGameCanvas.SetActive(false);
 
@@ -170,13 +172,13 @@ public class UIManager : Singleton<UIManager>
         }
         if (GameManager.Instance.gameState == GameManager.GameState.Play)
         {
-            _playerPosY.text = GameManager.Instance.PlayerPosY.ToString("F2") + "m";
-            _currentFloor = Mathf.FloorToInt(GameManager.Instance.PlayerPosY);
+            _playerPosY.text = GameManager.Instance.playerPosY.ToString("F2") + "m";
+            _currentFloor = Mathf.FloorToInt(GameManager.Instance.playerPosY);
         }
 
         if (GameManager.Instance.gameState == GameManager.GameState.End)
         {
-            _highScore.text = GameManager.Instance.HighScore.ToString("F2") + "m";
+            _highScore.text = GameManager.Instance.dataManager.HighScore.ToString("F2") + "m";
             _currentScore.text = _currentFloor.ToString("F2") + "m";
             diePanel.SetActive(true);
         }
