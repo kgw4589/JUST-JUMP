@@ -39,9 +39,9 @@ public class DataManager : MonoBehaviour
         
         if (characterInfoJson != null)
         {
-            var temporaryInfo =
+            var characterDictionary =
                 JsonUtility.FromJson<CharacterDictionary>(characterInfoJson.text);
-            foreach (var i in temporaryInfo.characters)
+            foreach (var i in characterDictionary.characters)
             {
                 characterInfo[i.Key] = i.Value;
             }
