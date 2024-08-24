@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 public class Gacha : MonoBehaviour
 {
-    private enum Probability
+    public enum Probability
     {
         Normal = 700,
         Epic = 250,
@@ -23,9 +23,10 @@ public class Gacha : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tempGachaName;
     [SerializeField] private Image tempGachaImage;
 
-    private CharacterScriptable _characterScriptable;
-    private List<CharacterScriptable.CharacterInfo> _haveNotCharacters = new List<CharacterScriptable.CharacterInfo>();
-
+    private List<CharacterInfo> _normalCharacters = new List<CharacterInfo>();
+    private List<CharacterInfo> _epicCharacters = new List<CharacterInfo>();
+    private List<CharacterInfo> _legendCharacters = new List<CharacterInfo>();
+    
     private void Awake()
     {
         _totalProbability = 0;
@@ -34,9 +35,7 @@ public class Gacha : MonoBehaviour
         {
             _totalProbability += (int)probability;
         }
-        
-        _characterScriptable = Resources.Load<CharacterScriptable>("AllCharacterList");
-        
+
         // foreach (var characterInfo in _characterScriptable.normalCharacters)
         // {
         //     _haveNotCharacters.Add(characterInfo);
@@ -72,9 +71,6 @@ public class Gacha : MonoBehaviour
 
     private void SelectedCharacter(Probability probability)
     {
-        CharacterScriptable.CharacterInfo selectedCharacter = default;
-        List<CharacterScriptable.CharacterInfo> selectedInfos;
-        
         switch (probability)
         {
             // case Probability.Normal :
@@ -93,15 +89,12 @@ public class Gacha : MonoBehaviour
             //     selectedCharacter.ratingText = _characterScriptable.legendText;
             //     break;
         }
-
-        _haveNotCharacters.Remove(selectedCharacter);
-        SetData(selectedCharacter);
+        
+        // SetData(selectedCharacter);
     }
 
-    private void SetData(CharacterScriptable.CharacterInfo character)
+    private void SetData()
     {
-        tempRatingText.text = character.ratingText;
-        tempGachaImage.sprite = character.characterImage;
-        tempGachaName.text = character.characterName;
+        
     }
 }
