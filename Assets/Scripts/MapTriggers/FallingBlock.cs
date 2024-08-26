@@ -7,13 +7,19 @@ using UnityEngine.Serialization;
 
 public class FallingBlock : MapTriggerBasicLogic
 {
+    [Header("TriggerMode 설정 (프리펩은 세팅 해놨으니 수정 X)")]
+    public TriggerMode triggerMode;
+
+    [Header("TriggerMode = Falling일 때 수정")]
     [SerializeField] private float moveDis;
     [SerializeField][Range(0.0001f, 0.5f)] private float speed;
     
+    [SerializeField] private GameObject effect;
+    [Header("TriggerMode = FadeOut일 때 수정")]
     [SerializeField] private float onDelay;
     [SerializeField] private float offDelay;
 
-    [SerializeField] private GameObject effect;
+    
     private float _animSpeed;
     
     private Vector2 _startPos;
@@ -32,9 +38,6 @@ public class FallingBlock : MapTriggerBasicLogic
         Falling,
         FadeOut
     }
-
-    public TriggerMode triggerMode;
-
     private void Start()
     {
         _anim = GetComponent<Animator>();
