@@ -9,11 +9,6 @@ using Image = UnityEngine.UI.Image;
 
 public class ChangeCharacter : MonoBehaviour
 {
-    // [SerializeField]
-    // private List<GameObject> CharacterList; // 캐릭터들 담길 리스트
-    // [SerializeField]
-    // private List<Sprite> ImagesList;
-    
     public Image ViewCharacterImage;   // 화면에 보일 이미지
     public TextMeshProUGUI NowCharacterText;
 
@@ -52,7 +47,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
-        NowCharacterText.text ="Now Character: "+ GameManager.Instance.dataManager.characterIso[_characterIndex].characterPrefab.gameObject.name;
+        NowCharacterText.text = GameManager.Instance.dataManager.characterIso[_characterIndex].characterPrefab.gameObject.name;
         ViewCharacterImage.sprite = GameManager.Instance.dataManager.characterIso[_characterIndex].characterImage;
         
     }
