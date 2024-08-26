@@ -16,9 +16,3 @@ MonoBehaviour:
   maps:
   - sectionMaps:
     - {fileID: 8994412898334947561, guid: 65ee90da589714f8387ccaccb1ef0895, type: 3}
-    - {fileID: 7980429517757732451, guid: b42e71b70155843258ef4cfd181ea99c, type: 3}
-    - {fileID: 1459887781035545123, guid: 67c68419fbe5e4bc0b4d108e96945806, type: 3}
-    - {fileID: 1938112901152411972, guid: 592fb90e0f53a46fbab42d0801465097, type: 3}
-    - {fileID: 8955237955338830621, guid: 372d4f8b1d037442c8dbb5b0902ab570, type: 3}
-    - {fileID: 198510205639923059, guid: 297f2ac5e5480d5478e3aeb3435bd708, type: 3}
-    - {fileID: 5693015968334047516, guid: 3cf22b8b00fd01649bd1b8802bbb8801, type: 3}

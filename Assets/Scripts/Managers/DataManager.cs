@@ -28,6 +28,19 @@ public class DataManager : MonoBehaviour
     public GameObject[] characterPrefabs;
     
     public Dictionary<int, CharacterInfo> characterInfos = new Dictionary<int, CharacterInfo>();
+    public List<CharacterInfo> haveCharacters = new List<CharacterInfo>();
+
+    // 임시 더미 로직.
+    private int _coin = 50;
+    public int Coin
+    {
+        get { return _coin; }
+        set
+        {
+            _coin = value;
+            GameManager.Instance.uiManager.SetCoinUI(_coin);
+        }
+    }
 
     [Serializable]
     public class CharacterIso
@@ -40,6 +53,8 @@ public class DataManager : MonoBehaviour
 
     private IEnumerator Start()
     {
+        GameManager.Instance.uiManager.SetCoinUI(Coin);
+        
         using (UnityWebRequest www = UnityWebRequest.Get(_sheetURL))
         {
             yield return www.SendWebRequest();
@@ -67,6 +82,12 @@ public class DataManager : MonoBehaviour
                 characterRating = (Gacha.Probability)Enum.Parse(typeof(Gacha.Probability), columns[_SHEET_CHARACTER_RATING_INDEX]),
                 characterIndex = int.Parse(columns[_SHEET_CHARACTER_INDEX_INDEX])
             };
+            
+            if (characterInfo.characterId == 0)
+            {
+                haveCharacters.Add(characterInfo);
+                continue;
+            }
             
             characterInfos.Add(characterInfo.characterId, characterInfo);
         }

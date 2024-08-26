@@ -65,6 +65,11 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.soundManager.PlayBgm(true);
     }
 
+    public void SetCoinUI(int haveCoin)
+    {
+        _coin.text = haveCoin.ToString();
+    }
+
     public void OnClickPauseButton()
     {
         Debug.Log("Game Pause");

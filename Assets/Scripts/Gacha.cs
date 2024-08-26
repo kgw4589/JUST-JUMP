@@ -49,8 +49,21 @@ public class Gacha : MonoBehaviour
             _totalProbability += probability;
         }
     }
-
+    
     public void PlayGacha()
+    {
+        if (GameManager.Instance.dataManager.Coin >= 5)
+        {
+            SelectRating();
+            GameManager.Instance.dataManager.Coin -= 5;
+        }
+        else
+        {
+            Debug.Log("코인 부족");
+        }
+    }
+
+    private void SelectRating()
     {
         _currentPivot = 0;
         
@@ -83,6 +96,7 @@ public class Gacha : MonoBehaviour
 
         Debug.Log(selectedCharacter.characterName);
         // GameManager.Instance.dataManager.SaveData.UnlockCharacters.Add(selectedCharacter.characterId);
+        GameManager.Instance.dataManager.haveCharacters.Add(selectedCharacter);
         SetUIData(selectedCharacter);
         
         if (_characterInfos[probability].Count <= 0)

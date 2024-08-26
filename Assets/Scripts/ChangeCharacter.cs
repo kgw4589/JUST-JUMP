@@ -39,7 +39,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             RigthButton.SetActive(true);
         }
-        if (_characterIndex == GameManager.Instance.dataManager.characterIso.Count -1)
+        if (_characterIndex == GameManager.Instance.dataManager.haveCharacters.Count -1)
         {
             LeftButton.SetActive(false);
         }
@@ -47,8 +47,9 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
-        NowCharacterText.text = GameManager.Instance.dataManager.characterIso[_characterIndex].characterPrefab.gameObject.name;
-        ViewCharacterImage.sprite = GameManager.Instance.dataManager.characterIso[_characterIndex].characterImage;
+        NowCharacterText.text = GameManager.Instance.dataManager.haveCharacters[_characterIndex].characterName;
+        ViewCharacterImage.sprite = GameManager.Instance.dataManager.
+            characterIso[GameManager.Instance.dataManager.haveCharacters[_characterIndex].characterIndex].characterImage;
         
     }
     
@@ -60,7 +61,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             Destroy(DeletObject);
         }
-        _selectCharacter = GameManager.Instance.dataManager.characterIso[_characterIndex].characterPrefab;
+        _selectCharacter = GameManager.Instance.dataManager.characterIso[GameManager.Instance.dataManager.haveCharacters[_characterIndex].characterIndex].characterPrefab;
         _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);
 
@@ -74,20 +75,21 @@ public class ChangeCharacter : MonoBehaviour
             _skin.gameObject.transform.localPosition = new Vector3(0, -1.6f, 0);
             _skin.gameObject.transform.localScale = new Vector3(2.5f, 4, 1);
         }
+        
+        GameManager.Instance.uiManager.OnClickCharaChangeClose();
     }
 
-    public void RigthButtonPush()
+    public void LeftButtonPush()
     {
-        
         if (_characterIndex != 0)
         {
             _characterIndex--;
         }
     }
-    public void LeftButtonPush()
+    public void RightButtonPush()
     {
         
-        if (_characterIndex != GameManager.Instance.dataManager.characterIso.Count -1)
+        if (_characterIndex != GameManager.Instance.dataManager.haveCharacters.Count -1)
         {
             _characterIndex ++;
         }
