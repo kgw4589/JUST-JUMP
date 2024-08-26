@@ -9,10 +9,10 @@ using Image = UnityEngine.UI.Image;
 
 public class ChangeCharacter : MonoBehaviour
 {
-    [SerializeField]
-    private List<GameObject> CharacterList; // 캐릭터들 담길 리스트
-    [SerializeField]
-    private List<Sprite> ImagesList;
+    // [SerializeField]
+    // private List<GameObject> CharacterList; // 캐릭터들 담길 리스트
+    // [SerializeField]
+    // private List<Sprite> ImagesList;
     
     public Image ViewCharacterImage;   // 화면에 보일 이미지
     public TextMeshProUGUI NowCharacterText;
@@ -44,7 +44,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             RigthButton.SetActive(true);
         }
-        if (_characterIndex == CharacterList.Count -1)
+        if (_characterIndex == GameManager.Instance.dataManager.characterIso.Count -1)
         {
             LeftButton.SetActive(false);
         }
@@ -52,10 +52,9 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
-        NowCharacterText.text ="Now Character: "+ CharacterList[_characterIndex].gameObject.name;
-        ViewCharacterImage.sprite = ImagesList[_characterIndex];
-
-        // Debug.Log(CharacterList[_characterIndex].gameObject.name);
+        NowCharacterText.text ="Now Character: "+ GameManager.Instance.dataManager.characterIso[_characterIndex].characterPrefab.gameObject.name;
+        ViewCharacterImage.sprite = GameManager.Instance.dataManager.characterIso[_characterIndex].characterImage;
+        
     }
     
 
@@ -66,7 +65,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             Destroy(DeletObject);
         }
-        _selectCharacter = CharacterList[_characterIndex];
+        _selectCharacter = GameManager.Instance.dataManager.characterIso[_characterIndex].characterPrefab;
         _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);
 
@@ -93,15 +92,15 @@ public class ChangeCharacter : MonoBehaviour
     public void LeftButtonPush()
     {
         
-        if (_characterIndex != CharacterList.Count -1)
+        if (_characterIndex != GameManager.Instance.dataManager.characterIso.Count -1)
         {
             _characterIndex ++;
         }
     }
-
-    public void AddList(GameObject gameObject,Sprite sprite)
-    {//가챠로 뽑았을때
-        CharacterList.Add(gameObject);
-        ImagesList.Add(sprite);
-    }
+    //
+    // public void AddList(GameObject gameObject,Sprite sprite)
+    // {//가챠로 뽑았을때
+    //     CharacterList.Add(gameObject);
+    //     ImagesList.Add(sprite);
+    // }
 }
