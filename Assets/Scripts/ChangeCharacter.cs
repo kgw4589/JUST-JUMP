@@ -53,9 +53,9 @@ public class ChangeCharacter : MonoBehaviour
             LeftButton.SetActive(true);
         }
         NowCharacterText.text ="Now Character: "+ CharacterList[_characterIndex].gameObject.name;
-        ViewCharacterImage.sprite = ImagesList[_characterIndex]; 
-        Debug.Log(CharacterList[_characterIndex].gameObject.name);
-        
+        ViewCharacterImage.sprite = ImagesList[_characterIndex];
+
+        // Debug.Log(CharacterList[_characterIndex].gameObject.name);
     }
     
 
@@ -69,10 +69,17 @@ public class ChangeCharacter : MonoBehaviour
         _selectCharacter = CharacterList[_characterIndex];
         _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);
-        
-        
-        _skin.gameObject.transform.localPosition = new Vector3(0, -1.6f, 0);
-        _skin.gameObject.transform.localScale = new Vector3(2, 4, 1);
+
+        if (_characterIndex == 0)
+        {
+            _skin.gameObject.transform.localPosition = new Vector3(0, -0.4f, 0);
+            _skin.gameObject.transform.localScale = new Vector3(5, 7, 0);
+        }
+        else
+        {
+            _skin.gameObject.transform.localPosition = new Vector3(0, -1.6f, 0);
+            _skin.gameObject.transform.localScale = new Vector3(2.5f, 4, 1);
+        }
     }
 
     public void RigthButtonPush()
