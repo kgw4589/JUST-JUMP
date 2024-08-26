@@ -305,6 +305,10 @@ public partial class Player : MonoBehaviour
     public void InitObject()
     {
         transform.Rotate(0,0,0);
+        if (!_isRight)
+        {
+            _isRight = false;
+        }
         _rd.velocity = Vector2.zero;
         isDie = false;
         playerHp = maxplayerHp;
