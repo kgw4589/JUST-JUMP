@@ -165,6 +165,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: effect_state_poisoning_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6092117211213480904, guid: a18e3a522541b4ade984b6ed092f2e99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6092117211213480905, guid: a18e3a522541b4ade984b6ed092f2e99, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.3
