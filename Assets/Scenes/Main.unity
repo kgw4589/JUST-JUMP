@@ -3619,6 +3619,26 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Skin
       objectReference: {fileID: 0}
+    - target: {fileID: 1764550627159122354, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime2
+      value: 65150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764550627159122354, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime3
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764550627159122354, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Parameters.colorGradient.key2.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764550627159122354, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Parameters.colorGradient.key3.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764550627159122354, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_NumAlphaKeys
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2179049527291968340, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
