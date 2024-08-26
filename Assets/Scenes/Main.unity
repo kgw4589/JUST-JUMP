@@ -2499,11 +2499,22 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7def91bcff6bb4304987bb63da527b31, type: 3}
   - {fileID: 21300000, guid: 286957a45eb814d5d90cd2491c9c9d7a, type: 3}
   characterPrefabs:
-  - {fileID: 0}
+  - {fileID: 8317949656392250675, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
   - {fileID: 7421779896858430636, guid: 4ffc51874f2ab22448d9dc3b9612160c, type: 3}
   - {fileID: 866148982198049316, guid: 88e9ec1d42f7944489ec9fccd8b19491, type: 3}
   - {fileID: 7038514439267334622, guid: 062ae60089e4c954e84a94ef81204be7, type: 3}
   - {fileID: 8143271742072760529, guid: 3766f223679806f4999636a3024e35b3, type: 3}
+  characterIso:
+  - characterImage: {fileID: 680172632, guid: 59e17b3d5356c4d6e976db93b87b77bc, type: 3}
+    characterPrefab: {fileID: 8317949656392250675, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+  - characterImage: {fileID: 21300000, guid: b9d1ad8ab8ce54c79b11f4ebfaa956dd, type: 3}
+    characterPrefab: {fileID: 7421779896858430636, guid: 4ffc51874f2ab22448d9dc3b9612160c, type: 3}
+  - characterImage: {fileID: 21300000, guid: 5b9809fc1c75943a1b34d237ad976a18, type: 3}
+    characterPrefab: {fileID: 7038514439267334622, guid: 062ae60089e4c954e84a94ef81204be7, type: 3}
+  - characterImage: {fileID: 21300000, guid: 7def91bcff6bb4304987bb63da527b31, type: 3}
+    characterPrefab: {fileID: 866148982198049316, guid: 88e9ec1d42f7944489ec9fccd8b19491, type: 3}
+  - characterImage: {fileID: 21300000, guid: 286957a45eb814d5d90cd2491c9c9d7a, type: 3}
+    characterPrefab: {fileID: 8143271742072760529, guid: 3766f223679806f4999636a3024e35b3, type: 3}
 --- !u!4 &1823390458
 Transform:
   m_ObjectHideFlags: 0

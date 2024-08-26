@@ -10,7 +10,13 @@ using UnityEngine.Networking;
 public class DataManager : MonoBehaviour
 {
     private string _sheetData;
-    private const string _sheetURL ="https://docs.google.com/spreadsheets/d/1fXMD0-E3BzRYGxw1NP9vNgQME82UK3_nQsQUexYfYzo/export?format=tsv&range=A2:D2";
+    private const string _sheetURL ="https://docs.google.com/spreadsheets/d/1fXMD0-E3BzRYGxw1NP9vNgQME82UK3_nQsQUexYfYzo/export?format=tsv&range=A2:D";
+    
+    // sheet Data Index
+    private const int _SHEET_CHARACTER_ID_INDEX = 0;
+    private const int _SHEET_CHARACTER_NAME_INDEX = 1;
+    private const int _SHEET_CHARACTER_RATING_INDEX = 2;
+    private const int _SHEET_CHARACTER_INDEX_INDEX = 3;
     
     // save Data
     [SerializeField]
@@ -20,8 +26,17 @@ public class DataManager : MonoBehaviour
 
     public Sprite[] characterSprites;
     public GameObject[] characterPrefabs;
+    
+    public Dictionary<int, CharacterInfo> characterInfos = new Dictionary<int, CharacterInfo>();
 
-    public List<CharacterInfo> characterInfos = new List<CharacterInfo>();
+    [Serializable]
+    public class CharacterIso
+    {
+        public Sprite characterImage;
+        public GameObject characterPrefab;
+    }
+    
+    public List<CharacterIso> characterIso = new List<CharacterIso>();
 
     private IEnumerator Start()
     {
@@ -43,17 +58,17 @@ public class DataManager : MonoBehaviour
         
         foreach (var data in row)
         {
-            string[] columns = row[0].Split("\t");
+            string[] columns = data.Split("\t");
 
             CharacterInfo characterInfo = new CharacterInfo()
             {
-                characterId = int.Parse(columns[0]),
-                characterName = columns[1],
-                characterRating = (Gacha.Probability)Enum.Parse(typeof(Gacha.Probability), columns[2]),
-                characterIndex = int.Parse(columns[3])
+                characterId = int.Parse(columns[_SHEET_CHARACTER_ID_INDEX]),
+                characterName = columns[_SHEET_CHARACTER_NAME_INDEX],
+                characterRating = (Gacha.Probability)Enum.Parse(typeof(Gacha.Probability), columns[_SHEET_CHARACTER_RATING_INDEX]),
+                characterIndex = int.Parse(columns[_SHEET_CHARACTER_INDEX_INDEX])
             };
             
-            this.characterInfos.Add(characterInfo);
+            characterInfos.Add(characterInfo.characterId, characterInfo);
         }
     }
 

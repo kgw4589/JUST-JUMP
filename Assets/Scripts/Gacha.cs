@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.Utilities;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -13,7 +15,7 @@ public class Gacha : MonoBehaviour
     public enum Probability
     {
         Normal = 700,
-        Epic = 250,
+        Epic = 600,
         Legend = 500
     }
     private int _totalProbability;
@@ -22,26 +24,46 @@ public class Gacha : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tempRatingText;
     [SerializeField] private TextMeshProUGUI tempGachaName;
     [SerializeField] private Image tempGachaImage;
-
-    private List<CharacterInfo> _normalCharacters = new List<CharacterInfo>();
-    private List<CharacterInfo> _epicCharacters = new List<CharacterInfo>();
-    private List<CharacterInfo> _legendCharacters = new List<CharacterInfo>();
     
-    private void Awake()
+    private Dictionary<Probability, List<CharacterInfo>> _characterInfos = new Dictionary<Probability, List<CharacterInfo>>();
+
+    private IEnumerator Start()
     {
-        _totalProbability = 0;
-        _currentPivot = 0;
-        foreach (Probability probability in Enum.GetValues(typeof(Probability)))
+        yield return new WaitUntil(() => GameManager.Instance.dataManager.characterInfos.Count > 0);
+        Debug.Log(GameManager.Instance.dataManager.characterInfos.Count);
+        foreach (var characterInfo in GameManager.Instance.dataManager.characterInfos)
         {
-            _totalProbability += (int)probability;
+            if (!_characterInfos.ContainsKey(characterInfo.Value.characterRating))
+            {
+                _characterInfos.Add(characterInfo.Value.characterRating, new List<CharacterInfo>(){characterInfo.Value});
+            }
+            else
+            {
+                _characterInfos[characterInfo.Value.characterRating].Add(characterInfo.Value);
+            }
+        }
+
+        _totalProbability = 0;
+        foreach (int probability in Enum.GetValues(typeof(Probability)))
+        {
+            _totalProbability += probability;
         }
     }
 
     public void PlayGacha()
     {
-        int randomValue = Random.Range(1, _totalProbability + 1);
+        _currentPivot = 0;
+        
+        if (_characterInfos.Keys.Count <= 0)
+        {
+            Debug.Log("모든 캐릭터를 뽑았음");
+            return;
+        }
 
-        foreach (Probability probability in Enum.GetValues(typeof(Probability)))
+        int randomValue = Random.Range(1, _totalProbability + 1);
+        Debug.Log("가챠 랜덤 값 : " + randomValue);
+        
+        foreach (Probability probability in _characterInfos.Keys)
         {
             _currentPivot += (int)probability;
 
@@ -52,36 +74,33 @@ public class Gacha : MonoBehaviour
                 break;
             }
         }
-
-        _currentPivot = 0;
     }
 
     private void SelectedCharacter(Probability probability)
     {
-        Debug.Log(GameManager.Instance.dataManager.characterInfos[0].characterName);
+        CharacterInfo selectedCharacter = _characterInfos[probability][Random.Range(0, _characterInfos[probability].Count)];
+        _characterInfos[probability].Remove(selectedCharacter);
+
+        Debug.Log(selectedCharacter.characterName);
+        // GameManager.Instance.dataManager.SaveData.UnlockCharacters.Add(selectedCharacter.characterId);
+        SetUIData(selectedCharacter);
         
-        switch (probability)
+        if (_characterInfos[probability].Count <= 0)
         {
-            // case Probability.Normal :
-            //     selectedInfos = _characterScriptable.normalCharacters;
-            //     selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
-            //     selectedCharacter.ratingText = _characterScriptable.normalText;
-            //     break;
-            // case Probability.Epic :
-            //     selectedInfos = _characterScriptable.epicCharacters;
-            //     selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
-            //     selectedCharacter.ratingText = _characterScriptable.epicText;
-            //     break;
-            // case Probability.Legend :
-            //     selectedInfos = _characterScriptable.legendCharacters;
-            //     selectedCharacter = selectedInfos[Random.Range(0, selectedInfos.Count)];
-            //     selectedCharacter.ratingText = _characterScriptable.legendText;
-            //     break;
+            _characterInfos.Remove(probability);
+            Debug.Log(probability + " 등급의 모든 캐릭터를 뽑음");
+            foreach (var characterInfo in _characterInfos)
+            {
+                _totalProbability = 0;
+                _totalProbability += (int)characterInfo.Key;
+            }
         }
     }
 
-    private void SetData()
+    private void SetUIData(CharacterInfo character)
     {
-        
+        tempGachaName.text = character.characterName;
+        tempRatingText.text = character.characterRating.ToString();
+        tempGachaImage.sprite = GameManager.Instance.dataManager.characterIso[character.characterIndex].characterImage;
     }
 }
