@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     public GameObject wave2DGameObject; // PixelWave
     
     private int _currentFloor;
+    [SerializeField]
+    private bool rightSort = false;
     
     [Header("#UI Canvases")]
     public GameObject startUICanvas; // Start Set UI Panel
@@ -23,6 +25,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gachaButton; // GachaGoButton
     [SerializeField] private GameObject charaButton; // CharaChangeButton
     [SerializeField] private GameObject modeChangeButton; // ModeSelectButton
+    [SerializeField] private GameObject inGameRightButton;
+    [SerializeField] private GameObject inGameLeftButton;
+    [SerializeField] private GameObject inGameSortButton;
     
     [Header("#UI Panels")]
     [SerializeField] private GameObject pausePanel; // PausePanel
@@ -63,6 +68,31 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.gameState = GameManager.GameState.Play;
         GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
         GameManager.Instance.soundManager.PlayBgm(true);
+    }
+
+    public void OnSortButton()
+    {
+        if (!rightSort)
+        {
+            OnRightSort();
+        }
+        else
+        {
+            OnMiddleSort();
+        }
+    }
+
+    public void OnMiddleSort()
+    {
+        rightSort = false;
+        inGameRightButton.transform.position = new Vector3(1350, 65, 0);
+        inGameLeftButton.transform.position = new Vector3(80, 65, 0);
+    }
+
+    public void OnRightSort()
+    {
+        rightSort = true;
+        inGameLeftButton.transform.position = new Vector3(600, 65, 0);
     }
 
     public void SetCoinUI(int haveCoin)
