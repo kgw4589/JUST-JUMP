@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct SectionMaps
+public class SectionMaps
 {
     public List<GameObject> sectionMaps;
 }
@@ -11,6 +11,8 @@ public struct SectionMaps
 [System.Serializable]
 public class MapScriptable : ScriptableObject
 {
+    public int coinWeight = 1;
+    
     public float[] section;
 
     public List<SectionMaps> maps;

@@ -1,16 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Permissions;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class MapManager : MonoBehaviour
 {
     private MapListScriptable _mapListScriptable;
-    private MapScriptable _selectedMapScriptable;
+    public MapScriptable selectedMapScriptable;
     
     private Vector2 _startPos;
     
@@ -40,8 +42,8 @@ public class MapManager : MonoBehaviour
         _mapScriptableIndex = 0;
 
         _mapListScriptable = Resources.Load<MapListScriptable>("MapScriptables");
-        _selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
-        modeText.text = "MODE : " + _selectedMapScriptable.name;
+        selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
+        modeText.text = "MODE : " + selectedMapScriptable.name;
         
         _startPos = new Vector2(0, 0);
         
@@ -69,8 +71,8 @@ public class MapManager : MonoBehaviour
         _player ??= FindObjectOfType<Player>().gameObject;
         _gameOverZone ??= FindObjectOfType<GameOverZone>().gameObject;
         
-        _lastMap = Instantiate(_selectedMapScriptable.maps[_mapSectionIndex]
-            .sectionMaps[Random.Range(0, _selectedMapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
+        _lastMap = Instantiate(selectedMapScriptable.maps[_mapSectionIndex]
+            .sectionMaps[Random.Range(0, selectedMapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
 
         _lastMap.transform.position = _startPos + new Vector2(0, _lastMap.transform.localScale.y / 2);
         _mapQueue.Enqueue(_lastMap);
@@ -83,18 +85,18 @@ public class MapManager : MonoBehaviour
 
     public void ChangeMode(int index)
     {
-        _selectedMapScriptable = _mapListScriptable.mapScriptableList[index];
+        selectedMapScriptable = _mapListScriptable.mapScriptableList[index];
         
-        modeText.text = "MODE : " + _selectedMapScriptable.name;
+        modeText.text = "MODE : " + selectedMapScriptable.name;
     }
 
     public void ChangeMode(bool isMinus)
     {
         _mapScriptableIndex = Mathf.Abs(_mapScriptableIndex + (isMinus ? -1 : 1)) % _mapListScriptable.mapScriptableList.Count;
         
-        _selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
+        selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
         
-        modeText.text = "MODE : " + _selectedMapScriptable.name;
+        modeText.text = "MODE : " + selectedMapScriptable.name;
     }
 
     void Update()
@@ -108,8 +110,8 @@ public class MapManager : MonoBehaviour
 
         if (dis < _mapSizeY * 3)
         {
-            if (_mapSectionIndex < _selectedMapScriptable.section.Length
-                && GameManager.Instance.playerPosY >= _selectedMapScriptable.section[_mapSectionIndex])
+            if (_mapSectionIndex < selectedMapScriptable.section.Length
+                && GameManager.Instance.playerPosY >= selectedMapScriptable.section[_mapSectionIndex])
             {
                 ++_mapSectionIndex;
             }
@@ -126,8 +128,8 @@ public class MapManager : MonoBehaviour
 
     void InstantiateRandomMap()
     {
-        GameObject map = Instantiate(_selectedMapScriptable.maps[_mapSectionIndex]
-            .sectionMaps[Random.Range(0, _selectedMapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
+        GameObject map = Instantiate(selectedMapScriptable.maps[_mapSectionIndex]
+            .sectionMaps[Random.Range(0, selectedMapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
         
         float lastMapSizeY = _lastMap.transform.localScale.y / 2;
         _mapSizeY = map.transform.localScale.y / 2;
