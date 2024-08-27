@@ -42,7 +42,7 @@ public class SPUM_Prefabs : MonoBehaviour
     // 이름으로 애니메이션 실행
     public void PlayAnimation(string name){
 
-        Debug.Log(name);
+        // Debug.Log(name);
         
         foreach (var animationName in _nameToHashPair)
         {

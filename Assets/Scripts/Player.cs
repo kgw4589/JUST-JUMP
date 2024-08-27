@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public partial class Player : MonoBehaviour
 {
+    
+    public SPUM_Prefabs _spumPrefabs;
     public GameObject PausePanel;
     public Button RButton;
     public Button LButton;
@@ -62,6 +64,7 @@ public partial class Player : MonoBehaviour
    // Start is called before the first frame update
     void Start()
     {
+        
         //초기화
         _collider = GetComponent<Collider2D>();
         _lineRenderer = GetComponent<LineRenderer>(); 
@@ -82,6 +85,11 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
+        if (_spumPrefabs == null)
+        {
+            Debug.Log("이거 왜 안됨?");
+            _spumPrefabs = GetComponentInChildren<SPUM_Prefabs>();
+        }
         if (GameManager.Instance.gameState == GameManager.GameState.Ready)
         {
             _lineRenderer.enabled = false;
@@ -92,19 +100,25 @@ public partial class Player : MonoBehaviour
         }
         if (_isRigthButtonPush && !_isDragging && IsJumpAble())
         {
+            _spumPrefabs.PlayAnimation("1_Run");
             transform.position += new Vector3(MoveSpeed, 0, 0);
             if (!_isRight)
             {
                 TurnPlayer();   
             }
         }
-        if (_isLeftButtonPush && !_isDragging && IsJumpAble())
+        else if (_isLeftButtonPush && !_isDragging && IsJumpAble())
         {
+            _spumPrefabs.PlayAnimation("1_Run");
             transform.position += new Vector3(-MoveSpeed, 0, 0);
             if (_isRight)
             {
                 TurnPlayer();   
             }
+        }
+        else
+        {
+            _spumPrefabs.PlayAnimation("0_idle");
         }
         if (playerHp <= 0)
         {
