@@ -7,8 +7,8 @@ using UnityEngine;
 public class GameOverZone : MonoBehaviour
 {
     [SerializeField] private float _waitTime = 5f; // wait second
-    [SerializeField] private float _moveDistance = 100f; // Max Y Axis
-    [SerializeField] private float _moveDuration = 100f;  // second
+    [SerializeField] private float _moveDistance = 10000f; // Max Y Axis
+    [SerializeField] private float _moveDuration = 10000f;  // second
 
     private float _startYaxis = -30f;
     private float _contactTime = 0f;
@@ -41,11 +41,10 @@ public class GameOverZone : MonoBehaviour
 
     IEnumerator MoveUpAfterWait()
     {
-        float _timeConsol = _waitTime;
+        float _timeConsol = GameManager.Instance.mapManager.selectedMapScriptable.waitTime;
 
         while (_timeConsol > 0)
         {
-            Debug.Log("Wave Wait: " + _timeConsol + "(s)");
             yield return new WaitForSeconds(1f);
             _timeConsol -= 1f;
         }
@@ -57,8 +56,9 @@ public class GameOverZone : MonoBehaviour
 
         float _elapsedTime = 0f; // Elapsed Time
         float _currentSpeed = 0f; // speed
-        float _maxSpeed = 2f; // Max Speed
-        float _accel = _moveDistance / _moveDuration; // accelerlation
+        float _maxSpeed = GameManager.Instance.mapManager.selectedMapScriptable.maxSpeed;
+        float _accel = GameManager.Instance.mapManager.selectedMapScriptable.moveDistance
+                       / GameManager.Instance.mapManager.selectedMapScriptable.moveDuration; // accelerlation
         
         while (_elapsedTime < _moveDuration)
         {
