@@ -177,7 +177,7 @@ MonoBehaviour:
   modeChangeButton: {fileID: 135438025}
   pausePanel: {fileID: 846314673}
   diePanel: {fileID: 119525321}
-  tutorialPanel: {fileID: 1398212435}
+  tutorialPanel: {fileID: 818843331}
   gachaPanel: {fileID: 804444356}
   charaPanel: {fileID: 1687949722}
   modeChangePanel: {fileID: 536340593}
@@ -900,6 +900,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 747696468079487241}
+    - target: {fileID: 1187808232361379113, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 89165387}
     - target: {fileID: 1216476681291839822, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -913,10 +917,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1252785621}
     - target: {fileID: 1901379524800019498, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 89165387}
-    - target: {fileID: 1991885951915727923, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 89165387}
@@ -1531,6 +1531,11 @@ Transform:
 --- !u!1 &804444356 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5178824585042063905, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+  m_PrefabInstance: {fileID: 478886813}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &818843331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7545529861791841961, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
   m_PrefabInstance: {fileID: 478886813}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &830710130 stripped
@@ -2306,11 +2311,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1398212435 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5925716274121445913, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
-  m_PrefabInstance: {fileID: 478886813}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1505347242 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5589082910701075786, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
