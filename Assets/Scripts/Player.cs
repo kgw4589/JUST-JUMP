@@ -43,7 +43,6 @@ public partial class Player : MonoBehaviour
     [SerializeField] 
     private float maxPower;
     
-
     private bool _isRight = false;
 
     private bool _isDragging = false;
@@ -327,7 +326,7 @@ public partial class Player : MonoBehaviour
     public void InitObject()
     {
         
-        if (!_isRight)
+        if (_isRight)
         {
             TurnPlayer();
         }
