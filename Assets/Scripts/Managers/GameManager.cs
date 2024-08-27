@@ -80,6 +80,7 @@ public class GameManager : Singleton<GameManager>
             // _saveData.highScore = _highScore;
             try {
                 firebaseManager.GetSaveInDB(JsonUtility.ToJson(dataManager.SaveData));
+                firebaseManager.WriteRanking();
             } catch (Exception e) {
                 Debug.Log(e);
                 gameState = GameState.End;

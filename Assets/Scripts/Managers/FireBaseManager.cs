@@ -123,6 +123,21 @@ public class FireBaseManager : Singleton<FireBaseManager>
         PlayGamesPlatform.Instance.ShowLeaderboardUI(GPGSIds.leaderboard);
     }
 
+    public void WriteRanking()
+    {
+        PlayGamesPlatform.Instance.ReportScore(GameManager.Instance.dataManager.HighScore, GPGSIds.leaderboard, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log("Success");
+            }
+            else
+            {
+                Debug.Log("Ranking Update failed");
+            }
+        });
+}
+
     public void GetSaveInDB(string value)
     {
         SaveInDB(value);
