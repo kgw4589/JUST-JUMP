@@ -5,12 +5,12 @@ using UnityEngine;
 public class Coin : MapTriggerBasicLogic
 {
     private Player _player;
-    public int price;
+    private const int _PRICE = 1;
 
     protected override void EnterEvent()
     {
         // GameManager.Instance.dataManager.SaveData.Coin += price;
-        GameManager.Instance.dataManager.Coin += price;
+        GameManager.Instance.dataManager.Coin = _PRICE;
         gameObject.SetActive(false);
     }
 

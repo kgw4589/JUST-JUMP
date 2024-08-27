@@ -27,6 +27,8 @@ public class Gacha : MonoBehaviour
     
     private Dictionary<Probability, List<CharacterInfo>> _characterInfos = new Dictionary<Probability, List<CharacterInfo>>();
 
+    private const int _COIN_PRICE = 10;  
+
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => GameManager.Instance.dataManager.characterInfos.Count > 0);
@@ -52,10 +54,10 @@ public class Gacha : MonoBehaviour
     
     public void PlayGacha()
     {
-        if (GameManager.Instance.dataManager.Coin >= 5)
+        if (GameManager.Instance.dataManager.Coin >= _COIN_PRICE)
         {
             SelectRating();
-            GameManager.Instance.dataManager.Coin -= 5;
+            GameManager.Instance.dataManager.Coin -= _COIN_PRICE;
         }
         else
         {
