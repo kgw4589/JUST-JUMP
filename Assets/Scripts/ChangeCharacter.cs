@@ -65,18 +65,16 @@ public class ChangeCharacter : MonoBehaviour
         _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);
 
-        if (_characterIndex == 0)
-        {
-            _skin.gameObject.transform.localPosition = new Vector3(0, -0.4f, 0);
-            _skin.gameObject.transform.localScale = new Vector3(5, 7, 0);
-        }
-        else
-        {
+        // if (_characterIndex == 0)
+        // {
+        //     _skin.gameObject.transform.localPosition = new Vector3(0, -0.4f, 0);
+        //     _skin.gameObject.transform.localScale = new Vector3(5, 7, 0);
+        // }
+        
             _skin.gameObject.transform.localPosition = new Vector3(0, -1.6f, 0);
             _skin.gameObject.transform.localScale = new Vector3(2.5f, 4, 1);
-        }
-        
-        GameManager.Instance.uiManager.OnClickCharaChangeClose();
+
+            GameManager.Instance.uiManager.OnClickCharaChangeClose();
     }
 
     public void LeftButtonPush()

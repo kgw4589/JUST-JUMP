@@ -2548,8 +2548,6 @@ MonoBehaviour:
   - {fileID: 7038514439267334622, guid: 062ae60089e4c954e84a94ef81204be7, type: 3}
   - {fileID: 8143271742072760529, guid: 3766f223679806f4999636a3024e35b3, type: 3}
   characterIso:
-  - characterImage: {fileID: 680172632, guid: 59e17b3d5356c4d6e976db93b87b77bc, type: 3}
-    characterPrefab: {fileID: 6239729059786100292, guid: 26bc8ea68e780433d8eec7946326481e, type: 3}
   - characterImage: {fileID: 21300000, guid: 765aa16f6b8da41d3a2f906b3d8783f1, type: 3}
     characterPrefab: {fileID: 7421779896858430636, guid: 4ffc51874f2ab22448d9dc3b9612160c, type: 3}
   - characterImage: {fileID: 21300000, guid: 70cc2da2d163841efa3d7791f3b7e08e, type: 3}
