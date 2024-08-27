@@ -7,8 +7,7 @@ using UnityEngine.EventSystems;
 
 public partial class Player : MonoBehaviour
 {
-    
-    public SPUM_Prefabs _spumPrefabs;
+    private Animator _animator;
     public GameObject PausePanel;
     public Button RButton;
     public Button LButton;
@@ -64,8 +63,8 @@ public partial class Player : MonoBehaviour
    // Start is called before the first frame update
     void Start()
     {
-        
         //초기화
+        InitAnimation();
         _collider = GetComponent<Collider2D>();
         _lineRenderer = GetComponent<LineRenderer>(); 
         _rd = GetComponent<Rigidbody2D>();
@@ -83,12 +82,24 @@ public partial class Player : MonoBehaviour
         GameManager.Instance.initAction += InitObject;
     }
 
+    void InitAnimation()
+    {
+        Transform firstChild = transform.GetChild(0);
+        Transform secondChild = firstChild.GetChild(0);
+        
+        _animator = secondChild.GetComponent<Animator>();
+    }
+
     void Update()
     {
-        if (_spumPrefabs == null)
+        if (_animator == null)
         {
-            Debug.Log("이거 왜 안됨?");
-            _spumPrefabs = GetComponentInChildren<SPUM_Prefabs>();
+            InitAnimation();
+        }
+
+        if (_animator != null)
+        {
+            _animator.SetBool("isRun",_isLeftButtonPush || _isRigthButtonPush);
         }
         if (GameManager.Instance.gameState == GameManager.GameState.Ready)
         {
@@ -100,7 +111,7 @@ public partial class Player : MonoBehaviour
         }
         if (_isRigthButtonPush && !_isDragging && IsJumpAble())
         {
-            _spumPrefabs.PlayAnimation("1_Run");
+           
             transform.position += new Vector3(MoveSpeed, 0, 0);
             if (!_isRight)
             {
@@ -109,16 +120,12 @@ public partial class Player : MonoBehaviour
         }
         else if (_isLeftButtonPush && !_isDragging && IsJumpAble())
         {
-            _spumPrefabs.PlayAnimation("1_Run");
+           
             transform.position += new Vector3(-MoveSpeed, 0, 0);
             if (_isRight)
             {
                 TurnPlayer();   
             }
-        }
-        else
-        {
-            _spumPrefabs.PlayAnimation("0_idle");
         }
         if (playerHp <= 0)
         {
@@ -135,7 +142,7 @@ public partial class Player : MonoBehaviour
             _playerHpBarColor.color = Color.yellow;
         }
         else if (PlayerHpBar.value >= 0.2f)
-        {
+        { 
             _playerHpBarColor.color = Color.red;
         }
         
@@ -192,6 +199,7 @@ public partial class Player : MonoBehaviour
         {
             GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
+            _animator.SetTrigger("isJump");
             StartCoroutine(Jump(_direction));
         }
     }
