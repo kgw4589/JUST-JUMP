@@ -118,6 +118,11 @@ public class FireBaseManager : Singleton<FireBaseManager>
         });
     }
 
+    public void ShowLeaderBoard()
+    {
+        PlayGamesPlatform.Instance.ShowLeaderboardUI(GPGSIds.leaderboard);
+    }
+
     public void GetSaveInDB(string value)
     {
         SaveInDB(value);

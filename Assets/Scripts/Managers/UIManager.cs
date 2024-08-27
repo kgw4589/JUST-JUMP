@@ -159,6 +159,18 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
+    public void OnClickRanking()
+    {
+        if (GameManager.Instance.firebaseManager != null)
+        {
+            GameManager.Instance.firebaseManager.ShowLeaderBoard();
+        }
+        else
+        {
+            Debug.Log("Show failed : FirebaseManager is null");
+        }
+    }
+
     private void Awake()
     {
         GameManager.Instance.uiManager = this;
