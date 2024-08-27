@@ -22,13 +22,19 @@ public class Cannon : MonoBehaviour
     private Vector2 _startPoint;
     private Vector2 _direction;
     private Vector2 _force;
+    private float _startRot;
 
-    private void OnEnable()
+    private void Start()
     {
         _startPoint = transform.position;
+        _startRot = transform.position.z;
         endPoint = new Vector2(endPoint.x + _startPoint.x, endPoint.y + _startPoint.y);
         
         StartCoroutine(Reload());
+        Vector3 dir = endPoint - new Vector2(cannonHead.transform.position.x,cannonHead.transform.position.y);
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        cannonHead.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward) * Quaternion.Euler(0, 0, 180);
     }
 
     private void Update()
@@ -43,9 +49,6 @@ public class Cannon : MonoBehaviour
             bulletObj.transform.position = transform.position;
             _currentTime = 0;
         }
-        var newPos = endPoint - new Vector2(cannonHead.transform.position.x, cannonHead.transform.position.y);
-        var rotZ = Mathf.Atan2(newPos.x, newPos.y) * Mathf.Rad2Deg;
-        cannonHead.transform.rotation = Quaternion.Euler(0, 0, rotZ);
     }
 
     private IEnumerator Reload()
