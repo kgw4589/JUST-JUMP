@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66c7bfd552f70140aeda9aa9e7ca84f, type: 3}
   m_Name: Normal
   m_EditorClassIdentifier: 
-  coinWeight: 3
+  coinWeight: 2
+  waitTime: 4
+  moveDistance: 1000000
+  moveDuration: 1250000
+  maxSpeed: 2
   section:
   - 20
   - 60

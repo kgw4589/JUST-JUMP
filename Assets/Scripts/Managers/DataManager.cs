@@ -31,14 +31,13 @@ public class DataManager : MonoBehaviour
     public List<CharacterInfo> haveCharacters = new List<CharacterInfo>();
 
     // 임시 더미 로직.
-    private int _coin = 0;
+    private int _coin = 50;
     public int Coin
     {
         get { return _coin; }
         set
         {
-            _coin += value * GameManager.Instance.mapManager.selectedMapScriptable.coinWeight;
-            Debug.Log(" 밸류 : " + value + "  w : " + GameManager.Instance.mapManager.selectedMapScriptable.coinWeight);
+            _coin = value;
             GameManager.Instance.uiManager.SetCoinUI(_coin);
         }
     }
