@@ -21,13 +21,22 @@ public class Gacha : MonoBehaviour
     private int _totalProbability;
     private int _currentPivot;
 
-    [SerializeField] private TextMeshProUGUI tempRatingText;
-    [SerializeField] private TextMeshProUGUI tempGachaName;
-    [SerializeField] private Image tempGachaImage;
-    
     private Dictionary<Probability, List<CharacterInfo>> _characterInfos = new Dictionary<Probability, List<CharacterInfo>>();
 
     private const int _COIN_PRICE = 10;  
+    
+    [Header("#UI Gacha")]
+    [SerializeField] private Sprite originGachaImage;
+    [SerializeField] private TextMeshProUGUI ratingText;
+    [SerializeField] private TextMeshProUGUI gachaName;
+    [SerializeField] private Image gachaImage;
+    [SerializeField] private TextMeshProUGUI gachaErrorText;
+    [SerializeField] private Animator gachaErrorAnimator;
+    
+    private const string _GACHA_ORIGIN_NAME_MESSAGE = "캐릭터 뽑기";
+    private const string _GACHA_ORIGIN_RATING_MESSAGE = "10 코인";
+    private const string _HAVE_NO_COIN_MESSAGE = "코인이 부족합니다";
+    private const string _HAVE_ALL_CHARACTER_MESSAGE = "모든 캐릭터를 보유하고 있습니다";
 
     private IEnumerator Start()
     {
@@ -50,30 +59,30 @@ public class Gacha : MonoBehaviour
         {
             _totalProbability += probability;
         }
+        
+        SetGachaPanelOrigin();
     }
     
     public void PlayGacha()
     {
-        if (GameManager.Instance.dataManager.Coin >= _COIN_PRICE)
+        if (_characterInfos.Keys.Count <= 0)
         {
-            SelectRating();
-            GameManager.Instance.dataManager.Coin -= _COIN_PRICE;
+            GachaError(_HAVE_ALL_CHARACTER_MESSAGE);
+        }
+        else if (GameManager.Instance.dataManager.Coin < _COIN_PRICE)
+        {
+            GachaError(_HAVE_NO_COIN_MESSAGE);
         }
         else
         {
-            Debug.Log("코인 부족");
+            SelectRating();
+            GameManager.Instance.dataManager.Coin -= _COIN_PRICE;
         }
     }
 
     private void SelectRating()
     {
         _currentPivot = 0;
-        
-        if (_characterInfos.Keys.Count <= 0)
-        {
-            Debug.Log("모든 캐릭터를 뽑았음");
-            return;
-        }
 
         int randomValue = Random.Range(1, _totalProbability + 1);
         Debug.Log("가챠 랜덤 값 : " + randomValue);
@@ -81,14 +90,34 @@ public class Gacha : MonoBehaviour
         foreach (Probability probability in _characterInfos.Keys)
         {
             _currentPivot += (int)probability;
-
+            
             if (randomValue <= _currentPivot)
             {
-                Debug.Log(probability);
                 SelectedCharacter(probability);
                 break;
             }
         }
+    }
+
+    private void SetGachaPanelOrigin()
+    {
+        gachaName.text = _GACHA_ORIGIN_NAME_MESSAGE;
+        ratingText.text = _GACHA_ORIGIN_RATING_MESSAGE;
+        gachaImage.sprite = originGachaImage;
+    }
+
+    private void GachaError(string errorMessage)
+    {
+        Debug.Log("가챠 에러 " + errorMessage);
+        gachaErrorText.text = errorMessage;
+        gachaErrorAnimator.SetTrigger("GachaError");
+    }
+
+    private void SetGachaPanel(CharacterInfo character)
+    {
+        gachaName.text = character.characterName;
+        ratingText.text = character.characterRating.ToString();
+        gachaImage.sprite = GameManager.Instance.dataManager.characterIso[character.characterIndex].characterImage;
     }
 
     private void SelectedCharacter(Probability probability)
@@ -99,7 +128,7 @@ public class Gacha : MonoBehaviour
         Debug.Log(selectedCharacter.characterName);
         // GameManager.Instance.dataManager.SaveData.UnlockCharacters.Add(selectedCharacter.characterId);
         GameManager.Instance.dataManager.haveCharacters.Add(selectedCharacter);
-        SetUIData(selectedCharacter);
+        SetGachaPanel(selectedCharacter);
         
         if (_characterInfos[probability].Count <= 0)
         {
@@ -111,12 +140,5 @@ public class Gacha : MonoBehaviour
                 _totalProbability += (int)characterInfo.Key;
             }
         }
-    }
-
-    private void SetUIData(CharacterInfo character)
-    {
-        tempGachaName.text = character.characterName;
-        tempRatingText.text = character.characterRating.ToString();
-        tempGachaImage.sprite = GameManager.Instance.dataManager.characterIso[character.characterIndex].characterImage;
     }
 }
