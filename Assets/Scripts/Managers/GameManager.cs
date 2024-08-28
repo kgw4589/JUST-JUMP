@@ -74,24 +74,10 @@ public class GameManager : Singleton<GameManager>
     
     private void GameOver()
     {
-        // if (playerPosY > dataManager.HighScore)
-        // {
-        //     dataManager.HighScore = (int)playerPosY;
-        //     // _saveData.highScore = _highScore;
-        //     try {
-        //         firebaseManager.GetSaveInDB(JsonUtility.ToJson(dataManager.SaveData));
-        //         firebaseManager.WriteRanking();
-        //     } catch (Exception e) {
-        //         Debug.Log(e);
-        //         gameState = GameState.End;
-        //     }
-        // }
-        
-        // 임시
-        if (playerPosY > mapManager.selectedMapScriptable.bestScore)
+        if (playerPosY > dataManager.HighScore)
         {
-            mapManager.selectedMapScriptable.bestScore = (int)playerPosY;
-            
+            dataManager.HighScore = (int)playerPosY;
+            // _saveData.highScore = _highScore;
             try {
                 firebaseManager.GetSaveInDB(JsonUtility.ToJson(dataManager.SaveData));
                 firebaseManager.WriteRanking();

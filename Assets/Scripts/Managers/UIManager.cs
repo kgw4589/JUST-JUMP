@@ -41,7 +41,6 @@ public class UIManager : MonoBehaviour
     [Header("#UI Texts")]
     [SerializeField] private TextMeshProUGUI playerPosY; // PlayerPosY
     [SerializeField] private TextMeshProUGUI highScore; // Best Score
-    [SerializeField] private TextMeshProUGUI modeText; // Mode Name
     [SerializeField] private TextMeshProUGUI currentScore; // Score
     [SerializeField] private TextMeshProUGUI coin; // Coin
 
@@ -255,10 +254,7 @@ public class UIManager : MonoBehaviour
 
         if (GameManager.Instance.gameState == GameManager.GameState.End)
         {
-            // highScore.text = GameManager.Instance.dataManager.HighScore.ToString("F2") + "m";
-            highScore.text = GameManager.Instance.mapManager.selectedMapScriptable.bestScore.ToString("F2") + "m";
-            modeText.text = GameManager.Instance.mapManager.selectedMapScriptable.modeText;
-            modeText.color = GameManager.Instance.mapManager.selectedMapScriptable.modeColor;
+            highScore.text = GameManager.Instance.dataManager.HighScore.ToString("F2") + "m";
             currentScore.text = _currentFloor.ToString("F2") + "m";
             diePanel.SetActive(true);
         }
