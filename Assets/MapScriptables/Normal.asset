@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Normal
   m_EditorClassIdentifier: 
   modeText: "\uB178\uB9D0"
-  modeIcon: {fileID: 21300000, guid: eb9231ae83b6a42aa9208b7274c3ba79, type: 3}
+  modeIcon: {fileID: 21300000, guid: 765aa16f6b8da41d3a2f906b3d8783f1, type: 3}
   coinWeight: 2
   waitTime: 4
   moveDistance: 1000000

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Easy
   m_EditorClassIdentifier: 
   modeText: "\uC26C\uC6C0"
-  modeIcon: {fileID: 21300000, guid: 414ef8d59a7e44cffaef0875d5f26081, type: 3}
+  modeIcon: {fileID: 680172632, guid: 59e17b3d5356c4d6e976db93b87b77bc, type: 3}
   coinWeight: 1
   waitTime: 5
   moveDistance: 1000000
