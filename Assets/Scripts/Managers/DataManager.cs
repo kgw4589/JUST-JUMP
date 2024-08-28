@@ -51,7 +51,27 @@ public class DataManager : MonoBehaviour
     
     public List<CharacterIso> characterIso = new List<CharacterIso>();
 
-    private IEnumerator Start()
+    private void Start()
+    {
+        CheckInternet();
+    }
+
+    public void CheckInternet()
+    {
+        if (!Internet.IsOkInternet())
+        {
+            Time.timeScale = 0;
+            GameManager.Instance.uiManager.OnErrorInternet();
+        }
+        else
+        {
+            Time.timeScale = 1;
+            GameManager.Instance.uiManager.OffErrorInternet();
+            StartCoroutine(StartLogic());
+        }
+    }
+
+    private IEnumerator StartLogic()
     {
         GameManager.Instance.uiManager.SetCoinUI(Coin);
         

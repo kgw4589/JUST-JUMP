@@ -106,7 +106,7 @@ public class Gacha : MonoBehaviour
     {
         Debug.Log("가챠 에러 " + errorMessage);
         gachaErrorText.text = errorMessage;
-        gachaErrorAnimator.SetTrigger("GachaError");
+        gachaErrorAnimator.SetTrigger("PopUp");
     }
 
     private void SetGachaPanel(CharacterInfo character)

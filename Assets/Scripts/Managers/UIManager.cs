@@ -38,10 +38,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject modeChangePanel; // ModePanel
     
     [Header("#UI Texts")]
-    [SerializeField] private TextMeshProUGUI _playerPosY; // PlayerPosY
-    [SerializeField] private TextMeshProUGUI _highScore; // Best Score
-    [SerializeField] private TextMeshProUGUI _currentScore; // Score
-    [SerializeField] private TextMeshProUGUI _coin; // Coin
+    [SerializeField] private TextMeshProUGUI playerPosY; // PlayerPosY
+    [SerializeField] private TextMeshProUGUI highScore; // Best Score
+    [SerializeField] private TextMeshProUGUI currentScore; // Score
+    [SerializeField] private TextMeshProUGUI coin; // Coin
+
+    [Header("#Error Internet")]
+    [SerializeField] private GameObject errorInternetPanel;
+    [SerializeField] private Animator errorInternetAnimator;
 
     public void InitObject()
     {
@@ -52,6 +56,28 @@ public class UIManager : MonoBehaviour
         diePanel.SetActive(false);
         tutorialPanel.SetActive(false);
         gachaPanel.SetActive(false);
+    }
+
+    public void OnErrorInternet()
+    {
+        if (!errorInternetPanel.activeSelf)
+        {
+            errorInternetPanel.SetActive(true);
+        }
+        else
+        {
+            errorInternetAnimator.SetTrigger("PopUp");
+        }
+    }
+
+    public void OffErrorInternet()
+    {
+        errorInternetPanel.SetActive(false);
+    }
+
+    public void OnClickCheckInternet()
+    {
+        GameManager.Instance.dataManager.CheckInternet();
     }
 
     public void OnClickStartButton()
@@ -97,7 +123,7 @@ public class UIManager : MonoBehaviour
 
     public void SetCoinUI(int haveCoin)
     {
-        _coin.text = haveCoin.ToString();
+        coin.text = haveCoin.ToString();
     }
 
     public void OnClickPauseButton()
@@ -219,14 +245,14 @@ public class UIManager : MonoBehaviour
         }
         if (GameManager.Instance.gameState == GameManager.GameState.Play)
         {
-            _playerPosY.text = GameManager.Instance.playerPosY.ToString("F2") + "m";
+            playerPosY.text = GameManager.Instance.playerPosY.ToString("F2") + "m";
             _currentFloor = Mathf.FloorToInt(GameManager.Instance.playerPosY);
         }
 
         if (GameManager.Instance.gameState == GameManager.GameState.End)
         {
-            _highScore.text = GameManager.Instance.dataManager.HighScore.ToString("F2") + "m";
-            _currentScore.text = _currentFloor.ToString("F2") + "m";
+            highScore.text = GameManager.Instance.dataManager.HighScore.ToString("F2") + "m";
+            currentScore.text = _currentFloor.ToString("F2") + "m";
             diePanel.SetActive(true);
         }
     }

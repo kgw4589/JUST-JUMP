@@ -185,10 +185,12 @@ MonoBehaviour:
   gachaPanel: {fileID: 804444356}
   charaPanel: {fileID: 1687949722}
   modeChangePanel: {fileID: 536340593}
-  _playerPosY: {fileID: 1505347242}
-  _highScore: {fileID: 631991474}
-  _currentScore: {fileID: 1294533647}
-  _coin: {fileID: 773531878}
+  playerPosY: {fileID: 1505347242}
+  highScore: {fileID: 631991474}
+  currentScore: {fileID: 1294533647}
+  coin: {fileID: 773531878}
+  errorInternetPanel: {fileID: 373983077}
+  errorInternetAnimator: {fileID: 1213622848}
 --- !u!1 &95423639
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +964,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &373983077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7762309003891838645, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+  m_PrefabInstance: {fileID: 478886813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &477124505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,6 +1280,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7936795588553851576, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 89165387}
+    - target: {fileID: 9122355383159320259, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 89165387}
@@ -2106,6 +2117,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1213622848 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2214734243330662500, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+  m_PrefabInstance: {fileID: 478886813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1252785619
 GameObject:
   m_ObjectHideFlags: 0
