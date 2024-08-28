@@ -1116,6 +1116,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 747696468079487241}
+    - target: {fileID: 269416272913444734, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_Text
+      value: "\uB178\uB9D0"
+      objectReference: {fileID: 0}
     - target: {fileID: 938796411567936904, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1160,6 +1164,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 89165387}
+    - target: {fileID: 2429103440472752109, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_Text
+      value: "\uD558\uB4DC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3094607101359822415, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_Text
+      value: "\uC26C\uC6C0"
+      objectReference: {fileID: 0}
     - target: {fileID: 3274361391733108767, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2726,6 +2738,8 @@ MonoBehaviour:
     characterPrefab: {fileID: 4834097764096836681, guid: 3f744af0d8bcd4d33a42bd8de4b2d6fb, type: 3}
   - characterImage: {fileID: 21300000, guid: 8b594e926be7f4bcab77d3762aaae2f4, type: 3}
     characterPrefab: {fileID: 673971671719322303, guid: 8a65a011979ac48cd8c3d4dd3c0d8c4b, type: 3}
+  - characterImage: {fileID: 21300000, guid: 3199ce6cb333a454a98a607e11f27618, type: 3}
+    characterPrefab: {fileID: 1298730980069718434, guid: a538015b75ef940939377f35fb42298d, type: 3}
 --- !u!4 &1823390458
 Transform:
   m_ObjectHideFlags: 0
