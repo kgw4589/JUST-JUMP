@@ -44,8 +44,8 @@ public class MapManager : MonoBehaviour
 
         _mapListScriptable = Resources.Load<MapListScriptable>("MapScriptables");
         selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
-        modeText.text = selectedMapScriptable.modeText;
-        modeIcon.sprite = selectedMapScriptable.modeIcon;
+        
+        SetModeUI();
         
         _startPos = new Vector2(0, 0);
         
@@ -89,7 +89,13 @@ public class MapManager : MonoBehaviour
     {
         selectedMapScriptable = _mapListScriptable.mapScriptableList[index];
         
+        SetModeUI();
+    }
+
+    private void SetModeUI()
+    {
         modeText.text = selectedMapScriptable.modeText;
+        modeText.color = selectedMapScriptable.modeColor;
         modeIcon.sprite = selectedMapScriptable.modeIcon;
     }
 
