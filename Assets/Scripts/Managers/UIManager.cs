@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
     [Header("#Error Internet")]
     [SerializeField] private GameObject errorInternetPanel;
     [SerializeField] private Animator errorInternetAnimator;
-    private Gacha _gacha;
+    [SerializeField] private Gacha gacha;
 
     public void InitObject()
     {
@@ -214,7 +214,7 @@ public class UIManager : MonoBehaviour
     public void OnClickGachaClose()
     {
         gachaPanel.SetActive(false);
-        _gacha.SetGachaPanelOrigin();
+        gacha.SetGachaPanelOrigin();
         GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
@@ -232,7 +232,6 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        _gacha = GetComponent<Gacha>();
         GameManager.Instance.uiManager = this;
         
         wave2DGameObject.SetActive(false);
