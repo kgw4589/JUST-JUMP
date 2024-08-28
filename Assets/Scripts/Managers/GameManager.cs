@@ -58,6 +58,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1; // game start
         gameState = GameState.Play;
         Application.targetFrameRate = 120;
+        GameManager.Instance.soundManager.PlayBgm(true);
         if (!restart)
         {
             startAction();

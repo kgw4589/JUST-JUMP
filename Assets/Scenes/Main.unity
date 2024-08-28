@@ -1167,7 +1167,7 @@ PrefabInstance:
       objectReference: {fileID: 89165387}
     - target: {fileID: 3094607101359822415, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_Text
-      value: "\uC774\uC9C0\n"
+      value: "\uC774\uC9C0"
       objectReference: {fileID: 0}
     - target: {fileID: 3274361391733108767, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
