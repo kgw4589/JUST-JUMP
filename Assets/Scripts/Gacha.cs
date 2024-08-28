@@ -95,7 +95,7 @@ public class Gacha : MonoBehaviour
         }
     }
 
-    private void SetGachaPanelOrigin()
+    public void SetGachaPanelOrigin()
     {
         gachaName.text = _GACHA_ORIGIN_NAME_MESSAGE;
         ratingText.text = _GACHA_ORIGIN_RATING_MESSAGE;
