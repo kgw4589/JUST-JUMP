@@ -17,7 +17,7 @@ MonoBehaviour:
   coinWeight: 2
   waitTime: 4
   moveDistance: 1000000
-  moveDuration: 1500000
+  moveDuration: 2500000
   maxSpeed: 2
   section:
   - 20
