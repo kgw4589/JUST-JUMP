@@ -1319,7 +1319,7 @@ GameObject:
   - component: {fileID: 4808711488604158698}
   m_Layer: 5
   m_Name: Unit DoDuk
-  m_TagString: Untagged
+  m_TagString: Skin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
