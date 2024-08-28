@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+
     
     public GameObject wave2DGameObject; // PixelWave
     
@@ -46,6 +47,7 @@ public class UIManager : MonoBehaviour
     [Header("#Error Internet")]
     [SerializeField] private GameObject errorInternetPanel;
     [SerializeField] private Animator errorInternetAnimator;
+    private Gacha _gacha;
 
     public void InitObject()
     {
@@ -212,6 +214,7 @@ public class UIManager : MonoBehaviour
     public void OnClickGachaClose()
     {
         gachaPanel.SetActive(false);
+        _gacha.SetGachaPanelOrigin();
         GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
@@ -229,6 +232,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        _gacha = GetComponent<Gacha>();
         GameManager.Instance.uiManager = this;
         
         wave2DGameObject.SetActive(false);
