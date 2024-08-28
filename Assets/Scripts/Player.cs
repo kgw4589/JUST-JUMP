@@ -70,7 +70,7 @@ public partial class Player : MonoBehaviour
         _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>(); //색 변경 컴포넌트
         //------------------------------------------------
         //게임 스탯 초기화 
-        PlayerstartPosition = transform.position;
+        PlayerstartPosition = transform.position + new Vector3(0,1f,0);
         maxPower = originMaxPower; 
         playerHp = maxplayerHp;
         gravityScale = _rd.gravityScale;
