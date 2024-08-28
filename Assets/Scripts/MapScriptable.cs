@@ -11,6 +11,8 @@ public class SectionMaps
 [System.Serializable]
 public class MapScriptable : ScriptableObject
 {
+    public string modeText; 
+        
     public int coinWeight = 1;
 
     public float waitTime = 5f;

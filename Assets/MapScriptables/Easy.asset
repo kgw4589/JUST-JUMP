@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66c7bfd552f70140aeda9aa9e7ca84f, type: 3}
   m_Name: Easy
   m_EditorClassIdentifier: 
+  modeText: "\uAC81\uC7C1\uC774\uB4E4\uC758 \uC27C\uD130"
   coinWeight: 1
   waitTime: 5
   moveDistance: 1000000

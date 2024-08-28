@@ -32,7 +32,7 @@ public class MapManager : MonoBehaviour
 
     private float _mapDestroyDistance = 50.0f;
 
-    [SerializeField] private Text modeText;
+    [SerializeField] private TextMeshProUGUI modeText;
 
     private void Awake()
     {
@@ -43,7 +43,7 @@ public class MapManager : MonoBehaviour
 
         _mapListScriptable = Resources.Load<MapListScriptable>("MapScriptables");
         selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
-        modeText.text = "MODE : " + selectedMapScriptable.name;
+        modeText.text = selectedMapScriptable.modeText;
         
         _startPos = new Vector2(0, 0);
         
@@ -87,16 +87,7 @@ public class MapManager : MonoBehaviour
     {
         selectedMapScriptable = _mapListScriptable.mapScriptableList[index];
         
-        modeText.text = "MODE : " + selectedMapScriptable.name;
-    }
-
-    public void ChangeMode(bool isMinus)
-    {
-        _mapScriptableIndex = Mathf.Abs(_mapScriptableIndex + (isMinus ? -1 : 1)) % _mapListScriptable.mapScriptableList.Count;
-        
-        selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
-        
-        modeText.text = "MODE : " + selectedMapScriptable.name;
+        modeText.text = selectedMapScriptable.modeText;
     }
 
     void Update()
