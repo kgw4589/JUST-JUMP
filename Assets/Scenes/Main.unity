@@ -2742,6 +2742,16 @@ MonoBehaviour:
     characterPrefab: {fileID: 1298730980069718434, guid: a538015b75ef940939377f35fb42298d, type: 3}
   - characterImage: {fileID: 21300000, guid: 7b1d1785941934e7aae3d342ca0875a3, type: 3}
     characterPrefab: {fileID: 2383018367457156238, guid: 30a46b7cff96e4eceb899749ff59473d, type: 3}
+  - characterImage: {fileID: 21300000, guid: b19368e3a467646408107d6a9ba8cffb, type: 3}
+    characterPrefab: {fileID: 3451225887122953806, guid: 5b775f2c4239648abb4163ee8841c115, type: 3}
+  - characterImage: {fileID: 21300000, guid: 9bbf201347c1f4ad59629714f0e1ff99, type: 3}
+    characterPrefab: {fileID: 6130853590671059307, guid: 98a5c972779d94188bafed7b71a4e45d, type: 3}
+  - characterImage: {fileID: 21300000, guid: 742df8ad000b4468da360a8d30a2d60b, type: 3}
+    characterPrefab: {fileID: 8768361461393671576, guid: bc48329c7922645bf95dbb05b95abbb1, type: 3}
+  - characterImage: {fileID: 21300000, guid: 362b8f6698899445fa81ab2dbf6f2097, type: 3}
+    characterPrefab: {fileID: 945109136258310662, guid: d12afe3269c2c4692a720162be1c10c6, type: 3}
+  - characterImage: {fileID: 21300000, guid: dec6bc76603034a56bfd0bd40b68e8f2, type: 3}
+    characterPrefab: {fileID: 6669959912563073190, guid: 0157eea0306e049e5a58df6239f97b38, type: 3}
 --- !u!4 &1823390458
 Transform:
   m_ObjectHideFlags: 0
