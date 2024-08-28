@@ -24,9 +24,6 @@ public class DataManager : MonoBehaviour
     
     private UserData _saveData;
 
-    public Sprite[] characterSprites;
-    public GameObject[] characterPrefabs;
-    
     public Dictionary<int, CharacterInfo> characterInfos = new Dictionary<int, CharacterInfo>();
     public List<CharacterInfo> haveCharacters = new List<CharacterInfo>();
 

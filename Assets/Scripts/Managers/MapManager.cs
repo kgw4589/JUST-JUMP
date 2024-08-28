@@ -33,6 +33,7 @@ public class MapManager : MonoBehaviour
     private float _mapDestroyDistance = 50.0f;
 
     [SerializeField] private TextMeshProUGUI modeText;
+    [SerializeField] private Image modeIcon;
 
     private void Awake()
     {
@@ -44,6 +45,7 @@ public class MapManager : MonoBehaviour
         _mapListScriptable = Resources.Load<MapListScriptable>("MapScriptables");
         selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
         modeText.text = selectedMapScriptable.modeText;
+        modeIcon.sprite = selectedMapScriptable.modeIcon;
         
         _startPos = new Vector2(0, 0);
         
@@ -88,6 +90,7 @@ public class MapManager : MonoBehaviour
         selectedMapScriptable = _mapListScriptable.mapScriptableList[index];
         
         modeText.text = selectedMapScriptable.modeText;
+        modeIcon.sprite = selectedMapScriptable.modeIcon;
     }
 
     void Update()

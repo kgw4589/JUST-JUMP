@@ -11,7 +11,8 @@ public class SectionMaps
 [System.Serializable]
 public class MapScriptable : ScriptableObject
 {
-    public string modeText; 
+    public string modeText;
+    public Sprite modeIcon;
         
     public int coinWeight = 1;
 
