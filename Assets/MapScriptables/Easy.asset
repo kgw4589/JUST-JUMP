@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modeText: "\uC26C\uC6C0"
   modeIcon: {fileID: 21300000, guid: 414ef8d59a7e44cffaef0875d5f26081, type: 3}
+  modeColor: {r: 0.6891341, g: 1, b: 0, a: 1}
+  bestScore: 0
   coinWeight: 1
   waitTime: 5
   moveDistance: 1000000

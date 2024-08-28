@@ -8,8 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-
-    
     public GameObject wave2DGameObject; // PixelWave
     
     private int _currentFloor;
@@ -43,6 +41,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI highScore; // Best Score
     [SerializeField] private TextMeshProUGUI currentScore; // Score
     [SerializeField] private TextMeshProUGUI coin; // Coin
+    [SerializeField] private TextMeshProUGUI modeText; // Mode Name
 
     [Header("#Error Internet")]
     [SerializeField] private GameObject errorInternetPanel;
@@ -254,7 +253,10 @@ public class UIManager : MonoBehaviour
 
         if (GameManager.Instance.gameState == GameManager.GameState.End)
         {
-            highScore.text = GameManager.Instance.dataManager.HighScore.ToString("F2") + "m";
+            // highScore.text = GameManager.Instance.dataManager.HighScore.ToString("F2") + "m";
+            highScore.text = GameManager.Instance.mapManager.selectedMapScriptable.bestScore.ToString("F2") + "m";
+            modeText.text = GameManager.Instance.mapManager.selectedMapScriptable.modeText;
+            modeText.color = GameManager.Instance.mapManager.selectedMapScriptable.modeColor;
             currentScore.text = _currentFloor.ToString("F2") + "m";
             diePanel.SetActive(true);
         }

@@ -13,6 +13,9 @@ public class MapScriptable : ScriptableObject
 {
     public string modeText;
     public Sprite modeIcon;
+    public Color modeColor;
+
+    public int bestScore;
         
     public int coinWeight = 1;
 

@@ -189,6 +189,7 @@ MonoBehaviour:
   highScore: {fileID: 631991474}
   currentScore: {fileID: 1294533647}
   coin: {fileID: 773531878}
+  modeText: {fileID: 1282893209}
   errorInternetPanel: {fileID: 373983077}
   errorInternetAnimator: {fileID: 1213622848}
   gacha: {fileID: 1988900460}
@@ -1140,10 +1141,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 89165387}
-    - target: {fileID: 1649322558189183369, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -60
-      objectReference: {fileID: 0}
     - target: {fileID: 1830318956303291649, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2205,6 +2202,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1282893209 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1574457920990169846, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+  m_PrefabInstance: {fileID: 478886813}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1294533647 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1442552880314319992, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
