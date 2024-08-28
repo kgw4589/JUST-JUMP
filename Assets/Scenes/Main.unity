@@ -224,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmSlider: {fileID: 1033646576}
   sfxSlider: {fileID: 730578010}
-  bgmClip: {fileID: 8300000, guid: 39e6a761f270f364ea71343443f88537, type: 3}
+  bgmClip: {fileID: 8300000, guid: 5cd9e7851163fb549815d1a74b8a9ed3, type: 3}
   sfxClips:
   - {fileID: 8300000, guid: 32651fe1ad0203340a065ff23863ec46, type: 3}
   - {fileID: 8300000, guid: 58a53764f5b49d14ba5564a45be67d38, type: 3}
