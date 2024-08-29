@@ -107,6 +107,7 @@ public class MapManager : Singleton<MapManager>
                 break;
         }
         SetModeUI();
+        UIManager.Instance.OnClickModeClose();
     }
 
     void Update()
