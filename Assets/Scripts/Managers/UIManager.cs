@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [Header("#UI Canvases")]
     public GameObject startUICanvas; // Start Set UI Panel
     public GameObject inGameCanvas; // In Game UI Panel
+    public GameObject tutorialImg;
     
     [Header("#UI Buttons")]
     [SerializeField] private GameObject homeButton; // HomeButton
@@ -52,6 +53,7 @@ public class UIManager : MonoBehaviour
     {
         startUICanvas.SetActive(true);
         inGameCanvas.SetActive(false);
+        tutorialImg.SetActive(false);
         wave2DGameObject.SetActive(false);
         pausePanel.SetActive(false);
         diePanel.SetActive(false);
@@ -84,6 +86,21 @@ public class UIManager : MonoBehaviour
     public void OnClickStartButton()
     {
         Debug.Log("Game Start");
+        startUICanvas.SetActive(false);
+        if (GameManager.Instance.dataManager.SaveData.IsFirstGame)
+        {
+            tutorialImg.SetActive(true);
+            GameManager.Instance.dataManager.SaveData.IsFirstGame = false;
+        }
+        else
+        {
+            OnClickTutorial();
+        }
+    }
+
+    public void OnClickTutorial()
+    {
+        tutorialImg.SetActive(false);
         wave2DGameObject.SetActive(true);
         startUICanvas.SetActive(false);
         inGameCanvas.SetActive(true);

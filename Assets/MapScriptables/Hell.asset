@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d66c7bfd552f70140aeda9aa9e7ca84f, type: 3}
   m_Name: Hell
   m_EditorClassIdentifier: 
-  modeText: "\uD558\uB4DC"
+  modeText: HARD
   modeIcon: {fileID: 21300000, guid: 2ab974ff6b4be42c78510b55c3fb1f29, type: 3}
   modeColor: {r: 0.509434, g: 0, b: 0, a: 1}
   bestScore: 0

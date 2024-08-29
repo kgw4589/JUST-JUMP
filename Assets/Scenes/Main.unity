@@ -171,6 +171,7 @@ MonoBehaviour:
   rightSort: 0
   startUICanvas: {fileID: 1306917738}
   inGameCanvas: {fileID: 1820739215}
+  tutorialImg: {fileID: 1091640400}
   homeButton: {fileID: 231768221}
   tutorialButton: {fileID: 1729192546}
   gachaButton: {fileID: 769475987}
@@ -1141,9 +1142,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 89165387}
+    - target: {fileID: 1649322558189183369, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649322558189183369, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1748413571718163862, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_text
-      value: "\uC774\uC9C0\n"
+      value: EASY
+      objectReference: {fileID: 0}
+    - target: {fileID: 1748413571718163862, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1748413571718163862, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1830318956303291649, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1185,6 +1202,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 89165387}
+    - target: {fileID: 4948424715753063551, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4948424715753063551, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 5546189073641703301, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1201,6 +1226,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1988900460}
+    - target: {fileID: 6353180045812550891, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353180045812550891, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6643584792241610276, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_Name
       value: UI Canvas
@@ -2038,6 +2071,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1091640400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 269285053864611181, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+  m_PrefabInstance: {fileID: 478886813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1157011564 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6647505020831311728, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}

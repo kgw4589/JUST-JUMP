@@ -50,6 +50,11 @@ public class DataManager : MonoBehaviour
 
     private void Start()
     {
+        if (_saveData == null)
+        {
+            _saveData = new UserData();
+            Debug.Log(_saveData.IsFirstGame);
+        }
         CheckInternet();
     }
 
