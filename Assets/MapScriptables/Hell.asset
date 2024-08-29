@@ -20,7 +20,7 @@ MonoBehaviour:
   waitTime: 3
   moveDistance: 125000
   moveDuration: 1000000
-  maxSpeed: 6
+  maxSpeed: 2.5
   section: []
   maps:
   - sectionMaps:

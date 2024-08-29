@@ -20,7 +20,7 @@ MonoBehaviour:
   waitTime: 4
   moveDistance: 100000
   moveDuration: 1000000
-  maxSpeed: 5
+  maxSpeed: 2.4
   section:
   - 20
   - 60
