@@ -85,14 +85,14 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Game Start");
         wave2DGameObject.SetActive(true);
-        GameManager.Instance.StartGame(false);
         startUICanvas.SetActive(false);
         inGameCanvas.SetActive(true);
         diePanel.SetActive(false);
         modeChangePanel.SetActive(false);
         tutorialPanel.SetActive(false);
 
-        GameManager.Instance.gameState = GameManager.GameState.Play;
+        GameManager.Instance.StartGame(false);
+        
         GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
         GameManager.Instance.soundManager.PlayBgm(true);
     }
@@ -141,9 +141,9 @@ public class UIManager : MonoBehaviour
     {
         pausePanel.SetActive(false);
         Debug.Log("Panel Close");
+        
         GameManager.Instance.StartGame(true);
-
-        GameManager.Instance.gameState = GameManager.GameState.Play;
+        
         GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.menuClose);
         GameManager.Instance.soundManager.UnPauseBGM();
     }
