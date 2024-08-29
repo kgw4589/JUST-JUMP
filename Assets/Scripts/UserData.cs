@@ -4,8 +4,12 @@ public class UserData
 {
     // private string userName;
     
-    private int _highScore;
+    private float _easyHighScore;
 
+    private float _normalHighScore;
+
+    private float _hardHighScore;
+    
     private int _coin;
 
     private bool _isFirstGame;
@@ -14,24 +18,38 @@ public class UserData
 
     public UserData()
     {
-        _highScore = 0;
+        
         _coin = 0;
         _unlockCharacters = null;
         _isFirstGame = true;
     }
 
-    public UserData(int highScore, int coin, List<int> unlockCharacters,bool isFirstGame)
+    public UserData(float easyHighScore, float normalHighScore, float hardHighScore, int coin, List<int> unlockCharacters,bool isFirstGame)
     {
-        _highScore = highScore;
+        _easyHighScore = easyHighScore;
+        _normalHighScore = normalHighScore;
+        _hardHighScore = hardHighScore;
         _coin = coin;
         _unlockCharacters = unlockCharacters;
         _isFirstGame = isFirstGame;
     }
 
-    public int HighScore
+    public float EasyHighScore
     {
-        get { return _highScore; }
-        set { _highScore = value;  }
+        get { return _easyHighScore; }
+        set { _easyHighScore = value;  }
+    }
+    
+    public float NormalHighScore
+    {
+        get { return _normalHighScore; }
+        set { _normalHighScore = value;  }
+    }
+
+    public float HardHighScore
+    {
+        get { return _hardHighScore; }
+        set { _hardHighScore = value;  }
     }
 
     public int Coin

@@ -95,7 +95,24 @@ public class MapManager : MonoBehaviour
     public void ChangeMode(int index)
     {
         selectedMapScriptable = _mapListScriptable.mapScriptableList[index];
-        
+        switch (index)
+        {
+            case 0:
+                GameManager.Instance.gameMode = GameManager.GameMode.Easy;
+                GameManager.Instance.dataManager.HighScore = GameManager.Instance.dataManager.SaveData.EasyHighScore;
+                break;
+            case 1:
+                GameManager.Instance.gameMode = GameManager.GameMode.Normal;
+                GameManager.Instance.dataManager.HighScore = GameManager.Instance.dataManager.SaveData.NormalHighScore;
+                break;
+            case 2:
+                GameManager.Instance.gameMode = GameManager.GameMode.Hard;
+                GameManager.Instance.dataManager.HighScore = GameManager.Instance.dataManager.SaveData.HardHighScore;
+                break;
+            default:
+                Debug.LogError("Index error");
+                break;
+        }
         SetModeUI();
     }
 

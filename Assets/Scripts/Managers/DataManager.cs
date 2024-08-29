@@ -20,7 +20,7 @@ public class DataManager : MonoBehaviour
     
     // save Data
     [SerializeField]
-    private int _highScore;
+    private float _highScore;
     
     private UserData _saveData;
 
@@ -55,6 +55,8 @@ public class DataManager : MonoBehaviour
             _saveData = new UserData();
             Debug.Log(_saveData.IsFirstGame);
         }
+
+        _highScore = _saveData.EasyHighScore;
         CheckInternet();
     }
 
@@ -125,7 +127,7 @@ public class DataManager : MonoBehaviour
         }
     }
     
-    public int HighScore
+    public float HighScore
     {
         get { return _highScore; }
         set { _highScore = value; }

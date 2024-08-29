@@ -23,6 +23,13 @@ public class GameManager : Singleton<GameManager>
     public Action initAction;
     public Action startAction;
 
+    public enum GameMode
+    {
+        Easy,
+        Normal,
+        Hard
+    }
+
     public enum GameState
     {
         Ready,
@@ -32,7 +39,8 @@ public class GameManager : Singleton<GameManager>
     }
 
     public GameState gameState = GameState.Ready;
-
+    public GameMode gameMode = GameMode.Easy;
+    
     protected override void Init()
     {
         Time.timeScale = 0; // game stop
@@ -88,10 +96,22 @@ public class GameManager : Singleton<GameManager>
         //     }
         // }
         
-        if (playerPosY > mapManager.selectedMapScriptable.bestScore)
+        if (playerPosY > dataManager.HighScore)
         {
-            mapManager.selectedMapScriptable.bestScore = (int)playerPosY;
-            // _saveData.highScore = _highScore;
+            Debug.LogError("갱신");
+            dataManager.HighScore = playerPosY;
+            switch (gameMode)
+            {
+                case GameMode.Easy:
+                    dataManager.SaveData.EasyHighScore = playerPosY;
+                    break;
+                case GameMode.Normal:
+                    dataManager.SaveData.NormalHighScore = playerPosY;
+                    break;
+                case GameMode.Hard:
+                    dataManager.SaveData.HardHighScore = playerPosY;
+                    break;
+            }
             try {
                 firebaseManager.GetSaveInDB(JsonUtility.ToJson(dataManager.SaveData));
                 firebaseManager.WriteRanking();

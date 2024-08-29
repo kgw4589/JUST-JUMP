@@ -125,7 +125,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
 
     public void WriteRanking()
     {
-        PlayGamesPlatform.Instance.ReportScore(GameManager.Instance.dataManager.HighScore, GPGSIds.leaderboard, (bool success) =>
+        PlayGamesPlatform.Instance.ReportScore((int)GameManager.Instance.dataManager.HighScore, GPGSIds.leaderboard, (bool success) =>
         {
             if (success)
             {
@@ -136,7 +136,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
                 Debug.Log("Ranking Update failed");
             }
         });
-}
+    }
 
     public void GetSaveInDB(string value)
     {

@@ -270,8 +270,7 @@ public class UIManager : MonoBehaviour
 
         if (GameManager.Instance.gameState == GameManager.GameState.End)
         {
-            // highScore.text = GameManager.Instance.dataManager.HighScore.ToString("F2") + "m";
-            highScore.text = GameManager.Instance.mapManager.selectedMapScriptable.bestScore.ToString("F2") + "m";
+            highScore.text = GameManager.Instance.dataManager.HighScore.ToString("F2") + "m";
             modeText.text = GameManager.Instance.mapManager.selectedMapScriptable.modeText;
             modeText.color = GameManager.Instance.mapManager.selectedMapScriptable.modeColor;
             currentScore.text = _currentFloor.ToString("F2") + "m";
