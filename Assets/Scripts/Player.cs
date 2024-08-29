@@ -178,7 +178,7 @@ public partial class Player : MonoBehaviour
             //Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
 
             _endPosition = Input.mousePosition;
-            _direction = (_startPosition - _endPosition) /5f;
+            _direction = (_startPosition - _endPosition) /3f;
             jumpPower = _direction.magnitude / 20;
             if (jumpPower > maxPower)
             {
