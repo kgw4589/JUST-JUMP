@@ -4238,6 +4238,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 478886814}
     - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
+      propertyPath: MoveSpeed
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: PausePanel
       value: 
       objectReference: {fileID: 846314673}
