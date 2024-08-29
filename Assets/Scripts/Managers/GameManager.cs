@@ -12,12 +12,7 @@ public class GameManager : Singleton<GameManager>
 {
     // GameObjects
     public Player player;
-    public MapManager mapManager;
-    public UIManager uiManager;
-    public DataManager dataManager;
-    public SoundManager soundManager;
-    public FireBaseManager firebaseManager;
-    
+
     public float playerPosY;
 
     public Action initAction;
@@ -66,7 +61,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1; // game start
         gameState = GameState.Play;
         Application.targetFrameRate = 60;
-        GameManager.Instance.soundManager.PlayBgm(true);
+        SoundManager.Instance.PlayBgm(true);
         if (!restart)
         {
             startAction();
@@ -78,7 +73,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0; // game pause (stop)
         gameState = GameState.Pause;
         Application.targetFrameRate = 30;
-        soundManager.PauseBGM();
+        SoundManager.Instance.PauseBGM();
     }
     
     private void GameOver()
@@ -96,25 +91,25 @@ public class GameManager : Singleton<GameManager>
         //     }
         // }
         
-        if (playerPosY > dataManager.HighScore)
+        if (playerPosY > DataManager.Instance.HighScore)
         {
             Debug.LogError("갱신");
-            dataManager.HighScore = playerPosY;
+            DataManager.Instance.HighScore = playerPosY;
             switch (gameMode)
             {
                 case GameMode.Easy:
-                    dataManager.SaveData.EasyHighScore = playerPosY;
+                    DataManager.Instance.SaveData.EasyHighScore = playerPosY;
                     break;
                 case GameMode.Normal:
-                    dataManager.SaveData.NormalHighScore = playerPosY;
+                    DataManager.Instance.SaveData.NormalHighScore = playerPosY;
                     break;
                 case GameMode.Hard:
-                    dataManager.SaveData.HardHighScore = playerPosY;
+                    DataManager.Instance.SaveData.HardHighScore = playerPosY;
                     break;
             }
             try {
-                firebaseManager.GetSaveInDB(JsonUtility.ToJson(dataManager.SaveData));
-                firebaseManager.WriteRanking();
+                FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(DataManager.Instance.SaveData));
+                FireBaseManager.Instance.WriteRanking();
             } catch (Exception e) {
                 Debug.Log(e);
                 gameState = GameState.End;
@@ -124,7 +119,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0;
         gameState = GameState.End;
         Application.targetFrameRate = 30;
-        soundManager.PlayBgm(false);
+        SoundManager.Instance.PlayBgm(false);
     }
 
     private void Update()

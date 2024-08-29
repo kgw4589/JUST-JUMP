@@ -41,7 +41,7 @@ public class GameOverZone : MonoBehaviour
 
     IEnumerator MoveUpAfterWait()
     {
-        float _timeConsol = GameManager.Instance.mapManager.selectedMapScriptable.waitTime;
+        float _timeConsol = MapManager.Instance.selectedMapScriptable.waitTime;
 
         while (_timeConsol > 0)
         {
@@ -56,9 +56,9 @@ public class GameOverZone : MonoBehaviour
 
         float _elapsedTime = 0f; // Elapsed Time
         float _currentSpeed = 0f; // speed
-        float _maxSpeed = GameManager.Instance.mapManager.selectedMapScriptable.maxSpeed;
-        float _accel = GameManager.Instance.mapManager.selectedMapScriptable.moveDistance
-                       / GameManager.Instance.mapManager.selectedMapScriptable.moveDuration; // accelerlation
+        float _maxSpeed = MapManager.Instance.selectedMapScriptable.maxSpeed;
+        float _accel = MapManager.Instance.selectedMapScriptable.moveDistance
+                       / MapManager.Instance.selectedMapScriptable.moveDuration; // accelerlation
         
         while (_elapsedTime < _moveDuration)
         {

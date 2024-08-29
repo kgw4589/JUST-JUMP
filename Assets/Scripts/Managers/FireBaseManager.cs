@@ -19,7 +19,6 @@ public class FireBaseManager : Singleton<FireBaseManager>
     
     protected override void Init()
     {
-        GameManager.Instance.firebaseManager = this;
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
         
@@ -99,7 +98,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
                 Debug.Log("Load failed : " + task.Exception);
             }
 
-            GameManager.Instance.dataManager.SaveData = JsonUtility.FromJson<UserData>(snapshot.GetRawJsonValue());
+            DataManager.Instance.SaveData = JsonUtility.FromJson<UserData>(snapshot.GetRawJsonValue());
         });
     }
 
@@ -125,7 +124,7 @@ public class FireBaseManager : Singleton<FireBaseManager>
 
     public void WriteRanking()
     {
-        PlayGamesPlatform.Instance.ReportScore((int)GameManager.Instance.dataManager.HighScore, GPGSIds.leaderboard, (bool success) =>
+        PlayGamesPlatform.Instance.ReportScore((int)DataManager.Instance.HighScore, GPGSIds.leaderboard, (bool success) =>
         {
             if (success)
             {
