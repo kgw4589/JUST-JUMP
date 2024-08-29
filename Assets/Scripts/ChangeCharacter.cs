@@ -39,7 +39,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             RigthButton.SetActive(true);
         }
-        if (_characterIndex == GameManager.Instance.dataManager.haveCharacters.Count -1)
+        if (_characterIndex == DataManager.Instance.haveCharacters.Count -1)
         {
             LeftButton.SetActive(false);
         }
@@ -47,9 +47,9 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
-        NowCharacterText.text = GameManager.Instance.dataManager.haveCharacters[_characterIndex].characterName;
-        ViewCharacterImage.sprite = GameManager.Instance.dataManager.
-            characterIso[GameManager.Instance.dataManager.haveCharacters[_characterIndex].characterIndex].characterImage;
+        NowCharacterText.text = DataManager.Instance.haveCharacters[_characterIndex].characterName;
+        ViewCharacterImage.sprite = DataManager.Instance.
+            characterIso[DataManager.Instance.haveCharacters[_characterIndex].characterIndex].characterImage;
         
     }
     
@@ -61,7 +61,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             Destroy(DeletObject);
         }
-        _selectCharacter = GameManager.Instance.dataManager.characterIso[GameManager.Instance.dataManager.haveCharacters[_characterIndex].characterIndex].characterPrefab;
+        _selectCharacter = DataManager.Instance.characterIso[DataManager.Instance.haveCharacters[_characterIndex].characterIndex].characterPrefab;
         _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);
 
@@ -74,7 +74,7 @@ public class ChangeCharacter : MonoBehaviour
             _skin.gameObject.transform.localPosition = new Vector3(0, -2f, 0);
             _skin.gameObject.transform.localScale = new Vector3(2.5f, 4, 1);
 
-            GameManager.Instance.uiManager.OnClickCharaChangeClose();
+            UIManager.Instance.OnClickCharaChangeClose();
     }
 
     public void LeftButtonPush()
@@ -87,7 +87,7 @@ public class ChangeCharacter : MonoBehaviour
     public void RightButtonPush()
     {
         
-        if (_characterIndex != GameManager.Instance.dataManager.haveCharacters.Count -1)
+        if (_characterIndex != DataManager.Instance.haveCharacters.Count -1)
         {
             _characterIndex ++;
         }

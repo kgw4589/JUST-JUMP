@@ -7,7 +7,7 @@ using System.Text;
 using Unity.VisualScripting;
 using UnityEngine.Networking;
 
-public class DataManager : MonoBehaviour
+public class DataManager : Singleton<DataManager>
 {
     private string _sheetData;
     private const string _sheetURL ="https://docs.google.com/spreadsheets/d/1fXMD0-E3BzRYGxw1NP9vNgQME82UK3_nQsQUexYfYzo/export?format=tsv&range=A2:D";
@@ -35,7 +35,7 @@ public class DataManager : MonoBehaviour
         set
         {
             _coin = value;
-            GameManager.Instance.uiManager.SetCoinUI(_coin);
+            UIManager.Instance.SetCoinUI(_coin);
         }
     }
 
@@ -47,6 +47,14 @@ public class DataManager : MonoBehaviour
     }
     
     public List<CharacterIso> characterIso = new List<CharacterIso>();
+
+    protected override void Init()
+    {
+        if (_highScore == null)
+        {
+            _highScore = 0;
+        }
+    }
 
     private void Start()
     {
@@ -65,19 +73,19 @@ public class DataManager : MonoBehaviour
         if (!Internet.IsOkInternet())
         {
             Time.timeScale = 0;
-            GameManager.Instance.uiManager.OnErrorInternet();
+            UIManager.Instance.OnErrorInternet();
         }
         else
         {
             Time.timeScale = 1;
-            GameManager.Instance.uiManager.OffErrorInternet();
+            UIManager.Instance.OffErrorInternet();
             StartCoroutine(StartLogic());
         }
     }
 
     private IEnumerator StartLogic()
     {
-        GameManager.Instance.uiManager.SetCoinUI(Coin);
+        UIManager.Instance.SetCoinUI(Coin);
         
         using (UnityWebRequest www = UnityWebRequest.Get(_sheetURL))
         {
@@ -114,16 +122,6 @@ public class DataManager : MonoBehaviour
             }
             
             characterInfos.Add(characterInfo.characterId, characterInfo);
-        }
-    }
-
-    private void Awake()
-    {
-        GameManager.Instance.dataManager = this;
-        
-        if (_highScore == null)
-        {
-            _highScore = 0;
         }
     }
     

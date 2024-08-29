@@ -1,15 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Security.Permissions;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MapManager : MonoBehaviour
+public class MapManager : Singleton<MapManager>
 {
     private MapListScriptable _mapListScriptable;
     public MapScriptable selectedMapScriptable;
@@ -35,10 +30,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI modeText;
     [SerializeField] private Image modeIcon;
 
-    private void Awake()
+    protected override void Init()
     {
-        GameManager.Instance.mapManager = this;
-        
         _mapSectionIndex = 0;
         _mapScriptableIndex = 0;
 
@@ -99,15 +92,15 @@ public class MapManager : MonoBehaviour
         {
             case 0:
                 GameManager.Instance.gameMode = GameManager.GameMode.Easy;
-                GameManager.Instance.dataManager.HighScore = GameManager.Instance.dataManager.SaveData.EasyHighScore;
+                DataManager.Instance.HighScore = DataManager.Instance.SaveData.EasyHighScore;
                 break;
             case 1:
                 GameManager.Instance.gameMode = GameManager.GameMode.Normal;
-                GameManager.Instance.dataManager.HighScore = GameManager.Instance.dataManager.SaveData.NormalHighScore;
+                DataManager.Instance.HighScore = DataManager.Instance.SaveData.NormalHighScore;
                 break;
             case 2:
                 GameManager.Instance.gameMode = GameManager.GameMode.Hard;
-                GameManager.Instance.dataManager.HighScore = GameManager.Instance.dataManager.SaveData.HardHighScore;
+                DataManager.Instance.HighScore = DataManager.Instance.SaveData.HardHighScore;
                 break;
             default:
                 Debug.LogError("Index error");

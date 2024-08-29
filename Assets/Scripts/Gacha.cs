@@ -36,9 +36,9 @@ public class Gacha : MonoBehaviour
 
     private IEnumerator Start()
     {
-        yield return new WaitUntil(() => GameManager.Instance.dataManager.characterInfos.Count > 0);
-        Debug.Log(GameManager.Instance.dataManager.characterInfos.Count);
-        foreach (var characterInfo in GameManager.Instance.dataManager.characterInfos)
+        yield return new WaitUntil(() => DataManager.Instance.characterInfos.Count > 0);
+        Debug.Log(DataManager.Instance.characterInfos.Count);
+        foreach (var characterInfo in DataManager.Instance.characterInfos)
         {
             if (!_characterInfos.ContainsKey(characterInfo.Value.characterRating))
             {
@@ -65,14 +65,14 @@ public class Gacha : MonoBehaviour
         {
             GachaError(_HAVE_ALL_CHARACTER_MESSAGE);
         }
-        else if (GameManager.Instance.dataManager.Coin < _COIN_PRICE)
+        else if (DataManager.Instance.Coin < _COIN_PRICE)
         {
             GachaError(_HAVE_NO_COIN_MESSAGE);
         }
         else
         {
             SelectRating();
-            GameManager.Instance.dataManager.Coin -= _COIN_PRICE;
+            DataManager.Instance.Coin -= _COIN_PRICE;
         }
     }
 
@@ -113,7 +113,7 @@ public class Gacha : MonoBehaviour
     {
         gachaName.text = character.characterName;
         ratingText.text = character.characterRating.ToString();
-        gachaImage.sprite = GameManager.Instance.dataManager.characterIso[character.characterIndex].characterImage;
+        gachaImage.sprite = DataManager.Instance.characterIso[character.characterIndex].characterImage;
     }
 
     private void SelectedCharacter(Probability probability)
@@ -122,8 +122,8 @@ public class Gacha : MonoBehaviour
         _characterInfos[probability].Remove(selectedCharacter);
 
         Debug.Log(selectedCharacter.characterName);
-        // GameManager.Instance.dataManager.SaveData.UnlockCharacters.Add(selectedCharacter.characterId);
-        GameManager.Instance.dataManager.haveCharacters.Add(selectedCharacter);
+        // DataManager.Instance.SaveData.UnlockCharacters.Add(selectedCharacter.characterId);
+        DataManager.Instance.haveCharacters.Add(selectedCharacter);
         SetGachaPanel(selectedCharacter);
         
         if (_characterInfos[probability].Count <= 0)

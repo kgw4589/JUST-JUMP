@@ -196,7 +196,7 @@ public partial class Player : MonoBehaviour
 
         if (_isDragging && Input.GetMouseButtonUp(0) && IsJumpAble())
         {
-            GameManager.Instance.soundManager.PlaySfx(SoundManager.Sfx.jump);
+            SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
             _animator.SetTrigger("isJump");
             StartCoroutine(Jump(_direction));

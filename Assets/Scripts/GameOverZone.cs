@@ -41,7 +41,7 @@ public class GameOverZone : MonoBehaviour
 
     IEnumerator MoveUpAfterWait()
     {
-        float _timeConsol = GameManager.Instance.mapManager.selectedMapScriptable.waitTime;
+        float _timeConsol = MapManager.Instance.selectedMapScriptable.waitTime;
 
         while (_timeConsol > 0)
         {
@@ -56,9 +56,9 @@ public class GameOverZone : MonoBehaviour
 
         float _elapsedTime = 0f; // Elapsed Time
         float _currentSpeed = 0f; // speed
-        float _maxSpeed = GameManager.Instance.mapManager.selectedMapScriptable.maxSpeed;
-        float _accel = GameManager.Instance.mapManager.selectedMapScriptable.moveDistance
-                       / GameManager.Instance.mapManager.selectedMapScriptable.moveDuration; // accelerlation
+        float _maxSpeed = MapManager.Instance.selectedMapScriptable.maxSpeed;
+        float _accel = MapManager.Instance.selectedMapScriptable.moveDistance
+                       / MapManager.Instance.selectedMapScriptable.moveDuration; // accelerlation
         
         while (_elapsedTime < _moveDuration)
         {
@@ -67,7 +67,7 @@ public class GameOverZone : MonoBehaviour
             {
                 _currentSpeed = _maxSpeed;
             }
-            Debug.Log(_currentSpeed);
+            
             _currentSpeed += _accel * Time.deltaTime; // speed Up
             transform.position = Vector3.MoveTowards(transform.position, endPosition, _currentSpeed * Time.deltaTime);
             _elapsedTime += Time.deltaTime;
@@ -81,16 +81,6 @@ public class GameOverZone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // _contactTime += Time.deltaTime;
-            //
-            // if (_contactTime >= _timeSecond)
-            // {
-            //     _player.curruentTime = 0;
-            //     _contactCnt++;
-            //     _player.Damage();
-            //     Debug.Log($"Player Cnt : {_contactCnt}(s)");
-            //     _contactTime = 0f;
-            // }
             _player.Damage();
         }
     }
