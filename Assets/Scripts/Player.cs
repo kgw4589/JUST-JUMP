@@ -12,6 +12,8 @@ public partial class Player : MonoBehaviour
     public Button RButton;
     public Button LButton;
     [Range(0, 0.09f)] [SerializeField] private float MoveSpeed = 0.05f;
+    [Range(0, 5)] [SerializeField] public float sensitivity = 3f;
+    [SerializeField] private Slider sensiSlider;
         
     
     [SerializeField]
@@ -91,6 +93,7 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
+        sensitivity = sensiSlider.value;
         if (_animator == null)
         {
             InitAnimation();
@@ -178,7 +181,7 @@ public partial class Player : MonoBehaviour
             //Vector2 playerLook = Camera.main.ScreenToWorldPoint(myPos);
 
             _endPosition = Input.mousePosition;
-            _direction = (_startPosition - _endPosition) /3f;
+            _direction = (_startPosition - _endPosition) / sensitivity;
             jumpPower = _direction.magnitude / 20;
             if (jumpPower > maxPower)
             {
