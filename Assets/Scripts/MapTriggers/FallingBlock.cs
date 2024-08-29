@@ -72,6 +72,7 @@ public class FallingBlock : MapTriggerBasicLogic
                    }
                    else
                    {
+                       _up = true;
                        effect.SetActive(false);
                    }
 
