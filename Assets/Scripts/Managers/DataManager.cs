@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using System.Text;
 using Unity.VisualScripting;
+using UnityEngine.Android;
 using UnityEngine.Networking;
 
 public class DataManager : Singleton<DataManager>
@@ -50,21 +51,15 @@ public class DataManager : Singleton<DataManager>
 
     protected override void Init()
     {
-        if (_highScore == null)
+        if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageRead))
         {
-            _highScore = 0;
+            Permission.RequestUserPermission(Permission.ExternalStorageRead);
         }
-    }
-
-    private void Start()
-    {
-        if (_saveData == null)
+        if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
         {
-            _saveData = new UserData();
-            Debug.Log(_saveData.IsFirstGame);
+            Permission.RequestUserPermission(Permission.ExternalStorageWrite);
         }
-
-        _highScore = _saveData.EasyHighScore;
+        SaveManager.Instance.LoadUserData();
         CheckInternet();
     }
 
@@ -122,6 +117,22 @@ public class DataManager : Singleton<DataManager>
             }
             
             characterInfos.Add(characterInfo.characterId, characterInfo);
+        }
+
+        if (_saveData.UnlockCharacters == null)
+        {
+            return;
+        }
+        
+        foreach (var i in _saveData.UnlockCharacters)
+        {
+            foreach (var j in characterInfos.Keys)
+            {
+                if (i == j)
+                {
+                    haveCharacters.Add(characterInfos[j]);
+                }
+            }
         }
     }
     

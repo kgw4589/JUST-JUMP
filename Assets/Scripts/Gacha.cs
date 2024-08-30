@@ -136,11 +136,12 @@ public class Gacha : MonoBehaviour
         else
         {
             newCharacterText.SetActive(true);
-            // DataManager.Instance.SaveData.UnlockCharacters.Add(selectedCharacter.characterId);
+            DataManager.Instance.SaveData.UnlockCharacters.Add(selectedCharacter.characterId);
             DataManager.Instance.haveCharacters.Add(selectedCharacter);
         }
 
         Debug.Log(selectedCharacter.characterName);
+        SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
         SetGachaPanel(selectedCharacter);
     }
 }

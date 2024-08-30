@@ -39,10 +39,9 @@ public class GameManager : Singleton<GameManager>
     protected override void Init()
     {
         Time.timeScale = 0; // game stop
-        // _highScore = _saveData.highScore;
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
-        // Debug.Log(_saveData.highScore);
+        SaveManager.Instance.LoadUserData();
     }
     
     public void InitObjects()
@@ -78,22 +77,8 @@ public class GameManager : Singleton<GameManager>
     
     private void GameOver()
     {
-        // if (playerPosY > dataManager.HighScore)
-        // {
-        //     dataManager.HighScore = (int)playerPosY;
-        //     // _saveData.highScore = _highScore;
-        //     try {
-        //         firebaseManager.GetSaveInDB(JsonUtility.ToJson(dataManager.SaveData));
-        //         firebaseManager.WriteRanking();
-        //     } catch (Exception e) {
-        //         Debug.Log(e);
-        //         gameState = GameState.End;
-        //     }
-        // }
-        
         if (playerPosY > DataManager.Instance.HighScore)
         {
-            Debug.LogError("갱신");
             DataManager.Instance.HighScore = playerPosY;
             switch (gameMode)
             {
@@ -107,13 +92,14 @@ public class GameManager : Singleton<GameManager>
                     DataManager.Instance.SaveData.HardHighScore = playerPosY;
                     break;
             }
-            try {
-                FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(DataManager.Instance.SaveData));
-                FireBaseManager.Instance.WriteRanking();
-            } catch (Exception e) {
-                Debug.Log(e);
-                gameState = GameState.End;
-            }
+            // try {
+            //     FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(DataManager.Instance.SaveData));
+            //     FireBaseManager.Instance.WriteRanking();
+            // } catch (Exception e) {
+            //     Debug.Log(e);
+            //     gameState = GameState.End;
+            // }
+            SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
         }
         
         Time.timeScale = 0;
@@ -137,7 +123,9 @@ public class GameManager : Singleton<GameManager>
         }
 
     }
-    
 
-    
+    private void OnApplicationQuit()
+    {
+        SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
+    }
 }

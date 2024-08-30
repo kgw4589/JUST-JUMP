@@ -234,17 +234,17 @@ public class UIManager : Singleton<UIManager>
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
 
-    public void OnClickRanking()
-    {
-        if (FireBaseManager.Instance != null)
-        {
-            FireBaseManager.Instance.ShowLeaderBoard();
-        }
-        else
-        {
-            Debug.Log("Show failed : FirebaseManager is null");
-        }
-    }
+    // public void OnClickRanking()
+    // {
+    //     if (FireBaseManager.Instance != null)
+    //     {
+    //         FireBaseManager.Instance.ShowLeaderBoard();
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("Show failed : FirebaseManager is null");
+    //     }
+    // }
 
     protected override void Init()
     {

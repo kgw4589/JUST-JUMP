@@ -8,7 +8,7 @@ using Firebase.Extensions;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 
-public class FireBaseManager : Singleton<FireBaseManager>
+public class FireBaseManager : MonoBehaviour
 {
     private string _authCode;
     private FirebaseAuth _auth;
@@ -17,29 +17,29 @@ public class FireBaseManager : Singleton<FireBaseManager>
     private DatabaseReference _userReference;
     private FirebaseUser _user;
     
-    protected override void Init()
-    {
-        PlayGamesPlatform.DebugLogEnabled = true;
-        PlayGamesPlatform.Activate();
-        
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
-        {
-            if (task.Result == DependencyStatus.Available)
-            {
-                PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
-            }
-            else
-            {
-                Debug.Log("Could not resolve all Firebase dependencies: " + task.Result);
-            }
-        });
-
-        _app = FirebaseApp.DefaultInstance;
-        _auth = FirebaseAuth.DefaultInstance;
-        _dbReference = FirebaseDatabase.DefaultInstance.RootReference;
-        
-        FireBaseLogin();
-    }
+    // protected override void Init()
+    // {
+    //     PlayGamesPlatform.DebugLogEnabled = true;
+    //     PlayGamesPlatform.Activate();
+    //     
+    //     FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+    //     {
+    //         if (task.Result == DependencyStatus.Available)
+    //         {
+    //             PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+    //         }
+    //         else
+    //         {
+    //             Debug.Log("Could not resolve all Firebase dependencies: " + task.Result);
+    //         }
+    //     });
+    //
+    //     _app = FirebaseApp.DefaultInstance;
+    //     _auth = FirebaseAuth.DefaultInstance;
+    //     _dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+    //     
+    //     FireBaseLogin();
+    // }
 
     private void ProcessAuthentication(SignInStatus status)
     {

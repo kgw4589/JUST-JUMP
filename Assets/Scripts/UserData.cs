@@ -15,16 +15,18 @@ public class UserData
     private bool _isFirstGame;
     
     private List<int> _unlockCharacters;
-
+    
     public UserData()
     {
-        
+        _easyHighScore = 0;
+        _normalHighScore = 0;
+        _hardHighScore = 0;
         _coin = 0;
         _unlockCharacters = null;
         _isFirstGame = true;
     }
 
-    public UserData(float easyHighScore, float normalHighScore, float hardHighScore, int coin, List<int> unlockCharacters,bool isFirstGame)
+    public UserData(float easyHighScore, float normalHighScore, float hardHighScore, int coin, List<int> unlockCharacters,bool isFirstGame, float bgmVolume, float sfxVolume)
     {
         _easyHighScore = easyHighScore;
         _normalHighScore = normalHighScore;
