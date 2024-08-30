@@ -98,7 +98,7 @@ public class DataManager : MonoBehaviour
                 characterIndex = int.Parse(columns[_SHEET_CHARACTER_INDEX_INDEX])
             };
             
-            if (characterInfo.characterId == 0)
+            if (_saveData.unlockCharacters.Count <= 0 && characterInfo.characterId == 0)
             {
                 Debug.Log(characterInfo);
                 _saveData.unlockCharacters = new List<int> { characterInfo.characterId };
