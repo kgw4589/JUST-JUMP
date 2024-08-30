@@ -141,16 +141,17 @@ public class Gacha : MonoBehaviour
             GameManager.Instance.datamanager.SaveData.coin += _PAYBACK_COIN;
             UIManager.Instance.SetCoinUI(GameManager.Instance.datamanager.SaveData.coin);
             UIManager.Instance.ShowPayback();
+            SaveManager.Instance.GetSaveUserData(GameManager.Instance.datamanager.SaveData);
         }
         else
         {
             newCharacterText.SetActive(true);
             UIManager.Instance.hidePayback();
             GameManager.Instance.datamanager.SaveData.unlockCharacters.Add(selectedCharacter.characterId);
+            SaveManager.Instance.GetSaveUserData(GameManager.Instance.datamanager.SaveData);
         }
 
         Debug.Log(selectedCharacter.characterName);
-        SaveManager.Instance.GetSaveUserData(GameManager.Instance.datamanager.SaveData);
         SetGachaPanel(selectedCharacter);
     }
 }
