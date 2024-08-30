@@ -3276,8 +3276,6 @@ RectTransform:
   - {fileID: 62768357343762985}
   - {fileID: 8199051552182276344}
   - {fileID: 8915162024170951584}
-  - {fileID: 6544678359258256886}
-  - {fileID: 2107798328343878117}
   - {fileID: 959070595195493770}
   m_Father: {fileID: 7362910963498496458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6416,7 +6414,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4439582384775680449}
-  m_Father: {fileID: 4974269653805358834}
+  m_Father: {fileID: 7362910963498496458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -7144,6 +7142,8 @@ RectTransform:
   m_Children:
   - {fileID: 7943438839160909548}
   - {fileID: 4974269653805358834}
+  - {fileID: 6544678359258256886}
+  - {fileID: 2107798328343878117}
   - {fileID: 1163226082899781780}
   - {fileID: 6887334442151673514}
   m_Father: {fileID: 0}
@@ -10287,7 +10287,7 @@ RectTransform:
   - {fileID: 3178593361974903894}
   - {fileID: 848519715986947695}
   - {fileID: 4129085739889920589}
-  m_Father: {fileID: 4974269653805358834}
+  m_Father: {fileID: 7362910963498496458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10698,7 +10698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345591233596119718, guid: 972ce372564524532aaa93b20c3c7121, type: 3}
       propertyPath: m_text
-      value: Gamdo
+      value: Sens
       objectReference: {fileID: 0}
     - target: {fileID: 345591233596119718, guid: 972ce372564524532aaa93b20c3c7121, type: 3}
       propertyPath: m_fontAsset
@@ -10909,11 +10909,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345591233572540019, guid: 972ce372564524532aaa93b20c3c7121, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 345591233572540019, guid: 972ce372564524532aaa93b20c3c7121, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 345591233596119716, guid: 972ce372564524532aaa93b20c3c7121, type: 3}
       propertyPath: m_Pivot.y
@@ -11632,11 +11632,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 345591233572540019, guid: 972ce372564524532aaa93b20c3c7121, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 345591233572540019, guid: 972ce372564524532aaa93b20c3c7121, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 345591233596119716, guid: 972ce372564524532aaa93b20c3c7121, type: 3}
       propertyPath: m_Pivot.x

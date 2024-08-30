@@ -10,7 +10,7 @@ public class UIManager : Singleton<UIManager>
 {
     public GameObject wave2DGameObject; // PixelWave
     
-    private int _currentFloor;
+    private float _currentFloor;
     [SerializeField]
     private bool rightSort = false;
     
@@ -148,7 +148,10 @@ public class UIManager : Singleton<UIManager>
     public void OnClickPauseButton()
     {
         Debug.Log("Game Pause");
-        GameManager.Instance.PauseGame();
+        if (inGameCanvas.activeSelf)
+        {
+            GameManager.Instance.PauseGame();
+        }
         pausePanel.SetActive(true);
 
         GameManager.Instance.gameState = GameManager.GameState.Pause;
@@ -159,9 +162,11 @@ public class UIManager : Singleton<UIManager>
     {
         pausePanel.SetActive(false);
         Debug.Log("Panel Close");
-        
-        GameManager.Instance.StartGame(true);
-        
+
+        if (inGameCanvas.activeSelf)
+        {
+            GameManager.Instance.StartGame(true);
+        }
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
         SoundManager.Instance.UnPauseBGM();
     }
@@ -169,8 +174,13 @@ public class UIManager : Singleton<UIManager>
     public void OnClickHomeButton()
     {
         Debug.Log("Go Home");
+
+        if (inGameCanvas.activeSelf)
+        {
+            GameManager.Instance.InitObjects();
+        }
         
-        GameManager.Instance.InitObjects();
+        pausePanel.SetActive(false);
         
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
@@ -274,7 +284,7 @@ public class UIManager : Singleton<UIManager>
         if (GameManager.Instance.gameState == GameManager.GameState.Play)
         {
             playerPosY.text = GameManager.Instance.playerPosY.ToString("F2") + "m";
-            _currentFloor = Mathf.FloorToInt(GameManager.Instance.playerPosY);
+            _currentFloor = GameManager.Instance.playerPosY;
         }
 
         if (GameManager.Instance.gameState == GameManager.GameState.End)
