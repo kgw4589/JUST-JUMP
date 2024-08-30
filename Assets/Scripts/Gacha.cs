@@ -140,10 +140,12 @@ public class Gacha : MonoBehaviour
         {
             GameManager.Instance.datamanager.SaveData.coin += _PAYBACK_COIN;
             UIManager.Instance.SetCoinUI(GameManager.Instance.datamanager.SaveData.coin);
+            UIManager.Instance.ShowPayback();
         }
         else
         {
             newCharacterText.SetActive(true);
+            UIManager.Instance.hidePayback();
             GameManager.Instance.datamanager.SaveData.unlockCharacters.Add(selectedCharacter.characterId);
         }
 

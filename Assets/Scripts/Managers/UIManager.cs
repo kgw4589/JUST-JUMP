@@ -43,7 +43,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private TextMeshProUGUI currentScore; // Score
     [SerializeField] private TextMeshProUGUI coin; // Coin
     [SerializeField] private TextMeshProUGUI modeText; // Mode Name
-
+    [SerializeField] private GameObject paybackText;
+    
     [Header("#Error Internet")]
     [SerializeField] private GameObject errorInternetPanel;
     [SerializeField] private Animator errorInternetAnimator;
@@ -245,6 +246,16 @@ public class UIManager : Singleton<UIManager>
     //         Debug.Log("Show failed : FirebaseManager is null");
     //     }
     // }
+
+    public void ShowPayback()
+    {
+        paybackText.SetActive(true);
+    }
+
+    public void hidePayback()
+    {
+        paybackText.SetActive(false);
+    }
 
     protected override void Init()
     {
