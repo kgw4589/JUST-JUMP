@@ -82,8 +82,8 @@ public class Gacha : MonoBehaviour
         {
             newCharacterText.SetActive(false);
             
-            SelectRating();
             GameManager.Instance.datamanager.SaveData.coin -= _COIN_PRICE;
+            SelectRating();
             UIManager.Instance.SetCoinUI(GameManager.Instance.datamanager.SaveData.coin);
         }
     }
