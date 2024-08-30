@@ -10,9 +10,9 @@ public class Gacha : MonoBehaviour
 {
     public enum Probability
     {
-        Normal = 700,
-        Epic = 600,
-        Legend = 500
+        Normal = 500,
+        Epic = 400,
+        Legend = 100
     }
     private int _totalProbability;
     private int _currentPivot;
