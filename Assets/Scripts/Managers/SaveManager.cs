@@ -5,25 +5,26 @@ using UnityEngine;
 
 public class SaveManager : Singleton<SaveManager>
 {
-    private string _savePath;    
+    private string _savePath;
     
     private void SaveUserData(UserData userData)
     {
+        _savePath = Application.persistentDataPath + "/SaveData.json";
         string jsonData = JsonUtility.ToJson(userData);
-        _savePath = Path.Combine(Application.persistentDataPath, "SaveData.json");
         File.WriteAllText(_savePath, jsonData);
     }
 
     public void LoadUserData()
     {
-        _savePath = Path.Combine(Application.persistentDataPath, "SaveData.json");
+        _savePath = Application.persistentDataPath + "/SaveData.json";
         if (!File.Exists(_savePath))
         {
-            DataManager.Instance.SaveData = new UserData();
+            GameManager.Instance.datamanager.SaveData = new UserData();
             return;
         }
         string jsonData = File.ReadAllText(_savePath);
-        DataManager.Instance.SaveData = JsonUtility.FromJson<UserData>(jsonData);
+        GameManager.Instance.datamanager.SaveData = JsonUtility.FromJson<UserData>(jsonData);
+        Debug.Log("Complete");
     }
 
     public void GetSaveUserData(UserData userData)

@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine.Android;
 using UnityEngine.Networking;
 
-public class DataManager : Singleton<DataManager>
+public class DataManager : MonoBehaviour
 {
     private string _sheetData;
     private const string _sheetURL ="https://docs.google.com/spreadsheets/d/1fXMD0-E3BzRYGxw1NP9vNgQME82UK3_nQsQUexYfYzo/export?format=tsv&range=A2:D";
@@ -28,18 +28,6 @@ public class DataManager : Singleton<DataManager>
     public Dictionary<int, CharacterInfo> characterInfos = new Dictionary<int, CharacterInfo>();
     public List<CharacterInfo> haveCharacters = new List<CharacterInfo>();
 
-    // 임시 더미 로직.
-    private int _coin = 500;
-    public int Coin
-    {
-        get { return _coin; }
-        set
-        {
-            _coin = value;
-            UIManager.Instance.SetCoinUI(_coin);
-        }
-    }
-
     [Serializable]
     public class CharacterIso
     {
@@ -49,8 +37,10 @@ public class DataManager : Singleton<DataManager>
     
     public List<CharacterIso> characterIso = new List<CharacterIso>();
 
-    protected override void Init()
+    private void Awake()
     {
+        GameManager.Instance.datamanager = this;
+
         if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageRead))
         {
             Permission.RequestUserPermission(Permission.ExternalStorageRead);
@@ -60,9 +50,14 @@ public class DataManager : Singleton<DataManager>
             Permission.RequestUserPermission(Permission.ExternalStorageWrite);
         }
         SaveManager.Instance.LoadUserData();
+        if (_saveData == null)
+        {
+            _saveData = new UserData();
+        }
+        UIManager.Instance.SetCoinUI(_saveData.coin);
         CheckInternet();
     }
-
+    
     public void CheckInternet()
     {
         if (!Internet.IsOkInternet())
@@ -80,7 +75,7 @@ public class DataManager : Singleton<DataManager>
 
     private IEnumerator StartLogic()
     {
-        UIManager.Instance.SetCoinUI(Coin);
+        UIManager.Instance.SetCoinUI(SaveData.coin);
         
         using (UnityWebRequest www = UnityWebRequest.Get(_sheetURL))
         {
@@ -112,29 +107,15 @@ public class DataManager : Singleton<DataManager>
             
             if (characterInfo.characterId == 0)
             {
-                haveCharacters.Add(characterInfo);
+                Debug.Log(characterInfo);
+                _saveData.unlockCharacters = new List<int> { characterInfo.characterId };
                 continue;
             }
             
             characterInfos.Add(characterInfo.characterId, characterInfo);
         }
-
-        if (_saveData.UnlockCharacters == null)
-        {
-            return;
-        }
-        
-        foreach (var i in _saveData.UnlockCharacters)
-        {
-            foreach (var j in characterInfos.Keys)
-            {
-                if (i == j)
-                {
-                    haveCharacters.Add(characterInfos[j]);
-                }
-            }
-        }
     }
+    
     
     public float HighScore
     {

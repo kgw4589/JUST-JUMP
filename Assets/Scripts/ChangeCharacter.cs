@@ -13,7 +13,7 @@ public class ChangeCharacter : MonoBehaviour
     public TextMeshProUGUI NowCharacterText;
 
     private GameObject _selectCharacter; //  고른 캐릭터
-    private int _characterIndex = 0;      //현재 화면에 보일 캐릭터 인덱스임
+    private int _characterId = 1;      //현재 화면에 보일 캐릭터 ID
     
     private GameObject _player;           // 적용될 플레이어
     
@@ -25,13 +25,13 @@ public class ChangeCharacter : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindWithTag("Player");
-        _characterIndex = 0;
+        _characterId = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_characterIndex == 0)
+        if (_characterId == 1)
         {
             RigthButton.SetActive(false);
         }
@@ -39,7 +39,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             RigthButton.SetActive(true);
         }
-        if (_characterIndex == DataManager.Instance.haveCharacters.Count -1)
+        if (_characterId == GameManager.Instance.datamanager.SaveData.unlockCharacters.Count -1)
         {
             LeftButton.SetActive(false);
         }
@@ -47,9 +47,9 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
-        NowCharacterText.text = DataManager.Instance.haveCharacters[_characterIndex].characterName;
-        ViewCharacterImage.sprite = DataManager.Instance.
-            characterIso[DataManager.Instance.haveCharacters[_characterIndex].characterIndex].characterImage;
+        NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterName;
+        ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIso
+            [GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
         
     }
     
@@ -61,11 +61,12 @@ public class ChangeCharacter : MonoBehaviour
         {
             Destroy(DeletObject);
         }
-        _selectCharacter = DataManager.Instance.characterIso[DataManager.Instance.haveCharacters[_characterIndex].characterIndex].characterPrefab;
+        _selectCharacter = GameManager.Instance.datamanager.characterIso[GameManager.Instance.datamanager.characterInfos
+            [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterPrefab;
         _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);
 
-        // if (_characterIndex == 0)
+        // if (_characterId == 0)
         // {
         //     _skin.gameObject.transform.localPosition = new Vector3(0, -0.4f, 0);
         //     _skin.gameObject.transform.localScale = new Vector3(5, 7, 0);
@@ -79,17 +80,17 @@ public class ChangeCharacter : MonoBehaviour
 
     public void LeftButtonPush()
     {
-        if (_characterIndex != 0)
+        if (_characterId != 0)
         {
-            _characterIndex--;
+            _characterId--;
         }
     }
     public void RightButtonPush()
     {
         
-        if (_characterIndex != DataManager.Instance.haveCharacters.Count -1)
+        if (_characterId != GameManager.Instance.datamanager.SaveData.unlockCharacters.Count -1)
         {
-            _characterIndex ++;
+            _characterId ++;
         }
     }
     //

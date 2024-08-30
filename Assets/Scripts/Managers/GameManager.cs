@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
 {
     // GameObjects
     public Player player;
+    public DataManager datamanager;
 
     public float playerPosY;
 
@@ -41,7 +42,6 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0; // game stop
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
-        SaveManager.Instance.LoadUserData();
     }
     
     public void InitObjects()
@@ -77,19 +77,19 @@ public class GameManager : Singleton<GameManager>
     
     private void GameOver()
     {
-        if (playerPosY > DataManager.Instance.HighScore)
+        if (playerPosY > datamanager.HighScore)
         {
-            DataManager.Instance.HighScore = playerPosY;
+            datamanager.HighScore = playerPosY;
             switch (gameMode)
             {
                 case GameMode.Easy:
-                    DataManager.Instance.SaveData.EasyHighScore = playerPosY;
+                    datamanager.SaveData.easyHighScore = playerPosY;
                     break;
                 case GameMode.Normal:
-                    DataManager.Instance.SaveData.NormalHighScore = playerPosY;
+                    datamanager.SaveData.normalHighScore = playerPosY;
                     break;
                 case GameMode.Hard:
-                    DataManager.Instance.SaveData.HardHighScore = playerPosY;
+                    datamanager.SaveData.hardHighScore = playerPosY;
                     break;
             }
             // try {
@@ -99,7 +99,7 @@ public class GameManager : Singleton<GameManager>
             //     Debug.Log(e);
             //     gameState = GameState.End;
             // }
-            SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
+            SaveManager.Instance.GetSaveUserData(datamanager.SaveData);
         }
         
         Time.timeScale = 0;
@@ -126,6 +126,6 @@ public class GameManager : Singleton<GameManager>
 
     private void OnApplicationQuit()
     {
-        SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
+        SaveManager.Instance.GetSaveUserData(datamanager.SaveData);
     }
 }

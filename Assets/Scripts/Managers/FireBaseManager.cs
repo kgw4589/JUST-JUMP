@@ -98,7 +98,7 @@ public class FireBaseManager : MonoBehaviour
                 Debug.Log("Load failed : " + task.Exception);
             }
 
-            DataManager.Instance.SaveData = JsonUtility.FromJson<UserData>(snapshot.GetRawJsonValue());
+            GameManager.Instance.datamanager.SaveData = JsonUtility.FromJson<UserData>(snapshot.GetRawJsonValue());
         });
     }
 
@@ -124,7 +124,7 @@ public class FireBaseManager : MonoBehaviour
 
     public void WriteRanking()
     {
-        PlayGamesPlatform.Instance.ReportScore((int)DataManager.Instance.HighScore, GPGSIds.leaderboard, (bool success) =>
+        PlayGamesPlatform.Instance.ReportScore((int)GameManager.Instance.datamanager.HighScore, GPGSIds.leaderboard, (bool success) =>
         {
             if (success)
             {

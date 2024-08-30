@@ -4,71 +4,35 @@ public class UserData
 {
     // private string userName;
     
-    private float _easyHighScore;
+    public float easyHighScore;
 
-    private float _normalHighScore;
+    public float normalHighScore;
 
-    private float _hardHighScore;
+    public float hardHighScore;
     
-    private int _coin;
+    public int coin;
 
-    private bool _isFirstGame;
+    public bool isFirstGame;
     
-    private List<int> _unlockCharacters;
+    public List<int> unlockCharacters;
     
     public UserData()
     {
-        _easyHighScore = 0;
-        _normalHighScore = 0;
-        _hardHighScore = 0;
-        _coin = 0;
-        _unlockCharacters = null;
-        _isFirstGame = true;
+        easyHighScore = 0;
+        normalHighScore = 0;
+        hardHighScore = 0;
+        coin = 50;
+        unlockCharacters = new List<int>();
+        isFirstGame = true;
     }
 
     public UserData(float easyHighScore, float normalHighScore, float hardHighScore, int coin, List<int> unlockCharacters,bool isFirstGame, float bgmVolume, float sfxVolume)
     {
-        _easyHighScore = easyHighScore;
-        _normalHighScore = normalHighScore;
-        _hardHighScore = hardHighScore;
-        _coin = coin;
-        _unlockCharacters = unlockCharacters;
-        _isFirstGame = isFirstGame;
-    }
-
-    public float EasyHighScore
-    {
-        get { return _easyHighScore; }
-        set { _easyHighScore = value;  }
-    }
-    
-    public float NormalHighScore
-    {
-        get { return _normalHighScore; }
-        set { _normalHighScore = value;  }
-    }
-
-    public float HardHighScore
-    {
-        get { return _hardHighScore; }
-        set { _hardHighScore = value;  }
-    }
-
-    public int Coin
-    {
-        get { return _coin; }
-        set { _coin = value; }
-    }
-
-    public List<int> UnlockCharacters
-    {
-        get { return _unlockCharacters; }
-        set { _unlockCharacters = value; }
-    }
-
-    public bool IsFirstGame
-    {
-        get { return _isFirstGame; }
-        set { _isFirstGame = value; }
+        this.easyHighScore = easyHighScore;
+        this.normalHighScore = normalHighScore;
+        this.hardHighScore = hardHighScore;
+        this.coin = coin;
+        this.unlockCharacters = unlockCharacters;
+        this.isFirstGame = isFirstGame;
     }
 }

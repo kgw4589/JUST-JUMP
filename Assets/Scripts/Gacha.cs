@@ -40,9 +40,9 @@ public class Gacha : MonoBehaviour
 
     private IEnumerator Start()
     {
-        yield return new WaitUntil(() => DataManager.Instance.characterInfos.Count > 0);
-        Debug.Log(DataManager.Instance.characterInfos.Count);
-        foreach (var characterInfo in DataManager.Instance.characterInfos)
+        yield return new WaitUntil(() => GameManager.Instance.datamanager.characterInfos.Count > 0);
+        Debug.Log(GameManager.Instance.datamanager.characterInfos.Count);
+        foreach (var characterInfo in GameManager.Instance.datamanager.characterInfos)
         {
             if (!_characterInfos.ContainsKey(characterInfo.Value.characterRating))
             {
@@ -69,7 +69,7 @@ public class Gacha : MonoBehaviour
         {
             GachaError(_HAVE_ALL_CHARACTER_MESSAGE);
         }
-        else if (DataManager.Instance.Coin < _COIN_PRICE)
+        else if (GameManager.Instance.datamanager.SaveData.coin < _COIN_PRICE)
         {
             GachaError(_HAVE_NO_COIN_MESSAGE);
         }
@@ -78,7 +78,7 @@ public class Gacha : MonoBehaviour
             newCharacterText.SetActive(false);
             
             SelectRating();
-            DataManager.Instance.Coin -= _COIN_PRICE;
+            GameManager.Instance.datamanager.SaveData.coin -= _COIN_PRICE;
         }
     }
 
@@ -122,26 +122,26 @@ public class Gacha : MonoBehaviour
     {
         gachaName.text = character.characterName;
         ratingText.text = character.characterRating.ToString();
-        gachaImage.sprite = DataManager.Instance.characterIso[character.characterIndex].characterImage;
+        Debug.Log(character.characterIndex + " " + GameManager.Instance.datamanager.characterIso.Count);
+        gachaImage.sprite = GameManager.Instance.datamanager.characterIso[character.characterIndex].characterImage;
     }
 
     private void SelectedCharacter(Probability probability)
     {
         CharacterInfo selectedCharacter = _characterInfos[probability][Random.Range(0, _characterInfos[probability].Count)];
         
-        if (DataManager.Instance.haveCharacters.Contains(selectedCharacter))
+        if (GameManager.Instance.datamanager.SaveData.unlockCharacters.Contains(selectedCharacter.characterId))
         {
-            DataManager.Instance.Coin += _PAYBACK_COIN;
+            GameManager.Instance.datamanager.SaveData.coin += _PAYBACK_COIN;
         }
         else
         {
             newCharacterText.SetActive(true);
-            DataManager.Instance.SaveData.UnlockCharacters.Add(selectedCharacter.characterId);
-            DataManager.Instance.haveCharacters.Add(selectedCharacter);
+            GameManager.Instance.datamanager.SaveData.unlockCharacters.Add(selectedCharacter.characterId);
         }
 
         Debug.Log(selectedCharacter.characterName);
-        SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
+        SaveManager.Instance.GetSaveUserData(GameManager.Instance.datamanager.SaveData);
         SetGachaPanel(selectedCharacter);
     }
 }

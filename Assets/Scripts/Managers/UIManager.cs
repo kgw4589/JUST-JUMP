@@ -80,17 +80,17 @@ public class UIManager : Singleton<UIManager>
 
     public void OnClickCheckInternet()
     {
-        DataManager.Instance.CheckInternet();
+        GameManager.Instance.datamanager.CheckInternet();
     }
 
     public void OnClickStartButton()
     {
         Debug.Log("Game Start");
         startUICanvas.SetActive(false);
-        if (DataManager.Instance.SaveData.IsFirstGame)
+        if (GameManager.Instance.datamanager.SaveData.isFirstGame)
         {
             tutorialImg.SetActive(true);
-            DataManager.Instance.SaveData.IsFirstGame = false;
+            GameManager.Instance.datamanager.SaveData.isFirstGame = false;
         }
         else
         {
@@ -268,7 +268,7 @@ public class UIManager : Singleton<UIManager>
 
         if (GameManager.Instance.gameState == GameManager.GameState.End)
         {
-            highScore.text = DataManager.Instance.HighScore.ToString("F2") + "m";
+            highScore.text = GameManager.Instance.datamanager.HighScore.ToString("F2") + "m";
             modeText.text = MapManager.Instance.selectedMapScriptable.modeText;
             modeText.color = MapManager.Instance.selectedMapScriptable.modeColor;
             currentScore.text = _currentFloor.ToString("F2") + "m";

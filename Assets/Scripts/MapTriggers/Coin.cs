@@ -9,8 +9,7 @@ public class Coin : MapTriggerBasicLogic
 
     protected override void EnterEvent()
     {
-        // GameManager.Instance.dataManager.SaveData.Coin += price;
-        DataManager.Instance.Coin += _PRICE * MapManager.Instance.selectedMapScriptable.coinWeight;
+        GameManager.Instance.datamanager.SaveData.coin += _PRICE * MapManager.Instance.selectedMapScriptable.coinWeight;
         gameObject.SetActive(false);
     }
 
