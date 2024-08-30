@@ -22,12 +22,16 @@ public class Gacha : MonoBehaviour
     private const int _COIN_PRICE = 10;  
     
     [Header("#UI Gacha")]
+    [SerializeField] private GameObject newCharacterText;
+    
     [SerializeField] private Sprite originGachaImage;
     [SerializeField] private TextMeshProUGUI ratingText;
     [SerializeField] private TextMeshProUGUI gachaName;
     [SerializeField] private Image gachaImage;
     [SerializeField] private TextMeshProUGUI gachaErrorText;
     [SerializeField] private Animator gachaErrorAnimator;
+
+    private const int _PAYBACK_COIN = 5;
     
     private const string _GACHA_ORIGIN_NAME_MESSAGE = "캐릭터 뽑기";
     private const string _GACHA_ORIGIN_RATING_MESSAGE = "10 코인";
@@ -71,6 +75,8 @@ public class Gacha : MonoBehaviour
         }
         else
         {
+            newCharacterText.SetActive(false);
+            
             SelectRating();
             DataManager.Instance.Coin -= _COIN_PRICE;
         }
@@ -100,6 +106,9 @@ public class Gacha : MonoBehaviour
         gachaName.text = _GACHA_ORIGIN_NAME_MESSAGE;
         ratingText.text = _GACHA_ORIGIN_RATING_MESSAGE;
         gachaImage.sprite = originGachaImage;
+        
+        newCharacterText.SetActive(false);
+        
     }
 
     private void GachaError(string errorMessage)
@@ -119,22 +128,19 @@ public class Gacha : MonoBehaviour
     private void SelectedCharacter(Probability probability)
     {
         CharacterInfo selectedCharacter = _characterInfos[probability][Random.Range(0, _characterInfos[probability].Count)];
-        _characterInfos[probability].Remove(selectedCharacter);
+        
+        if (DataManager.Instance.haveCharacters.Contains(selectedCharacter))
+        {
+            DataManager.Instance.Coin += _PAYBACK_COIN;
+        }
+        else
+        {
+            newCharacterText.SetActive(true);
+        }
 
         Debug.Log(selectedCharacter.characterName);
         // DataManager.Instance.SaveData.UnlockCharacters.Add(selectedCharacter.characterId);
         DataManager.Instance.haveCharacters.Add(selectedCharacter);
         SetGachaPanel(selectedCharacter);
-        
-        if (_characterInfos[probability].Count <= 0)
-        {
-            _characterInfos.Remove(probability);
-            Debug.Log(probability + " 등급의 모든 캐릭터를 뽑음");
-            foreach (var characterInfo in _characterInfos)
-            {
-                _totalProbability = 0;
-                _totalProbability += (int)characterInfo.Key;
-            }
-        }
     }
 }

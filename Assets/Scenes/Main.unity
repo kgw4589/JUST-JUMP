@@ -3371,6 +3371,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d5efdd4530dfd4e9576c97922f3753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2020158248 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1465429339434137063, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+  m_PrefabInstance: {fileID: 478886813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2078060728
 GameObject:
   m_ObjectHideFlags: 0
@@ -4374,6 +4379,10 @@ PrefabInstance:
       propertyPath: gachaErrorText
       value: 
       objectReference: {fileID: 538774046434013764}
+    - target: {fileID: 374461434915741713, guid: d44a105fa3cfcbc49b9f1f5d0ccf0cca, type: 3}
+      propertyPath: newCharacterText
+      value: 
+      objectReference: {fileID: 2020158248}
     - target: {fileID: 374461434915741713, guid: d44a105fa3cfcbc49b9f1f5d0ccf0cca, type: 3}
       propertyPath: gachaErrorAnimator
       value: 

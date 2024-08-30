@@ -28,7 +28,7 @@ public class DataManager : Singleton<DataManager>
     public List<CharacterInfo> haveCharacters = new List<CharacterInfo>();
 
     // 임시 더미 로직.
-    private int _coin = 50;
+    private int _coin = 500;
     public int Coin
     {
         get { return _coin; }
