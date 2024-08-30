@@ -26,16 +26,7 @@ public class DataManager : MonoBehaviour
     private UserData _saveData;
 
     public Dictionary<int, CharacterInfo> characterInfos = new Dictionary<int, CharacterInfo>();
-    public List<CharacterInfo> haveCharacters = new List<CharacterInfo>();
-
-    [Serializable]
-    public class CharacterIso
-    {
-        public Sprite characterImage;
-        public GameObject characterPrefab;
-    }
-    
-    public List<CharacterIso> characterIso = new List<CharacterIso>();
+    public CharacterIsoScriptable characterIsoScriptableObject;
 
     private void Awake()
     {
@@ -56,6 +47,8 @@ public class DataManager : MonoBehaviour
         }
         UIManager.Instance.SetCoinUI(_saveData.coin);
         CheckInternet();
+
+        characterIsoScriptableObject = Resources.Load<CharacterIsoScriptable>("Character Iso");
     }
     
     public void CheckInternet()
@@ -109,7 +102,6 @@ public class DataManager : MonoBehaviour
             {
                 Debug.Log(characterInfo);
                 _saveData.unlockCharacters = new List<int> { characterInfo.characterId };
-                continue;
             }
             
             characterInfos.Add(characterInfo.characterId, characterInfo);

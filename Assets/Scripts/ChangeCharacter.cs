@@ -13,7 +13,7 @@ public class ChangeCharacter : MonoBehaviour
     public TextMeshProUGUI NowCharacterText;
 
     private GameObject _selectCharacter; //  고른 캐릭터
-    private int _characterId = 1;      //현재 화면에 보일 캐릭터 ID
+    private int _characterId = 0;      //현재 화면에 보일 캐릭터 ID
     
     private GameObject _player;           // 적용될 플레이어
     
@@ -25,13 +25,13 @@ public class ChangeCharacter : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindWithTag("Player");
-        _characterId = 1;
+        _characterId = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_characterId == 1)
+        if (_characterId == 0)
         {
             RigthButton.SetActive(false);
         }
@@ -48,7 +48,7 @@ public class ChangeCharacter : MonoBehaviour
             LeftButton.SetActive(true);
         }
         NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterName;
-        ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIso
+        ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso
             [GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
         
     }
@@ -61,7 +61,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             Destroy(DeletObject);
         }
-        _selectCharacter = GameManager.Instance.datamanager.characterIso[GameManager.Instance.datamanager.characterInfos
+        _selectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[GameManager.Instance.datamanager.characterInfos
             [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterPrefab;
         _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);

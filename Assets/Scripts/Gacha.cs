@@ -44,6 +44,11 @@ public class Gacha : MonoBehaviour
         Debug.Log(GameManager.Instance.datamanager.characterInfos.Count);
         foreach (var characterInfo in GameManager.Instance.datamanager.characterInfos)
         {
+            if (characterInfo.Value.characterId == 0)
+            {
+                continue;
+            }
+            
             if (!_characterInfos.ContainsKey(characterInfo.Value.characterRating))
             {
                 _characterInfos.Add(characterInfo.Value.characterRating, new List<CharacterInfo>(){characterInfo.Value});
@@ -79,6 +84,7 @@ public class Gacha : MonoBehaviour
             
             SelectRating();
             GameManager.Instance.datamanager.SaveData.coin -= _COIN_PRICE;
+            UIManager.Instance.SetCoinUI(GameManager.Instance.datamanager.SaveData.coin);
         }
     }
 
@@ -122,8 +128,8 @@ public class Gacha : MonoBehaviour
     {
         gachaName.text = character.characterName;
         ratingText.text = character.characterRating.ToString();
-        Debug.Log(character.characterIndex + " " + GameManager.Instance.datamanager.characterIso.Count);
-        gachaImage.sprite = GameManager.Instance.datamanager.characterIso[character.characterIndex].characterImage;
+        Debug.Log(character.characterIndex + " " + GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count);
+        gachaImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[character.characterIndex].characterImage;
     }
 
     private void SelectedCharacter(Probability probability)
@@ -133,6 +139,7 @@ public class Gacha : MonoBehaviour
         if (GameManager.Instance.datamanager.SaveData.unlockCharacters.Contains(selectedCharacter.characterId))
         {
             GameManager.Instance.datamanager.SaveData.coin += _PAYBACK_COIN;
+            UIManager.Instance.SetCoinUI(GameManager.Instance.datamanager.SaveData.coin);
         }
         else
         {
