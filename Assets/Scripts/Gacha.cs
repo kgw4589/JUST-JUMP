@@ -82,7 +82,6 @@ public class Gacha : MonoBehaviour
         {
             newCharacterText.SetActive(false);
             
-            GameManager.Instance.datamanager.SaveData.coin -= _COIN_PRICE;
             SelectRating();
             UIManager.Instance.SetCoinUI(GameManager.Instance.datamanager.SaveData.coin);
         }
@@ -135,6 +134,7 @@ public class Gacha : MonoBehaviour
     private void SelectedCharacter(Probability probability)
     {
         CharacterInfo selectedCharacter = _characterInfos[probability][Random.Range(0, _characterInfos[probability].Count)];
+        GameManager.Instance.datamanager.SaveData.coin -= _COIN_PRICE;
         
         if (GameManager.Instance.datamanager.SaveData.unlockCharacters.Contains(selectedCharacter.characterId))
         {
