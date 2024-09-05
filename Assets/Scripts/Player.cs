@@ -8,10 +8,10 @@ using UnityEngine.EventSystems;
 public partial class Player : MonoBehaviour
 {
     private Animator _animator;
-    public GameObject PausePanel;
-    public Button RButton;
-    public Button LButton;
-    [Range(0, 0.09f)] [SerializeField] private float MoveSpeed = 0.05f;
+    public GameObject pausePanel;
+    public Button rButton;
+    public Button lButton;
+    [Range(0, 0.09f)] [SerializeField] private float moveSpeed = 0.05f;
     [Range(0, 5)] [SerializeField] public float sensitivity = 3f;
     [SerializeField] private Slider sensiSlider;
         
@@ -20,9 +20,9 @@ public partial class Player : MonoBehaviour
     private float playerHp = 5;
     [SerializeField]
     private float maxplayerHp = 5;
-    private Vector3 PlayerstartPosition;
+    private Vector3 _playerstartPosition;
 
-    public Slider PlayerHpBar;
+    public Slider playerHpBar;
     public bool isHitWave = false;
     public Image image;
     public float curruentTime = 0f;
@@ -38,7 +38,7 @@ public partial class Player : MonoBehaviour
     private float gravityScale;
     public bool isDie = false;
     [SerializeField]
-    private bool _isJump = false;
+    private bool isJump = false;
     public float jumpPower = 0;
     [SerializeField] 
     private float originMaxPower = 8f;
@@ -69,10 +69,10 @@ public partial class Player : MonoBehaviour
         _collider = GetComponent<Collider2D>();
         _lineRenderer = GetComponent<LineRenderer>(); 
         _rd = GetComponent<Rigidbody2D>();
-        _playerHpBarColor = PlayerHpBar.fillRect.GetComponent<Image>(); //색 변경 컴포넌트
+        _playerHpBarColor = playerHpBar.fillRect.GetComponent<Image>(); //색 변경 컴포넌트
         //------------------------------------------------
         //게임 스탯 초기화 
-        PlayerstartPosition = transform.position + new Vector3(0,1f,0);
+        _playerstartPosition = transform.position + new Vector3(0,1f,0);
         maxPower = originMaxPower; 
         playerHp = maxplayerHp;
         gravityScale = _rd.gravityScale;
@@ -114,7 +114,7 @@ public partial class Player : MonoBehaviour
         if (_isRigthButtonPush && !_isDragging && IsJumpAble())
         {
            
-            transform.position += new Vector3(MoveSpeed, 0, 0);
+            transform.position += new Vector3(moveSpeed, 0, 0);
             if (!_isRight)
             {
                 TurnPlayer();   
@@ -123,7 +123,7 @@ public partial class Player : MonoBehaviour
         else if (_isLeftButtonPush && !_isDragging && IsJumpAble())
         {
            
-            transform.position += new Vector3(-MoveSpeed, 0, 0);
+            transform.position += new Vector3(-moveSpeed, 0, 0);
             if (_isRight)
             {
                 TurnPlayer();   
@@ -133,17 +133,17 @@ public partial class Player : MonoBehaviour
         {
             isDie = true;
         }
-        PlayerHpBar.value = playerHp / maxplayerHp;
+        playerHpBar.value = playerHp / maxplayerHp;
         
-        if (PlayerHpBar.value >= 0.8f)
+        if (playerHpBar.value >= 0.8f)
         {
             _playerHpBarColor.color = Color.cyan;
         }
-        else if (PlayerHpBar.value >= 0.5f)
+        else if (playerHpBar.value >= 0.5f)
         {
             _playerHpBarColor.color = Color.yellow;
         }
-        else if (PlayerHpBar.value >= 0.2f)
+        else if (playerHpBar.value >= 0.2f)
         { 
             _playerHpBarColor.color = Color.red;
         }
@@ -159,8 +159,8 @@ public partial class Player : MonoBehaviour
     
         if (Input.GetMouseButtonDown(0) && (EventSystem.current.currentSelectedGameObject))
         {//클릭한게 Ui인지 확인해서 리턴함
-            if (EventSystem.current.currentSelectedGameObject.name == LButton.name || 
-                EventSystem.current.currentSelectedGameObject.name == RButton.name)
+            if (EventSystem.current.currentSelectedGameObject.name == lButton.name || 
+                EventSystem.current.currentSelectedGameObject.name == rButton.name)
             {
                 Debug.Log(EventSystem.current.currentSelectedGameObject.name);
                 return;
@@ -220,7 +220,7 @@ public partial class Player : MonoBehaviour
 
     bool IsJumpAble()
     {
-        if ( !_isJump && !isDie && !PausePanel.activeSelf && GameManager.Instance.gameState is GameManager.GameState.Play)
+        if ( !isJump && !isDie && !pausePanel.activeSelf && GameManager.Instance.gameState is GameManager.GameState.Play)
         {//현재 게임상태가 펄스거나 점프안하고 있거나 안죽었거나 펄스판넬이 없을때
             return true;
         }
@@ -247,7 +247,7 @@ public partial class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             
-            _isJump = false;
+            isJump = false;
            
         }
     }
@@ -321,7 +321,7 @@ public partial class Player : MonoBehaviour
         
         yield return new WaitForSeconds(0.09f);
         
-        _isJump = true;
+        isJump = true;
         _lineRenderer.transform.position = transform.position;
         _lineRenderer.enabled = false;
     }
@@ -338,7 +338,7 @@ public partial class Player : MonoBehaviour
         playerHp = maxplayerHp;
         jumpPower = 0;
         maxPower = originMaxPower;
-        transform.position = PlayerstartPosition;
+        transform.position = _playerstartPosition;
         curruentTime = 0;
         Debug.Log("리셋");
     }
