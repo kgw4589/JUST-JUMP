@@ -301,7 +301,7 @@ MonoBehaviour:
   currentScore: {fileID: 1442552880775118821}
   coin: {fileID: 1896902757633997976}
   modeText: {fileID: 1574457921333391723}
-  paybackText: {fileID: 0}
+  paybackText: {fileID: 1512106840116009809, guid: 133deeadfe05b20429090d68ef23e402, type: 3}
   errorInternetPanel: {fileID: 7762309003413108008}
   errorInternetAnimator: {fileID: 2214734243657227257}
   gacha: {fileID: 1988900460}
@@ -2334,6 +2334,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1217831376 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5151128199477028019, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+  m_PrefabInstance: {fileID: 478886813}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1252785619
 GameObject:
   m_ObjectHideFlags: 0
@@ -4269,7 +4280,7 @@ PrefabInstance:
     - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: image
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1217831376}
     - target: {fileID: 6429097256749598456, guid: f08be030c5cdbc742aa1c794e642c09c, type: 3}
       propertyPath: LButton
       value: 

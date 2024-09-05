@@ -24,7 +24,7 @@ public partial class Player : MonoBehaviour
 
     public Slider playerHpBar;
     public bool isHitWave = false;
-    public Image image;
+    
     public float curruentTime = 0f;
     private float _healTime = 1f;
 
@@ -77,7 +77,6 @@ public partial class Player : MonoBehaviour
         playerHp = maxplayerHp;
         gravityScale = _rd.gravityScale;
         
-        image.gameObject.SetActive(false);
         _lineRenderer.enabled = false;
         
         GameManager.Instance.initAction += InitObject;
