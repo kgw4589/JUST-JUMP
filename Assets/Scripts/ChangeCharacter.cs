@@ -9,14 +9,19 @@ using Image = UnityEngine.UI.Image;
 
 public class ChangeCharacter : MonoBehaviour
 {
-    public Image ViewCharacterImage;   // 화면에 보일 이미지
+    [SerializeField] private bool isUnLockCharacter;
+    public GameObject lockCharacterText;
+
+
+    public Image ViewCharacterImage; // 화면에 보일 이미지
     public TextMeshProUGUI NowCharacterText;
 
     private GameObject _selectCharacter; //  고른 캐릭터
-    private int _characterId = 0;      //현재 화면에 보일 캐릭터 ID
-    
-    private GameObject _player;           // 적용될 플레이어
-    
+    private GameObject _nowSelectCharacter; //  고른 캐릭터
+    private int _characterId = 0; //현재 화면에 보일 캐릭터 ID
+
+    private GameObject _player; // 적용될 플레이어
+
     private GameObject _skin; // 
 
     public GameObject RigthButton;
@@ -31,7 +36,6 @@ public class ChangeCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"{_characterId},{GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count -1} dksl");
         if (_characterId == 0)
         {
             RigthButton.SetActive(false);
@@ -40,7 +44,8 @@ public class ChangeCharacter : MonoBehaviour
         {
             RigthButton.SetActive(true);
         }
-        if (_characterId == GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count -1)
+
+        if (_characterId == GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count - 1)
         {
             LeftButton.SetActive(false);
         }
@@ -48,6 +53,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
+
         // NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterName;
         NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterName;
         // ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso
@@ -55,8 +61,10 @@ public class ChangeCharacter : MonoBehaviour
         //         [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
         ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject
             .characterIso[_characterId].characterImage;
+        _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
+            .characterPrefab;
     }
-    
+
 
     public void Apply()
     {
@@ -65,23 +73,17 @@ public class ChangeCharacter : MonoBehaviour
         {
             Destroy(DeletObject);
         }
+
         // _selectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[GameManager.Instance.datamanager.characterInfos
         //     [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterPrefab;
-        _selectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
-            .characterPrefab;
+        _selectCharacter = _nowSelectCharacter;
         _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);
 
-        // if (_characterId == 0)
-        // {
-        //     _skin.gameObject.transform.localPosition = new Vector3(0, -0.4f, 0);
-        //     _skin.gameObject.transform.localScale = new Vector3(5, 7, 0);
-        // }
-        
-            _skin.gameObject.transform.localPosition = new Vector3(0, -2f, 0);
-            _skin.gameObject.transform.localScale = new Vector3(2.5f, 4, 1);
+        _skin.gameObject.transform.localPosition = new Vector3(0, -2f, 0);
+        _skin.gameObject.transform.localScale = new Vector3(2.5f, 4, 1);
 
-            UIManager.Instance.OnClickCharaChangeClose();
+        UIManager.Instance.OnClickCharaChangeClose();
     }
 
     public void LeftButtonPush()
@@ -91,18 +93,12 @@ public class ChangeCharacter : MonoBehaviour
             _characterId--;
         }
     }
+
     public void RightButtonPush()
     {
-        
-        if (_characterId != GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count -1)
+        if (_characterId != GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count - 1)
         {
-            _characterId ++;
+            _characterId++;
         }
     }
-    //
-    // public void AddList(GameObject gameObject,Sprite sprite)
-    // {//가챠로 뽑았을때
-    //     CharacterList.Add(gameObject);
-    //     ImagesList.Add(sprite);
-    // }
 }
