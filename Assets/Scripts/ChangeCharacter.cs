@@ -31,6 +31,7 @@ public class ChangeCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log($"{_characterId},{GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count -1} dksl");
         if (_characterId == 0)
         {
             RigthButton.SetActive(false);
@@ -39,7 +40,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             RigthButton.SetActive(true);
         }
-        if (_characterId == GameManager.Instance.datamanager.SaveData.unlockCharacters.Count -1)
+        if (_characterId == GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count -1)
         {
             LeftButton.SetActive(false);
         }
@@ -47,10 +48,13 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
-        NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterName;
-        ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso
-            [GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
-        
+        // NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterName;
+        NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterName;
+        // ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso
+        //     [GameManager.Instance.datamanager.characterInfos
+        //         [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
+        ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject
+            .characterIso[_characterId].characterImage;
     }
     
 
@@ -61,8 +65,10 @@ public class ChangeCharacter : MonoBehaviour
         {
             Destroy(DeletObject);
         }
-        _selectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[GameManager.Instance.datamanager.characterInfos
-            [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterPrefab;
+        // _selectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[GameManager.Instance.datamanager.characterInfos
+        //     [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterPrefab;
+        _selectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
+            .characterPrefab;
         _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);
 
@@ -88,7 +94,7 @@ public class ChangeCharacter : MonoBehaviour
     public void RightButtonPush()
     {
         
-        if (_characterId != GameManager.Instance.datamanager.SaveData.unlockCharacters.Count -1)
+        if (_characterId != GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count -1)
         {
             _characterId ++;
         }

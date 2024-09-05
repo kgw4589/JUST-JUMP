@@ -259,10 +259,9 @@ public partial class Player : MonoBehaviour
             return;
         }
 
-        int steps = 60;
+        int steps = 60; // 라인렌더러 얼마나 길게 늘릴지 정하는거 
         float deltaTime = Time.fixedDeltaTime;
         Vector3 gravity = Physics.gravity;
-        Vector3 position = startPos;
         Vector3 velocity = vel;
 
         _lineRenderer.positionCount = steps;
@@ -273,8 +272,8 @@ public partial class Player : MonoBehaviour
         for (int i = 0; i < steps; i++)
         {
             // 박스 캐스트를 사용하여 벽 충돌 감지함
-            RaycastHit2D hit = Physics2D.BoxCast(position, boxSize, boxAngle, velocity, velocity.magnitude * deltaTime);
-            Debug.DrawRay(position, velocity * velocity.magnitude * deltaTime, Color.red);
+            RaycastHit2D hit = Physics2D.BoxCast(startPos, boxSize, boxAngle, velocity, velocity.magnitude * deltaTime);
+            Debug.DrawRay(startPos, velocity * velocity.magnitude * deltaTime, Color.red);
 
             if (hit.collider != null && (hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Wall")))
             {
@@ -295,9 +294,9 @@ public partial class Player : MonoBehaviour
             else
             {
                 // 충돌이 감지되지 않으면 정상적으로 라인 렌더러 그리기 계속
-                position += velocity * deltaTime + gravity * (0.5f * deltaTime * deltaTime);
+                startPos += velocity * deltaTime + gravity * (0.5f * deltaTime * deltaTime);
                 velocity += gravity * deltaTime;
-                _lineRenderer.SetPosition(i, position);
+                _lineRenderer.SetPosition(i, startPos);
             }
         }
     }
