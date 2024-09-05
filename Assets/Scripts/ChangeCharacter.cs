@@ -36,6 +36,7 @@ public class ChangeCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(Application.persistentDataPath);
         if (_characterId == 0)
         {
             RigthButton.SetActive(false);
@@ -63,6 +64,9 @@ public class ChangeCharacter : MonoBehaviour
             .characterIso[_characterId].characterImage;
         _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
             .characterPrefab;
+        isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
+            Contains(_characterId);
+        lockCharacterText.SetActive(!isUnLockCharacter);
     }
 
 
