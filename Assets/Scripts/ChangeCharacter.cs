@@ -10,10 +10,11 @@ using Image = UnityEngine.UI.Image;
 public class ChangeCharacter : MonoBehaviour
 {
     [SerializeField] private bool isUnLockCharacter;
-    public GameObject lockCharacterText;
-    public GameObject butButton;
-    public GameObject applyButton;
-    
+    [SerializeField] private GameObject lockCharacterText;
+    [SerializeField] private GameObject butButton;
+    [SerializeField] private GameObject applyButton;
+
+    [SerializeField] private Animator errorText;
     
     public int price = 5;
 
@@ -25,8 +26,8 @@ public class ChangeCharacter : MonoBehaviour
     }
 
 
-    public Image ViewCharacterImage; // 화면에 보일 이미지
-    public TextMeshProUGUI NowCharacterText;
+    [SerializeField] private Image ViewCharacterImage; // 화면에 보일 이미지
+    [SerializeField] private TextMeshProUGUI NowCharacterText;
 
     private GameObject _selectCharacter; //  고른 캐릭터
     private GameObject _nowSelectCharacter; //  고른 캐릭터
@@ -36,8 +37,8 @@ public class ChangeCharacter : MonoBehaviour
 
     private GameObject _skin; // 
 
-    public GameObject RigthButton;
-    public GameObject LeftButton;
+    [SerializeField] private GameObject RigthButton;
+    [SerializeField] private GameObject LeftButton;
 
     void Start()
     {
@@ -99,7 +100,7 @@ public class ChangeCharacter : MonoBehaviour
         }
         else
         {
-            Debug.Log("대충 캐릭터 구입 에러임");
+            errorText.SetTrigger("PopUp");
         }
     }
 
