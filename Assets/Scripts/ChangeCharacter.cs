@@ -11,9 +11,9 @@ public class ChangeCharacter : MonoBehaviour
 {
     [SerializeField] private bool isUnLockCharacter;
     [SerializeField] private GameObject lockCharacterText;
-    [SerializeField] private GameObject butButton;
+    [SerializeField] private GameObject buyButton;
     [SerializeField] private GameObject applyButton;
-
+    [SerializeField] private TextMeshProUGUI characterPrice;
     [SerializeField] private Animator errorText;
     
     public int price = 5;
@@ -82,10 +82,21 @@ public class ChangeCharacter : MonoBehaviour
             .characterPrefab;
         isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
             Contains(_characterId);
+        if (isUnLockCharacter)
+        {
+            applyButton.SetActive(true);
+            lockCharacterText.SetActive(false);
+            buyButton.SetActive(false);
+            characterPrice.text = "";
+        }
+        else
+        {
+            characterPrice.text = $"대충가격: {price}";
+            applyButton.SetActive(false);
+            lockCharacterText.SetActive(true);
+            buyButton.SetActive(true);
+        }
         
-        lockCharacterText.SetActive(!isUnLockCharacter);
-        applyButton.SetActive(isUnLockCharacter);
-        butButton.SetActive(!isUnLockCharacter);
     }
 
     public void Buy()
