@@ -15,7 +15,14 @@ public class ChangeCharacter : MonoBehaviour
     public GameObject applyButton;
     
     
-    public int price;
+    public int price = 5;
+
+    private enum Probability
+    {
+        Normal = 500,
+        Epic = 400,
+        Legend = 100
+    }
 
 
     public Image ViewCharacterImage; // 화면에 보일 이미지
@@ -82,8 +89,18 @@ public class ChangeCharacter : MonoBehaviour
 
     public void Buy()
     {
-        GameManager.Instance.datamanager.SaveData.coin -= price;
-        Debug.Log("캐릭터 구입했습ㄴ다.");
+        if (GameManager.Instance.datamanager.SaveData.coin >= price)
+        {
+            GameManager.Instance.datamanager.SaveData.coin -= price;
+            Debug.Log($"캐릭터 구입했습ㄴ다.{GameManager.Instance.datamanager.SaveData.coin}");
+            UIManager.Instance.SetCoinUI(GameManager.Instance.datamanager.SaveData.coin);
+            GameManager.Instance.datamanager.SaveData.unlockCharacters.Add(_characterId);
+            SaveManager.Instance.GetSaveUserData(GameManager.Instance.datamanager.SaveData);
+        }
+        else
+        {
+            Debug.Log("대충 캐릭터 구입 에러임");
+        }
     }
 
 

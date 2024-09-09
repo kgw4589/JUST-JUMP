@@ -1607,6 +1607,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7431136903834593774, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: price
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7431136903834593774, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: butButton
       value: 
       objectReference: {fileID: 1229786371}
