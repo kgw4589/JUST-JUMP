@@ -11,6 +11,11 @@ public class ChangeCharacter : MonoBehaviour
 {
     [SerializeField] private bool isUnLockCharacter;
     public GameObject lockCharacterText;
+    public GameObject butButton;
+    public GameObject applyButton;
+    
+    
+    public int price;
 
 
     public Image ViewCharacterImage; // 화면에 보일 이미지
@@ -55,6 +60,9 @@ public class ChangeCharacter : MonoBehaviour
             LeftButton.SetActive(true);
         }
 
+
+
+
         // NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterName;
         NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterName;
         // ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso
@@ -66,7 +74,16 @@ public class ChangeCharacter : MonoBehaviour
             .characterPrefab;
         isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
             Contains(_characterId);
+        
         lockCharacterText.SetActive(!isUnLockCharacter);
+        applyButton.SetActive(isUnLockCharacter);
+        butButton.SetActive(!isUnLockCharacter);
+    }
+
+    public void Buy()
+    {
+        GameManager.Instance.datamanager.SaveData.coin -= price;
+        Debug.Log("캐릭터 구입했습ㄴ다.");
     }
 
 
