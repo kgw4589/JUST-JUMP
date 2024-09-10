@@ -5,11 +5,13 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Color = UnityEngine.Color;
 using Image = UnityEngine.UI.Image;
 
 public class ChangeCharacter : MonoBehaviour
 {
     [SerializeField] private bool isUnLockCharacter;
+    [SerializeField] private GameObject lockCharacterDimmed;
     [SerializeField] private GameObject lockCharacterImage;
     [SerializeField] private GameObject buyButton;
     [SerializeField] private GameObject applyButton;
@@ -55,7 +57,7 @@ public class ChangeCharacter : MonoBehaviour
             Contains(_characterId);
         price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
         characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
-        
+        TextChageColor();
     }
 
     // Update is called once per frame
@@ -90,6 +92,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             applyButton.SetActive(true);
             lockCharacterImage.SetActive(false);
+            lockCharacterDimmed.SetActive(false);
             buyButton.SetActive(false);
             characterPrice.text = "";
         }
@@ -98,6 +101,7 @@ public class ChangeCharacter : MonoBehaviour
             characterPrice.text = $"대충가격: {price}";
             applyButton.SetActive(false);
             lockCharacterImage.SetActive(true);
+            lockCharacterDimmed.SetActive(true);
             buyButton.SetActive(true);
         }
         
@@ -157,6 +161,24 @@ public class ChangeCharacter : MonoBehaviour
                 Contains(_characterId);
             price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
             characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
+            TextChageColor();
+        }
+    }
+
+    void TextChageColor()
+    {
+        
+        if (characterRating.text == Gacha.Probability.Normal.ToString())
+        {
+            characterRating.color = Color.gray;
+        }
+        else if (characterRating.text == Gacha.Probability.Epic.ToString())
+        {
+            characterRating.color = Color.magenta;
+        }
+        else
+        {
+            characterRating.color = Color.yellow;
         }
     }
 
@@ -173,6 +195,7 @@ public class ChangeCharacter : MonoBehaviour
                 Contains(_characterId);
             price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
             characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
+            TextChageColor();
         }
     }
 }
