@@ -10,7 +10,7 @@ using Image = UnityEngine.UI.Image;
 public class ChangeCharacter : MonoBehaviour
 {
     [SerializeField] private bool isUnLockCharacter;
-    [SerializeField] private GameObject lockCharacterText;
+    [SerializeField] private GameObject lockCharacterImage;
     [SerializeField] private GameObject buyButton;
     [SerializeField] private GameObject applyButton;
     [SerializeField] private TextMeshProUGUI characterPrice;
@@ -48,6 +48,10 @@ public class ChangeCharacter : MonoBehaviour
             .characterIso[_characterId].characterImage;
         _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
             .characterPrefab;
+        isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
+            Contains(_characterId);
+        price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
+        characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
     }
 
     // Update is called once per frame
@@ -77,13 +81,11 @@ public class ChangeCharacter : MonoBehaviour
         //     [GameManager.Instance.datamanager.characterInfos
         //         [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
        
-        isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
-            Contains(_characterId);
-        price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
+        
         if (isUnLockCharacter)
         {
             applyButton.SetActive(true);
-            lockCharacterText.SetActive(false);
+            lockCharacterImage.SetActive(false);
             buyButton.SetActive(false);
             characterPrice.text = "";
         }
@@ -91,7 +93,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             characterPrice.text = $"대충가격: {price}";
             applyButton.SetActive(false);
-            lockCharacterText.SetActive(true);
+            lockCharacterImage.SetActive(true);
             buyButton.SetActive(true);
         }
         
@@ -106,6 +108,10 @@ public class ChangeCharacter : MonoBehaviour
             UIManager.Instance.SetCoinUI(GameManager.Instance.datamanager.SaveData.coin);
             GameManager.Instance.datamanager.SaveData.unlockCharacters.Add(_characterId);
             SaveManager.Instance.GetSaveUserData(GameManager.Instance.datamanager.SaveData);
+            isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
+                Contains(_characterId);
+            price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
+            characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
         }
         else
         {
@@ -143,6 +149,10 @@ public class ChangeCharacter : MonoBehaviour
                 .characterIso[_characterId].characterImage;
             _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
                 .characterPrefab;
+            isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
+                Contains(_characterId);
+            price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
+            characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
         }
     }
 
@@ -155,6 +165,10 @@ public class ChangeCharacter : MonoBehaviour
                 .characterIso[_characterId].characterImage;
             _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
                 .characterPrefab;
+            isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
+                Contains(_characterId);
+            price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
+            characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
         }
     }
 }
