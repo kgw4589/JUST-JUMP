@@ -17,7 +17,7 @@ public class ChangeCharacter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI characterRating;
     [SerializeField] private Animator errorText;
     
-    public int price = 5;
+    
 
     [SerializeField] private Image ViewCharacterImage; // 화면에 보일 이미지
     [SerializeField] private TextMeshProUGUI NowCharacterText;
@@ -36,9 +36,12 @@ public class ChangeCharacter : MonoBehaviour
     private GameObject _player; // 적용될 플레이어
 
     private GameObject _skin; // 
+    
 
     [SerializeField] private GameObject RigthButton;
     [SerializeField] private GameObject LeftButton;
+    
+    public int price = 5;
 
     void Start()
     {
@@ -52,6 +55,7 @@ public class ChangeCharacter : MonoBehaviour
             Contains(_characterId);
         price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
         characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
+        
     }
 
     // Update is called once per frame

@@ -132,30 +132,8 @@ public partial class Player : MonoBehaviour
         {
             isDie = true;
         }
-        playerHpBar.value = playerHp / maxplayerHp;
-        
-        if (playerHpBar.value >= 0.8f)
-        {
-            _playerHpBarColor.color = Color.cyan;
-        }
-        else if (playerHpBar.value >= 0.5f)
-        {
-            _playerHpBarColor.color = Color.yellow;
-        }
-        else if (playerHpBar.value >= 0.2f)
-        { 
-            _playerHpBarColor.color = Color.red;
-        }
-        
-        if (!isHitWave && playerHp <= maxplayerHp && !isDie) //힐량 오버남
-        {
-            curruentTime += Time.deltaTime;
-            if (curruentTime >= _healTime)
-            {
-                playerHp += Time.deltaTime;
-            }
-        }
-    
+        HpColorChange();
+        HealHp();
         if (Input.GetMouseButtonDown(0) && (EventSystem.current.currentSelectedGameObject))
         {//클릭한게 Ui인지 확인해서 리턴함
             if (EventSystem.current.currentSelectedGameObject.name == lButton.name || 
@@ -214,6 +192,36 @@ public partial class Player : MonoBehaviour
         _isLeftButtonPush = isPush;
     }
 
+    void HpColorChange()
+    {
+        playerHpBar.value = playerHp / maxplayerHp;
+        
+        if (playerHpBar.value >= 0.8f)
+        {
+            _playerHpBarColor.color = Color.cyan;
+        }
+        else if (playerHpBar.value >= 0.5f)
+        {
+            _playerHpBarColor.color = Color.yellow;
+        }
+        else if (playerHpBar.value >= 0.2f)
+        { 
+            _playerHpBarColor.color = Color.red;
+        }
+
+    }
+
+    void HealHp()
+    {
+        if (!isHitWave && playerHp <= maxplayerHp && !isDie) //힐량 오버남
+        {
+            curruentTime += Time.deltaTime;
+            if (curruentTime >= _healTime)
+            {
+                playerHp += Time.deltaTime;
+            }
+        }
+    }
 
 
 
