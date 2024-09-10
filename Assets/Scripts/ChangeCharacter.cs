@@ -14,20 +14,20 @@ public class ChangeCharacter : MonoBehaviour
     [SerializeField] private GameObject buyButton;
     [SerializeField] private GameObject applyButton;
     [SerializeField] private TextMeshProUGUI characterPrice;
+    [SerializeField] private TextMeshProUGUI characterRating;
     [SerializeField] private Animator errorText;
     
     public int price = 5;
 
-    private enum Probability
-    {
-        Normal = 500,
-        Epic = 400,
-        Legend = 100
-    }
-
-
     [SerializeField] private Image ViewCharacterImage; // 화면에 보일 이미지
     [SerializeField] private TextMeshProUGUI NowCharacterText;
+
+    private Dictionary<Gacha.Probability, int> _priceDictionary = new Dictionary<Gacha.Probability, int>()
+    {
+        { Gacha.Probability.Normal , 50},
+        { Gacha.Probability.Epic , 100 },
+        { Gacha.Probability.Legend , 200 }
+    };
 
     private GameObject _selectCharacter; //  고른 캐릭터
     private GameObject _nowSelectCharacter; //  고른 캐릭터
@@ -44,6 +44,10 @@ public class ChangeCharacter : MonoBehaviour
     {
         _player = GameObject.FindWithTag("Player");
         _characterId = 0;
+        ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject
+            .characterIso[_characterId].characterImage;
+        _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
+            .characterPrefab;
     }
 
     // Update is called once per frame
@@ -67,21 +71,15 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
-
-
-
-
         // NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterName;
         NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterName;
         // ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso
         //     [GameManager.Instance.datamanager.characterInfos
         //         [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
-        ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject
-            .characterIso[_characterId].characterImage;
-        _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
-            .characterPrefab;
+       
         isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
             Contains(_characterId);
+        price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
         if (isUnLockCharacter)
         {
             applyButton.SetActive(true);
@@ -141,6 +139,10 @@ public class ChangeCharacter : MonoBehaviour
         if (_characterId != 0)
         {
             _characterId--;
+            ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject
+                .characterIso[_characterId].characterImage;
+            _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
+                .characterPrefab;
         }
     }
 
@@ -149,6 +151,10 @@ public class ChangeCharacter : MonoBehaviour
         if (_characterId != GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count - 1)
         {
             _characterId++;
+            ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject
+                .characterIso[_characterId].characterImage;
+            _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
+                .characterPrefab;
         }
     }
 }
