@@ -152,9 +152,4 @@ public class MapManager : Singleton<MapManager>
         
         _mapQueue.Enqueue(_lastMap);
     }
-
-    private void OnDestroy()
-    {
-        GameManager.Instance.initAction -= InitObject;
-    }
 }
