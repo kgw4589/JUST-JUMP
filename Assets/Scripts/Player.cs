@@ -261,11 +261,6 @@ public partial class Player : MonoBehaviour
 
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
-        if (_lineRenderer == null)
-        {
-            Debug.LogError(_lineRenderer.enabled);
-            return;
-        }
 
         int steps = 60; // 라인렌더러 얼마나 길게 늘릴지 정하는거 
         float deltaTime = Time.fixedDeltaTime;
