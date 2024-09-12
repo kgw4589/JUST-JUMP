@@ -14,6 +14,10 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private bool rightSort = false;
     
+    private Vector3 rightSortAllBtnPOS = new Vector3(600, 65, 0);
+    private Vector3 midSortLBtnPOS = new Vector3(80, 65, 0);
+    private Vector3 midSortRBtnPOS = new Vector3(1350, 65, 0);
+    
     [Header("#UI Canvases")]
     public GameObject startUICanvas; // Start Set UI Panel
     public GameObject inGameCanvas; // In Game UI Panel
@@ -130,14 +134,14 @@ public class UIManager : Singleton<UIManager>
     public void OnMiddleSort()
     {
         rightSort = false;
-        inGameRightButton.transform.position = new Vector3(1350, 65, 0);
-        inGameLeftButton.transform.position = new Vector3(80, 65, 0);
+        inGameLeftButton.transform.position = midSortLBtnPOS;
+        inGameRightButton.transform.position = midSortRBtnPOS;
     }
 
     public void OnRightSort()
     {
         rightSort = true;
-        inGameLeftButton.transform.position = new Vector3(600, 65, 0);
+        inGameLeftButton.transform.position = rightSortAllBtnPOS;
     }
 
     public void SetCoinUI(int haveCoin)
