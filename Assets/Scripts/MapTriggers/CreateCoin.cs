@@ -11,6 +11,7 @@ public class CreateCoin : MonoBehaviour
     [Header("최대로 생성될 코인 개수")]
     public int maxCoin;             // 3이면 1~3개 사이로 나옴
     private readonly List<int> _coinList = new List<int>();
+    private Transform _mapParent;
 
     private void Awake()
     {
@@ -21,16 +22,22 @@ public class CreateCoin : MonoBehaviour
     }
     private void Start()
     {
+        _mapParent = gameObject.transform.parent;
+        gameObject.transform.SetParent(null);
+
         for(int l = 0; l < maxCoin; l++)
         {
             CreateUnDuplicateRandom(0, coin.Length - 1);
         }
-    
+
+        var scale = gameObject.transform.lossyScale;
         foreach (var i in _coinList)
         {
             Debug.Log(i);
             coin[i].SetActive(true);
+            coin[i].transform.localScale = new Vector2(1 / scale.x, 1 / scale.y);
         }
+        gameObject.transform.SetParent(_mapParent);
     }
     
     // 랜덤 생성 (중복 배제)
