@@ -98,7 +98,7 @@ public class ChangeCharacter : MonoBehaviour
         }
         else
         {
-            characterPrice.text = $"대충가격: {price}";
+            characterPrice.text = $"가격: {price}";
             applyButton.SetActive(false);
             lockCharacterImage.SetActive(true);
             lockCharacterDimmed.SetActive(true);

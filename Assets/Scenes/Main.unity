@@ -1104,6 +1104,14 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 747696468079487241}
+    - target: {fileID: 848519715531414863, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5555556
+      objectReference: {fileID: 0}
+    - target: {fileID: 848519715531414863, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 848519715986947695, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2
@@ -1172,6 +1180,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -77
       objectReference: {fileID: 0}
+    - target: {fileID: 3178593361482655606, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178593361482655606, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3178593361974903894, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2
@@ -1227,6 +1243,14 @@ PrefabInstance:
     - target: {fileID: 7211718626909131617, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_LocalScale.y
       value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7211718627522244673, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7211718627522244673, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7362910963498496458, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_Pivot.x
@@ -1314,7 +1338,7 @@ PrefabInstance:
       objectReference: {fileID: 89165387}
     - target: {fileID: 9034294895185043853, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9122355383159320259, guid: fd7d88215dd1dae459b630667327ac3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

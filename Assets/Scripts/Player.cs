@@ -292,6 +292,14 @@ public partial class Player : MonoBehaviour
                 {
                     TurnPlayer();
                 }
+                if (_lineRenderer.positionCount > transform.position.x && !_isRight)
+                {
+                    TurnPlayer();
+                }
+                if (_lineRenderer.positionCount < transform.position.x && _isRight)
+                {
+                    TurnPlayer();
+                }
                 break; // 충돌이 감지되면 루프를 빠져나옴
             }
             else
