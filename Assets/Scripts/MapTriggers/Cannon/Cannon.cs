@@ -30,11 +30,12 @@ public class Cannon : MonoBehaviour
         _startRot = transform.position.z;
         endPoint = new Vector2(endPoint.x + _startPoint.x, endPoint.y + _startPoint.y);
         
-        StartCoroutine(Reload());
         Vector3 dir = endPoint - new Vector2(cannonHead.transform.position.x,cannonHead.transform.position.y);
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         cannonHead.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward) * Quaternion.Euler(0, 0, 180);
+        StartCoroutine(Reload());
+
     }
 
     private void Update()
@@ -55,37 +56,29 @@ public class Cannon : MonoBehaviour
 
     private IEnumerator Reload()
     {
-        while (true)
-        {
-            if (Time.timeScale == 0)
-            {
-                _distance = Vector2.Distance(_startPoint, endPoint);
-                _direction = (_startPoint - endPoint).normalized;
-                _force = _direction * (_distance * pushForce);
-                    
-                Debug.DrawLine(_startPoint,endPoint);
-                    
-                yield return new WaitUntil((() => _currentTime > shootingTime - 0.75f));
-                cannonBullet.rb.gravityScale = 0f;
-                bulletObj.SetActive(true);
-                    
-                Debug.DrawLine(_startPoint,endPoint);
-                    
-                trajectory.UpdateDots(cannonBullet.Pos,_force);
-                trajectory.Show();
-            
-                yield return new WaitUntil((() => _currentTime > shootingTime));
-                Shooting();
-                _currentTime = 0;
-            }
-            
-        }
-        
+        _distance = Vector2.Distance(_startPoint, endPoint);
+        _direction = (_startPoint - endPoint).normalized;
+        _force = _direction * (_distance * pushForce);
+
+        Debug.DrawLine(_startPoint, endPoint);
+
+        yield return new WaitUntil((() => _currentTime > shootingTime - 0.75f));
+        cannonBullet.rb.gravityScale = 0f;
+        bulletObj.SetActive(true);
+
+        Debug.DrawLine(_startPoint, endPoint);
+
+        trajectory.UpdateDots(cannonBullet.Pos, _force);
+        trajectory.Show();
+
+        yield return new WaitUntil((() => _currentTime > shootingTime));
+        Shooting();
+        _currentTime = 0;
     }
 
     void Shooting()
     {
         cannonBullet.Push(_force);
-        trajectory.Hide();
+        StartCoroutine(Reload());
     }
 }
