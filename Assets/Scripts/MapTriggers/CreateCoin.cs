@@ -22,9 +22,6 @@ public class CreateCoin : MonoBehaviour
     }
     private void Start()
     {
-        _mapParent = gameObject.transform.parent;
-        gameObject.transform.SetParent(null);
-
         for(int l = 0; l < maxCoin; l++)
         {
             CreateUnDuplicateRandom(0, coin.Length - 1);
@@ -37,7 +34,6 @@ public class CreateCoin : MonoBehaviour
             coin[i].SetActive(true);
             coin[i].transform.localScale = new Vector2(1 / scale.x, 1 / scale.y);
         }
-        gameObject.transform.SetParent(_mapParent);
     }
     
     // 랜덤 생성 (중복 배제)
