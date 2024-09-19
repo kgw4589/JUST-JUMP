@@ -266,7 +266,7 @@ public class UIManager : Singleton<UIManager>
         paybackText.SetActive(true);
     }
 
-    public void hidePayback()
+    public void HidePayback()
     {
         paybackText.SetActive(false);
     }

@@ -146,7 +146,7 @@ public class Gacha : MonoBehaviour
         else
         {
             newCharacterText.SetActive(true);
-            UIManager.Instance.hidePayback();
+            UIManager.Instance.HidePayback();
             GameManager.Instance.datamanager.SaveData.unlockCharacters.Add(selectedCharacter.characterId);
             SaveManager.Instance.GetSaveUserData(GameManager.Instance.datamanager.SaveData);
         }
