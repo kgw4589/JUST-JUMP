@@ -231,6 +231,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 32651fe1ad0203340a065ff23863ec46, type: 3}
   - {fileID: 8300000, guid: 58a53764f5b49d14ba5564a45be67d38, type: 3}
   - {fileID: 8300000, guid: ee2f835f826dc594d85ddc8d147e48d1, type: 3}
+  - {fileID: 8300000, guid: 086f24f4f7c5f4914960064f01389f74, type: 3}
   channels: 6
 --- !u!4 &95423641
 Transform:
