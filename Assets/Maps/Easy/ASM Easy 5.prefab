@@ -228,7 +228,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerTagName: Player
-  price: 0
 --- !u!1 &3200229411608261114
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +362,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerTagName: Player
-  price: 0
 --- !u!1 &3557225028510330160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1267,14 @@ PrefabInstance:
     - target: {fileID: 2722785392408556290, guid: 2fa16a9c763251047a456671a1561da7, type: 3}
       propertyPath: m_Name
       value: CreateCoin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330211098085447278, guid: 2fa16a9c763251047a456671a1561da7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25079998
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330211098085447278, guid: 2fa16a9c763251047a456671a1561da7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.10034
       objectReference: {fileID: 0}
     - target: {fileID: 3330211098085447278, guid: 2fa16a9c763251047a456671a1561da7, type: 3}
       propertyPath: m_LocalPosition.x
