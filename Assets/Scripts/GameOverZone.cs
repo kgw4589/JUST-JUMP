@@ -40,15 +40,7 @@ public class GameOverZone : MonoBehaviour
 
     IEnumerator MoveUpAfterWait()
     {
-        float _timeConsol = MapManager.Instance.selectedMapScriptable.waitTime;
-
-        while (_timeConsol > 0)
-        {
-            yield return new WaitForSeconds(1f);
-            _timeConsol -= 1f;
-        }
-        
-        // yield return new WaitForSeconds(_waitTime); <<<Not Consol log>>>
+        yield return new WaitForSeconds(MapManager.Instance.selectedMapScriptable.waitTime);
 
         Vector3 startPosition = transform.position;
         Vector3 endPosition = new Vector3(startPosition.x, startPosition.y + _moveDistance, startPosition.z);
