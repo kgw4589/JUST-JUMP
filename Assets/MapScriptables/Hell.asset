@@ -17,7 +17,7 @@ MonoBehaviour:
   modeColor: {r: 0.509434, g: 0, b: 0, a: 1}
   bestScore: 0
   coinWeight: 3
-  waitTime: 3
+  waitTime: 2
   moveDistance: 75000
   moveDuration: 1000000
   maxSpeed: 4
