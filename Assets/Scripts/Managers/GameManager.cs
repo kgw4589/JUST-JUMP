@@ -106,6 +106,7 @@ public class GameManager : Singleton<GameManager>
         gameState = GameState.End;
         Application.targetFrameRate = 30;
         SoundManager.Instance.PlayBgm(false);
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.gameOver);
     }
 
     private void Update()

@@ -185,11 +185,17 @@ public partial class Player : MonoBehaviour
 
     public void RigthButtonPush(bool isPush)
     {
-        _isRigthButtonPush = isPush;
+        if (!_isDragging)
+        {
+            _isRigthButtonPush = isPush;    
+        }
     }
     public void LeftButtonPush(bool isPush)
     {
-        _isLeftButtonPush = isPush;
+        if (!_isDragging)
+        {
+            _isLeftButtonPush = isPush;
+        }
     }
 
     void HpColorChange()

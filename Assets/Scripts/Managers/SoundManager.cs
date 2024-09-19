@@ -15,7 +15,8 @@ public class SoundManager : Singleton<SoundManager>
         jump,
         menuTouch,
         menuClose,
-        coin
+        coin,
+        gameOver
     }
     
     [Header("#Volume SET")]
