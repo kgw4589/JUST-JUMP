@@ -31,6 +31,7 @@ public class ChangeCharacter : MonoBehaviour
         { Gacha.Probability.Legend , 200 }
     };
 
+    private Animator _animator;
     private GameObject _selectCharacter; //  고른 캐릭터
     private GameObject _nowSelectCharacter; //  고른 캐릭터
     private int _characterId = 0; //현재 화면에 보일 캐릭터 ID
@@ -47,6 +48,7 @@ public class ChangeCharacter : MonoBehaviour
 
     void Start()
     {
+        _animator = transform.GetComponent<Animator>();
         _player = GameObject.FindWithTag("Player");
         _characterId = 0;
         ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject
@@ -116,10 +118,7 @@ public class ChangeCharacter : MonoBehaviour
             UIManager.Instance.SetCoinUI(GameManager.Instance.datamanager.SaveData.coin);
             GameManager.Instance.datamanager.SaveData.unlockCharacters.Add(_characterId);
             SaveManager.Instance.GetSaveUserData(GameManager.Instance.datamanager.SaveData);
-            isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
-                Contains(_characterId);
-            price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
-            characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
+            StartCoroutine(BuyAnimation());
         }
         else
         {
@@ -127,6 +126,16 @@ public class ChangeCharacter : MonoBehaviour
         }
     }
 
+    IEnumerator BuyAnimation()
+    {
+        _animator.SetTrigger("Buy");
+        yield return new WaitForSeconds(1f);
+        Debug.Log("ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 매그네릭~");
+        isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
+            Contains(_characterId);
+        price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
+        characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
+    }
 
     public void Apply()
     {
