@@ -19,7 +19,7 @@ public class Elevator : MapTriggerBasicLogic
 
     private void Update()
     {
-        
+        if (Time.timeScale == 0) return;
         if (!_collision)
         {
             transform.position = Vector2.Lerp(gameObject.transform.position, _setPos, 0.05f);

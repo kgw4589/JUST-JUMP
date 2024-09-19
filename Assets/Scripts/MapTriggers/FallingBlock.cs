@@ -49,6 +49,7 @@ public class FallingBlock : MapTriggerBasicLogic
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
         switch (triggerMode)
         {
             case TriggerMode.Falling:

@@ -39,6 +39,8 @@ public class Cannon : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
+
         _currentTime += Time.deltaTime;
         
         _bulletDistance = Vector2.Distance(transform.position, bulletObj.transform.position);
@@ -55,24 +57,28 @@ public class Cannon : MonoBehaviour
     {
         while (true)
         {
-            _distance = Vector2.Distance(_startPoint, endPoint);
-            _direction = (_startPoint - endPoint).normalized;
-            _force = _direction * (_distance * pushForce);
+            if (Time.timeScale == 0)
+            {
+                _distance = Vector2.Distance(_startPoint, endPoint);
+                _direction = (_startPoint - endPoint).normalized;
+                _force = _direction * (_distance * pushForce);
                     
-            Debug.DrawLine(_startPoint,endPoint);
+                Debug.DrawLine(_startPoint,endPoint);
                     
-            yield return new WaitUntil((() => _currentTime > shootingTime - 0.75f));
-            cannonBullet.rb.gravityScale = 0f;
-            bulletObj.SetActive(true);
+                yield return new WaitUntil((() => _currentTime > shootingTime - 0.75f));
+                cannonBullet.rb.gravityScale = 0f;
+                bulletObj.SetActive(true);
                     
-            Debug.DrawLine(_startPoint,endPoint);
+                Debug.DrawLine(_startPoint,endPoint);
                     
-            trajectory.UpdateDots(cannonBullet.Pos,_force);
-            trajectory.Show();
+                trajectory.UpdateDots(cannonBullet.Pos,_force);
+                trajectory.Show();
             
-            yield return new WaitUntil((() => _currentTime > shootingTime));
-            Shooting();
-            _currentTime = 0;
+                yield return new WaitUntil((() => _currentTime > shootingTime));
+                Shooting();
+                _currentTime = 0;
+            }
+            
         }
         
     }

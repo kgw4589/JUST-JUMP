@@ -20,6 +20,7 @@ public class DamageBlock : MapTriggerBasicLogic
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
         if(_col)
         {
             effect.transform.position = _player.transform.position;
