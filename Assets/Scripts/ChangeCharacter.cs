@@ -191,6 +191,11 @@ public class ChangeCharacter : MonoBehaviour
         }
     }
 
+    public void PlaySound()
+    {
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.buyCharacter);
+    }
+
     public void RightButtonPush()
     {
         if (_characterId != GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count - 1)
