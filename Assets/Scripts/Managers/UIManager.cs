@@ -32,6 +32,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject inGameRightButton;
     [SerializeField] private GameObject inGameLeftButton;
     [SerializeField] private GameObject inGameSortButton;
+    [SerializeField] private GameObject probabilityButton;
     
     [Header("#UI Panels")]
     [SerializeField] private GameObject pausePanel; // PausePanel
@@ -129,6 +130,11 @@ public class UIManager : Singleton<UIManager>
         {
             OnMiddleSort();
         }
+    }
+
+    public void ProbabilityButton()
+    {
+        Application.OpenURL("https://root-xylocarp-b3c.notion.site/2024-09-20-1079dfc52f1780568a3add1abaf17703?pvs=74");
     }
 
     public void OnMiddleSort()
@@ -248,7 +254,7 @@ public class UIManager : Singleton<UIManager>
         gacha.SetGachaPanelOrigin();
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
-
+    
     // public void OnClickRanking()
     // {
     //     if (FireBaseManager.Instance != null)
