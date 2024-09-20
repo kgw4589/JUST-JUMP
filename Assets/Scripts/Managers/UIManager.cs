@@ -134,7 +134,7 @@ public class UIManager : Singleton<UIManager>
 
     public void ProbabilityButton()
     {
-        Application.OpenURL("https://root-xylocarp-b3c.notion.site/2024-09-20-1079dfc52f1780568a3add1abaf17703?pvs=74");
+        Application.OpenURL("https://root-xylocarp-b3c.notion.site/2024-09-20-1079dfc52f1780568a3add1abaf17703");
     }
 
     public void OnMiddleSort()
