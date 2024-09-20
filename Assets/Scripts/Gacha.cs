@@ -33,7 +33,7 @@ public class Gacha : MonoBehaviour
     [SerializeField] private Animator gachaErrorAnimator;
 
     private const string _GACHA_ORIGIN_NAME_MESSAGE = "캐릭터 뽑기";
-    private const string _GACHA_ORIGIN_RATING_MESSAGE = "10 코인";
+    private const string _GACHA_ORIGIN_RATING_MESSAGE = "100 코인";
     private const string _HAVE_NO_COIN_MESSAGE = "코인이 부족합니다";
     private const string _HAVE_ALL_CHARACTER_MESSAGE = "모든 캐릭터를 보유하고 있습니다";
 
