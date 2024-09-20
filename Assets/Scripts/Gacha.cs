@@ -10,16 +10,17 @@ public class Gacha : MonoBehaviour
 {
     public enum Probability
     {
-        Normal = 500,
-        Epic = 400,
-        Legend = 100
+        Normal = 750,
+        Epic = 200,
+        Legend = 50
     }
     private int _totalProbability;
     private int _currentPivot;
 
     private Dictionary<Probability, List<CharacterInfo>> _characterInfos = new Dictionary<Probability, List<CharacterInfo>>();
 
-    private const int _COIN_PRICE = 10;  
+    private const int _COIN_PRICE = 100;
+    private const int _PAYBACK_COIN = 10;
     
     [Header("#UI Gacha")]
     [SerializeField] private GameObject newCharacterText;
@@ -31,8 +32,6 @@ public class Gacha : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gachaErrorText;
     [SerializeField] private Animator gachaErrorAnimator;
 
-    private const int _PAYBACK_COIN = 5;
-    
     private const string _GACHA_ORIGIN_NAME_MESSAGE = "캐릭터 뽑기";
     private const string _GACHA_ORIGIN_RATING_MESSAGE = "10 코인";
     private const string _HAVE_NO_COIN_MESSAGE = "코인이 부족합니다";

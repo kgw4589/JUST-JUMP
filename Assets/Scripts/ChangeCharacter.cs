@@ -26,9 +26,9 @@ public class ChangeCharacter : MonoBehaviour
 
     private Dictionary<Gacha.Probability, int> _priceDictionary = new Dictionary<Gacha.Probability, int>()
     {
-        { Gacha.Probability.Normal , 50},
-        { Gacha.Probability.Epic , 100 },
-        { Gacha.Probability.Legend , 200 }
+        { Gacha.Probability.Normal , 350},
+        { Gacha.Probability.Epic , 750 },
+        { Gacha.Probability.Legend , 1500 }
     };
 
     private Animator _animator;
