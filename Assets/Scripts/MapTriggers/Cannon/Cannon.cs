@@ -35,7 +35,6 @@ public class Cannon : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         cannonHead.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward) * Quaternion.Euler(0, 0, 180);
         StartCoroutine(Reload());
-
     }
 
     private void Update()
@@ -48,6 +47,7 @@ public class Cannon : MonoBehaviour
         
         if (_bulletDistance > 10f)
         {
+            StartCoroutine(Reload());
             bulletObj.SetActive(false);
             bulletObj.transform.position = transform.position;
             _currentTime = 0;
@@ -56,6 +56,7 @@ public class Cannon : MonoBehaviour
 
     private IEnumerator Reload()
     {
+        trajectory.Hide();
         _distance = Vector2.Distance(_startPoint, endPoint);
         _direction = (_startPoint - endPoint).normalized;
         _force = _direction * (_distance * pushForce);
@@ -79,6 +80,5 @@ public class Cannon : MonoBehaviour
     void Shooting()
     {
         cannonBullet.Push(_force);
-        StartCoroutine(Reload());
     }
 }

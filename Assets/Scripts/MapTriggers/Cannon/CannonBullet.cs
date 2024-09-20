@@ -15,13 +15,7 @@ namespace MapTriggers.Cannon
 
         private float _distance;
         [HideInInspector]
-        public Vector3 Pos
-        {
-            get
-            {
-                return transform.position;
-            }
-        }
+        public Vector3 Pos => transform.position;
 
         void Awake()
         {
