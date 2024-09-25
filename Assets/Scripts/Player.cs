@@ -283,13 +283,20 @@ public partial class Player : MonoBehaviour
             // 박스 캐스트를 사용하여 벽 충돌 감지함
             RaycastHit2D hit = Physics2D.BoxCast(startPos, boxSize, boxAngle, velocity, velocity.magnitude * deltaTime);
             Debug.DrawRay(startPos, velocity * velocity.magnitude * deltaTime, Color.red);
-
+            if (_lineRenderer.GetPosition(_lineRenderer.positionCount - 1).x > transform.position.x && !_isRight)
+            {
+                TurnPlayer();
+            }
+            if (_lineRenderer.GetPosition(_lineRenderer.positionCount - 1).x < transform.position.x && _isRight)
+            {
+                TurnPlayer();
+            }
             if (hit.collider != null && (hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Wall")))
             {
                 _lineRenderer.positionCount = i + 1;
                 // 충돌이 감지되면 라인 렌더러의 길이를 충돌 지점까지로 조정함
                 _lineRenderer.SetPosition(i, hit.point);
-
+                
                 if (hit.point.x > transform.position.x && !_isRight)
                 {
                     TurnPlayer();
