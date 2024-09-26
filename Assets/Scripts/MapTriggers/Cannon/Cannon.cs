@@ -65,7 +65,7 @@ public class Cannon : MonoBehaviour
 
         yield return new WaitUntil((() => _currentTime > shootingTime - 0.75f));
         cannonBullet.rb.gravityScale = 0f;
-        bulletObj.SetActive(true);
+        bulletObj.SetActive(false);
 
         Debug.DrawLine(_startPoint, endPoint);
 
@@ -73,6 +73,7 @@ public class Cannon : MonoBehaviour
         trajectory.Show();
 
         yield return new WaitUntil((() => _currentTime > shootingTime));
+        bulletObj.SetActive(true);
         Shooting();
         _currentTime = 0;
     }
@@ -80,5 +81,7 @@ public class Cannon : MonoBehaviour
     void Shooting()
     {
         cannonBullet.Push(_force);
+        trajectory.Hide();
+
     }
 }

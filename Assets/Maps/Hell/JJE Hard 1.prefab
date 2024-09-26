@@ -1432,7 +1432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 852979302086692869, guid: 82c41d9631cf4a74d849941e688eb977, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0959
+      value: -0.1001
       objectReference: {fileID: 0}
     - target: {fileID: 852979302086692869, guid: 82c41d9631cf4a74d849941e688eb977, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1472,7 +1472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1013578842630441958, guid: 82c41d9631cf4a74d849941e688eb977, type: 3}
       propertyPath: dotSpacing
-      value: 0.1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5094560875141388212, guid: 82c41d9631cf4a74d849941e688eb977, type: 3}
       propertyPath: pushForce
@@ -1484,11 +1484,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5094560875141388212, guid: 82c41d9631cf4a74d849941e688eb977, type: 3}
       propertyPath: endPoint.y
-      value: 3.16
+      value: 4.66
       objectReference: {fileID: 0}
     - target: {fileID: 5094560875141388212, guid: 82c41d9631cf4a74d849941e688eb977, type: 3}
       propertyPath: shootingTime
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6310872112958429720, guid: 82c41d9631cf4a74d849941e688eb977, type: 3}
       propertyPath: m_Name

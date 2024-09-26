@@ -1187,6 +1187,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cannon
       objectReference: {fileID: 0}
+    - target: {fileID: 8391301044138540486, guid: 82c41d9631cf4a74d849941e688eb977, type: 3}
+      propertyPath: power
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8391301044138540486, guid: 82c41d9631cf4a74d849941e688eb977, type: 3}
+      propertyPath: force.x
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
