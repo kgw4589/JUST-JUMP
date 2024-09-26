@@ -110,7 +110,8 @@ public class Gacha : MonoBehaviour
         gachaName.text = _GACHA_ORIGIN_NAME_MESSAGE;
         ratingText.text = _GACHA_ORIGIN_RATING_MESSAGE;
         gachaImage.sprite = originGachaImage;
-        
+        gachaErrorText.alpha = 0.0f;
+
         UIManager.Instance.HidePayback();
         newCharacterText.SetActive(false);
         
