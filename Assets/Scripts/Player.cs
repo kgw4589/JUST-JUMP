@@ -267,7 +267,7 @@ public partial class Player : MonoBehaviour
 
     void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
-
+        
         int steps = 60; // 라인렌더러 얼마나 길게 늘릴지 정하는거 
         float deltaTime = Time.fixedDeltaTime;
         Vector3 gravity = Physics.gravity;
@@ -295,7 +295,8 @@ public partial class Player : MonoBehaviour
             {
                 _lineRenderer.positionCount = i + 1;
                 // 충돌이 감지되면 라인 렌더러의 길이를 충돌 지점까지로 조정함
-                _lineRenderer.SetPosition(i, hit.point);
+                startPos.z = 0;
+                _lineRenderer.SetPosition(i, new Vector3(startPos.x, startPos.y, 0));
                 
                 if (hit.point.x > transform.position.x && !_isRight)
                 {
