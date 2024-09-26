@@ -1872,7 +1872,7 @@ GameObject:
   - component: {fileID: 3854141013421309833}
   - component: {fileID: 688597902497164638}
   m_Layer: 5
-  m_Name: "Epic_\uB18D\uAD6C\uC120\uC218"
+  m_Name: "Legend_\uB18D\uAD6C\uC120\uC218"
   m_TagString: Skin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
