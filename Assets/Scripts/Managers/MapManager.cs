@@ -68,8 +68,10 @@ public class MapManager : Singleton<MapManager>
         
         _lastMap = Instantiate(selectedMapScriptable.maps[_mapSectionIndex]
             .sectionMaps[Random.Range(0, selectedMapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
-
-        _lastMap.transform.position = _startPos + new Vector2(0, _lastMap.transform.localScale.y / 2);
+        
+        float interval = _lastMap.transform.localScale.y / 2;
+        _lastMap.transform.position = new Vector3(0, transform.position.y + interval, 0);
+        
         _mapQueue.Enqueue(_lastMap);
 
         _isInitComplete = true;
@@ -110,7 +112,7 @@ public class MapManager : Singleton<MapManager>
         UIManager.Instance.OnClickModeClose();
     }
 
-    void Update()
+    private void Update()
     {
         if (!_isInitComplete)
         {
@@ -137,7 +139,7 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    void InstantiateRandomMap()
+    private void InstantiateRandomMap()
     {
         GameObject map = Instantiate(selectedMapScriptable.maps[_mapSectionIndex]
             .sectionMaps[Random.Range(0, selectedMapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
