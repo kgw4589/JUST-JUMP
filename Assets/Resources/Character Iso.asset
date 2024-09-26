@@ -71,3 +71,37 @@ MonoBehaviour:
     characterPrefab: {fileID: 8780603499772415629, guid: 15cfce7ce405f8e4388a286c8fcec3ad, type: 3}
   - characterImage: {fileID: 21300000, guid: 356106f2c9c3a44b09fd85f43ca45ed5, type: 3}
     characterPrefab: {fileID: 7386167006013438898, guid: f2b65b3c938be7d488a9d15dc0c28def, type: 3}
+  - characterImage: {fileID: 21300000, guid: 691ff5db703074152bdc24eac665019a, type: 3}
+    characterPrefab: {fileID: 3723138049013571635, guid: c2ce18d1b29cf6a42bb695a276ecb0ac, type: 3}
+  - characterImage: {fileID: 21300000, guid: 8f88fad31ae6644c2ac56ddfc989d6b5, type: 3}
+    characterPrefab: {fileID: 7029300567673336717, guid: fb0ba85a49aeb164c899280aa977bca9, type: 3}
+  - characterImage: {fileID: 21300000, guid: 5495090ae20ec49159309e3757e6b8cb, type: 3}
+    characterPrefab: {fileID: 7746537730454416522, guid: f6ba05591cc35374294a3765a54e9831, type: 3}
+  - characterImage: {fileID: 21300000, guid: f8d505f7aeee04c2ba70f2896a970be2, type: 3}
+    characterPrefab: {fileID: 332406522812505672, guid: c44939fa782684971bc90018563a435d, type: 3}
+  - characterImage: {fileID: 21300000, guid: 97900c8fda056412bbef2a2cd4b314b6, type: 3}
+    characterPrefab: {fileID: 7751302267068437451, guid: 9ef69e052e8ad49589e9ea99b1af60db, type: 3}
+  - characterImage: {fileID: 21300000, guid: 2db39c3e7a042430eac855b837e403c1, type: 3}
+    characterPrefab: {fileID: 3635731550517006010, guid: a051e1164ce37490fadf8c3b93acacf7, type: 3}
+  - characterImage: {fileID: 21300000, guid: 49dadc9ce7cee4d44be873ea555c029e, type: 3}
+    characterPrefab: {fileID: 6909192439242089858, guid: 9069e819fb7db8d46b0e3ef14cd59aaf, type: 3}
+  - characterImage: {fileID: 21300000, guid: bde39982e17e9455aa7ddcefc231e4a0, type: 3}
+    characterPrefab: {fileID: 1757940133116846570, guid: ee94bebdec9894efcaa794c97874d6d0, type: 3}
+  - characterImage: {fileID: 21300000, guid: a3557c4a7d2304de4855042c6afb8925, type: 3}
+    characterPrefab: {fileID: 6006008203367334905, guid: 552330a092322e343b3bf726071eb3af, type: 3}
+  - characterImage: {fileID: 21300000, guid: 7b0202533f4c346be8185aa6511912f5, type: 3}
+    characterPrefab: {fileID: 4600767153618237384, guid: 93cc215cb7495c744bd6f594c8e01733, type: 3}
+  - characterImage: {fileID: 21300000, guid: 5756270026c4c4c959d3989400dc2fb0, type: 3}
+    characterPrefab: {fileID: 4618372432665373761, guid: 2d96c6a8ad9ee2645b6b967ca0e9f237, type: 3}
+  - characterImage: {fileID: 21300000, guid: ffc86a530063845a293b1274de5ffc6e, type: 3}
+    characterPrefab: {fileID: 3411837589212327819, guid: 7288436cc942380468c304f992c66938, type: 3}
+  - characterImage: {fileID: 21300000, guid: 37147f34f3b304f48a2054e9a1dd2318, type: 3}
+    characterPrefab: {fileID: 6237672186105902862, guid: 08e4ce8bba02adb438d52b48b430ea4f, type: 3}
+  - characterImage: {fileID: 21300000, guid: df80e732e7b564e3383562e929007cc7, type: 3}
+    characterPrefab: {fileID: 6316152867411382712, guid: cd93f6313d2f885499e9e0ae48341fca, type: 3}
+  - characterImage: {fileID: 21300000, guid: 2cc686de907c945e29ce4b941c4d534a, type: 3}
+    characterPrefab: {fileID: 1536729672036349763, guid: 4bdc7837241a09c4cab3626dcf2356df, type: 3}
+  - characterImage: {fileID: 21300000, guid: a42c483e6cbe8486da4effbd8d2784a8, type: 3}
+    characterPrefab: {fileID: 2747531062641851648, guid: 799e1cbfb7435cc49ae77a6cefdd427b, type: 3}
+  - characterImage: {fileID: 21300000, guid: 0c348f721963d4edda6c67ccd3544f13, type: 3}
+    characterPrefab: {fileID: 7216422806358738135, guid: 979c2549982b3451c8ec8893b781fd88, type: 3}
