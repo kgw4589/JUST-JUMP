@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
-    public GameObject wave2DGameObject; // PixelWave
+    [SerializeField] private GameObject wave2DGameObject; // PixelWave
     
     private float _currentFloor;
     [SerializeField]
@@ -19,9 +19,9 @@ public class UIManager : Singleton<UIManager>
     private Vector3 midSortRBtnPOS = new Vector3(1350, 65, 0);
     
     [Header("#UI Canvases")]
-    public GameObject startUICanvas; // Start Set UI Panel
-    public GameObject inGameCanvas; // In Game UI Panel
-    public GameObject tutorialImg;
+    [SerializeField] private GameObject startUICanvas; // Start Set UI Panel
+    [SerializeField] private GameObject inGameCanvas; // In Game UI Panel
+    [SerializeField] private GameObject tutorialImg;
     
     [Header("#UI Buttons")]
     [SerializeField] private GameObject homeButton; // HomeButton
