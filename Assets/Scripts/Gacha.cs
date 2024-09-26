@@ -67,6 +67,7 @@ public class Gacha : MonoBehaviour
         SetGachaPanelOrigin();
     }
     
+    // 가챠 버튼 클릭 시 처리 로직
     public void PlayGacha()
     {
         if (_characterInfos.Keys.Count <= 0)
@@ -81,11 +82,13 @@ public class Gacha : MonoBehaviour
         {
             newCharacterText.SetActive(false);
             
+            // 조건 만족 시 순서대로 뽑기 로직 시작
             SelectRating();
             UIManager.Instance.SetCoinUI(DataManager.Instance.SaveData.coin);
         }
     }
 
+    // 1. 확률에 맞게 캐릭터 등급 정함
     private void SelectRating()
     {
         _currentPivot = 0;
@@ -105,33 +108,7 @@ public class Gacha : MonoBehaviour
         }
     }
 
-    public void SetGachaPanelOrigin()
-    {
-        gachaName.text = _GACHA_ORIGIN_NAME_MESSAGE;
-        ratingText.text = _GACHA_ORIGIN_RATING_MESSAGE;
-        gachaImage.sprite = originGachaImage;
-        gachaErrorText.alpha = 0.0f;
-
-        UIManager.Instance.HidePayback();
-        newCharacterText.SetActive(false);
-        
-    }
-
-    private void GachaError(string errorMessage)
-    {
-        Debug.Log("가챠 에러 " + errorMessage);
-        gachaErrorText.text = errorMessage;
-        gachaErrorAnimator.SetTrigger("PopUp");
-    }
-
-    private void SetGachaPanel(CharacterInfo character)
-    {
-        gachaName.text = character.characterName;
-        ratingText.text = character.characterRating.ToString();
-        Debug.Log(character.characterIndex + " " + DataManager.Instance.characterIsoScriptableObject.characterIso.Count);
-        gachaImage.sprite = DataManager.Instance.characterIsoScriptableObject.characterIso[character.characterIndex].characterImage;
-    }
-
+    // 2. 뽑은 등급에 맞는 캐릭터 랜덤 선택
     private void SelectedCharacter(Probability probability)
     {
         CharacterInfo selectedCharacter = _characterInfos[probability][Random.Range(0, _characterInfos[probability].Count)];
@@ -154,5 +131,33 @@ public class Gacha : MonoBehaviour
 
         Debug.Log(selectedCharacter.characterName);
         SetGachaPanel(selectedCharacter);
+    }
+    
+    // 3. 뽑은 캐릭터에 맞게 가챠 패널 UI 세팅
+    private void SetGachaPanel(CharacterInfo character)
+    {
+        gachaName.text = character.characterName;
+        ratingText.text = character.characterRating.ToString();
+        Debug.Log(character.characterIndex + " " + DataManager.Instance.characterIsoScriptableObject.characterIso.Count);
+        gachaImage.sprite = DataManager.Instance.characterIsoScriptableObject.characterIso[character.characterIndex].characterImage;
+    }
+    
+    // 세팅한 가챠 패널 UI 초기화
+    public void SetGachaPanelOrigin()
+    {
+        gachaName.text = _GACHA_ORIGIN_NAME_MESSAGE;
+        ratingText.text = _GACHA_ORIGIN_RATING_MESSAGE;
+        gachaImage.sprite = originGachaImage;
+        gachaErrorText.alpha = 0.0f;
+
+        UIManager.Instance.HidePayback();
+        newCharacterText.SetActive(false);
+    }
+    
+    private void GachaError(string errorMessage)
+    {
+        Debug.Log("가챠 에러 " + errorMessage);
+        gachaErrorText.text = errorMessage;
+        gachaErrorAnimator.SetTrigger("PopUp");
     }
 }
