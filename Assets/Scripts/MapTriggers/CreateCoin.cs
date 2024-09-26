@@ -30,7 +30,6 @@ public class CreateCoin : MonoBehaviour
         var scale = gameObject.transform.lossyScale;
         foreach (var i in _coinList)
         {
-            Debug.Log(i);
             coin[i].SetActive(true);
             coin[i].transform.localScale = new Vector2(1 / scale.x, 1 / scale.y);
         }

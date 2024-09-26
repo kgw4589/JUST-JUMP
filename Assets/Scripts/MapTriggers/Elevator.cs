@@ -14,7 +14,6 @@ public class Elevator : MapTriggerBasicLogic
     private void Start()
     {
         _setPos = new Vector2(transform.position.x, transform.position.y);
-        Debug.Log(_setPos);
     }
 
     private void Update()

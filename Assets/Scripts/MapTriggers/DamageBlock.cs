@@ -29,7 +29,6 @@ public class DamageBlock : MapTriggerBasicLogic
             if (!(_currentTime > hitTime)) return;
             _player.GetDamage(damage);
             _currentTime = 0;
-            Debug.Log("으악");
         }
     }
 
