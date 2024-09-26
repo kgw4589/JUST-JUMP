@@ -2930,7 +2930,7 @@ GameObject:
   - component: {fileID: 8260996581714834443}
   m_Layer: 5
   m_Name: "Normal_\uBBF8\uAD6D\uC5B4\uB9B0\uC774"
-  m_TagString: Untagged
+  m_TagString: Skin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

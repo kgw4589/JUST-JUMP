@@ -38,6 +38,7 @@ public class ChangeCharacter : MonoBehaviour
 
     private GameObject _player; // 적용될 플레이어
 
+    private bool _isBuy;
     private GameObject _skin; // 
     
 
@@ -48,6 +49,7 @@ public class ChangeCharacter : MonoBehaviour
 
     void Start()
     {
+        _isBuy = false;
         _animator = transform.GetComponent<Animator>();
         _player = GameObject.FindWithTag("Player");
         _characterId = 0;
@@ -111,8 +113,9 @@ public class ChangeCharacter : MonoBehaviour
 
     public void Buy()
     {
-        if (DataManager.Instance.SaveData.coin >= price)
+        if (DataManager.Instance.SaveData.coin >= price && !_isBuy)
         {
+            _isBuy = true;
             DataManager.Instance.SaveData.coin -= price;
             Debug.Log($"캐릭터 구입했습ㄴ다.{DataManager.Instance.SaveData.coin}");
             UIManager.Instance.SetCoinUI(DataManager.Instance.SaveData.coin);
@@ -135,6 +138,7 @@ public class ChangeCharacter : MonoBehaviour
             Contains(_characterId);
         price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
         characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
+        _isBuy = false;
     }
 
     public void Apply()
