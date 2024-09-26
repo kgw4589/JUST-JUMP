@@ -51,14 +51,14 @@ public class ChangeCharacter : MonoBehaviour
         _animator = transform.GetComponent<Animator>();
         _player = GameObject.FindWithTag("Player");
         _characterId = 0;
-        ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject
+        ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
             .characterIso[_characterId].characterImage;
-        _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
+        _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
             .characterPrefab;
-        isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
+        isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
             Contains(_characterId);
-        price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
-        characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
+        price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
+        characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
         TextChageColor();
     }
 
@@ -75,7 +75,7 @@ public class ChangeCharacter : MonoBehaviour
             RigthButton.SetActive(true);
         }
 
-        if (_characterId == GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count - 1)
+        if (_characterId == DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1)
         {
             LeftButton.SetActive(false);
         }
@@ -83,11 +83,11 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
-        // NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterName;
-        NowCharacterText.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterName;
-        // ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso
-        //     [GameManager.Instance.datamanager.characterInfos
-        //         [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
+        // NowCharacterText.text = DataManager.Instance.characterInfos[DataManager.Instance.SaveData.unlockCharacters[_characterId]].characterName;
+        NowCharacterText.text = DataManager.Instance.characterInfos[_characterId].characterName;
+        // ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject.characterIso
+        //     [DataManager.Instance.characterInfos
+        //         [DataManager.Instance.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
        
         
         if (isUnLockCharacter)
@@ -111,13 +111,13 @@ public class ChangeCharacter : MonoBehaviour
 
     public void Buy()
     {
-        if (GameManager.Instance.datamanager.SaveData.coin >= price)
+        if (DataManager.Instance.SaveData.coin >= price)
         {
-            GameManager.Instance.datamanager.SaveData.coin -= price;
-            Debug.Log($"캐릭터 구입했습ㄴ다.{GameManager.Instance.datamanager.SaveData.coin}");
-            UIManager.Instance.SetCoinUI(GameManager.Instance.datamanager.SaveData.coin);
-            GameManager.Instance.datamanager.SaveData.unlockCharacters.Add(_characterId);
-            SaveManager.Instance.GetSaveUserData(GameManager.Instance.datamanager.SaveData);
+            DataManager.Instance.SaveData.coin -= price;
+            Debug.Log($"캐릭터 구입했습ㄴ다.{DataManager.Instance.SaveData.coin}");
+            UIManager.Instance.SetCoinUI(DataManager.Instance.SaveData.coin);
+            DataManager.Instance.SaveData.unlockCharacters.Add(_characterId);
+            SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
             StartCoroutine(BuyAnimation());
         }
         else
@@ -131,10 +131,10 @@ public class ChangeCharacter : MonoBehaviour
         _animator.SetTrigger("Buy");
         yield return new WaitForSeconds(1f);
         Debug.Log("ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 매그네릭~");
-        isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
+        isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
             Contains(_characterId);
-        price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
-        characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
+        price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
+        characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
     }
 
     public void Apply()
@@ -145,8 +145,8 @@ public class ChangeCharacter : MonoBehaviour
             Destroy(DeletObject);
         }
 
-        // _selectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[GameManager.Instance.datamanager.characterInfos
-        //     [GameManager.Instance.datamanager.SaveData.unlockCharacters[_characterId]].characterIndex].characterPrefab;
+        // _selectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[DataManager.Instance.characterInfos
+        //     [DataManager.Instance.SaveData.unlockCharacters[_characterId]].characterIndex].characterPrefab;
         _selectCharacter = _nowSelectCharacter;
         _skin = Instantiate(_selectCharacter);
         _skin.transform.SetParent(_player.transform);
@@ -162,14 +162,14 @@ public class ChangeCharacter : MonoBehaviour
         if (_characterId != 0)
         {
             _characterId--;
-            ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject
+            ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
                 .characterIso[_characterId].characterImage;
-            _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
+            _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
                 .characterPrefab;
-            isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
+            isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
                 Contains(_characterId);
-            price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
-            characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
+            price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
+            characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
             TextChageColor();
         }
     }
@@ -198,17 +198,17 @@ public class ChangeCharacter : MonoBehaviour
 
     public void RightButtonPush()
     {
-        if (_characterId != GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso.Count - 1)
+        if (_characterId != DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1)
         {
             _characterId++;
-            ViewCharacterImage.sprite = GameManager.Instance.datamanager.characterIsoScriptableObject
+            ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
                 .characterIso[_characterId].characterImage;
-            _nowSelectCharacter = GameManager.Instance.datamanager.characterIsoScriptableObject.characterIso[_characterId]
+            _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
                 .characterPrefab;
-            isUnLockCharacter = GameManager.Instance.datamanager.SaveData.unlockCharacters.
+            isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
                 Contains(_characterId);
-            price = _priceDictionary[GameManager.Instance.datamanager.characterInfos[_characterId].characterRating];
-            characterRating.text = GameManager.Instance.datamanager.characterInfos[_characterId].characterRating.ToString();
+            price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
+            characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
             TextChageColor();
         }
     }

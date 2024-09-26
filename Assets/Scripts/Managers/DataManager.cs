@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine.Android;
 using UnityEngine.Networking;
 
-public class DataManager : MonoBehaviour
+public class DataManager : Singleton<DataManager>
 {
     private string _sheetData;
     private const string _sheetURL ="https://docs.google.com/spreadsheets/d/1fXMD0-E3BzRYGxw1NP9vNgQME82UK3_nQsQUexYfYzo/export?format=tsv&range=A2:D";
@@ -28,10 +28,8 @@ public class DataManager : MonoBehaviour
     public Dictionary<int, CharacterInfo> characterInfos = new Dictionary<int, CharacterInfo>();
     public CharacterIsoScriptable characterIsoScriptableObject;
 
-    private void Awake()
+    protected override void Init()
     {
-        GameManager.Instance.datamanager = this;
-
         if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageRead))
         {
             Permission.RequestUserPermission(Permission.ExternalStorageRead);

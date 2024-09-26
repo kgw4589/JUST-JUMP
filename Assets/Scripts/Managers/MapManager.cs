@@ -94,15 +94,15 @@ public class MapManager : Singleton<MapManager>
         {
             case 0:
                 GameManager.Instance.gameMode = GameManager.GameMode.Easy;
-                GameManager.Instance.datamanager.HighScore = GameManager.Instance.datamanager.SaveData.easyHighScore;
+                DataManager.Instance.HighScore = DataManager.Instance.SaveData.easyHighScore;
                 break;
             case 1:
                 GameManager.Instance.gameMode = GameManager.GameMode.Normal;
-                GameManager.Instance.datamanager.HighScore = GameManager.Instance.datamanager.SaveData.normalHighScore;
+                DataManager.Instance.HighScore = DataManager.Instance.SaveData.normalHighScore;
                 break;
             case 2:
                 GameManager.Instance.gameMode = GameManager.GameMode.Hard;
-                GameManager.Instance.datamanager.HighScore = GameManager.Instance.datamanager.SaveData.hardHighScore;
+                DataManager.Instance.HighScore = DataManager.Instance.SaveData.hardHighScore;
                 break;
             default:
                 Debug.LogError("Index error");

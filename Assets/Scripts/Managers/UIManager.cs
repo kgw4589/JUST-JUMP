@@ -55,7 +55,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Animator errorInternetAnimator;
     [SerializeField] private Gacha gacha;
 
-    public void InitObject()
+    private void InitObject()
     {
         startUICanvas.SetActive(true);
         inGameCanvas.SetActive(false);
@@ -86,17 +86,17 @@ public class UIManager : Singleton<UIManager>
 
     public void OnClickCheckInternet()
     {
-        GameManager.Instance.datamanager.CheckInternet();
+        DataManager.Instance.CheckInternet();
     }
 
     public void OnClickStartButton()
     {
         Debug.Log("Game Start");
         startUICanvas.SetActive(false);
-        if (GameManager.Instance.datamanager.SaveData.isFirstGame)
+        if (DataManager.Instance.SaveData.isFirstGame)
         {
             tutorialImg.SetActive(true);
-            GameManager.Instance.datamanager.SaveData.isFirstGame = false;
+            DataManager.Instance.SaveData.isFirstGame = false;
         }
         else
         {
@@ -299,7 +299,7 @@ public class UIManager : Singleton<UIManager>
 
         if (GameManager.Instance.gameState == GameManager.GameState.End)
         {
-            highScore.text = GameManager.Instance.datamanager.HighScore.ToString("F2") + "m";
+            highScore.text = DataManager.Instance.HighScore.ToString("F2") + "m";
             modeText.text = MapManager.Instance.selectedMapScriptable.modeText;
             modeText.color = MapManager.Instance.selectedMapScriptable.modeColor;
             currentScore.text = _currentFloor.ToString("F2") + "m";

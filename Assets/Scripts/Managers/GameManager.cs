@@ -12,7 +12,6 @@ public class GameManager : Singleton<GameManager>
 {
     // GameObjects
     public Player player;
-    public DataManager datamanager;
 
     public float playerPosY;
 
@@ -39,7 +38,6 @@ public class GameManager : Singleton<GameManager>
     
     protected override void Init()
     {
-        Time.timeScale = 0; // game stop
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
     }
@@ -77,29 +75,29 @@ public class GameManager : Singleton<GameManager>
     
     private void GameOver()
     {
-        if (playerPosY > datamanager.HighScore)
+        if (playerPosY > DataManager.Instance.HighScore)
         {
-            datamanager.HighScore = playerPosY;
+            DataManager.Instance.HighScore = playerPosY;
             switch (gameMode)
             {
                 case GameMode.Easy:
-                    datamanager.SaveData.easyHighScore = playerPosY;
+                    DataManager.Instance.SaveData.easyHighScore = playerPosY;
                     break;
                 case GameMode.Normal:
-                    datamanager.SaveData.normalHighScore = playerPosY;
+                    DataManager.Instance.SaveData.normalHighScore = playerPosY;
                     break;
                 case GameMode.Hard:
-                    datamanager.SaveData.hardHighScore = playerPosY;
+                    DataManager.Instance.SaveData.hardHighScore = playerPosY;
                     break;
             }
             // try {
-            //     FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(DataManager.Instance.SaveData));
+            //     FireBaseManager.Instance.GetSaveInDB(JsonUtility.ToJson(DataManager.Instance.Instance.SaveData));
             //     FireBaseManager.Instance.WriteRanking();
             // } catch (Exception e) {
             //     Debug.Log(e);
             //     gameState = GameState.End;
             // }
-            SaveManager.Instance.GetSaveUserData(datamanager.SaveData);
+            SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
         }
         
         Time.timeScale = 0;
@@ -127,6 +125,6 @@ public class GameManager : Singleton<GameManager>
 
     private void OnApplicationQuit()
     {
-        SaveManager.Instance.GetSaveUserData(datamanager.SaveData);
+        SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
     }
 }

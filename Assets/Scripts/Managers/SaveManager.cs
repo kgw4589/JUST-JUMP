@@ -19,11 +19,11 @@ public class SaveManager : Singleton<SaveManager>
         _savePath = Application.persistentDataPath + "/SaveData.json";
         if (!File.Exists(_savePath))
         {
-            GameManager.Instance.datamanager.SaveData = new UserData();
+            DataManager.Instance.SaveData = new UserData();
             return;
         }
         string jsonData = File.ReadAllText(_savePath);
-        GameManager.Instance.datamanager.SaveData = JsonUtility.FromJson<UserData>(jsonData);
+        DataManager.Instance.SaveData = JsonUtility.FromJson<UserData>(jsonData);
         Debug.Log("Complete");
     }
 
