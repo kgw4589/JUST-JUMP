@@ -24,12 +24,15 @@ public class Gacha : MonoBehaviour
     
     [Header("#UI Gacha")]
     [SerializeField] private GameObject newCharacterText;
+    [SerializeField] private GameObject gotchaDimmed;
     
     [SerializeField] private Sprite originGachaImage;
+    [SerializeField] private Sprite originGachaBoxImage;
     [SerializeField] private TextMeshProUGUI ratingText;
     [SerializeField] private TextMeshProUGUI gachaName;
     [SerializeField] private Image gachaImage;
     [SerializeField] private TextMeshProUGUI gachaErrorText;
+    [SerializeField] private Animator gachaBoxAnimator;
     [SerializeField] private Animator gachaErrorAnimator;
 
     private const string _GACHA_ORIGIN_NAME_MESSAGE = "캐릭터 뽑기";
@@ -82,6 +85,7 @@ public class Gacha : MonoBehaviour
         {
             newCharacterText.SetActive(false);
             
+            
             // 조건 만족 시 순서대로 뽑기 로직 시작
             SelectRating();
             UIManager.Instance.SetCoinUI(DataManager.Instance.SaveData.coin);
@@ -96,6 +100,13 @@ public class Gacha : MonoBehaviour
         int randomValue = Random.Range(1, _totalProbability + 1);
         Debug.Log("가챠 랜덤 값 : " + randomValue);
         
+        UIManager.Instance.HidePayback();
+        gotchaDimmed.SetActive(true);
+        gachaBoxAnimator.gameObject.SetActive(true);
+        gachaImage.gameObject.SetActive(false);
+
+        gachaBoxAnimator.speed = 1;
+        gachaBoxAnimator.Rebind();
         foreach (Probability probability in _characterInfos.Keys)
         {
             _currentPivot += (int)probability;
@@ -116,26 +127,42 @@ public class Gacha : MonoBehaviour
         
         if (DataManager.Instance.SaveData.unlockCharacters.Contains(selectedCharacter.characterId))
         {
-            DataManager.Instance.SaveData.coin += _PAYBACK_COIN;
             UIManager.Instance.SetCoinUI(DataManager.Instance.SaveData.coin);
-            UIManager.Instance.ShowPayback();
             SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
         }
         else
         {
-            newCharacterText.SetActive(true);
-            UIManager.Instance.HidePayback();
             DataManager.Instance.SaveData.unlockCharacters.Add(selectedCharacter.characterId);
             SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
         }
 
         Debug.Log(selectedCharacter.characterName);
+        StartCoroutine(BoxAnim(selectedCharacter));
+    }
+
+    private IEnumerator BoxAnim(CharacterInfo selectedCharacter)
+    {
+        yield return new WaitUntil(() => gachaBoxAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f);
+        gachaBoxAnimator.speed = 0;
+        gachaImage.gameObject.SetActive(true);
+        gachaBoxAnimator.gameObject.SetActive(false);
         SetGachaPanel(selectedCharacter);
     }
     
     // 3. 뽑은 캐릭터에 맞게 가챠 패널 UI 세팅
     private void SetGachaPanel(CharacterInfo character)
     {
+        if (DataManager.Instance.SaveData.unlockCharacters.Contains(character.characterId))
+        {
+            UIManager.Instance.ShowPayback();
+            DataManager.Instance.SaveData.coin += _PAYBACK_COIN;
+        }
+        else
+        {
+            newCharacterText.SetActive(true);
+            UIManager.Instance.HidePayback();
+        }
+        gotchaDimmed.SetActive(false);
         gachaName.text = character.characterName;
         ratingText.text = character.characterRating.ToString();
         Debug.Log(character.characterIndex + " " + DataManager.Instance.characterIsoScriptableObject.characterIso.Count);
@@ -145,9 +172,13 @@ public class Gacha : MonoBehaviour
     // 세팅한 가챠 패널 UI 초기화
     public void SetGachaPanelOrigin()
     {
+        gachaBoxAnimator.speed = 0;
+        gachaBoxAnimator.Rebind();
+        gotchaDimmed.SetActive(false);   
+        
         gachaName.text = _GACHA_ORIGIN_NAME_MESSAGE;
         ratingText.text = _GACHA_ORIGIN_RATING_MESSAGE;
-        gachaImage.sprite = originGachaImage;
+        gachaImage.sprite = originGachaBoxImage;
         gachaErrorText.alpha = 0.0f;
 
         UIManager.Instance.HidePayback();
