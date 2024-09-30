@@ -10,6 +10,8 @@ public class LoadingSceneController : MonoBehaviour
 
     [SerializeField] private Image progressBar;
 
+    public static bool isInternetOk = false;
+
     public static void LoadScene(string sceneName)
     {
         _nextScene = sceneName;
@@ -26,6 +28,7 @@ public class LoadingSceneController : MonoBehaviour
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(_nextScene);
         asyncOperation.allowSceneActivation = false;
 
+
         float timer = 0.0f;
         while (!asyncOperation.isDone)
         {
@@ -37,6 +40,8 @@ public class LoadingSceneController : MonoBehaviour
             }
             else
             {
+                yield return new WaitUntil(() => isInternetOk);
+                
                 timer += Time.unscaledDeltaTime;
                 progressBar.fillAmount = Mathf.Lerp(0.8f, 1.0f, timer);
                 if (progressBar.fillAmount >= 1.0f)

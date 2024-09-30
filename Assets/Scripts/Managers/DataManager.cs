@@ -56,6 +56,7 @@ public class DataManager : Singleton<DataManager>
         {
             Time.timeScale = 0;
             internetErrorPanel.SetActive(true);
+            LoadingSceneController.isInternetOk = false;
         }
         else
         {
@@ -67,8 +68,6 @@ public class DataManager : Singleton<DataManager>
 
     private IEnumerator StartLogic()
     {
-        UIManager.Instance.SetCoinUI(SaveData.coin);
-        
         using (UnityWebRequest www = UnityWebRequest.Get(_sheetURL))
         {
             yield return www.SendWebRequest();
@@ -105,6 +104,8 @@ public class DataManager : Singleton<DataManager>
             
             characterInfos.Add(characterInfo.characterId, characterInfo);
         }
+        
+        LoadingSceneController.isInternetOk = true;
     }
     
     

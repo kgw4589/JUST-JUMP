@@ -8,9 +8,7 @@ public class MapManager : Singleton<MapManager>
 {
     private MapListScriptable _mapListScriptable;
     public MapScriptable selectedMapScriptable;
-    
-    private Vector2 _startPos;
-    
+
     private GameObject _player;
     private GameObject _gameOverZone;
     
@@ -30,6 +28,10 @@ public class MapManager : Singleton<MapManager>
     [SerializeField] private TextMeshProUGUI modeText;
     [SerializeField] private Image modeIcon;
 
+    private GameObject _backgroundObjectOne;
+    private GameObject _backgroundObjectTwo;
+    private float _backgroundInterval = 150;
+
     protected override void Init()
     {
         _mapSectionIndex = 0;
@@ -38,10 +40,10 @@ public class MapManager : Singleton<MapManager>
         _mapListScriptable = Resources.Load<MapListScriptable>("MapScriptables");
         selectedMapScriptable = _mapListScriptable.mapScriptableList[_mapScriptableIndex];
         
+        // _backgroundInterval = _backgroundObjectOne.transform.localScale.y;
+        
         SetModeUI();
-        
-        _startPos = new Vector2(0, 0);
-        
+
         GameManager.Instance.initAction += InitObject;
         GameManager.Instance.startAction += StartMap;
         
@@ -59,6 +61,49 @@ public class MapManager : Singleton<MapManager>
 
         _mapSectionIndex = 0;
         _mapQueue.Clear();
+    }
+
+    private void Update()
+    {
+        if (!_isInitComplete)
+        {
+            return;
+        }
+
+        float dis = Vector2.Distance(_player.transform.position, _lastMap.transform.position);
+
+        if (dis < _mapSizeY * 3)
+        {
+            if (_mapSectionIndex < selectedMapScriptable.section.Length
+                && GameManager.Instance.playerPosY >= selectedMapScriptable.section[_mapSectionIndex])
+            {
+                ++_mapSectionIndex;
+            }
+            InstantiateRandomMap();
+        }
+        
+        Vector3 mapQueFirst = _mapQueue.Peek().transform.position;
+
+        if (_gameOverZone.transform.position.y - mapQueFirst.y > _mapDestroyDistance)
+        {
+            Destroy(_mapQueue.Dequeue());
+        }
+    }
+
+    private void InstantiateRandomMap()
+    {
+        GameObject map = Instantiate(selectedMapScriptable.maps[_mapSectionIndex]
+            .sectionMaps[Random.Range(0, selectedMapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
+        
+        float lastMapSizeY = _lastMap.transform.localScale.y / 2;
+        _mapSizeY = map.transform.localScale.y / 2;
+        
+        _interval = new Vector2(0, lastMapSizeY + _mapSizeY);
+
+        map.transform.position = _lastMap.transform.position + _interval;
+        _lastMap = map;
+        
+        _mapQueue.Enqueue(_lastMap);
     }
 
     private void StartMap()
@@ -111,47 +156,9 @@ public class MapManager : Singleton<MapManager>
         SetModeUI();
         UIManager.Instance.OnClickModeClose();
     }
-
-    private void Update()
+    
+    private void SetBackgroundImage()
     {
-        if (!_isInitComplete)
-        {
-            return;
-        }
-
-        float dis = Vector2.Distance(_player.transform.position, _lastMap.transform.position);
-
-        if (dis < _mapSizeY * 3)
-        {
-            if (_mapSectionIndex < selectedMapScriptable.section.Length
-                && GameManager.Instance.playerPosY >= selectedMapScriptable.section[_mapSectionIndex])
-            {
-                ++_mapSectionIndex;
-            }
-            InstantiateRandomMap();
-        }
         
-        Vector3 mapQueFirst = _mapQueue.Peek().transform.position;
-
-        if (_gameOverZone.transform.position.y - mapQueFirst.y > _mapDestroyDistance)
-        {
-            Destroy(_mapQueue.Dequeue());
-        }
-    }
-
-    private void InstantiateRandomMap()
-    {
-        GameObject map = Instantiate(selectedMapScriptable.maps[_mapSectionIndex]
-            .sectionMaps[Random.Range(0, selectedMapScriptable.maps[_mapSectionIndex].sectionMaps.Count)]);
-        
-        float lastMapSizeY = _lastMap.transform.localScale.y / 2;
-        _mapSizeY = map.transform.localScale.y / 2;
-        
-        _interval = new Vector2(0, lastMapSizeY + _mapSizeY);
-
-        map.transform.position = _lastMap.transform.position + _interval;
-        _lastMap = map;
-        
-        _mapQueue.Enqueue(_lastMap);
     }
 }
