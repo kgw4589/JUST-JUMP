@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -283,6 +284,7 @@ public class UIManager : Singleton<UIManager>
         inGameCanvas.SetActive(false);
 
         GameManager.Instance.initAction += InitObject;
+        SetCoinUI(DataManager.Instance.SaveData.coin);
     }
 
     private void Update()

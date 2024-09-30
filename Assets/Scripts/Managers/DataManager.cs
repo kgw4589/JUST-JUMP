@@ -25,6 +25,8 @@ public class DataManager : Singleton<DataManager>
     
     private UserData _saveData;
 
+    public GameObject internetErrorPanel;
+
     public Dictionary<int, CharacterInfo> characterInfos = new Dictionary<int, CharacterInfo>();
     public CharacterIsoScriptable characterIsoScriptableObject;
 
@@ -43,7 +45,6 @@ public class DataManager : Singleton<DataManager>
         {
             _saveData = new UserData();
         }
-        UIManager.Instance.SetCoinUI(_saveData.coin);
         CheckInternet();
 
         characterIsoScriptableObject = Resources.Load<CharacterIsoScriptable>("Character Iso");
@@ -54,12 +55,12 @@ public class DataManager : Singleton<DataManager>
         if (!Internet.IsOkInternet())
         {
             Time.timeScale = 0;
-            UIManager.Instance.OnErrorInternet();
+            internetErrorPanel.SetActive(true);
         }
         else
         {
             Time.timeScale = 1;
-            UIManager.Instance.OffErrorInternet();
+            internetErrorPanel.SetActive(false);
             StartCoroutine(StartLogic());
         }
     }
