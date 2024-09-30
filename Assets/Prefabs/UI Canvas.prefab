@@ -1251,7 +1251,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\uC774\uBBF8 \uD68D\uB4DD\uD55C \uCE90\uB9AD\uD130\uC785\uB2C8\uB2E4.
-    + 5"
+    + 20"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5d44709fa4c971e4ca95ad62f8c34074, type: 2}
   m_sharedMaterial: {fileID: 2273987222721953196, guid: 5d44709fa4c971e4ca95ad62f8c34074, type: 2}

@@ -20,7 +20,7 @@ public class Gacha : MonoBehaviour
     private Dictionary<Probability, List<CharacterInfo>> _characterInfos = new Dictionary<Probability, List<CharacterInfo>>();
 
     private const int _COIN_PRICE = 100;
-    private const int _PAYBACK_COIN = 10;
+    private const int _PAYBACK_COIN = 20;
     
     [Header("#UI Gacha")]
     [SerializeField] private GameObject newCharacterText;
