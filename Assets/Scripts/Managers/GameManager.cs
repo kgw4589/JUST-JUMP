@@ -59,6 +59,18 @@ public class GameManager : Singleton<GameManager>
         gameState = GameState.Play;
         Application.targetFrameRate = 60;
         SoundManager.Instance.PlayBgm(true);
+        switch (gameMode)
+        {
+            case GameMode.Easy:
+                DataManager.Instance.HighScore = DataManager.Instance.SaveData.easyHighScore;
+                break;
+            case GameMode.Normal:
+                DataManager.Instance.HighScore = DataManager.Instance.SaveData.normalHighScore;
+                break;
+            case GameMode.Hard:
+                DataManager.Instance.HighScore = DataManager.Instance.SaveData.hardHighScore;
+                break;
+        }
         if (!restart)
         {
             startAction();
