@@ -18,17 +18,16 @@ public class ChangeCharacter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI characterPrice;
     [SerializeField] private TextMeshProUGUI characterRating;
     [SerializeField] private Animator errorText;
-    
-    
+
 
     [SerializeField] private Image ViewCharacterImage; // 화면에 보일 이미지
     [SerializeField] private TextMeshProUGUI NowCharacterText;
 
     private Dictionary<Gacha.Probability, int> _priceDictionary = new Dictionary<Gacha.Probability, int>()
     {
-        { Gacha.Probability.Normal , 350},
-        { Gacha.Probability.Epic , 750 },
-        { Gacha.Probability.Legend , 1500 }
+        { Gacha.Probability.Normal, 350 },
+        { Gacha.Probability.Epic, 750 },
+        { Gacha.Probability.Legend, 1500 }
     };
 
     private Animator _animator;
@@ -40,11 +39,11 @@ public class ChangeCharacter : MonoBehaviour
 
     private bool _isBuy;
     private GameObject _skin; // 
-    
+
 
     [SerializeField] private GameObject RigthButton;
     [SerializeField] private GameObject LeftButton;
-    
+
     public int price = 5;
 
     void Start()
@@ -53,45 +52,13 @@ public class ChangeCharacter : MonoBehaviour
         _animator = transform.GetComponent<Animator>();
         _player = GameObject.FindWithTag("Player");
         _characterId = 0;
-        ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
-            .characterIso[_characterId].characterImage;
-        _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
-            .characterPrefab;
-        isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
-            Contains(_characterId);
-        price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
-        characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
-        TextChageColor();
+        InitChangeCharacter();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Application.persistentDataPath);
-        if (_characterId == 0)
-        {
-            RigthButton.SetActive(false);
-        }
-        else
-        {
-            RigthButton.SetActive(true);
-        }
-
-        if (_characterId == DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1)
-        {
-            LeftButton.SetActive(false);
-        }
-        else
-        {
-            LeftButton.SetActive(true);
-        }
-        // NowCharacterText.text = DataManager.Instance.characterInfos[DataManager.Instance.SaveData.unlockCharacters[_characterId]].characterName;
-        NowCharacterText.text = DataManager.Instance.characterInfos[_characterId].characterName;
-        // ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject.characterIso
-        //     [DataManager.Instance.characterInfos
-        //         [DataManager.Instance.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
-       
-        
+        //   Debug.Log(Application.persistentDataPath);
         if (isUnLockCharacter)
         {
             applyButton.SetActive(true);
@@ -108,7 +75,6 @@ public class ChangeCharacter : MonoBehaviour
             lockCharacterDimmed.SetActive(true);
             buyButton.SetActive(true);
         }
-        
     }
 
     public void Buy()
@@ -134,8 +100,7 @@ public class ChangeCharacter : MonoBehaviour
         _animator.SetTrigger("Buy");
         yield return new WaitForSeconds(1f);
         Debug.Log("ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 매그네릭~");
-        isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
-            Contains(_characterId);
+        isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.Contains(_characterId);
         price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
         characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
         _isBuy = false;
@@ -166,21 +131,12 @@ public class ChangeCharacter : MonoBehaviour
         if (_characterId != 0)
         {
             _characterId--;
-            ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
-                .characterIso[_characterId].characterImage;
-            _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
-                .characterPrefab;
-            isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
-                Contains(_characterId);
-            price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
-            characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
-            TextChageColor();
+            InitChangeCharacter();
         }
     }
 
     void TextChageColor()
     {
-        
         if (characterRating.text == Gacha.Probability.Normal.ToString())
         {
             characterRating.color = Color.gray;
@@ -205,15 +161,42 @@ public class ChangeCharacter : MonoBehaviour
         if (_characterId != DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1)
         {
             _characterId++;
-            ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
-                .characterIso[_characterId].characterImage;
-            _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
-                .characterPrefab;
-            isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
-                Contains(_characterId);
-            price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
-            characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
-            TextChageColor();
+            InitChangeCharacter();
+        }
+    }
+
+    void InitChangeCharacter()
+    {
+        MoveButtonSetActive();
+        ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
+            .characterIso[_characterId].characterImage; //이미지 정상화
+        _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
+            .characterPrefab; //프리팹 정상화
+        isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.Contains(_characterId); //저장 정상화
+        price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating]; //가격 정상화
+        characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString(); //랭크 정상화
+        NowCharacterText.text = DataManager.Instance.characterInfos[_characterId].characterName; //캐릭터 이름 정상화
+        TextChageColor();
+    }
+
+    void MoveButtonSetActive()
+    {
+        if (_characterId == 0)
+        {
+            RigthButton.SetActive(false);
+        }
+        else
+        {
+            RigthButton.SetActive(true);
+        }
+
+        if (_characterId == DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1)
+        {
+            LeftButton.SetActive(false);
+        }
+        else
+        {
+            LeftButton.SetActive(true);
         }
     }
 }
