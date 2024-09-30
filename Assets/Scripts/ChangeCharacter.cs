@@ -53,15 +53,7 @@ public class ChangeCharacter : MonoBehaviour
         _animator = transform.GetComponent<Animator>();
         _player = GameObject.FindWithTag("Player");
         _characterId = 0;
-        ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
-            .characterIso[_characterId].characterImage;
-        _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
-            .characterPrefab;
-        isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
-            Contains(_characterId);
-        price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
-        characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
-        TextChageColor();
+        ReRodingReSoucse();
     }
 
     // Update is called once per frame
@@ -85,13 +77,6 @@ public class ChangeCharacter : MonoBehaviour
         {
             LeftButton.SetActive(true);
         }
-        // NowCharacterText.text = DataManager.Instance.characterInfos[DataManager.Instance.SaveData.unlockCharacters[_characterId]].characterName;
-        NowCharacterText.text = DataManager.Instance.characterInfos[_characterId].characterName;
-        // ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject.characterIso
-        //     [DataManager.Instance.characterInfos
-        //         [DataManager.Instance.SaveData.unlockCharacters[_characterId]].characterIndex].characterImage;
-       
-        
         if (isUnLockCharacter)
         {
             applyButton.SetActive(true);
@@ -109,6 +94,20 @@ public class ChangeCharacter : MonoBehaviour
             buyButton.SetActive(true);
         }
         
+    }
+
+    void ReRodingReSoucse()
+    {
+        ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
+            .characterIso[_characterId].characterImage;
+        _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
+            .characterPrefab;
+        isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
+            Contains(_characterId);
+        price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
+        characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
+        NowCharacterText.text = DataManager.Instance.characterInfos[_characterId].characterName;
+        TextChageColor();
     }
 
     public void Buy()
@@ -166,15 +165,7 @@ public class ChangeCharacter : MonoBehaviour
         if (_characterId != 0)
         {
             _characterId--;
-            ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
-                .characterIso[_characterId].characterImage;
-            _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
-                .characterPrefab;
-            isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
-                Contains(_characterId);
-            price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
-            characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
-            TextChageColor();
+            ReRodingReSoucse();
         }
     }
 
@@ -205,15 +196,7 @@ public class ChangeCharacter : MonoBehaviour
         if (_characterId != DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1)
         {
             _characterId++;
-            ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
-                .characterIso[_characterId].characterImage;
-            _nowSelectCharacter = DataManager.Instance.characterIsoScriptableObject.characterIso[_characterId]
-                .characterPrefab;
-            isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
-                Contains(_characterId);
-            price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
-            characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
-            TextChageColor();
+            ReRodingReSoucse();   
         }
     }
 }
