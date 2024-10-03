@@ -1,9 +1,9 @@
 lastUpgrade=01101
 proj.pluginVersion=0.11.01
-proj.AppId=949622483618
+proj.AppId=334903100778
 and.BundleId=com.DGSWTeamSSR.JUSTJUMP
 proj.classDir=Assets
 proj.ConstantsClassName=GPGSIds
-and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e949622483618%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.DGSWTeamSSR.JUSTJUMP%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+%ec%9d%b4%ec%a7%80+%eb%9e%ad%ed%82%b9--%3e%0d%0a++%3cstring+name%3d%22leaderboard%22+translatable%3d%22false%22%3eCgkIotWkz9EbEAIQAg%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+%eb%85%b8%eb%a9%80+%eb%9e%ad%ed%82%b9--%3e%0d%0a++%3cstring+name%3d%22leaderboard_2%22+translatable%3d%22false%22%3eCgkIotWkz9EbEAIQAw%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+%ed%95%98%eb%93%9c+%eb%9e%ad%ed%82%b9--%3e%0d%0a++%3cstring+name%3d%22leaderboard_3%22+translatable%3d%22false%22%3eCgkIotWkz9EbEAIQBA%3c%2fstring%3e%0d%0a%3c%2fresources%3e
-and.ClientId=949622483618-5hd9rm3nmgspjnvfg1ttjjntap65i0u0.apps.googleusercontent.com
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e334903100778%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.DGSWTeamSSR.JUSTJUMP%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+EASY+RANKING--%3e%0d%0a++%3cstring+name%3d%22leaderboard_easy_ranking%22+translatable%3d%22false%22%3eCgkI6oqfzt8JEAIQAw%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+NORMAL+RANKING--%3e%0d%0a++%3cstring+name%3d%22leaderboard_normal_ranking%22+translatable%3d%22false%22%3eCgkI6oqfzt8JEAIQBA%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+HARD+RANKING--%3e%0d%0a++%3cstring+name%3d%22leaderboard_hard_ranking%22+translatable%3d%22false%22%3eCgkI6oqfzt8JEAIQBQ%3c%2fstring%3e%0d%0a%3c%2fresources%3e
+and.ClientId=334903100778-fln64clbtmu0b4pd4npd57o0vvkamnmh.apps.googleusercontent.com
 android.SetupDone=true
