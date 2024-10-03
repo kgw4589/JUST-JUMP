@@ -10,31 +10,32 @@ public class FireBaseManager : Singleton<FireBaseManager>
 {
     private string _googlePlayId;
 
+    private string _token;
     private DatabaseReference reference;
 
     protected override void Init()
     {
+        
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
         reference = FirebaseDatabase.DefaultInstance.RootReference;
-        GooglePlaySignIn();
+        PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
     }
 
-    private void GooglePlaySignIn()
+    internal void ProcessAuthentication(SignInStatus status)
     {
-        PlayGamesPlatform.Instance.Authenticate(status =>
+        if (status == SignInStatus.Success)
         {
-            if (status == SignInStatus.Success)
+            Debug.Log("Sign In Success");
+            PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
             {
-                _googlePlayId = PlayGamesPlatform.Instance.GetUserId();
-                Debug.Log("Sign In Success");
-                GetUserData();
-            }
-            else
-            {
-                Debug.Log("Sign in Failed: " + status);
-            }
-        });
+                _token = code;
+            });
+        }
+        else
+        {
+            Debug.Log("Sign In failed : " + status);
+        }
     }
 
     private void GetUserData()
