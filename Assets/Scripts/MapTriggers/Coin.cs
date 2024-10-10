@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,11 @@ public class Coin : MapTriggerBasicLogic
 {
     private Player _player;
     private const int _PRICE = 1;
+
+    private void Update()
+    {
+        transform.Rotate(0, 5, 0);
+    }
 
     protected override void EnterEvent()
     {
