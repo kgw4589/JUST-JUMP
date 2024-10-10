@@ -110,7 +110,7 @@ public partial class Player : MonoBehaviour
         {
             _lineRenderer.enabled = false;
         }
-        if (_isRigthButtonPush && !_isDragging && IsJumpAble())
+        if ((_isRigthButtonPush ||Input.GetKey(KeyCode.D)) && !_isDragging && IsJumpAble())
         {
            
             transform.position += new Vector3(moveSpeed, 0, 0);
@@ -119,7 +119,7 @@ public partial class Player : MonoBehaviour
                 TurnPlayer();   
             }
         }
-        else if (_isLeftButtonPush && !_isDragging && IsJumpAble())
+        else if ((_isLeftButtonPush || Input.GetKey(KeyCode.A)) && !_isDragging && IsJumpAble())
         {
            
             transform.position += new Vector3(-moveSpeed, 0, 0);
@@ -347,6 +347,9 @@ public partial class Player : MonoBehaviour
         {
             TurnPlayer();
         }
+
+        _isLeftButtonPush = false;
+        _isRigthButtonPush = false;
         _rd.velocity = Vector2.zero;
         isDie = false;
         playerHp = maxplayerHp;

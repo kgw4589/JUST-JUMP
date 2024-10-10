@@ -38,6 +38,7 @@ public class ChangeCharacter : MonoBehaviour
 
     private GameObject _player; // 적용될 플레이어
 
+    private bool _isPassable = true;
     private bool _isBuy;
     private GameObject _skin; // 
     
@@ -49,34 +50,20 @@ public class ChangeCharacter : MonoBehaviour
 
     void Start()
     {
+        _isPassable = true;
         _isBuy = false;
         _animator = transform.GetComponent<Animator>();
         _player = GameObject.FindWithTag("Player");
         _characterId = 0;
         ReRodingReSoucse();
+        CheakRLButton();
     }
 
     // Update is called once per frame
     void Update()
     {
         Debug.Log(Application.persistentDataPath);
-        if (_characterId == 0)
-        {
-            RigthButton.SetActive(false);
-        }
-        else
-        {
-            RigthButton.SetActive(true);
-        }
-
-        if (_characterId == DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1)
-        {
-            LeftButton.SetActive(false);
-        }
-        else
-        {
-            LeftButton.SetActive(true);
-        }
+        
         if (isUnLockCharacter)
         {
             applyButton.SetActive(true);
@@ -94,6 +81,26 @@ public class ChangeCharacter : MonoBehaviour
             buyButton.SetActive(true);
         }
         
+    }
+
+    void CheakRLButton()
+    {
+        if (_characterId == 0)
+        {
+            RigthButton.SetActive(false);
+        }
+        else
+        {
+            RigthButton.SetActive(true);
+        }
+        if (_characterId == DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1)
+        {
+            LeftButton.SetActive(false);
+        }
+        else
+        {
+            LeftButton.SetActive(true);
+        } 
     }
 
     void ReRodingReSoucse()
@@ -114,6 +121,7 @@ public class ChangeCharacter : MonoBehaviour
     {
         if (DataManager.Instance.SaveData.coin >= price && !_isBuy)
         {
+            _isPassable = false;
             _isBuy = true;
             DataManager.Instance.SaveData.coin -= price;
             Debug.Log($"캐릭터 구입했습ㄴ다.{DataManager.Instance.SaveData.coin}");
@@ -138,10 +146,12 @@ public class ChangeCharacter : MonoBehaviour
         price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
         characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
         _isBuy = false;
+        _isPassable = true;
     }
 
     public void Apply()
     {
+        _isPassable = false;
         GameObject DeletObject = GameObject.FindWithTag("Skin");
         if (DeletObject != null)
         {
@@ -156,16 +166,28 @@ public class ChangeCharacter : MonoBehaviour
 
         _skin.gameObject.transform.localPosition = new Vector3(0, -2f, 0);
         _skin.gameObject.transform.localScale = new Vector3(2.5f, 4, 1);
-
+        _isPassable = true;
         UIManager.Instance.OnClickCharaChangeClose();
     }
 
     public void LeftButtonPush()
     {
-        if (_characterId != 0)
+        
+        if (_characterId != 0 && _isPassable)
         {
             _characterId--;
+            CheakRLButton();
             ReRodingReSoucse();
+        }
+    }
+    public void RightButtonPush()
+    {
+        
+        if (_characterId != DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1 && _isPassable)
+        {
+            _characterId++;
+            CheakRLButton();
+            ReRodingReSoucse();   
         }
     }
 
@@ -190,13 +212,5 @@ public class ChangeCharacter : MonoBehaviour
     {
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.buyCharacter);
     }
-
-    public void RightButtonPush()
-    {
-        if (_characterId != DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1)
-        {
-            _characterId++;
-            ReRodingReSoucse();   
-        }
-    }
+    
 }
