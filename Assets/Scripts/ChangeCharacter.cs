@@ -57,13 +57,11 @@ public class ChangeCharacter : MonoBehaviour
         _characterId = 0;
         ReRodingReSoucse();
         CheakRLButton();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log(Application.persistentDataPath);
         
+    }
+    
+    void UnLockCharacter()
+    {
         if (isUnLockCharacter)
         {
             applyButton.SetActive(true);
@@ -80,7 +78,6 @@ public class ChangeCharacter : MonoBehaviour
             lockCharacterDimmed.SetActive(true);
             buyButton.SetActive(true);
         }
-        
     }
 
     void CheakRLButton()
@@ -115,12 +112,14 @@ public class ChangeCharacter : MonoBehaviour
         characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
         NowCharacterText.text = DataManager.Instance.characterInfos[_characterId].characterName;
         TextChageColor();
+        UnLockCharacter();
     }
 
     public void Buy()
     {
         if (DataManager.Instance.SaveData.coin >= price && !_isBuy)
         {
+            
             _isPassable = false;
             _isBuy = true;
             DataManager.Instance.SaveData.coin -= price;
@@ -128,6 +127,7 @@ public class ChangeCharacter : MonoBehaviour
             UIManager.Instance.SetCoinUI(DataManager.Instance.SaveData.coin);
             DataManager.Instance.SaveData.unlockCharacters.Add(_characterId);
             SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
+            UnLockCharacter();
             StartCoroutine(BuyAnimation());
         }
         else
@@ -146,6 +146,7 @@ public class ChangeCharacter : MonoBehaviour
         price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
         characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
         _isBuy = false;
+        ReRodingReSoucse();
         _isPassable = true;
     }
 
@@ -166,13 +167,14 @@ public class ChangeCharacter : MonoBehaviour
 
         _skin.gameObject.transform.localPosition = new Vector3(0, -2f, 0);
         _skin.gameObject.transform.localScale = new Vector3(2.5f, 4, 1);
+        UnLockCharacter();
         _isPassable = true;
         UIManager.Instance.OnClickCharaChangeClose();
     }
 
     public void LeftButtonPush()
     {
-        
+        Debug.Log(Application.persistentDataPath);
         if (_characterId != 0 && _isPassable)
         {
             _characterId--;

@@ -301,7 +301,7 @@ public partial class Player : MonoBehaviour
                 {
                     TurnPlayer();
                 }
-                if (hit.point.x < transform.position.x && _isRight)
+                else if (hit.point.x < transform.position.x && _isRight)
                 {
                     TurnPlayer();
                 }
