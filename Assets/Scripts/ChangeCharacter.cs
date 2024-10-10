@@ -213,7 +213,7 @@ public class ChangeCharacter : MonoBehaviour
 
     private void OnEnable()
     {
-        _animator.Rebind();
+        
         _isPassable = true;
         _isBuy = false;
     }
