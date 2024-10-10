@@ -26,7 +26,9 @@ public class MapManager : Singleton<MapManager>
     private float _mapDestroyDistance = 50.0f;
 
     [SerializeField] private GameObject backGroundImage;
-    [SerializeField] private int _playerCount = 200;
+    [SerializeField] private int playerCount = 200;
+    
+    private Queue<GameObject> _backGroundQueue = new Queue<GameObject>();
     private GameObject _backGround;
     
     [SerializeField] private TextMeshProUGUI modeText;
@@ -63,17 +65,26 @@ public class MapManager : Singleton<MapManager>
             Destroy(map);
         }
 
+        playerCount = 200;
+        _backGroundQueue.Clear();
         _mapSectionIndex = 0;
         _mapQueue.Clear();
     }
 
     private void Update()
     {
-        if (GameManager.Instance.playerPosY >= _playerCount )
+        if (GameManager.Instance.playerPosY >= playerCount)
         {
-           _backGround =  Instantiate(backGroundImage);
-           _backGround.transform.position = new Vector3(0,_playerCount,0);
-           _playerCount += 200;
+            
+            _backGround =  Instantiate(backGroundImage);
+            _backGround.transform.position = new Vector3(0,playerCount,0);
+            playerCount += 200; //400
+            _backGroundQueue.Enqueue(_backGround);
+            if (_backGroundQueue.Count > 2) 
+            {
+             
+               Destroy(_backGroundQueue.Dequeue()); 
+            }
         }
         if (!_isInitComplete)
         {
