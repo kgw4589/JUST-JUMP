@@ -130,11 +130,6 @@ public class Gacha : MonoBehaviour
             UIManager.Instance.SetCoinUI(DataManager.Instance.SaveData.coin);
             SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
         }
-        else
-        {
-            DataManager.Instance.SaveData.unlockCharacters.Add(selectedCharacter.characterId);
-            SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
-        }
 
         Debug.Log(selectedCharacter.characterName);
         StartCoroutine(BoxAnim(selectedCharacter));
@@ -159,6 +154,9 @@ public class Gacha : MonoBehaviour
         }
         else
         {
+            DataManager.Instance.SaveData.unlockCharacters.Add(character.characterId);
+            SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
+            
             newCharacterText.SetActive(true);
             UIManager.Instance.HidePayback();
         }
