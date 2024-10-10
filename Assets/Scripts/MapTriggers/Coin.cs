@@ -10,7 +10,7 @@ public class Coin : MapTriggerBasicLogic
 
     private void Update()
     {
-        transform.Rotate(0, 5, 0);
+        transform.Rotate(0, 2, 0);
     }
 
     protected override void EnterEvent()
