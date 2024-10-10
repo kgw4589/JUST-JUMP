@@ -1102,6 +1102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedMapScriptable: {fileID: 0}
+  backGroundImage: {fileID: 6655630067487029130, guid: 8201b909bcb8e4308b72d50669ebc535, type: 3}
+  _playerCount: 200
   modeText: {fileID: 1748413572044592651}
   modeIcon: {fileID: 6647505020773047533}
 --- !u!1 &1259906427

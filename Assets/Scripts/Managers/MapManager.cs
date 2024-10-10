@@ -25,6 +25,10 @@ public class MapManager : Singleton<MapManager>
 
     private float _mapDestroyDistance = 50.0f;
 
+    [SerializeField] private GameObject backGroundImage;
+    [SerializeField] private int _playerCount = 200;
+    private GameObject _backGround;
+    
     [SerializeField] private TextMeshProUGUI modeText;
     [SerializeField] private Image modeIcon;
 
@@ -65,6 +69,12 @@ public class MapManager : Singleton<MapManager>
 
     private void Update()
     {
+        if (GameManager.Instance.playerPosY >= _playerCount )
+        {
+           _backGround =  Instantiate(backGroundImage);
+           _backGround.transform.position = new Vector3(0,_playerCount,0);
+           _playerCount += 200;
+        }
         if (!_isInitComplete)
         {
             return;
