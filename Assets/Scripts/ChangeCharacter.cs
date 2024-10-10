@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -208,6 +209,13 @@ public class ChangeCharacter : MonoBehaviour
         {
             characterRating.color = Color.yellow;
         }
+    }
+
+    private void OnEnable()
+    {
+        _animator.Rebind();
+        _isPassable = true;
+        _isBuy = false;
     }
 
     public void PlaySound()
