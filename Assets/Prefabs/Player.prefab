@@ -137,7 +137,7 @@ MonoBehaviour:
   sensitivity: 3
   sensiSlider: {fileID: 0}
   playerHp: 100
-  maxplayerHp: 10
+  maxplayerHp: 20
   playerHpBar: {fileID: 0}
   isHitWave: 0
   curruentTime: 0
