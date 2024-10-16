@@ -16,10 +16,30 @@ public partial class Player : MonoBehaviour
     [SerializeField] private Slider sensiSlider;
         
     
-    [SerializeField]
-    private float playerHp = 5;
-    [SerializeField]
-    private float maxplayerHp = 5;
+    [SerializeField] private float playerHp = 5;
+    private float PlayerProperty
+    {
+        get
+        {
+            return playerHp;
+        }
+        set
+        {
+            if (value < 1)
+            {
+                playerHp = 0;
+            }
+            else if (value > maxplayerHp)
+            {
+                playerHp = maxplayerHp;
+            }
+            else
+            {
+                playerHp = value;
+            }
+        }
+    }
+    [SerializeField] private float maxplayerHp = 5;
     private Vector3 _playerstartPosition;
 
     public Slider playerHpBar;
@@ -34,16 +54,12 @@ public partial class Player : MonoBehaviour
     private Vector2 _startPosition;
     private Vector2 _endPosition;
     private Vector2 _direction;
-    [SerializeField]
-    private float gravityScale;
+    [SerializeField] private float gravityScale;
     public bool isDie = false;
-    [SerializeField]
-    private bool isJump = false;
+    [SerializeField] private bool isJump = false;
     public float jumpPower = 0;
-    [SerializeField] 
-    private float originMaxPower = 8f;
-    [SerializeField] 
-    private float maxPower;
+    [SerializeField] private float originMaxPower = 8f;
+    [SerializeField] private float maxPower;
     
     private bool _isRight = false;
 
@@ -56,13 +72,11 @@ public partial class Player : MonoBehaviour
    private Image _playerHpBarColor;
 
    private Collider2D _collider;
-   [SerializeField]
-   Vector2 boxSize = new Vector2(0.8f, 0.8f); // 너비와 높이를 적절하게 설정
-   [SerializeField]
-   float boxAngle = 0f; // 박스의 회전 각도, 필요시 변경 가능
+   [SerializeField] Vector2 boxSize = new Vector2(0.8f, 0.8f); // 너비와 높이를 적절하게 설정
+   [SerializeField] float boxAngle = 0f; // 박스의 회전 각도, 필요시 변경 가능
    
    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //초기화
         InitAnimation();
@@ -82,7 +96,7 @@ public partial class Player : MonoBehaviour
         GameManager.Instance.initAction += InitObject;
     }
 
-    void InitAnimation()
+    private void InitAnimation()
     {
         Transform firstChild = transform.GetChild(0);
         Transform secondChild = firstChild.GetChild(0);
@@ -90,50 +104,21 @@ public partial class Player : MonoBehaviour
         _animator = secondChild.GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
         sensitivity = sensiSlider.value;
         if (_animator == null)
         {
             InitAnimation();
         }
-
-        if (_animator != null)
+        else
         {
             _animator.SetBool("isRun",_isLeftButtonPush || _isRigthButtonPush);
-        }
-        if (GameManager.Instance.gameState == GameManager.GameState.Ready)
-        {
-            _lineRenderer.enabled = false;
-        }
-        if(isDie)
-        {
-            _lineRenderer.enabled = false;
-        }
-        if ((_isRigthButtonPush ||Input.GetKey(KeyCode.D)) && !_isDragging && IsJumpAble())
-        {
-           
-            transform.position += new Vector3(moveSpeed, 0, 0);
-            if (!_isRight)
-            {
-                TurnPlayer();   
-            }
-        }
-        else if ((_isLeftButtonPush || Input.GetKey(KeyCode.A)) && !_isDragging && IsJumpAble())
-        {
-           
-            transform.position += new Vector3(-moveSpeed, 0, 0);
-            if (_isRight)
-            {
-                TurnPlayer();   
-            }
         }
         if (playerHp <= 0)
         {
             isDie = true;
         }
-        HpColorChange();
-        HealHp();
         if (Input.GetMouseButtonDown(0) && (EventSystem.current.currentSelectedGameObject))
         {//클릭한게 Ui인지 확인해서 리턴함
             if (EventSystem.current.currentSelectedGameObject.name == lButton.name || 
@@ -143,7 +128,28 @@ public partial class Player : MonoBehaviour
                 return;
             }
         }
-        
+        if (GameManager.Instance.gameState == GameManager.GameState.Ready || isDie)
+        {
+            _lineRenderer.enabled = false;
+        }
+        if ((_isRigthButtonPush ||Input.GetKey(KeyCode.D)) && !_isDragging && IsJumpAble())
+        {
+            transform.position += new Vector3(moveSpeed, 0, 0);
+            if (!_isRight)
+            {
+                TurnPlayer();   
+            }
+        }
+        else if ((_isLeftButtonPush || Input.GetKey(KeyCode.A)) && !_isDragging && IsJumpAble())
+        {
+            transform.position += new Vector3(-moveSpeed, 0, 0);
+            if (_isRight)
+            {
+                TurnPlayer();   
+            }
+        }
+        HpColorChange();
+        HealHp();
         if (Input.GetMouseButtonDown(0) && IsJumpAble())
         {
             _lineRenderer.enabled = true;
@@ -151,7 +157,6 @@ public partial class Player : MonoBehaviour
             _startPosition = Input.mousePosition;
             // Debug.Log("시작 클릭");
         }
-
         if (Input.GetMouseButton(0) && IsJumpAble() && _isDragging )
         {
             //Vector2 myPos = Input.mousePosition;
@@ -173,7 +178,6 @@ public partial class Player : MonoBehaviour
             // Debug.Log("지금 클릭 중");
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
-
         if (_isDragging && Input.GetMouseButtonUp(0) && IsJumpAble())
         {
             SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
@@ -198,10 +202,9 @@ public partial class Player : MonoBehaviour
         }
     }
 
-    void HpColorChange()
+    private void HpColorChange()
     {
         playerHpBar.value = playerHp / maxplayerHp;
-        
         if (playerHpBar.value >= 0.8f)
         {
             _playerHpBarColor.color = Color.cyan;
@@ -210,28 +213,27 @@ public partial class Player : MonoBehaviour
         {
             _playerHpBarColor.color = Color.yellow;
         }
-        else if (playerHpBar.value >= 0.2f)
+        else //if (playerHpBar.value >= 0.2f)
         { 
             _playerHpBarColor.color = Color.red;
         }
-
     }
 
-    void HealHp()
+    private void HealHp()
     {
         if (!isHitWave && playerHp <= maxplayerHp && !isDie) //힐량 오버남
         {
             curruentTime += Time.deltaTime;
             if (curruentTime >= _healTime)
             {
-                playerHp += Time.deltaTime;
+                PlayerProperty += Time.deltaTime;
             }
         }
     }
 
 
 
-    bool IsJumpAble()
+    private bool IsJumpAble()
     {
         if ( !isJump && !isDie && !pausePanel.activeSelf && GameManager.Instance.gameState is GameManager.GameState.Play)
         {//현재 게임상태가 펄스거나 점프안하고 있거나 안죽었거나 펄스판넬이 없을때
@@ -242,8 +244,7 @@ public partial class Player : MonoBehaviour
             return false;
         }
     }
-
-    void TurnPlayer()
+    private void TurnPlayer()
     {
         _isRight = !_isRight;
         transform.Rotate(Vector3.up, 180f, Space.World);
@@ -252,22 +253,18 @@ public partial class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         maxPower = originMaxPower;
-        
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
-            
             isJump = false;
-           
         }
     }
 
-    void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
+    private void PredictTrajectoryAndDrawLine(Vector3 startPos, Vector3 vel)
     {
-        
         int steps = 60; // 라인렌더러 얼마나 길게 늘릴지 정하는거 
         float deltaTime = Time.fixedDeltaTime;
         Vector3 gravity = Physics.gravity;
@@ -287,7 +284,7 @@ public partial class Player : MonoBehaviour
             {
                 TurnPlayer();
             }
-            if (_lineRenderer.GetPosition(_lineRenderer.positionCount - 1).x < transform.position.x && _isRight)
+            else if (_lineRenderer.GetPosition(_lineRenderer.positionCount - 1).x < transform.position.x && _isRight)
             {
                 TurnPlayer();
             }
@@ -316,20 +313,16 @@ public partial class Player : MonoBehaviour
             }
         }
     }
-
-
-
     public void Damage()
     {
         if (!isDie)
         {
             curruentTime = 0;
-            playerHp -= Time.deltaTime;
+            PlayerProperty -= Time.deltaTime;
             isHitWave = true;
         }
     }
-
-    IEnumerator Jump(Vector2 dir)
+    private IEnumerator Jump(Vector2 dir)
     {
         _rd.AddForce(new Vector2(dir.x, dir.y) * jumpPower, ForceMode2D.Impulse);
         
@@ -342,12 +335,10 @@ public partial class Player : MonoBehaviour
 
     public void InitObject()
     {
-        
         if (_isRight)
         {
             TurnPlayer();
         }
-
         _isLeftButtonPush = false;
         _isRigthButtonPush = false;
         _rd.velocity = Vector2.zero;
