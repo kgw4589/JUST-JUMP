@@ -58,6 +58,7 @@ public class UIManager : Singleton<UIManager>
 
     private void InitObject()
     {
+        Input.multiTouchEnabled = false;
         startUICanvas.SetActive(true);
         inGameCanvas.SetActive(false);
         tutorialImg.SetActive(false);
