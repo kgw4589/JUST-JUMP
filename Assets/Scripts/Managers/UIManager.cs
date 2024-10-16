@@ -288,7 +288,8 @@ public class UIManager : Singleton<UIManager>
 
     protected override void Init()
     {
-        Input.multiTouchEnabled = false;
+        // Multi-Touch or Not
+        // Input.multiTouchEnabled = false;
         wave2DGameObject.SetActive(false);
         inGameCanvas.SetActive(false);
 
