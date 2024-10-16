@@ -58,7 +58,6 @@ public class UIManager : Singleton<UIManager>
 
     private void InitObject()
     {
-        Input.multiTouchEnabled = false;
         startUICanvas.SetActive(true);
         inGameCanvas.SetActive(false);
         tutorialImg.SetActive(false);
@@ -93,6 +92,8 @@ public class UIManager : Singleton<UIManager>
 
     public void OnClickStartButton()
     {
+        if (Input.touchCount > 1)
+            return;
         Debug.Log("Game Start");
         startUICanvas.SetActive(false);
         if (DataManager.Instance.SaveData.isFirstGame)
@@ -222,6 +223,8 @@ public class UIManager : Singleton<UIManager>
 
     public void OnClickModeChangeButton()
     {
+        if (Input.touchCount > 1)
+            return;
         modeChangePanel.SetActive(true);
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
@@ -234,6 +237,8 @@ public class UIManager : Singleton<UIManager>
 
     public void OnClickCharaChangeButton()
     {
+        if (Input.touchCount > 1)
+            return;
         charaPanel.SetActive(true);
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
@@ -246,6 +251,8 @@ public class UIManager : Singleton<UIManager>
 
     public void OnClickGachaButton()
     {
+        if (Input.touchCount > 1)
+            return;
         gachaPanel.SetActive(true);
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
     }
@@ -281,6 +288,7 @@ public class UIManager : Singleton<UIManager>
 
     protected override void Init()
     {
+        Input.multiTouchEnabled = false;
         wave2DGameObject.SetActive(false);
         inGameCanvas.SetActive(false);
 
