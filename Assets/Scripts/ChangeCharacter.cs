@@ -56,8 +56,8 @@ public class ChangeCharacter : MonoBehaviour
         _animator = transform.GetComponent<Animator>();
         _player = GameObject.FindWithTag("Player");
         _characterId = 0;
-        ReRodingReSoucse();
-        CheakRLButton();
+        ReRoadingReSoucse();
+        CheckRLButton();
         
     }
     
@@ -81,7 +81,7 @@ public class ChangeCharacter : MonoBehaviour
         }
     }
 
-    void CheakRLButton()
+    void CheckRLButton()
     {
         if (_characterId == 0)
         {
@@ -101,7 +101,7 @@ public class ChangeCharacter : MonoBehaviour
         } 
     }
 
-    void ReRodingReSoucse()
+    void ReRoadingReSoucse()
     {
         ViewCharacterImage.sprite = DataManager.Instance.characterIsoScriptableObject
             .characterIso[_characterId].characterImage;
@@ -112,11 +112,11 @@ public class ChangeCharacter : MonoBehaviour
         price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
         characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
         NowCharacterText.text = DataManager.Instance.characterInfos[_characterId].characterName;
-        TextChageColor();
+        TextChangeColor();
         UnLockCharacter();
     }
 
-    public void Buy()
+    public void CharacterBuy()
     {
         if (DataManager.Instance.SaveData.coin >= price && !_isBuy)
         {
@@ -147,11 +147,11 @@ public class ChangeCharacter : MonoBehaviour
         price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
         characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
         _isBuy = false;
-        ReRodingReSoucse();
+        ReRoadingReSoucse();
         _isPassable = true;
     }
 
-    public void Apply()
+    public void CharacterApply()
     {
         _isPassable = false;
         GameObject DeletObject = GameObject.FindWithTag("Skin");
@@ -179,8 +179,8 @@ public class ChangeCharacter : MonoBehaviour
         if (_characterId != 0 && _isPassable)
         {
             _characterId--;
-            CheakRLButton();
-            ReRodingReSoucse();
+            CheckRLButton();
+            ReRoadingReSoucse();
         }
     }
     public void RightButtonPush()
@@ -189,12 +189,12 @@ public class ChangeCharacter : MonoBehaviour
         if (_characterId != DataManager.Instance.characterIsoScriptableObject.characterIso.Count - 1 && _isPassable)
         {
             _characterId++;
-            CheakRLButton();
-            ReRodingReSoucse();   
+            CheckRLButton();
+            ReRoadingReSoucse();   
         }
     }
 
-    void TextChageColor()
+    void TextChangeColor()
     {
         
         if (characterRating.text == Gacha.Probability.Normal.ToString())

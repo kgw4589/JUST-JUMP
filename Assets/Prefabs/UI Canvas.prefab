@@ -6436,7 +6436,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7431136903834593774}
         m_TargetAssemblyTypeName: ChangeCharacter, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: CharacterBuy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12275,6 +12275,10 @@ PrefabInstance:
       propertyPath: CharacterList.Array.data[4]
       value: 
       objectReference: {fileID: 8143271742072760529, guid: 3766f223679806f4999636a3024e35b3, type: 3}
+    - target: {fileID: 3017369879299965912, guid: 78351c9b1262c46c5910cf31e716ce40, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CharacterApply
+      objectReference: {fileID: 0}
     - target: {fileID: 3842423058996577916, guid: 78351c9b1262c46c5910cf31e716ce40, type: 3}
       propertyPath: m_Name
       value: LeftButton
