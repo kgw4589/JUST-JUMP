@@ -22,12 +22,12 @@ public class Cannon : MonoBehaviour
     private Vector2 _startPoint;
     private Vector2 _direction;
     private Vector2 _force;
-    private float _startRot;
+    private Player _player;
 
     private void Start()
     {
+        _player = (Player)FindObjectOfType(typeof(Player));
         _startPoint = transform.position;
-        _startRot = transform.position.z;
         endPoint = new Vector2(endPoint.x + _startPoint.x, endPoint.y + _startPoint.y);
         
         Vector3 dir = endPoint - new Vector2(cannonHead.transform.position.x,cannonHead.transform.position.y);
@@ -80,8 +80,11 @@ public class Cannon : MonoBehaviour
 
     void Shooting()
     {
+        if(Vector2.Distance(_player.gameObject.transform.position, transform.position) < 13f)
+        {
+            SoundManager.Instance.PlaySfx(SoundManager.Sfx.cannon);
+        }
         cannonBullet.Push(_force);
         trajectory.Hide();
-
     }
 }
