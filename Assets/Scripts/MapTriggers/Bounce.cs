@@ -17,6 +17,7 @@ public class Bounce : MapTriggerBasicLogic
 
     protected override void EnterEvent()
     {
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.springBoard);
         _player.Bounce(bounceDirection.normalized, bouncePower);
     }
 

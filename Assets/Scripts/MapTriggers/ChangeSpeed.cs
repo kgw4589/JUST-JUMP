@@ -17,6 +17,7 @@ public class ChangeSpeed : MapTriggerBasicLogic
 
     protected override void EnterEvent()
     {
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.powerUp);
     }
 
     protected override void StayEvent()

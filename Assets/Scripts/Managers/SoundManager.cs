@@ -20,6 +20,8 @@ public class SoundManager : Singleton<SoundManager>
         elevator,
         fallingBlock,
         tickDamage,
+        powerUp,
+        springBoard,
         gameOver,
         buyCharacter
     }
