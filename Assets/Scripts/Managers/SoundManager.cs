@@ -27,7 +27,7 @@ public class SoundManager : Singleton<SoundManager>
 
     [Header("#BGM SET")]
     public AudioClip bgmClip;
-    private AudioSource bgmPlayer;
+    public AudioSource bgmPlayer;
     
     [Header("#SFX SET")]
     public AudioClip[] sfxClips;
