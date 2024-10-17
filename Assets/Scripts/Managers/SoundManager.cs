@@ -17,6 +17,7 @@ public class SoundManager : Singleton<SoundManager>
         menuClose,
         coin,
         cannon,
+        elevator,
         gameOver,
         buyCharacter
     }

@@ -28,7 +28,7 @@ public class Elevator : MapTriggerBasicLogic
 
     protected override void EnterEvent()
     {
-        
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.elevator);
     }
 
     protected override void StayEvent()
