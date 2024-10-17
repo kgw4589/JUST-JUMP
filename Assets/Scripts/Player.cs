@@ -173,7 +173,7 @@ public partial class Player : MonoBehaviour
             _direction.Normalize();
 
             Vector3 startPos = _collider.bounds.center;
-            Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * (jumpPower / gravityScale) * 1.5f;
+            Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * (jumpPower / gravityScale) * 1.45f;
             //-jumpPower/20));//0.6
            
             // Debug.Log("지금 클릭 중");
