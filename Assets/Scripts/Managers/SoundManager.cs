@@ -19,6 +19,7 @@ public class SoundManager : Singleton<SoundManager>
         cannon,
         elevator,
         fallingBlock,
+        tickDamage,
         gameOver,
         buyCharacter
     }
@@ -29,13 +30,17 @@ public class SoundManager : Singleton<SoundManager>
 
     [Header("#BGM SET")]
     public AudioClip bgmClip;
-    public AudioSource bgmPlayer;
+    private AudioSource bgmPlayer;
     
     [Header("#SFX SET")]
     public AudioClip[] sfxClips;
     public int channels;
     private AudioSource[] sfxPlayers;
     private int channelIndex;
+
+    [Header("#WAVE SFX SET")]
+    public AudioClip waveClip;
+    private AudioSource wavePlayer;
 
     protected override void Init()
     {
@@ -72,6 +77,18 @@ public class SoundManager : Singleton<SoundManager>
 
         #endregion
         
+        #region wavePlayer Initalize
+        
+        GameObject waveObject = new GameObject("WavePlayer");
+        waveObject.transform.parent = transform;
+        wavePlayer = waveObject.AddComponent<AudioSource>();
+        wavePlayer.playOnAwake = false;
+        wavePlayer.loop = true; // loop option
+        wavePlayer.clip = waveClip;
+        wavePlayer.volume = sfxSlider.value;
+        
+        #endregion
+        
     }
 
     public void PlayBgm(bool isPlay)
@@ -84,6 +101,26 @@ public class SoundManager : Singleton<SoundManager>
         {
             bgmPlayer.Stop();
         }
+    }
+
+    public void PlayWaveSound(bool isPlay)
+    {
+        if (isPlay)
+        { 
+            if (!wavePlayer.isPlaying)
+            {
+                wavePlayer.Play();
+            }
+        }
+        else
+        {
+            wavePlayer.Stop();
+        }
+    }
+
+    public void PlayWaveHitSound(float pitch)
+    {
+        wavePlayer.pitch = pitch;
     }
 
     public void PauseBGM()
@@ -121,12 +158,12 @@ public class SoundManager : Singleton<SoundManager>
         
     }
     
-    void ChangeBgmSound(float value)
+    private void ChangeBgmSound(float value)
     {
         bgmPlayer.volume = value;
     }
     
-    void ChangeSfxSound(float value)
+    private void ChangeSfxSound(float value)
     {
         foreach (AudioSource sfxs in sfxPlayers)
         {

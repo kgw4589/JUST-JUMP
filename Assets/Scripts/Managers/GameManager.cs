@@ -58,7 +58,6 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1; // game start
         gameState = GameState.Play;
         Application.targetFrameRate = 60;
-        SoundManager.Instance.PlayBgm(true);
         switch (gameMode)
         {
             case GameMode.Easy:
@@ -116,6 +115,7 @@ public class GameManager : Singleton<GameManager>
         gameState = GameState.End;
         Application.targetFrameRate = 30;
         SoundManager.Instance.PlayBgm(false);
+        SoundManager.Instance.PlayWaveSound(false);
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.gameOver);
     }
 
