@@ -19,6 +19,7 @@ public class SoundManager : Singleton<SoundManager>
         cannon,
         elevator,
         fallingBlock,
+        tickDamage,
         gameOver,
         buyCharacter
     }
