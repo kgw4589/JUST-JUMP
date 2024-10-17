@@ -28,6 +28,7 @@ public class DamageBlock : MapTriggerBasicLogic
 
             if (!(_currentTime > hitTime)) return;
             _player.GetDamage(damage);
+            SoundManager.Instance.PlaySfx(SoundManager.Sfx.tickDamage);
             _currentTime = 0;
         }
     }

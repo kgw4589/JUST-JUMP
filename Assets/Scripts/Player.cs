@@ -173,12 +173,13 @@ public partial class Player : MonoBehaviour
             _direction.Normalize();
 
             Vector3 startPos = _collider.bounds.center;
-            Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * jumpPower / (gravityScale - (jumpPower/20));//0.6
+            Vector3 velocity = new Vector3(_direction.x, _direction.y, 0) * (jumpPower / gravityScale) * 1.45f;
+            //-jumpPower/20));//0.6
            
             // Debug.Log("지금 클릭 중");
             PredictTrajectoryAndDrawLine(startPos, velocity);
         }
-        if (_isDragging && Input.GetMouseButtonUp(0) && IsJumpAble())
+        if (_isDragging && Input.GetMouseButtonUp(0) && IsJumpAble() && _lineRenderer.enabled)
         {
             SoundManager.Instance.PlaySfx(SoundManager.Sfx.jump);
             _isDragging = false;
