@@ -228,6 +228,7 @@ MonoBehaviour:
   bgmSlider: {fileID: 1033646576}
   sfxSlider: {fileID: 730578010}
   bgmClip: {fileID: 8300000, guid: 5cd9e7851163fb549815d1a74b8a9ed3, type: 3}
+  bgmPlayer: {fileID: 0}
   sfxClips:
   - {fileID: 8300000, guid: 32651fe1ad0203340a065ff23863ec46, type: 3}
   - {fileID: 8300000, guid: 58a53764f5b49d14ba5564a45be67d38, type: 3}
@@ -235,6 +236,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 086f24f4f7c5f4914960064f01389f74, type: 3}
   - {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
   - {fileID: 8300000, guid: 8401456349c492a489ed90469e317e43, type: 3}
+  - {fileID: 8300000, guid: 5e1a9f876d3dafd47bc6b3dde25135fa, type: 3}
   - {fileID: 8300000, guid: 4ce4ddefb57eb47148ed7c43113691a5, type: 3}
   - {fileID: 8300000, guid: d3fd437b99fdb4711ae856a50d716dac, type: 3}
   channels: 6

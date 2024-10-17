@@ -123,6 +123,7 @@ public class FallingBlock : MapTriggerBasicLogic
     protected override void EnterEvent()
     {
         _col = true;
+        SoundManager.Instance.PlaySfx(SoundManager.Sfx.fallingBlock);
     }
 
     protected override void StayEvent()
