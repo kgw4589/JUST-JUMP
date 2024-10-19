@@ -104,8 +104,7 @@ public class Gacha : MonoBehaviour
         gotchaDimmed.SetActive(true);
         gachaBoxAnimator.gameObject.SetActive(true);
         gachaImage.gameObject.SetActive(false);
-
-        gachaBoxAnimator.speed = 1;
+        
         gachaBoxAnimator.Rebind();
         foreach (Probability probability in _characterInfos.Keys)
         {
@@ -138,7 +137,7 @@ public class Gacha : MonoBehaviour
     private IEnumerator BoxAnim(CharacterInfo selectedCharacter)
     {
         yield return new WaitUntil(() => gachaBoxAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f);
-        gachaBoxAnimator.speed = 0;
+        
         gachaImage.gameObject.SetActive(true);
         gachaBoxAnimator.gameObject.SetActive(false);
         SetGachaPanel(selectedCharacter);
@@ -170,7 +169,6 @@ public class Gacha : MonoBehaviour
     // 세팅한 가챠 패널 UI 초기화
     public void SetGachaPanelOrigin()
     {
-        gachaBoxAnimator.speed = 0;
         gachaBoxAnimator.Rebind();
         gotchaDimmed.SetActive(false);   
         

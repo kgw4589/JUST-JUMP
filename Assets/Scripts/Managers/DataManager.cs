@@ -56,7 +56,7 @@ public class DataManager : Singleton<DataManager>
         {
             Time.timeScale = 0;
             internetErrorPanel.SetActive(true);
-            LoadingSceneController.isInternetOk = false;
+            LoadingSceneController.IsInternetOk = false;
         }
         else
         {
@@ -105,7 +105,7 @@ public class DataManager : Singleton<DataManager>
             characterInfos.Add(characterInfo.characterId, characterInfo);
         }
         
-        LoadingSceneController.isInternetOk = true;
+        LoadingSceneController.IsInternetOk = true;
     }
     
     
