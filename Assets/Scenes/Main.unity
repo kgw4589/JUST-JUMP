@@ -1414,6 +1414,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 832971539038388876, guid: 3dc944ac2271f6f43821730e05979dc5, type: 3}
+      propertyPath: m_Size.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 832971539038388876, guid: 3dc944ac2271f6f43821730e05979dc5, type: 3}
+      propertyPath: m_Size.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845406408267151751, guid: 3dc944ac2271f6f43821730e05979dc5, type: 3}
+      propertyPath: m_Size.y
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1845406408267151751, guid: 3dc944ac2271f6f43821730e05979dc5, type: 3}
+      propertyPath: m_Offset.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3137077749165602113, guid: 3dc944ac2271f6f43821730e05979dc5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 3137077749165602113, guid: 3dc944ac2271f6f43821730e05979dc5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.718
+      objectReference: {fileID: 0}
     - target: {fileID: 6470966701025529235, guid: 3dc944ac2271f6f43821730e05979dc5, type: 3}
       propertyPath: m_Name
       value: PixelWave
@@ -1459,7 +1483,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1139818403093920766, guid: 3dc944ac2271f6f43821730e05979dc5, type: 3}
+    - {fileID: 7746797367681860961, guid: 3dc944ac2271f6f43821730e05979dc5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dc944ac2271f6f43821730e05979dc5, type: 3}
