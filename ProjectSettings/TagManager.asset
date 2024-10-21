@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Elevator
   - Ground
+  - Skin
+  - Wall
   layers:
   - Default
   - TransparentFX
