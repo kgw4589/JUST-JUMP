@@ -10,7 +10,7 @@ public class GameOverZone : MonoBehaviour
     [SerializeField] private float _moveDistance = 10000f; // Max Y Axis
     [SerializeField] private float _moveDuration = 10000f;  // second
     
-    private float _soundDistance = 10f;
+    private float _soundDistance = 25f;
 
     private float _startYaxis = -30f;
     private float _contactTime = 0f;
@@ -54,15 +54,12 @@ public class GameOverZone : MonoBehaviour
         
         if (distance < _soundDistance)
         {
-            Debug.Log(distance);
-            Debug.Log("파도 효과음 재생");
             float waveVolume = Mathf.Clamp01(1 - (distance / _soundDistance));
             SoundManager.Instance.SetWaveVolume(waveVolume);
             SoundManager.Instance.PlayWaveSound(true);
         }
         else
         {
-            Debug.Log("브금 끔");
             SoundManager.Instance.PlayWaveSound(false);
         }
     }
