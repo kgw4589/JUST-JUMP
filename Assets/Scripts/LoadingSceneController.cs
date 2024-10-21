@@ -33,7 +33,7 @@ public class LoadingSceneController : MonoBehaviour
         {
             yield return null;
 
-            if (asyncOperation.progress < 0.8f)
+            if (asyncOperation.progress < 0.1f)
             {
                 progressBar.fillAmount = asyncOperation.progress;
             }
@@ -42,7 +42,7 @@ public class LoadingSceneController : MonoBehaviour
                 yield return new WaitUntil(() => IsInternetOk);
                 
                 timer += Time.unscaledDeltaTime;
-                progressBar.fillAmount = Mathf.Lerp(0.8f, 1.3f, timer);
+                progressBar.fillAmount = Mathf.Lerp(0.1f, 1.3f, timer);
                 if (progressBar.fillAmount >= 1.0f)
                 {
                     asyncOperation.allowSceneActivation = true;
