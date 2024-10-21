@@ -144,7 +144,7 @@ public class FallingBlock : MapTriggerBasicLogic
         _col = false;
         if (triggerMode == TriggerMode.FadeOut)
         {
-            _player.IsJumpChange(true);
+            // _player.IsJumpChange(true);
             _anim.SetBool("Broken", true);
             _currentTime = 0;
         }
