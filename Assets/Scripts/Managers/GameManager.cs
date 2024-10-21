@@ -57,6 +57,7 @@ public class GameManager : Singleton<GameManager>
         }
         Time.timeScale = 1; // game start
         gameState = GameState.Play;
+        SoundManager.Instance.UnPauseSound();
         Application.targetFrameRate = 60;
         switch (gameMode)
         {
@@ -81,7 +82,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0; // game pause (stop)
         gameState = GameState.Pause;
         Application.targetFrameRate = 30;
-        SoundManager.Instance.PauseBGM();
+        SoundManager.Instance.PauseSound();
     }
     
     private void GameOver()

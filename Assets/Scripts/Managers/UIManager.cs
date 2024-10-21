@@ -181,7 +181,6 @@ public class UIManager : Singleton<UIManager>
             GameManager.Instance.StartGame(true);
         }
         SoundManager.Instance.PlaySfx(SoundManager.Sfx.menuClose);
-        SoundManager.Instance.UnPauseBGM();
     }
 
     public void OnClickHomeButton()

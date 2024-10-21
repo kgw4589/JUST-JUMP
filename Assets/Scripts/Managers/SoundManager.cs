@@ -125,19 +125,21 @@ public class SoundManager : Singleton<SoundManager>
         wavePlayer.pitch = pitch;
     }
 
-    public void PauseBGM()
+    public void PauseSound()
     {
-        if (bgmPlayer.isPlaying)
+        if (bgmPlayer.isPlaying && wavePlayer.isPlaying)
         {
             bgmPlayer.Pause();
+            wavePlayer.Pause();
         }
     }
 
-    public void UnPauseBGM()
+    public void UnPauseSound()
     {
-        if (!bgmPlayer.isPlaying)
+        if (!bgmPlayer.isPlaying && !wavePlayer.isPlaying)
         {
             bgmPlayer.UnPause();
+            wavePlayer.UnPause();
         }
     }
 
