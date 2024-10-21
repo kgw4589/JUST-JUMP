@@ -11,16 +11,13 @@ public class GameOverZone : MonoBehaviour
     [SerializeField] private float _moveDuration = 10000f;  // second
     
     private float _soundDistance = 10f;
-    private float s;
-    
+
     private float _startYaxis = -30f;
     private float _contactTime = 0f;
     private float _timeSecond = 1f; // 1 Second +
     private int _contactCnt = 0;
 
     private Player _player;
-
-    private Vector3 temp;
 
     private void Awake()
     {
@@ -41,8 +38,6 @@ public class GameOverZone : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        float s = transform.localScale.y / 2;
-        
     }
 
     void Update()
@@ -55,8 +50,7 @@ public class GameOverZone : MonoBehaviour
 
     private void WaveSound()
     {
-        temp = transform.position + new Vector3(0, s+26, 0);
-        float distance = _player.transform.position.y - temp.y;
+        float distance = _player.transform.position.y - transform.position.y;
         
         if (distance < _soundDistance)
         {
@@ -65,15 +59,6 @@ public class GameOverZone : MonoBehaviour
             float waveVolume = Mathf.Clamp01(1 - (distance / _soundDistance));
             SoundManager.Instance.SetWaveVolume(waveVolume);
             SoundManager.Instance.PlayWaveSound(true);
-            if (distance <= 0)
-            {
-                Debug.Log("피치 낮아짐");
-                SoundManager.Instance.PlayWaveHitSound(0.25f);
-            }
-            else
-            {
-                SoundManager.Instance.PlayWaveHitSound(1f);
-            }
         }
         else
         {
@@ -112,6 +97,14 @@ public class GameOverZone : MonoBehaviour
         transform.position = endPosition;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SoundManager.Instance.PlayWaveHitSound(0.25f);
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -128,6 +121,8 @@ public class GameOverZone : MonoBehaviour
             
             _contactTime = 0f;
             _contactCnt = 0;
+            
+            SoundManager.Instance.PlayWaveHitSound(1f);
         }
     }
 }
