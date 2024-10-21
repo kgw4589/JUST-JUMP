@@ -12,7 +12,7 @@ public class GameOverZone : MonoBehaviour
     
     private float _soundDistance = 25f;
 
-    private float _startYaxis = -30f;
+    private float _startYaxis;
     private float _contactTime = 0f;
     private float _timeSecond = 1f; // 1 Second +
     private int _contactCnt = 0;
@@ -23,6 +23,8 @@ public class GameOverZone : MonoBehaviour
     {
         GameManager.Instance.initAction += InitObject;
         GameManager.Instance.startAction += StartMove;
+
+        _startYaxis = transform.position.y;
     }
 
     void InitObject()
