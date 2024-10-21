@@ -10,10 +10,15 @@ using UnityEngine.SceneManagement;
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private GameObject wave2DGameObject; // PixelWave
-    
+
+    public GameOverZone gameOverZone;
+    private float _currentWave;
     private float _currentFloor;
-    [SerializeField]
-    private bool rightSort = false;
+
+    private float _waveOffset = 0.75f;
+    
+    [Header("#Button Sorts")]
+    [SerializeField] private bool rightSort = false;
     
     private Vector3 rightSortAllBtnPOS = new Vector3(600, 65, 0);
     private Vector3 midSortLBtnPOS = new Vector3(80, 65, 0);
@@ -44,6 +49,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject modeChangePanel; // ModePanel
     
     [Header("#UI Texts")]
+    [SerializeField] private TextMeshProUGUI waveDistanceText;
     [SerializeField] private TextMeshProUGUI playerPosY; // PlayerPosY
     [SerializeField] private TextMeshProUGUI highScore; // Best Score
     [SerializeField] private TextMeshProUGUI currentScore; // Score
@@ -56,6 +62,17 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Animator errorInternetAnimator;
     [SerializeField] private Gacha gacha;
 
+    protected override void Init()
+    {
+        // Multi-Touch or Not
+        // Input.multiTouchEnabled = false;
+        wave2DGameObject.SetActive(false);
+        inGameCanvas.SetActive(false);
+
+        GameManager.Instance.initAction += InitObject;
+        SetCoinUI(DataManager.Instance.SaveData.coin);
+    }
+    
     private void InitObject()
     {
         startUICanvas.SetActive(true);
@@ -66,6 +83,31 @@ public class UIManager : Singleton<UIManager>
         diePanel.SetActive(false);
         tutorialPanel.SetActive(false);
         gachaPanel.SetActive(false);
+    }
+    
+    private void Update()
+    {
+        if (!GameManager.Instance)
+        {
+            return;
+        }
+        if (GameManager.Instance.gameState == GameManager.GameState.Play)
+        {
+            playerPosY.text = GameManager.Instance.playerPosY.ToString("F2") + "m";
+            _currentFloor = GameManager.Instance.playerPosY;
+
+            _currentWave = (gameOverZone.WaveDistance) - _waveOffset;
+            waveDistanceText.text = _currentWave.ToString("F2") + "m";
+        }
+
+        if (GameManager.Instance.gameState == GameManager.GameState.End)
+        {
+            highScore.text = DataManager.Instance.HighScore.ToString("F2") + "m";
+            modeText.text = MapManager.Instance.selectedMapScriptable.modeText;
+            modeText.color = MapManager.Instance.selectedMapScriptable.modeColor;
+            currentScore.text = _currentFloor.ToString("F2") + "m";
+            diePanel.SetActive(true);
+        }
     }
 
     public void OnErrorInternet()
@@ -284,37 +326,5 @@ public class UIManager : Singleton<UIManager>
     {
         paybackText.SetActive(false);
     }
-
-    protected override void Init()
-    {
-        // Multi-Touch or Not
-        // Input.multiTouchEnabled = false;
-        wave2DGameObject.SetActive(false);
-        inGameCanvas.SetActive(false);
-
-        GameManager.Instance.initAction += InitObject;
-        SetCoinUI(DataManager.Instance.SaveData.coin);
-    }
-
-    private void Update()
-    {
-        if (!GameManager.Instance)
-        {
-            return;
-        }
-        if (GameManager.Instance.gameState == GameManager.GameState.Play)
-        {
-            playerPosY.text = GameManager.Instance.playerPosY.ToString("F2") + "m";
-            _currentFloor = GameManager.Instance.playerPosY;
-        }
-
-        if (GameManager.Instance.gameState == GameManager.GameState.End)
-        {
-            highScore.text = DataManager.Instance.HighScore.ToString("F2") + "m";
-            modeText.text = MapManager.Instance.selectedMapScriptable.modeText;
-            modeText.color = MapManager.Instance.selectedMapScriptable.modeColor;
-            currentScore.text = _currentFloor.ToString("F2") + "m";
-            diePanel.SetActive(true);
-        }
-    }
+    
 }

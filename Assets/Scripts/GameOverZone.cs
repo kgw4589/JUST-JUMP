@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GameOverZone : MonoBehaviour
 {
+    public float WaveDistance { get; private set; }
+    
     [SerializeField] private float _waitTime = 5f; // wait second
     [SerializeField] private float _moveDistance = 10000f; // Max Y Axis
     [SerializeField] private float _moveDuration = 10000f;  // second
@@ -52,11 +54,11 @@ public class GameOverZone : MonoBehaviour
 
     private void WaveSound()
     {
-        float distance = _player.transform.position.y - transform.position.y;
+        WaveDistance = _player.transform.position.y - transform.position.y;
         
-        if (distance < _soundDistance)
+        if (WaveDistance < _soundDistance)
         {
-            float waveVolume = Mathf.Clamp01(1 - (distance / _soundDistance));
+            float waveVolume = Mathf.Clamp01(1 - (WaveDistance / _soundDistance));
             SoundManager.Instance.SetWaveVolume(waveVolume);
             SoundManager.Instance.PlayWaveSound(true);
         }
