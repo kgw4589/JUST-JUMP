@@ -119,6 +119,11 @@ public class SoundManager : Singleton<SoundManager>
             wavePlayer.Stop();
         }
     }
+    
+    public void SetWaveVolume(float volume)
+    {
+        wavePlayer.volume = volume;
+    }
 
     public void PlayWaveHitSound(float pitch)
     {
