@@ -59,7 +59,7 @@ MonoBehaviour:
     characterPrefab: {fileID: 7688218499624571972, guid: 906b9920b73b1fe46b318ccbfcd0febd, type: 3}
   - characterImage: {fileID: 21300000, guid: aaade8308fc23473484bb226e07969d4, type: 3}
     characterPrefab: {fileID: 9023196483522013431, guid: 03b8d2bb6d674fb459756e75e69f5e60, type: 3}
-  - characterImage: {fileID: 21300000, guid: 78aaf11205d754416a6bf3f7a00aaec9, type: 3}
+  - characterImage: {fileID: 21300000, guid: 1b8a4928156db436ca6450d067745c41, type: 3}
     characterPrefab: {fileID: 5357697453927644248, guid: 19614194e22a1a34cb220c6051856d8f, type: 3}
   - characterImage: {fileID: 21300000, guid: ecf4916e08b454bed802185601c7d021, type: 3}
     characterPrefab: {fileID: 5370562344304124828, guid: c8f272183fbd3c749af816f46cfef879, type: 3}
