@@ -21,7 +21,7 @@ public class UserData
         easyHighScore = 0;
         normalHighScore = 0;
         hardHighScore = 0;
-        coin = 1000;
+        coin = 5000000;
         unlockCharacters = new List<int>();
         isFirstGame = true;
     }
