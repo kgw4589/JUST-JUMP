@@ -122,7 +122,8 @@ public partial class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && (EventSystem.current.currentSelectedGameObject))
         {//클릭한게 Ui인지 확인해서 리턴함
             if (EventSystem.current.currentSelectedGameObject.name == lButton.name || 
-                EventSystem.current.currentSelectedGameObject.name == rButton.name)
+                EventSystem.current.currentSelectedGameObject.name == rButton.name ||
+                EventSystem.current.currentSelectedGameObject.name == "Pause")
             {
                 Debug.Log(EventSystem.current.currentSelectedGameObject.name);
                 return;
