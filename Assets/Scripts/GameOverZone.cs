@@ -47,12 +47,23 @@ public class GameOverZone : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale != 0)
+        {
+            WaveSound();
+        }
+    }
+
+    private void WaveSound()
+    {
         temp = transform.position + new Vector3(0, s+26, 0);
         float distance = _player.transform.position.y - temp.y;
+        
         if (distance < _soundDistance)
         {
-            //Debug.Log(distance);
+            Debug.Log(distance);
             Debug.Log("파도 효과음 재생");
+            float waveVolume = Mathf.Clamp01(1 - (distance / _soundDistance));
+            SoundManager.Instance.SetWaveVolume(waveVolume);
             SoundManager.Instance.PlayWaveSound(true);
             if (distance <= 0)
             {

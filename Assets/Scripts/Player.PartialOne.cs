@@ -20,4 +20,9 @@ public partial class Player
     {
         playerHp -= damage;
     }
+
+    public void IsJumpChange(bool jumpAble)
+    {
+        isJump = jumpAble;
+    }
 }

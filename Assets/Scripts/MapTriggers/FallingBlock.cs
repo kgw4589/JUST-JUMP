@@ -32,7 +32,8 @@ public class FallingBlock : MapTriggerBasicLogic
     private float _currentTime = 0;
     
     private bool _col;
-    
+
+    private Player _player;
     public enum TriggerMode
     {
         Falling,
@@ -40,6 +41,7 @@ public class FallingBlock : MapTriggerBasicLogic
     }
     private void Start()
     {
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
         _anim = GetComponent<Animator>();
         var position = transform.position;
         _endPos = new Vector2(position.x, position.y - moveDis);
@@ -123,7 +125,14 @@ public class FallingBlock : MapTriggerBasicLogic
     protected override void EnterEvent()
     {
         _col = true;
-        SoundManager.Instance.PlaySfx(SoundManager.Sfx.fallingBlock);
+        if(triggerMode == TriggerMode.Falling)
+        {
+            SoundManager.Instance.PlaySfx(SoundManager.Sfx.fallingBlock);
+        }
+        else
+        {
+            _anim.SetBool("Broken", false);
+        }
     }
 
     protected override void StayEvent()
@@ -133,5 +142,11 @@ public class FallingBlock : MapTriggerBasicLogic
     protected override void ExitEvent()
     {
         _col = false;
+        if (triggerMode == TriggerMode.FadeOut)
+        {
+            _player.IsJumpChange(true);
+            _anim.SetBool("Broken", true);
+            _currentTime = 0;
+        }
     }
 }
