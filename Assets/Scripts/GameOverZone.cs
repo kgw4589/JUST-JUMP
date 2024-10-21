@@ -47,6 +47,14 @@ public class GameOverZone : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale != 0)
+        {
+            WaveSound();
+        }
+    }
+
+    private void WaveSound()
+    {
         temp = transform.position + new Vector3(0, s+26, 0);
         float distance = _player.transform.position.y - temp.y;
         
