@@ -15,7 +15,7 @@ MonoBehaviour:
   characterIso:
   - characterImage: {fileID: 21300000, guid: 1985e49363ceb46b98caf66255051678, type: 3}
     characterPrefab: {fileID: 4834097764096836681, guid: 3f744af0d8bcd4d33a42bd8de4b2d6fb, type: 3}
-  - characterImage: {fileID: 21300000, guid: aef3018c893264124930e0f67e3f4d5f, type: 3}
+  - characterImage: {fileID: 21300000, guid: 6045f348493d047e984a857376fd6e26, type: 3}
     characterPrefab: {fileID: 7038514439267334622, guid: 062ae60089e4c954e84a94ef81204be7, type: 3}
   - characterImage: {fileID: 21300000, guid: 0cdd3cfeb70924ebeb19d5acb46fd281, type: 3}
     characterPrefab: {fileID: 866148982198049316, guid: 88e9ec1d42f7944489ec9fccd8b19491, type: 3}
