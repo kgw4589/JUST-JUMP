@@ -11,7 +11,9 @@ using Image = UnityEngine.UI.Image;
 
 public class ChangeCharacter : MonoBehaviour
 {
+    
     [SerializeField] private bool isUnLockCharacter;
+    [SerializeField] private GameObject notTouchScreen;
     [SerializeField] private GameObject lockCharacterDimmed;
     [SerializeField] private GameObject lockCharacterImage;
     [SerializeField] private GameObject buyButton;
@@ -51,6 +53,7 @@ public class ChangeCharacter : MonoBehaviour
 
     void Start()
     {
+        notTouchScreen.SetActive(false);
         _isPassable = true;
         _isBuy = false;
         _animator = transform.GetComponent<Animator>();
@@ -139,15 +142,16 @@ public class ChangeCharacter : MonoBehaviour
 
     IEnumerator BuyAnimation()
     {
+        notTouchScreen.SetActive(true);
         _animator.SetTrigger("Buy");
         yield return new WaitForSeconds(1f);
-        Debug.Log("ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 매그네릭~");
         isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
             Contains(_characterId);
         price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
         characterRating.text = DataManager.Instance.characterInfos[_characterId].characterRating.ToString();
         _isBuy = false;
         ReRoadingReSoucse();
+        notTouchScreen.SetActive(false);
         _isPassable = true;
     }
 
@@ -213,7 +217,7 @@ public class ChangeCharacter : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        notTouchScreen.SetActive(false);
         _isPassable = true;
         _isBuy = false;
     }
