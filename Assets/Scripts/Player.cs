@@ -315,6 +315,14 @@ public partial class Player : MonoBehaviour
             }
         }
     }
+
+    public void DieZone()
+    {
+        if (!isDie)
+        {
+            PlayerProperty -= maxplayerHp * 20;
+        }
+    }
     public void Damage()
     {
         if (!isDie)
