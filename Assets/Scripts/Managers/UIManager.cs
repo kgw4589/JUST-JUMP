@@ -108,7 +108,8 @@ public class UIManager : Singleton<UIManager>
         highScore.text = DataManager.Instance.HighScore.ToString("F2") + "m";
         modeText.text = MapManager.Instance.selectedMapScriptable.modeText;
         modeText.color = MapManager.Instance.selectedMapScriptable.modeColor;
-        currentScore.text = _currentFloor.ToString("F2") + "m";
+        currentScore.text = GameManager.Instance.playerPosY.ToString("F2") + "m";
+        playerPosY.text = currentScore.text;
         diePanel.SetActive(true);
     }
 
