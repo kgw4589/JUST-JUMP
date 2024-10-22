@@ -46,6 +46,8 @@ public class GameManager : Singleton<GameManager>
     {
         gameState = GameState.Ready;
 
+        // Time.timeScale = 1;
+
         initAction();
     }
     
@@ -87,6 +89,8 @@ public class GameManager : Singleton<GameManager>
     
     private void GameOver()
     {
+        Time.timeScale = 0;
+        
         if (playerPosY > DataManager.Instance.HighScore)
         {
             DataManager.Instance.HighScore = playerPosY;
@@ -112,8 +116,8 @@ public class GameManager : Singleton<GameManager>
             SaveManager.Instance.GetSaveUserData(DataManager.Instance.SaveData);
         }
         
-        Time.timeScale = 0;
         gameState = GameState.End;
+        UIManager.Instance.SetDiePanel();
         Application.targetFrameRate = 30;
         SoundManager.Instance.PlayBgm(false);
         SoundManager.Instance.PlayWaveSound(false);
