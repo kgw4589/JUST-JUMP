@@ -18,7 +18,7 @@ MonoBehaviour:
   bestScore: 0
   coinWeight: 2
   waitTime: 1.75
-  moveDistance: 50000
+  moveDistance: 30000
   moveDuration: 1000000
   maxSpeed: 3.5
   section:

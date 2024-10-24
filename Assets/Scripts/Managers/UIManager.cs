@@ -93,11 +93,13 @@ public class UIManager : Singleton<UIManager>
         }
         if (GameManager.Instance.gameState == GameManager.GameState.Play)
         {
+            // Player Score
             _currentFloor = GameManager.Instance.playerPosY;
             playerPosY.text = GameManager.Instance.playerPosY.ToString("F2") + "m";
 
+            // Wave Distance
             _currentWave = (gameOverZone.WaveDistance) - _waveOffset;
-            waveDistanceText.text = _currentWave.ToString("F2") + "m";
+            waveDistanceText.text = _currentWave.ToString("F1") + "m";
         }
     }
 
@@ -106,7 +108,8 @@ public class UIManager : Singleton<UIManager>
         highScore.text = DataManager.Instance.HighScore.ToString("F2") + "m";
         modeText.text = MapManager.Instance.selectedMapScriptable.modeText;
         modeText.color = MapManager.Instance.selectedMapScriptable.modeColor;
-        currentScore.text = _currentFloor.ToString("F2") + "m";
+        currentScore.text = GameManager.Instance.playerPosY.ToString("F2") + "m";
+        playerPosY.text = currentScore.text;
         diePanel.SetActive(true);
     }
 
