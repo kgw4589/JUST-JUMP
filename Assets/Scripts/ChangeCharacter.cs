@@ -144,7 +144,7 @@ public class ChangeCharacter : MonoBehaviour
     {
         notTouchScreen.SetActive(true);
         _animator.SetTrigger("Buy");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         isUnLockCharacter = DataManager.Instance.SaveData.unlockCharacters.
             Contains(_characterId);
         price = _priceDictionary[DataManager.Instance.characterInfos[_characterId].characterRating];
